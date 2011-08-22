@@ -109,7 +109,7 @@ set toolbar-=icons,tooltips
     " выполним перед записью буффера на диск
     autocmd! bufwritepre * call BackupDir()
 
-"Автокомплит "из текущего"
+" Автокомплит "из текущего"
     function InsertTabWrapper()
          let col = col('.') - 1
          if !col || getline('.')[col - 1] !~ '\k'
@@ -120,6 +120,60 @@ set toolbar-=icons,tooltips
     endfunction
     " Будем завершать из текущего буфера, других открытых буферов, тегов
     set complete=".bt"
+
+" Cпецифичные для maemo
+    " Скроллинг пальцем
+    " http://www.vim.org/scripts/script.php?script_id=3141
+    "func! MScroll()
+      "let l:done=0
+      "let l:n = -1
+      "let l:w0 = line("w0")
+      "let l:last = line("$")
+      "while done!=1
+        "let l:g = getchar()
+        "if l:g != "\<LeftDrag>"
+          "let done = 1
+        "else
+          "if l:n == -1
+            "let l:n = v:mouse_lnum
+            "let l:fln = v:mouse_lnum
+          "else
+            "let l:new = l:w0 - v:mouse_lnum + l:n
+            "if l:new<1
+              "let l:new = 1
+            "endif
+            "let l:diff = -v:mouse_lnum + l:n
+            "let l:nd = line("w$")
+            "if l:nd+l:diff>l:last
+              "let l:new = l:last - winheight(0) + 1
+              "if l:new<1
+                "let l:new = 1
+              "endif
+            "end
+            "let l:wn = "normal ".string(l:new)."zt"
+            "if (l:n != v:mouse_lnum)
+              "exec(l:wn)
+              "redraw
+            "endif
+            "let l:w0 = line("w0")
+            "let l:n = v:mouse_lnum + l:diff
+          "endif
+        "endif
+      "endwhile
+      ":call cursor(v:mouse_lnum,v:mouse_col)
+    "endfunc
+    ":set mouse=a
+    ":noremap <silent> <LeftMouse> :call MScroll()<CR>
+    ":noremap <LeftRelease> <Nop>
+    ":noremap <LeftDrag> <Nop>
+
+    " Ctrl-Space (переключение консоли) ничего не ломает.
+    "imap <Nul> <Nop>
+    "map <Nul> <Nop>
+    "vmap <Nul> <Nop>
+    "cmap <Nul> <Nop>
+    "nmap <Nul> <Nop>
+
 
 
 
@@ -240,3 +294,4 @@ nmap <F7> :setlocal spell spelllang=ru_yo,en_us<CR>
 " Shift-F7 - отключить проверку орфографии
 imap <S-F7> <Esc>:setlocal spell spelllang=<CR>a
 nmap <S-F7> :setlocal spell spelllang=<CR>
+

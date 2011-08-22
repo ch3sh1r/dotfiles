@@ -180,7 +180,6 @@ alias gd='git diff'
 alias go='git checkout '
 alias gh='git hist'
 alias gk='gitk --all&'
-alias gx='gitx --all'
 
 alias recal='cat ~/.zhistory|grep'
 alias df='df -h'
