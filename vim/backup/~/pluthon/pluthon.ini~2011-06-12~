@@ -1,8 +1,0 @@
--startup
-plugins/org.eclipse.equinox.launcher_1.0.101.R34x_v20081125.jar
---launcher.library
-plugins/org.eclipse.equinox.launcher.gtk.linux.x86_1.0.101.R34x_v20080805
--vmargs
--Xms40m
--Xmx800m
--XX:MaxPermSize=128m

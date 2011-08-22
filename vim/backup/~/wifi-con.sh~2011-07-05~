@@ -1,8 +1,0 @@
-#!/usr/bin/bash
-
-sudo ifconfig wlan0 down
-sudo iwconfig wlan0 mode ad-hoc channel 1
-sudo ifconfig wlan0 11.22.33.2 up
-sudo iwconfig wlan0 essid n900
-sudo route add default gw 11.22.33.1
-
