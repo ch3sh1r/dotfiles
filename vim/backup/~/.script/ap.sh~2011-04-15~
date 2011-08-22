@@ -1,0 +1,5 @@
+#!/bin/sh
+
+sudo iptables -A FORWARD -i eth0 -o wlan0 -s 193.169.1.1/24 -m conntrack --ctstate NEW -j ACCEPT
+sudo iptables -A FORWARD -m conntrack --ctstate ESTABLISHED,RELATED -j ACCEPT
+sudo iptables -A POSTROUTING -t nat -j MASQUERADE

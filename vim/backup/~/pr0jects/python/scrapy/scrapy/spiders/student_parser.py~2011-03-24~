@@ -1,0 +1,10 @@
+class StydentSpider(CrawlSpider):
+
+    name = "student"
+    allowed_domains = ["abitur.nica.ru"]
+    start_urls = ["http://abitur.nica.ru/new/www/search.php?region=77&town=0&opf=0&type=0&spec=0&ed_level=0&ed_form=0&qualif=&substr=&page=1"]
+
+    rules = (
+        Rule(SgmlLinkExtractor(allow=('search\.php\?.+')), follow=True),
+        Rule(SgmlLinkExtractor(allow=('vuz_detail\.php\?.+')), callback='parse_item'),
+        )

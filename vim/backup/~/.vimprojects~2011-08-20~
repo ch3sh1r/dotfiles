@@ -1,0 +1,14 @@
+
+abitur=/home/chesh1r/abitur CD=. filter="*" {
+ scrapy.cfg
+ abitur=abitur {
+  __init__.py
+  items.py
+  pipelines.py
+  settings.py
+  spiders=spiders {
+   __init__.py
+   spider.py
+  }
+ }
+}

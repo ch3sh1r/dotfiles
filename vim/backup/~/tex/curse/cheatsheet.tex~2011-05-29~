@@ -1,0 +1,47 @@
+\otimes - тензорное произведение
+{\em курсив}
+\bf болд \rm  
+\begin{itemize} буллет \end{itemize}
+
+Простые формулы: $x^y$, $x_n = \sqrt{a + b}$
+
+Сложная формула:
+\[
+z \left( 1 \ +\ \sqrt{\omega_{i+1} + \zeta -\frac{x+1}{\Theta +1} y + 1}
+\ \right)
+\ \ \ =\ \ \ 1
+\]
+
+ Сложная формула с нумерацией:
+\begin{equation}
+\left[
+{\bf X} + {\rm a} \ \geq\
+\underline{\hat a} \sum_i^N \lim_{x \rightarrow k} \delta C
+\right]
+\end{equation}
+
+Таблица
+\begin{center}
+Numbers of Computers on Earth Sciences Network, By Type.
+\begin{tabular}{lr}
+Macintosh&175\\
+DOS/Windows PC&60\\
+Unix Workstation or server&110\\
+\end{tabular}
+\end{center} 
+
+Суровая таблица
+\begin{center}
+\begin{tabular}{|l|c|p{3.5in}|}
+\hline
+\multicolumn{3}{|c|}{Places to Go Backpacking}\\ \hline
+Name&Driving Time&Notes\\
+&(hours)&\\ \hline
+Big Basin&1.5&Very nice overnight to Berry Creek Falls from
+either Headquarters or ocean side.\\ \hline
+Sunol&1&Technicolor green in the spring. Watch out for the cows.\\ \hline
+Henry Coe&1.5&Large wilderness nearby suitable for multi-day treks.\\ \hline
+\end{tabular}
+\end{center}
+
+

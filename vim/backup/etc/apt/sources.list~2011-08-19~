@@ -1,0 +1,4 @@
+deb http://all.repository.backtrack-linux.org revolution main microverse non-free testing
+deb http://32.repository.backtrack-linux.org revolution main microverse non-free testing
+deb http://source.repository.backtrack-linux.org revolution main microverse non-free testing
+deb http://skulltag.net/download/files/release/deb stable multiverse 

@@ -1,0 +1,56 @@
+#!/usr/bin/python
+# This snippet decrypts and encrypts your messages using XOR.
+# Usage: python filename.py -e|-d password string
+# -e encrypts and -d decrypts
+# Example:
+# [root@archie python]# python minuxor.py -e qwerty123 message
+# Ecnrypted form: 28 18 22 1 21 30 84
+# [root@archie python]# python minuxor.py -d qwerty123 28 18 22 1 21 30 84
+# Decrypted form: message
+
+import operator
+import sys
+
+# The workhorse behind this. Take string and pass and (en,de)crypts it usign XOR
+# Returns crypted string to "def encrypt" or "def decrypt"
+def xor(pw, str1):
+    c = 0
+    liste = []
+    for k in xrange(len(str1)):
+        if c > len(pw)-1:
+            c = 0
+        fi = ord(pw[c])
+        c += 1
+        se = ord(str1[k])
+        fin = operator.xor(fi, se)
+        liste += [chr(fin)]
+    return liste
+        
+def encrypt(passw, string):
+    ret = xor(passw, string)
+    print "Ecnrypted form:",
+    for k in ret:
+        print ord(k),
+
+def decrypt(passw, ret):
+    finale = xor(passw, ret)
+    print "Decrypted form:",
+    print "".join(finale)
+
+# This checks if the input is valid, else prints the usage instuctsions.
+if len(sys.argv) > 3 and sys.argv[1] == "-e" or sys.argv[1] == "-d":
+    # Encryption. Joins the arguments(message) into a single string
+    if sys.argv[1] == "-e":
+        passw = sys.argv[2]
+        string = " ".join(sys.argv[3::])
+        encrypt(passw, string)
+    # Decryption. Gets the arguments and turns the numbers into characters
+    elif sys.argv[1] == "-d":
+        listing = []
+        passw = sys.argv[2]
+        string = sys.argv[3::]
+        for num in string:
+            listing += [chr(int(num))]
+        decrypt(passw,listing)
+else:
+    print "Usage: python filename.py -e|-d password string"

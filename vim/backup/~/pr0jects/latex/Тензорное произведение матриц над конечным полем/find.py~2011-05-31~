@@ -1,0 +1,5 @@
+k = 123123
+    for i in xrange(1,k-1):
+        if (gcd(k-i,i) == 1):
+            print "%d = %d + %d" % (k, k-i, i)
+

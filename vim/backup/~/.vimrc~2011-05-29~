@@ -1,0 +1,254 @@
+" Предпочтение натройкам Vim относительно Vi.
+set nocompatible
+set shortmess+=I
+" И больше не будет детей Уганды.
+
+
+
+"-----------------------------------------
+"------------ Настройки среды ------------
+"-----------------------------------------
+
+" -раскладка->
+" Переключение на русскую/английскую раскладку по Ctrl-/
+set termencoding=utf-8
+set fileencodings=utf-8,usc-bom,default,latin1,cp1251
+set guifont=DejaVu\ Sans\ Mono\ 10
+set keymap=russian-jcukenwin   
+set iminsert=0 
+set imsearch=0 
+cmap  <C-^>
+map  <C-^>X<Esc>:call MyKeyMapHighlight()<CR>a<C-H>
+imap  <Esc>a<C-^><Esc>:call MyKeyMapHighlight()<CR>a
+nmap  a<C-^><Esc>:call MyKeyMapHighlight()<CR>
+vmap  <Esc>a<C-^><Esc>:call MyKeyMapHighlight()<CR>gv
+" Индикация выбранной в данный момент раскладки
+function MyKeyMapHighlight()
+   if &iminsert == 0
+       hi StatusLine ctermfg=Blue guifg=Blue
+   else
+       hi StatusLine ctermfg=Red guifg=Red
+   endif
+endfunction
+" Вызываем функцию, чтобы она установила цвета при запуске Vim'a
+call MyKeyMapHighlight()"
+" При изменении активного окна будет выполняться обновление индикации текущей раскладки
+au WinEnter * :call MyKeyMapHighlight()
+" <-раскладка-
+
+
+" Проверки синтаксиса и запуска Python-скриптов
+command Pyflakes :call Pyflakes()
+function! Pyflakes()
+    let tmpfile = tempname()
+    execute "w" tmpfile
+    execute "set makeprg=(pyflakes\\ " . tmpfile . "\\\\\\|sed\\ s@" . tmpfile ."@%@)"
+    silent make
+    cw  
+endfunction
+
+
+" Автокомплит по табу
+function InsertTabWrapper()
+     let col = col('.') - 1
+     if !col || getline('.')[col - 1] !~ '\k'
+         return "\<tab>"
+     else
+         return "\<c-p>"
+     endif
+endfunction
+imap <tab> <c-r>=InsertTabWrapper()<cr>
+" Слова откуда будем завершать
+set complete=""
+" Из текущего буфера
+set complete+=.
+" Из словаря
+set complete+=k
+" Из других открытых буферов
+set complete+=b
+" из тегов 
+set complete+=t
+
+
+" -умный бэкап->
+" Включить сохранение резервных копий
+set backup
+" сохранять умные резервные копии ежедневно
+function! BackupDir()
+	" определим каталог для сохранения резервной копии
+	let l:backupdir=$HOME.'/.vim/backup/'.
+			\substitute(expand('%:p:h'), '^'.$HOME, '~', '')
+	" если каталог не существует, создадим его рекурсивно
+	if !isdirectory(l:backupdir)
+		call mkdir(l:backupdir, 'p', 0700)
+	endif
+	" переопределим каталог для резервных копий
+	let &backupdir=l:backupdir
+	" переопределим расширение файла резервной копии
+	let &backupext=strftime('~%Y-%m-%d~')
+endfunction
+" выполним перед записью буффера на диск
+autocmd! bufwritepre * call BackupDir()
+" <-умный бэкап-
+
+
+" Показывать положение курсора всё время.
+set ruler  
+
+" Показывать незавершённые команды в статусбаре
+set showcmd  
+
+" Включаем нумерацию строк
+set nu
+
+" Хранить больше истории команд ...
+set history=128
+
+" ... и правок
+set undolevels=2048
+
+" Поиск не чувствительный к регистру.
+:set ignorecase
+
+" Фолдинг по отсупам
+set foldmethod=indent
+
+" Цветосхема
+colorscheme wombat256mod
+
+" Ставим терминалу 256 цветов
+set t_Co=256
+
+" Поиск (с подсветкой) по набору текста
+set incsearch
+set hlsearch
+
+" Теперь нет необходимости передвигать курсор к краю экрана, чтобы подняться/отпуститься в режиме редактирования
+set scrolljump=3
+set scrolloff=3
+
+" Выключаем звонок
+set novisualbell
+set t_vb=   
+
+" Поддержка мыши
+set mouse=a
+set mousemodel=popup
+
+" Не выгружать буфер, когда переключаемся на другой
+set hidden
+
+" Сделать строку команд высотой в одну строку
+set ch=1
+
+" Скрывать указатель мыши, когда печатаем
+set mousehide
+
+" Включить автоотступы
+set autoindent
+
+" Влючить подстветку синтаксиса
+syntax on
+let python_highlight_all = 1
+
+" Опции сесссий
+set sessionoptions=curdir,tabpages
+
+" Формат строки состояния
+set statusline=%<%f%h%m%r\ %b\ %{&encoding}\ 0x\ \ %l,%c%V\ %P 
+set laststatus=2
+
+" Включаем распознавание типов файлов и типо-специфичные плагины.
+filetype on
+filetype plugin on
+
+" Настройки для SessionMgr
+let g:SessionMgr_AutoManage = 0
+let g:SessionMgr_DefaultName = "mysession"
+
+" Настройки для Tlist (показвать только текущий файл в окне навигации по  коду)
+let g:Tlist_Show_One_File = 1
+set completeopt-=preview
+set completeopt+=longest
+set mps-=[:]
+
+"Настройка OmniComletion
+autocmd FileType python set omnifunc=pythoncomplete#Complete
+autocmd FileType javascript set omnifunc=javascriptcomplete#CompleteJS
+autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
+autocmd FileType css set omnifunc=csscomplete#CompleteCSS
+
+" Использование "x" вместе с бэкспейсом
+set backspace=indent,eol,start whichwrap+=<,>,[,]
+
+" Преобразование Таба в пробелы
+set expandtab
+" Размер табулации по умолчанию
+set shiftwidth=4
+set softtabstop=4
+set tabstop=4
+
+" Включаем "умные" отспупы и табы (например, автоотступ после {)
+set smartindent
+set smarttab
+
+" Фикс для <Enter> в коменмах
+set fo+=cr
+
+" Меню выбора кодировки текста
+set wildmenu
+set wcm=<Tab> 
+menu Encoding.koi8-r :e ++enc=koi8-r<CR>
+menu Encoding.windows-1251 :e ++enc=cp1251<CR>
+menu Encoding.cp866 :e ++enc=cp866<CR>
+menu Encoding.utf-8 :e ++enc=utf8 <CR>
+
+
+
+
+
+"-----------------------------------------
+"---------- Подвешиваем кеймапы ----------
+"-----------------------------------------
+nmap <Space> <PageDown>
+let g:snippetsEmu_key = "<C-j>"
+
+" Поиск и замена слова под курсором
+nmap ; :%s/\<<c-r>=expand("<cword>")<cr>\>/
+
+" \rr - запуск Python скриптов в стиле perl-support
+autocmd BufRead *.py set makeprg=python\ -c\ \"import\ py_compile,sys;\ sys.stderr=sys.stdout;\ py_compile.compile(r'%')\"
+autocmd BufRead *.py set efm=%C\ %.%#,%A\ \ File\ \"%f\"\\,\ line\ %l%.%#,%Z%[%^\ ]%\\@=%m
+autocmd BufRead *.py nmap \rr :w !python %<cr>
+autocmd BufRead *.py vmap <esc>\rr :w !python %<cr>
+autocmd BufRead *.py imap <esc>\rr :w !python %<cr>
+
+" Для LaTeX
+autocmd BufRead *.tex nmap \rr :w !latex %<cr>
+autocmd BufRead *.tex nmap \rp :w !pdflatex %<cr>
+
+" \we - прописывание utf кодировки в заголовок
+autocmd BufRead *.py nmap \we ggo# -*- coding:utf-8 -*-<esc>
+autocmd BufRead *.py vmap \we <esc>ggo# -*- coding:utf-8 -*-<esc>
+autocmd BufRead *.py imap \we <esc>ggo# -*- coding:utf-8 -*-<esc>
+
+" Новый таб
+nmap tn :tabnew 
+
+" F2 - быстрое сохранение без вопросов
+nmap <F2> :w!<cr>
+vmap <F2> <esc>:w!<cr>
+imap <F2> <esc>:w!<cr>
+
+" 1+F2 - быстрое sudo-сохранение
+nmap 1<F2> :w !sudo tee %<cr>
+vmap 1<F2> <esc>:w !sudo tee %<cr>
+imap 1<F2> <esc>:w !sudo tee %<cr>
+
+" F7 - проверка орфографии
+imap <F7> <Esc>:setlocal spell spelllang=ru_yo,en_us<CR>a
+nmap <F7> :setlocal spell spelllang=ru_yo,en_us<CR>
+
+" Shift-F7 - отключить проверку орфографии
+imap <S-F7> <Esc>:setlocal spell spelllang=<CR>a
+nmap <S-F7> :setlocal spell spelllang=<CR>

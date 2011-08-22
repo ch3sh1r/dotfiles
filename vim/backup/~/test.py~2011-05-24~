@@ -1,0 +1,31 @@
+from numpy import *
+import matplotlib.pyplot as plt
+
+def euler(n):
+     tot, pos = 0, n-1
+     while pos>0:
+        if euclid(pos,n)==1: tot += 1
+        pos -= 1
+     return tot
+
+def euclid(a,b):
+     while b:
+        a, b = b, a % b
+     return a
+
+t = xrange(10)
+y1 = [euler(2**x-1) for x in t]
+y2 = [2**(x-1)-1 for x in t]
+
+plt.plot(t, y1, 'g-',
+         t, y2, 'b-')
+
+
+plt.xlabel('t')
+plt.ylabel('y')
+plt.title('Plotting with markers')
+plt.legend(['Euler function',
+            'Estimate'],
+            loc='upper left')
+
+plt.show()

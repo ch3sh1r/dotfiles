@@ -1,0 +1,38 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
+
+def start(interface):
+    dump('dump', 'csv', interface)
+    return process('dump', 'csv')
+
+def dump(fileName, fileFormat, interface):
+    airodump = pexpect.spawn('airodump-ng %s -w %s --output-format %s -a --encrypt WEP'
+                             % (interface, fileName, fileFormat))
+    time.sleep(10)
+    airodump.close()
+
+def process(fileName, fileFormat):
+    dumpFileName = '%s-01.%s' % (fileName, fileFormat)
+    dumpFile = open(dumpFileName, 'r')
+    targetAP = []
+    for line in dumpFile:
+        if line.startswith('BSSID,') or line == '\r\n':
+            continue
+        elif line.startswith('Station'):
+            break
+        else:
+            words = line.split(',')
+            if (not words[-2] is None) and (words[-2] != ' \x00\x00\x00\x00\x00\x00'):
+                targetAP.append([words[0],words[-2],words[3]])
+    return targetAP
+
+def choose(apList):
+    print 'These access point is detected here:'
+    i = 0
+    for ap in apList:
+        i += 1
+        print i, '. ', ap[1]
+    num = int(raw_input('Choose one of them:'))
+    return num
+
