@@ -91,11 +91,11 @@ set toolbar-=icons,tooltips
     " При изменении активного окна будет выполняться обновление индикации текущей раскладки
     au WinEnter * :call MyKeyMapHighlight()
 
-" Сохранение резервных копий в ~/.vim/backup 
+" Сохранение резервных копий в ~/.backup 
     set backup
     function! BackupDir()
         " определим каталог для сохранения резервной копии
-        let l:backupdir=$HOME.'/.vim/backup/'.
+        let l:backupdir=$HOME.'/.backup/'.
                 \substitute(expand('%:p:h'), '^'.$HOME, '~', '')
         " если каталог не существует, создадим его рекурсивно
         if !isdirectory(l:backupdir)
@@ -108,7 +108,8 @@ set toolbar-=icons,tooltips
     endfunction
     " выполним перед записью буффера на диск
     autocmd! bufwritepre * call BackupDir()
-    "Автокомплит "из текущего"
+
+"Автокомплит "из текущего"
     function InsertTabWrapper()
          let col = col('.') - 1
          if !col || getline('.')[col - 1] !~ '\k'
