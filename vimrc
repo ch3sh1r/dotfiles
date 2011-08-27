@@ -69,7 +69,7 @@ set toolbar-=icons,tooltips
 
 " Переключение на русскую/английскую раскладку по Ctrl-/ 
     set termencoding=utf-8
-    set fileencodings=utf-8,usc-bom,default,latin1,cp1251
+    set fileencodings=utf-8,latin1,cp1251
     set keymap=russian-jcukenwin   
     set iminsert=0 
     set imsearch=0 

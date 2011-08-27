@@ -1,0 +1,107 @@
+#
+# Функции.
+#
+
+# Перестановка.
+rot13() {
+	if [ $# = 0 ] ; then
+		tr "[a-m][n-z][A-M][N-Z]" "[n-z][a-m][N-Z][A-M]"
+	else
+		tr "[a-m][n-z][A-M][N-Z]" "[n-z][a-m][N-Z][A-M]" < $1
+	fi
+}
+
+# Распаковка архива...
+upack() {
+    if [ -f $1 ] ; then
+        case $1 in
+            *.tar.bz2)   tar xjf $1;;
+            *.tar.gz)    tar xzf $1;;
+            *.bz2)       bunzip2 $1;;
+            *.rar)       unrar x $1;;
+            *.gz)        gunzip $1;;
+            *.tar)       tar xf $1;;
+            *.tbz2)      tar xjf $1;;
+            *.tgz)       tar xzf $1;;
+            *.zip)       unzip $1;;
+            *.Z)         uncompress $1;;
+            *.7z)        7z x $1;;
+            *)           echo "Cannot unpack '$1'..." ;;
+        esac
+    else
+        echo "'$1' is not a valid file"
+    fi
+}
+# ... и упаковка.
+pack() {
+    if [ $1 ] ; then
+        case $1 in
+            tbz)    tar cjvf $2.tar.bz2 $2;;
+            tgz)    tar czvf $2.tar.gz  $2;;
+            tar)    tar cpvf $2.tar  $2;;
+            bz2)    bzip $2;;
+            gz)     gzip -c -9 -n $2 > $2.gz;;
+            zip)    zip -r $2.zip $2;;
+            7z)     7z a $2.7z $2;;
+            *)      echo "'$1' Cannot be packed via pack()";;
+        esac
+    else
+        echo "'$1' is not a valid file"
+    fi
+}
+
+# pastebin
+pbin(){
+        fload(){
+                TFILE=`cat $1|sed 's|%|%25|g;s|&|%26|g;s|+|%2b|g;s|;|%3b|g'`
+                curl --data "paste_code='$TFILE'" "http://pastebin.com/api_public.php"
+                echo
+        }
+        case $1 in
+        
+        -h)
+                echo "Usage:"
+                echo "        pastebin filename 	for paste a file"
+                echo "        pastebin 			for edit/paste on fly"       
+        ;;
+        *)      if [ -n "$1" -a -f "$1" ];then
+                        if [ -s "$1" ];then
+                                fload $1
+                        else
+                                echo file $1 is empty
+                        fi
+                else
+                        TEMPFILE=`mktemp -q /tmp/pastebin.XXXXXX`
+                        $EDITOR $TEMPFILE
+                        if [ -s "$TEMPFILE" ]; then
+                                fload $TEMPFILE
+                        fi
+                        rm ${TEMPFILE}*
+                fi
+        ;;
+    esac
+}
+
+# Локальное зеркало сайта.
+lmirror(){
+    wget -r -l inf -k -p $1
+}
+
+#
+# Конвертируем всякую дурь
+#
+
+mp32utf() { find -iname '*.mp3' -print0 | xargs -0 mid3iconv -eCP1251 --remove-v1 }
+
+mpg2flv() { ffmpeg -i $1 -ar 22050 -ab 32 -f flv -s 320x240 `echo $1 | awk -F . '{print $1}'`.flv }
+
+flv2xvid() { mencoder "$1" -vf scale=320:240  -ovc xvid -xvidencopts bitrate=250:autoaspect -vf pp=lb -oac mp3lame  -lameopts fast:preset=standard -o  "./basename $1.avi" }
+
+flv2divx() { mencoder "$1" --vf scale=320:240  -ovc lavc -lavcopts vcodec=mpeg4:vbitrate=250:mbd=2:v4mv:autoaspect -vf pp=lb -oac mp3lame  -lameopts fast:preset=standard -o  "./basename $1.avi" }
+
+iso2cd() {"cdrecord -s dev=`cdrecord --devices 2>&1 | grep "\(rw\|dev=\)" | awk {'print $2'} | cut -f'2' -d'=' | head -n1` gracetime=1 driveropts=burnfree -dao -overburn -v"}
+
+nrg2iso() {"dd bs=1k if=$1 of=$2 skip=300"}
+
+win2utf() {"iconv -f CP1251 -t UTF-8 $1 > $1"}
+
