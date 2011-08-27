@@ -6,7 +6,13 @@ autoload colors && colors	# Pаскраска через $fg, $bg etc.
 # Переменные среды.
 #
 
+export PATH="$HOME/bin:$HOME/.bin:/usr/local/homebrew/bin:/usr/local/bin:/usr/local/sbin:/usr/local/mysql/bin:/usr/local/git/bin:$PATH"
+export MANPATH="/usr/local/man:/usr/local/mysql/man:/usr/local/git/man:$MANPATH"
+
+fpath=(~/.zsh/functions $fpath)
+autoload -U ~/.zsh/functions/*(:t)
 # Куда писать историю
+
 HISTFILE=~/.zhistory
 # Число команд, сохраняемых в истории
 SAVEHIST=7000
