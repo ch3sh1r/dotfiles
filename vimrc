@@ -57,6 +57,7 @@ set guifont=Monospace\ Book\ 10
 
 " Поиск 
     set ignorecase  " Поиск не чувствительный к регистру 
+    set smartcase   " ...сообразительный 
     set incsearch   " ...с подсветкой
     set hlsearch    " ...по набору текста
 
@@ -235,31 +236,37 @@ inoremap <silent> <S-Tab> <C-r>=InsertTabWrapper()<cr>
 " Поиск и замена слова под курсором
 nmap ; :%s/\<<c-r>=expand("<cword>")<cr>\>/
 
+" Убрать мусор из прошлого поиска
+nnoremap <leader><space> :noh<cr>
+
+" Новый таб
+nmap tn :tabnew 
+
 " \br - поиск и замена слова под курсором во всех буферах (Tip #382)
-nmap \br :call Replace()<cr>
-fun! Replace()
-    let s:word = input("Replace " . expand('<cword>') . " with:")
-    :exe 'bufdo! %s/\<' . expand('<cword>') . '\>/' . s:word . '/ge'
-    :unlet! s:word
-endfun 
+    nmap \br :call Replace()<cr>
+    fun! Replace()
+        let s:word = input("Replace " . expand('<cword>') . " with:")
+        :exe 'bufdo! %s/\<' . expand('<cword>') . '\>/' . s:word . '/ge'
+        :unlet! s:word
+    endfun 
 
 " \rr - запуск Python скриптов в стиле perl-support
-autocmd BufRead *.py nmap      \rr :w !python %<cr>
-autocmd BufRead *.py vmap <esc>\rr :w !python %<cr>
-autocmd BufRead *.py imap <esc>\rr :w !python %<cr>
+    autocmd BufRead *.py nmap      \rr :w !python %<cr>
+    autocmd BufRead *.py vmap <esc>\rr :w !python %<cr>
+    autocmd BufRead *.py imap <esc>\rr :w !python %<cr>
 
 " \r. - для LaTeX
-autocmd BufRead *.tex nmap      \rr :w !latex %<cr>
-autocmd BufRead *.tex vmap <esc>\rr :w !latex %<cr>
-autocmd BufRead *.tex imap <esc>\rr :w !latex %<cr>
-autocmd BufRead *.tex nmap      \rp :w !pdflatex %<cr>
-autocmd BufRead *.tex vmap <esc>\rp :w !pdflatex %<cr>
-autocmd BufRead *.tex imap <esc>\rp :w !pdflatex %<cr>
+    autocmd BufRead *.tex nmap      \rr :w !latex %<cr>
+    autocmd BufRead *.tex vmap <esc>\rr :w !latex %<cr>
+    autocmd BufRead *.tex imap <esc>\rr :w !latex %<cr>
+    autocmd BufRead *.tex nmap      \rp :w !pdflatex %<cr>
+    autocmd BufRead *.tex vmap <esc>\rp :w !pdflatex %<cr>
+    autocmd BufRead *.tex imap <esc>\rp :w !pdflatex %<cr>
 
 " \rr - для C
-autocmd BufRead *.c nmap      \rr :w !tcc -run %<cr>
-autocmd BufRead *.c vmap <esc>\rr :w !tcc -run %<cr>
-autocmd BufRead *.c imap <esc>\rr :w !tcc -run %<cr>
+    autocmd BufRead *.c nmap      \rr :w !tcc -run %<cr>
+    autocmd BufRead *.c vmap <esc>\rr :w !tcc -run %<cr>
+    autocmd BufRead *.c imap <esc>\rr :w !tcc -run %<cr>
 
 " \e. - смена кодировок 
     " \ek - koi8.
@@ -283,24 +290,26 @@ autocmd BufRead *.c imap <esc>\rr :w !tcc -run %<cr>
     vmap \er g?G <cr>
     imap \er g?G <cr>
 
-" Новый таб
-nmap tn :tabnew 
+" F1 - больше не поможет
+    inoremap <F1> <ESC>
+    nnoremap <F1> <ESC>
+    vnoremap <F1> <ESC>
 
 " `+F2 - быстрое сохранение без вопросов
-nmap `<F2> :w!<cr>
-vmap `<F2> <esc>:w!<cr>
-imap `<F2> <esc>:w!<cr>
+    nmap `<F2> :w!<cr>
+    vmap `<F2> <esc>:w!<cr>
+    imap `<F2> <esc>:w!<cr>
 
 " 1+F2 - быстрое sudo-сохранение
-nmap 1<F2> :w !sudo tee %<cr>
-vmap 1<F2> <esc>:w !sudo tee %<cr>
-imap 1<F2> <esc>:w !sudo tee %<cr>
+    nmap 1<F2> :w !sudo tee %<cr>
+    vmap 1<F2> <esc>:w !sudo tee %<cr>
+    imap 1<F2> <esc>:w !sudo tee %<cr>
 
 " F7 - проверка орфографии
-imap <F7> <Esc>:setlocal spell spelllang=ru_yo,en_us<CR>a
-nmap <F7> :setlocal spell spelllang=ru_yo,en_us<CR>
+    imap <F7> <Esc>:setlocal spell spelllang=ru_yo,en_us<CR>a
+    nmap <F7> :setlocal spell spelllang=ru_yo,en_us<CR>
 
 " Shift-F7 - отключить проверку орфографии
-imap <S-F7> <Esc>:setlocal spell spelllang=<CR>a
-nmap <S-F7> :setlocal spell spelllang=<CR>
+    imap <S-F7> <Esc>:setlocal spell spelllang=<CR>a
+    nmap <S-F7> :setlocal spell spelllang=<CR>
 

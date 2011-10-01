@@ -94,7 +94,7 @@ clck(){
 
 # Коммит с комментарием в git
 gc(){
-    git commit -m $1
+    git commit -m "$@"
 }
 
 #
