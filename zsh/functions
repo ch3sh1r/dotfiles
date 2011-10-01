@@ -87,6 +87,11 @@ lmirror(){
     wget -r -l inf -k -p $1
 }
 
+# Шортлинк в clck
+clck(){
+    curl http://clck.ru/--?url=$1
+}
+
 #
 # Конвертируем всякую дурь
 #

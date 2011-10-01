@@ -12,6 +12,7 @@ alias -s rb=ruby
 alias -s {ogg,mp3,wav,wma}=mplayer
 autoload -U pick-web-browser
 alias -s {html,htm}=pick-web-browser
+
 # В иксах
 alias -s {png,gif,jpg,jpeg}=feh
 alias -s {pdf,djvu}=evince
@@ -91,6 +92,7 @@ alias -g UC="| iconv -c -f utf8 -t cp1251"
 # Xитрожопые алиасы
 #
 
+# Шортлинк в clck.ru
 # Ноутбучный режим энергосбережения (1-5).
 alias set_etnergy="sudo echo $1 > /proc/sys/vm/laptop_mode"
 # Вывод прав циферками.
