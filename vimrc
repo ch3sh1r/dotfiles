@@ -222,6 +222,10 @@ set guifont=Monospace\ Book\ 10
 "---------------------------------------------------
 nmap <Space> <PageDown>
 
+" Поиск нормальными регулярками
+nnoremap / /\v
+vnoremap / /\v
+
 " Ctrl+j - сниппеты
 let g:snippetsEmu_key = "<C-j>"
 
@@ -240,9 +244,9 @@ fun! Replace()
 endfun 
 
 " \rr - запуск Python скриптов в стиле perl-support
-autocmd BufRead *.py nmap      /rr :w !python %<cr>
-autocmd BufRead *.py vmap <esc>/rr :w !python %<cr>
-autocmd BufRead *.py imap <esc>/rr :w !python %<cr>
+autocmd BufRead *.py nmap      \rr :w !python %<cr>
+autocmd BufRead *.py vmap <esc>\rr :w !python %<cr>
+autocmd BufRead *.py imap <esc>\rr :w !python %<cr>
 
 " \r. - для LaTeX
 autocmd BufRead *.tex nmap      \rr :w !latex %<cr>
@@ -253,9 +257,9 @@ autocmd BufRead *.tex vmap <esc>\rp :w !pdflatex %<cr>
 autocmd BufRead *.tex imap <esc>\rp :w !pdflatex %<cr>
 
 " \rr - для C
-autocmd BufRead *.c nmap      /rr :w !tcc -run %<cr>
-autocmd BufRead *.c vmap <esc>/rr :w !tcc -run %<cr>
-autocmd BufRead *.c imap <esc>/rr :w !tcc -run %<cr>
+autocmd BufRead *.c nmap      \rr :w !tcc -run %<cr>
+autocmd BufRead *.c vmap <esc>\rr :w !tcc -run %<cr>
+autocmd BufRead *.c imap <esc>\rr :w !tcc -run %<cr>
 
 " \e. - смена кодировок 
     " \ek - koi8.
