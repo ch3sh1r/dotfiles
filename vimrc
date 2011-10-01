@@ -1,6 +1,11 @@
 " chesh1r's vimrc
 " Maintained by Alexey Bednyakov, <cheshir.box@google.com>
 
+" Загрузка pathogen'a (https://github.com/tpope/vim-pathogen)
+filetype off
+call pathogen#runtime_append_all_bundles()
+filetype plugin indent on
+
 set nocompatible            " Предпочтение натройкам Vim относительно Vi
 set ruler                   " Показывать положение курсора всё время
 set showcmd                 " Показывать незавершённые команды в статусбаре
@@ -11,11 +16,10 @@ set scrolljump=3            " Теперь нет необходимости п�
 set scrolloff=3             "   краю экрана, чтобы подняться/отпуститься
 set shortmess+=I            " И больше не будет детей Уганды
 set history=128             " Хранить больше истории команд
-set undolevels=2048         " ... и правок
+set undolevels=2048         "   и правок
 set t_Co=256                " Ставим терминалу 256 цветов
-colorscheme wombat256mod    " Тема
+colorscheme wombat256mod    " Цветовая тема
 set guifont=Monospace\ Book\ 10
-set toolbar-=icons,tooltips
 
 " Выключить звук на ошибки 
     set noerrorbells
@@ -181,11 +185,6 @@ set toolbar-=icons,tooltips
 "--------------------- МОДУЛИ ----------------------
 "---------------------------------------------------
 
-" Включаем распознавание типов файлов и типо-специфичные плагины 
-    filetype on
-    filetype indent on
-    filetype plugin on
-
 " Настройки для PyDiction
     let g:pydiction_location = '/home/chesh1r/.vim/pydiction/complete-dict' 
     let g:pydiction_menu_height = 10
@@ -251,6 +250,11 @@ autocmd BufRead *.tex imap <esc>\rr :w !latex %<cr>
 autocmd BufRead *.tex nmap      \rp :w !pdflatex %<cr>
 autocmd BufRead *.tex vmap <esc>\rp :w !pdflatex %<cr>
 autocmd BufRead *.tex imap <esc>\rp :w !pdflatex %<cr>
+
+" \rr - для C
+autocmd BufRead *.c nmap      /rr :w !tcc -run %<cr>
+autocmd BufRead *.c vmap <esc>/rr :w !tcc -run %<cr>
+autocmd BufRead *.c imap <esc>/rr :w !tcc -run %<cr>
 
 " \e. - смена кодировок 
     " \ek - koi8.
