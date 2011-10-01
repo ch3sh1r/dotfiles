@@ -231,7 +231,7 @@ vnoremap / /\v
 let g:snippetsEmu_key = "<C-j>"
 
 " Shift+Tab - автокомплит "из текущего"
-inoremap <silent> <S-Tab> <C-r>=InsertTabWrapper()<cr>
+inoremap <silent><S-Tab> <C-r>=InsertTabWrapper()<cr>
 
 " Поиск и замена слова под курсором
 nmap ; :%s/\<<c-r>=expand("<cword>")<cr>\>/
@@ -241,6 +241,9 @@ nnoremap <leader><space> :noh<cr>
 
 " Новый таб
 nmap tn :tabnew 
+
+" Быстрое переключение режимов
+inoremap jj <ESC>
 
 " \rr - запуск Python скриптов в стиле perl-support
 autocmd BufRead *.py nnoremap <leader>rr :w !python %<cr>
