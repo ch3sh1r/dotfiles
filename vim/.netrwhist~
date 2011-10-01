@@ -1,0 +1,9 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhist_cnt =7
+let g:netrw_dirhist_1='/home/chesh1r/pytbull'
+let g:netrw_dirhist_2='/tmp/vmware-root'
+let g:netrw_dirhist_3='/pentest/python'
+let g:netrw_dirhist_4='/pentest/python/impacket-examples'
+let g:netrw_dirhist_5='/pentest/forensics/air-imager'
+let g:netrw_dirhist_6='/home/chesh1r/t3mp/kite'
+let g:netrw_dirhist_7='/etc/apt/apt.conf.d'

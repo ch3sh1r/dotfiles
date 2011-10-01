@@ -242,53 +242,45 @@ nnoremap <leader><space> :noh<cr>
 " Новый таб
 nmap tn :tabnew 
 
+" \rr - запуск Python скриптов в стиле perl-support
+autocmd BufRead *.py nnoremap <leader>rr :w !python %<cr>
+
+" \rr - для C
+autocmd BufRead *.c nnoremap <leader>rr :w !tcc -run %<cr>
+
+" \r. - для LaTeX
+autocmd BufRead *.tex nnoremap <leader>rr :w !latex %<cr>
+autocmd BufRead *.tex nnoremap <leader>rp :w !pdflatex %<cr>
+
 " \br - поиск и замена слова под курсором во всех буферах (Tip #382)
-    nmap \br :call Replace()<cr>
+    nmap <leader>br :call Replace()<cr>
     fun! Replace()
         let s:word = input("Replace " . expand('<cword>') . " with:")
         :exe 'bufdo! %s/\<' . expand('<cword>') . '\>/' . s:word . '/ge'
         :unlet! s:word
     endfun 
 
-" \rr - запуск Python скриптов в стиле perl-support
-    autocmd BufRead *.py nmap      \rr :w !python %<cr>
-    autocmd BufRead *.py vmap <esc>\rr :w !python %<cr>
-    autocmd BufRead *.py imap <esc>\rr :w !python %<cr>
-
-" \r. - для LaTeX
-    autocmd BufRead *.tex nmap      \rr :w !latex %<cr>
-    autocmd BufRead *.tex vmap <esc>\rr :w !latex %<cr>
-    autocmd BufRead *.tex imap <esc>\rr :w !latex %<cr>
-    autocmd BufRead *.tex nmap      \rp :w !pdflatex %<cr>
-    autocmd BufRead *.tex vmap <esc>\rp :w !pdflatex %<cr>
-    autocmd BufRead *.tex imap <esc>\rp :w !pdflatex %<cr>
-
-" \rr - для C
-    autocmd BufRead *.c nmap      \rr :w !tcc -run %<cr>
-    autocmd BufRead *.c vmap <esc>\rr :w !tcc -run %<cr>
-    autocmd BufRead *.c imap <esc>\rr :w !tcc -run %<cr>
-
 " \e. - смена кодировок 
     " \ek - koi8.
-    nmap \ek :e ++enc=koi8-r<cr>
-    vmap \ek :e ++enc=koi8-r<cr>
-    imap \ek :e ++enc=koi8-r<cr>
+    nmap <leader>ek :e ++enc=koi8-r<cr>
+    vmap <leader>ek :e ++enc=koi8-r<cr>
+    imap <leader>ek :e ++enc=koi8-r<cr>
     " \ew - cp1251 она же win.
-    nmap \ew :e ++enc=cp1251<cr>
-    vmap \ew :e ++enc=cp1251<cr>
-    imap \ew :e ++enc=cp1251<cr>
+    nmap <leader>ew :e ++enc=cp1251<cr>
+    vmap <leader>ew :e ++enc=cp1251<cr>
+    imap <leader>ew :e ++enc=cp1251<cr>
     " \ec - cp866.
-    nmap \ec :e ++enc=cp866<cr>
-    vmap \ec :e ++enc=cp866<cr>
-    imap \ec :e ++enc=cp866<cr>
+    nmap <leader>ec :e ++enc=cp866<cr>
+    vmap <leader>ec :e ++enc=cp866<cr>
+    imap <leader>ec :e ++enc=cp866<cr>
     " \eu - utf8. Yarr!
-    nmap \eu :e ++enc=utf8<cr>
-    vmap \eu :e ++enc=utf8<cr>
-    imap \eu :e ++enc=utf8<cr>
+    nmap <leader>eu :e ++enc=utf8<cr>
+    vmap <leader>eu :e ++enc=utf8<cr>
+    imap <leader>eu :e ++enc=utf8<cr>
     " \eu - rot13 до конца файла.
-    nmap \er g?G <cr>
-    vmap \er g?G <cr>
-    imap \er g?G <cr>
+    nmap <leader>er g?G <cr>
+    vmap <leader>er g?G <cr>
+    imap <leader>er g?G <cr>
 
 " F1 - больше не поможет
     inoremap <F1> <ESC>
