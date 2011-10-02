@@ -9,8 +9,6 @@ autoload colors && colors	# Pаскраска через $fg, $bg etc.
 export PATH="$HOME/bin:$HOME/.bin:/usr/local/homebrew/bin:/usr/local/bin:/usr/local/sbin:/usr/local/mysql/bin:/usr/local/git/bin:$PATH"
 export MANPATH="/usr/local/man:/usr/local/mysql/man:/usr/local/git/man:$MANPATH"
 
-fpath=(~/.zsh/functions $fpath)
-autoload -U ~/.zsh/functions/*(:t)
 # Куда писать историю
 
 HISTFILE=~/.zhistory
@@ -116,5 +114,4 @@ export GREP_COLOR="1;33"
   alias cvs="grc --colour=auto cvs"
   alias netstat="grc --colour=auto netstat"
 }
-
 

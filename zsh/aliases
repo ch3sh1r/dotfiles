@@ -12,6 +12,7 @@ alias -s rb=ruby
 alias -s {ogg,mp3,wav,wma}=mplayer
 autoload -U pick-web-browser
 alias -s {html,htm}=pick-web-browser
+
 # В иксах
 alias -s {png,gif,jpg,jpeg}=feh
 alias -s {pdf,djvu}=evince
@@ -42,9 +43,8 @@ alias la='ls -A'
 alias lsd='ls -ld .*'
 
 alias gs='git status '
-alias ga='git add '
+alias ga='git add .'
 alias gb='git branch '
-alias gc='git commit'
 alias gd='git diff'
 alias go='git checkout '
 alias gh='git hist'
@@ -91,6 +91,7 @@ alias -g UC="| iconv -c -f utf8 -t cp1251"
 # Xитрожопые алиасы
 #
 
+# Шортлинк в clck.ru
 # Ноутбучный режим энергосбережения (1-5).
 alias set_etnergy="sudo echo $1 > /proc/sys/vm/laptop_mode"
 # Вывод прав циферками.

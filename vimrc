@@ -1,21 +1,26 @@
 " chesh1r's vimrc
 " Maintained by Alexey Bednyakov, <cheshir.box@google.com>
 
+" Загрузка pathogen'a (https://github.com/tpope/vim-pathogen)
+filetype off
+call pathogen#runtime_append_all_bundles()
+filetype plugin indent on
+
 set nocompatible            " Предпочтение натройкам Vim относительно Vi
 set ruler                   " Показывать положение курсора всё время
 set showcmd                 " Показывать незавершённые команды в статусбаре
 set nu                      " Включаем нумерацию строк
 set autoread                " Автоматическая перезагрузка при изменении
 set foldmethod=indent       " Фолдинг по отсупам
+set modelines=0             " Во-первых не нужны, во-вторых - дырки (http://clck.ru/Lx2G)
 set scrolljump=3            " Теперь нет необходимости передвигать курсор к 
 set scrolloff=3             "   краю экрана, чтобы подняться/отпуститься
 set shortmess+=I            " И больше не будет детей Уганды
 set history=128             " Хранить больше истории команд
-set undolevels=2048         " ... и правок
+set undolevels=2048         "   и правок
 set t_Co=256                " Ставим терминалу 256 цветов
-colorscheme wombat256mod    " Тема
+colorscheme wombat256mod    " Цветовая тема
 set guifont=Monospace\ Book\ 10
-set toolbar-=icons,tooltips
 
 " Выключить звук на ошибки 
     set noerrorbells
@@ -30,7 +35,6 @@ set toolbar-=icons,tooltips
     set statusline+=\ \ \ [%{&ff}/%Y]
     set statusline+=\ \ \ %<%20.30(%{hostname()}:%{CurDir()}%)\
     set statusline+=%=%-10.(%l,%c%V%)\ %p%%/%L
-
     function! CurDir()
         let curdir = substitute(getcwd(), $HOME, "~", "")
             return curdir
@@ -52,6 +56,7 @@ set toolbar-=icons,tooltips
 
 " Поиск 
     set ignorecase  " Поиск не чувствительный к регистру 
+    set smartcase   " ...сообразительный 
     set incsearch   " ...с подсветкой
     set hlsearch    " ...по набору текста
 
@@ -82,9 +87,9 @@ set toolbar-=icons,tooltips
     function MyKeyMapHighlight()
        if &iminsert == 0
            " TODO Определяь цвет относительно gui
-           hi StatusLine ctermfg=Blue guifg=Blue
+           hi StatusLine ctermfg=blue guifg=blue
        else
-           hi StatusLine ctermfg=Red guifg=Red
+           hi StatusLine ctermfg=red guifg=red
        endif
     endfunction
     call MyKeyMapHighlight()
@@ -181,11 +186,6 @@ set toolbar-=icons,tooltips
 "--------------------- МОДУЛИ ----------------------
 "---------------------------------------------------
 
-" Включаем распознавание типов файлов и типо-специфичные плагины 
-    filetype on
-    filetype indent on
-    filetype plugin on
-
 " Настройки для PyDiction
     let g:pydiction_location = '/home/chesh1r/.vim/pydiction/complete-dict' 
     let g:pydiction_menu_height = 10
@@ -222,76 +222,96 @@ set toolbar-=icons,tooltips
 "---------------------------------------------------
 nmap <Space> <PageDown>
 
+" Поиск нормальными регулярками
+nnoremap / /\v
+vnoremap / /\v
+
 " Ctrl+j - сниппеты
 let g:snippetsEmu_key = "<C-j>"
 
 " Shift+Tab - автокомплит "из текущего"
-inoremap <silent> <S-Tab> <C-r>=InsertTabWrapper()<cr>
+inoremap <silent><S-Tab> <C-r>=InsertTabWrapper()<cr>
 
 " Поиск и замена слова под курсором
 nmap ; :%s/\<<c-r>=expand("<cword>")<cr>\>/
 
-" \br - поиск и замена слова под курсором во всех буферах (Tip #382)
-nmap \br :call Replace()<cr>
-fun! Replace()
-    let s:word = input("Replace " . expand('<cword>') . " with:")
-    :exe 'bufdo! %s/\<' . expand('<cword>') . '\>/' . s:word . '/ge'
-    :unlet! s:word
-endfun 
-
-" \rr - запуск Python скриптов в стиле perl-support
-autocmd BufRead *.py nmap      /rr :w !python %<cr>
-autocmd BufRead *.py vmap <esc>/rr :w !python %<cr>
-autocmd BufRead *.py imap <esc>/rr :w !python %<cr>
-
-" \r. - для LaTeX
-autocmd BufRead *.tex nmap      \rr :w !latex %<cr>
-autocmd BufRead *.tex vmap <esc>\rr :w !latex %<cr>
-autocmd BufRead *.tex imap <esc>\rr :w !latex %<cr>
-autocmd BufRead *.tex nmap      \rp :w !pdflatex %<cr>
-autocmd BufRead *.tex vmap <esc>\rp :w !pdflatex %<cr>
-autocmd BufRead *.tex imap <esc>\rp :w !pdflatex %<cr>
-
-" \e. - смена кодировок 
-    " \ek - koi8.
-    nmap \ek :e ++enc=koi8-r<cr>
-    vmap \ek :e ++enc=koi8-r<cr>
-    imap \ek :e ++enc=koi8-r<cr>
-    " \ew - cp1251 она же win.
-    nmap \ew :e ++enc=cp1251<cr>
-    vmap \ew :e ++enc=cp1251<cr>
-    imap \ew :e ++enc=cp1251<cr>
-    " \ec - cp866.
-    nmap \ec :e ++enc=cp866<cr>
-    vmap \ec :e ++enc=cp866<cr>
-    imap \ec :e ++enc=cp866<cr>
-    " \eu - utf8. Yarr!
-    nmap \eu :e ++enc=utf8<cr>
-    vmap \eu :e ++enc=utf8<cr>
-    imap \eu :e ++enc=utf8<cr>
-    " \eu - rot13 до конца файла.
-    nmap \er g?G <cr>
-    vmap \er g?G <cr>
-    imap \er g?G <cr>
+" Убрать мусор из прошлого поиска
+nnoremap <leader><space> :noh<cr>
 
 " Новый таб
 nmap tn :tabnew 
 
-" `+F2 - быстрое сохранение без вопросов
-nmap `<F2> :w!<cr>
-vmap `<F2> <esc>:w!<cr>
-imap `<F2> <esc>:w!<cr>
+" leader-шорткаты
+    " \rr - запуск Python скриптов в стиле perl-support
+    autocmd BufRead *.py nnoremap <leader>rr :w !python %<cr>
 
-" 1+F2 - быстрое sudo-сохранение
-nmap 1<F2> :w !sudo tee %<cr>
-vmap 1<F2> <esc>:w !sudo tee %<cr>
-imap 1<F2> <esc>:w !sudo tee %<cr>
+    " \rr - для C
+    autocmd BufRead *.c nnoremap <leader>rr :w !tcc -run %<cr>
 
-" F7 - проверка орфографии
-imap <F7> <Esc>:setlocal spell spelllang=ru_yo,en_us<CR>a
-nmap <F7> :setlocal spell spelllang=ru_yo,en_us<CR>
+    " \r. - для LaTeX
+    autocmd BufRead *.tex nnoremap <leader>rr :w !latex %<cr>
+    autocmd BufRead *.tex nnoremap <leader>rp :w !pdflatex %<cr>
 
-" Shift-F7 - отключить проверку орфографии
-imap <S-F7> <Esc>:setlocal spell spelllang=<CR>a
-nmap <S-F7> :setlocal spell spelllang=<CR>
+    " \br - поиск и замена слова под курсором во всех буферах (Tip #382)
+        nmap <leader>br :call Replace()<cr>
+        fun! Replace()
+            let s:word = input("Replace " . expand('<cword>') . " with:")
+            :exe 'bufdo! %s/\<' . expand('<cword>') . '\>/' . s:word . '/ge'
+            :unlet! s:word
+        endfun 
+
+    " \e. - смена кодировок 
+        " \ek - koi8.
+        nmap <leader>ek :e ++enc=koi8-r<cr>
+        vmap <leader>ek :e ++enc=koi8-r<cr>
+        imap <leader>ek :e ++enc=koi8-r<cr>
+        " \ew - cp1251 она же win.
+        nmap <leader>ew :e ++enc=cp1251<cr>
+        vmap <leader>ew :e ++enc=cp1251<cr>
+        imap <leader>ew :e ++enc=cp1251<cr>
+        " \ec - cp866.
+        nmap <leader>ec :e ++enc=cp866<cr>
+        vmap <leader>ec :e ++enc=cp866<cr>
+        imap <leader>ec :e ++enc=cp866<cr>
+        " \eu - utf8. Yarr!
+        nmap <leader>eu :e ++enc=utf8<cr>
+        vmap <leader>eu :e ++enc=utf8<cr>
+        imap <leader>eu :e ++enc=utf8<cr>
+        " \eu - rot13 до конца файла.
+        nmap <leader>er g?G <cr>
+        vmap <leader>er g?G <cr>
+        imap <leader>er g?G <cr>
+        
+" F<номер>-шорткаты
+    " F1 - больше не поможет
+        inoremap <F1> <ESC>
+        nnoremap <F1> <ESC>
+        vnoremap <F1> <ESC>
+
+    " `+F2 - быстрое сохранение без вопросов
+        nmap `<F2> :w!<cr>
+        vmap `<F2> <esc>:w!<cr>
+        imap `<F2> <esc>:w!<cr>
+
+    " 1+F2 - быстрое sudo-сохранение
+        nmap 1<F2> :w !sudo tee %<cr>
+        vmap 1<F2> <esc>:w !sudo tee %<cr>
+        imap 1<F2> <esc>:w !sudo tee %<cr>
+
+    " F7 - проверка орфографии
+        imap <F7> <Esc>:setlocal spell spelllang=ru_yo,en_us<CR>a
+        nmap <F7> :setlocal spell spelllang=ru_yo,en_us<CR>
+
+    " Shift-F7 - отключить проверку орфографии
+        imap <S-F7> <Esc>:setlocal spell spelllang=<CR>a
+        nmap <S-F7> :setlocal spell spelllang=<CR>
+
+" Работа с буерами
+    " Быстрый сплит
+    nnoremap <leader>w <C-w>v<C-w>l   
+    " Быстрое перемещение
+    nnoremap <C-h> <C-w>h
+    nnoremap <C-j> <C-w>j
+    nnoremap <C-k> <C-w>k
+    nnoremap <C-l> <C-w>l
 
