@@ -35,7 +35,6 @@ set guifont=Monospace\ Book\ 10
     set statusline+=\ \ \ [%{&ff}/%Y]
     set statusline+=\ \ \ %<%20.30(%{hostname()}:%{CurDir()}%)\
     set statusline+=%=%-10.(%l,%c%V%)\ %p%%/%L
-
     function! CurDir()
         let curdir = substitute(getcwd(), $HOME, "~", "")
             return curdir
@@ -88,9 +87,9 @@ set guifont=Monospace\ Book\ 10
     function MyKeyMapHighlight()
        if &iminsert == 0
            " TODO Определяь цвет относительно gui
-           hi StatusLine ctermfg=Blue guifg=Blue
+           hi StatusLine ctermfg=blue guifg=blue
        else
-           hi StatusLine ctermfg=Red guifg=Red
+           hi StatusLine ctermfg=red guifg=red
        endif
     endfunction
     call MyKeyMapHighlight()
@@ -242,69 +241,77 @@ nnoremap <leader><space> :noh<cr>
 " Новый таб
 nmap tn :tabnew 
 
-" Быстрое переключение режимов
-inoremap jj <ESC>
+" leader-шорткаты
+    " \rr - запуск Python скриптов в стиле perl-support
+    autocmd BufRead *.py nnoremap <leader>rr :w !python %<cr>
 
-" \rr - запуск Python скриптов в стиле perl-support
-autocmd BufRead *.py nnoremap <leader>rr :w !python %<cr>
+    " \rr - для C
+    autocmd BufRead *.c nnoremap <leader>rr :w !tcc -run %<cr>
 
-" \rr - для C
-autocmd BufRead *.c nnoremap <leader>rr :w !tcc -run %<cr>
+    " \r. - для LaTeX
+    autocmd BufRead *.tex nnoremap <leader>rr :w !latex %<cr>
+    autocmd BufRead *.tex nnoremap <leader>rp :w !pdflatex %<cr>
 
-" \r. - для LaTeX
-autocmd BufRead *.tex nnoremap <leader>rr :w !latex %<cr>
-autocmd BufRead *.tex nnoremap <leader>rp :w !pdflatex %<cr>
+    " \br - поиск и замена слова под курсором во всех буферах (Tip #382)
+        nmap <leader>br :call Replace()<cr>
+        fun! Replace()
+            let s:word = input("Replace " . expand('<cword>') . " with:")
+            :exe 'bufdo! %s/\<' . expand('<cword>') . '\>/' . s:word . '/ge'
+            :unlet! s:word
+        endfun 
 
-" \br - поиск и замена слова под курсором во всех буферах (Tip #382)
-    nmap <leader>br :call Replace()<cr>
-    fun! Replace()
-        let s:word = input("Replace " . expand('<cword>') . " with:")
-        :exe 'bufdo! %s/\<' . expand('<cword>') . '\>/' . s:word . '/ge'
-        :unlet! s:word
-    endfun 
+    " \e. - смена кодировок 
+        " \ek - koi8.
+        nmap <leader>ek :e ++enc=koi8-r<cr>
+        vmap <leader>ek :e ++enc=koi8-r<cr>
+        imap <leader>ek :e ++enc=koi8-r<cr>
+        " \ew - cp1251 она же win.
+        nmap <leader>ew :e ++enc=cp1251<cr>
+        vmap <leader>ew :e ++enc=cp1251<cr>
+        imap <leader>ew :e ++enc=cp1251<cr>
+        " \ec - cp866.
+        nmap <leader>ec :e ++enc=cp866<cr>
+        vmap <leader>ec :e ++enc=cp866<cr>
+        imap <leader>ec :e ++enc=cp866<cr>
+        " \eu - utf8. Yarr!
+        nmap <leader>eu :e ++enc=utf8<cr>
+        vmap <leader>eu :e ++enc=utf8<cr>
+        imap <leader>eu :e ++enc=utf8<cr>
+        " \eu - rot13 до конца файла.
+        nmap <leader>er g?G <cr>
+        vmap <leader>er g?G <cr>
+        imap <leader>er g?G <cr>
+        
+" F<номер>-шорткаты
+    " F1 - больше не поможет
+        inoremap <F1> <ESC>
+        nnoremap <F1> <ESC>
+        vnoremap <F1> <ESC>
 
-" \e. - смена кодировок 
-    " \ek - koi8.
-    nmap <leader>ek :e ++enc=koi8-r<cr>
-    vmap <leader>ek :e ++enc=koi8-r<cr>
-    imap <leader>ek :e ++enc=koi8-r<cr>
-    " \ew - cp1251 она же win.
-    nmap <leader>ew :e ++enc=cp1251<cr>
-    vmap <leader>ew :e ++enc=cp1251<cr>
-    imap <leader>ew :e ++enc=cp1251<cr>
-    " \ec - cp866.
-    nmap <leader>ec :e ++enc=cp866<cr>
-    vmap <leader>ec :e ++enc=cp866<cr>
-    imap <leader>ec :e ++enc=cp866<cr>
-    " \eu - utf8. Yarr!
-    nmap <leader>eu :e ++enc=utf8<cr>
-    vmap <leader>eu :e ++enc=utf8<cr>
-    imap <leader>eu :e ++enc=utf8<cr>
-    " \eu - rot13 до конца файла.
-    nmap <leader>er g?G <cr>
-    vmap <leader>er g?G <cr>
-    imap <leader>er g?G <cr>
+    " `+F2 - быстрое сохранение без вопросов
+        nmap `<F2> :w!<cr>
+        vmap `<F2> <esc>:w!<cr>
+        imap `<F2> <esc>:w!<cr>
 
-" F1 - больше не поможет
-    inoremap <F1> <ESC>
-    nnoremap <F1> <ESC>
-    vnoremap <F1> <ESC>
+    " 1+F2 - быстрое sudo-сохранение
+        nmap 1<F2> :w !sudo tee %<cr>
+        vmap 1<F2> <esc>:w !sudo tee %<cr>
+        imap 1<F2> <esc>:w !sudo tee %<cr>
 
-" `+F2 - быстрое сохранение без вопросов
-    nmap `<F2> :w!<cr>
-    vmap `<F2> <esc>:w!<cr>
-    imap `<F2> <esc>:w!<cr>
+    " F7 - проверка орфографии
+        imap <F7> <Esc>:setlocal spell spelllang=ru_yo,en_us<CR>a
+        nmap <F7> :setlocal spell spelllang=ru_yo,en_us<CR>
 
-" 1+F2 - быстрое sudo-сохранение
-    nmap 1<F2> :w !sudo tee %<cr>
-    vmap 1<F2> <esc>:w !sudo tee %<cr>
-    imap 1<F2> <esc>:w !sudo tee %<cr>
+    " Shift-F7 - отключить проверку орфографии
+        imap <S-F7> <Esc>:setlocal spell spelllang=<CR>a
+        nmap <S-F7> :setlocal spell spelllang=<CR>
 
-" F7 - проверка орфографии
-    imap <F7> <Esc>:setlocal spell spelllang=ru_yo,en_us<CR>a
-    nmap <F7> :setlocal spell spelllang=ru_yo,en_us<CR>
-
-" Shift-F7 - отключить проверку орфографии
-    imap <S-F7> <Esc>:setlocal spell spelllang=<CR>a
-    nmap <S-F7> :setlocal spell spelllang=<CR>
+" Работа с буерами
+    " Быстрый сплит
+    nnoremap <leader>w <C-w>v<C-w>l   
+    " Быстрое перемещение
+    nnoremap <C-h> <C-w>h
+    nnoremap <C-j> <C-w>j
+    nnoremap <C-k> <C-w>k
+    nnoremap <C-l> <C-w>l
 
