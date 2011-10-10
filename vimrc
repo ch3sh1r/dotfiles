@@ -63,14 +63,15 @@ set guifont=Monospace\ Book\ 10
 " Подстветка синтаксиса 
     syntax on
     let python_highlight_all = 1
+    autocmd BufRead *.conf :set filetype=sh<cr>
 
 " Меню выбора кодировки текста 
     set wildmenu
     set wcm=<Tab> 
-    menu Encoding.koi8-r :e ++enc=koi8-r<CR>
-    menu Encoding.windows-1251 :e ++enc=cp1251<CR>
-    menu Encoding.cp866 :e ++enc=cp866<CR>
-    menu Encoding.utf-8 :e ++enc=utf8 <CR>
+    menu Encoding.koi8-r :e ++enc=koi8-r<cr>
+    menu Encoding.windows-1251 :e ++enc=cp1251<cr>
+    menu Encoding.cp866 :e ++enc=cp866<cr>
+    menu Encoding.utf-8 :e ++enc=utf8<cr>
 
 " Переключение на русскую/английскую раскладку по Ctrl-/ 
     set termencoding=utf-8
