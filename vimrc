@@ -6,7 +6,7 @@ filetype off
 call pathogen#runtime_append_all_bundles()
 filetype plugin indent on
 
-set nocompatible            " Предпочтение натройкам Vim относительно Vi
+set nocompatible            " Предпочтение настройкам Vim относительно Vi
 set ruler                   " Показывать положение курсора всё время
 set showcmd                 " Показывать незавершённые команды в статусбаре
 set nu                      " Включаем нумерацию строк
@@ -40,7 +40,7 @@ set guifont=Monospace\ Book\ 10
             return curdir
     endfunction
 
-" Настройка отступов и tab 
+" Настройка отступов и табов 
     set autoindent
     set expandtab
     set shiftwidth=4
@@ -56,14 +56,14 @@ set guifont=Monospace\ Book\ 10
 
 " Поиск 
     set ignorecase  " Поиск не чувствительный к регистру 
-    set smartcase   " ...сообразительный 
-    set incsearch   " ...с подсветкой
-    set hlsearch    " ...по набору текста
+    set smartcase   "   сообразительный 
+    set incsearch   "   с подсветкой
+    set hlsearch    "   по набору текста
 
 " Подстветка синтаксиса 
     syntax on
     let python_highlight_all = 1
-    autocmd BufRead *.conf :set filetype=sh<cr>
+    autocmd BufRead *.conf :set filetype=sh
 
 " Меню выбора кодировки текста 
     set wildmenu
@@ -173,7 +173,7 @@ set guifont=Monospace\ Book\ 10
     ":noremap <LeftRelease> <Nop>
     ":noremap <LeftDrag> <Nop>
 
-    " Ctrl-Space (переключение консоли) ничего не ломает.
+    " Ctrl-Space (переключение языка) ничего не ломает.
     "imap <Nul> <Nop>
     "map <Nul> <Nop>
     "vmap <Nul> <Nop>
@@ -195,7 +195,7 @@ set guifont=Monospace\ Book\ 10
     let g:SessionMgr_AutoManage = 0
     let g:SessionMgr_DefaultName = "mysession"
 
-" Настройки для Tlist (показвать только текущий файл в окне навигации по  коду) 
+" Настройки для Tlist (показвать только текущий файл в окне навигации по коду) 
     let g:Tlist_Show_One_File = 1
     set completeopt-=preview
     set completeopt+=longest
@@ -221,7 +221,10 @@ set guifont=Monospace\ Book\ 10
 "---------------------------------------------------
 "--------------------- ХОТКЕИ ----------------------
 "---------------------------------------------------
+
+" Беглые скачки
 nmap <Space> <PageDown>
+nmap b <PageUp>
 
 " Поиск нормальными регулярками
 nnoremap / /\v
@@ -244,14 +247,15 @@ nmap tn :tabnew
 
 " leader-шорткаты
     " \rr - запуск Python скриптов в стиле perl-support
-    autocmd BufRead *.py nnoremap <leader>rr :w !python %<cr>
+    autocmd BufRead *.py nnoremap <leader>rr :!python %<cr>
+    autocmd BufRead *.py nnoremap <leader>rp :!python % 
 
     " \rr - для C
-    autocmd BufRead *.c nnoremap <leader>rr :w !tcc -run %<cr>
+    autocmd BufRead *.c nnoremap <leader>rr :!tcc -run %<cr>
 
     " \r. - для LaTeX
-    autocmd BufRead *.tex nnoremap <leader>rr :w !latex %<cr>
-    autocmd BufRead *.tex nnoremap <leader>rp :w !pdflatex %<cr>
+    autocmd BufRead *.tex nnoremap <leader>rr :!latex %<cr>
+    autocmd BufRead *.tex nnoremap <leader>rp :!pdflatex %<cr>
 
     " \br - поиск и замена слова под курсором во всех буферах (Tip #382)
         nmap <leader>br :call Replace()<cr>
