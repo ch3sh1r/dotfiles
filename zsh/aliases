@@ -25,10 +25,10 @@ alias -s {pdf,djvu}=evince
 
 
 #
-# Aлиасы
+# Aлиасы.
 #
 
-alias iddqd='sudo -s'
+alias iddqd='sudo -i'
 alias apt-get="sudo apt-get"
 alias iftop="sudo iftop"
 alias wifi="sudo /usr/bin/wifi"
@@ -42,11 +42,11 @@ alias ll='ls -al'
 alias la='ls -A'
 alias lsd='ls -ld .*'
 
-alias gs='git status '
+alias gs='git status'
 alias ga='git add .'
-alias gb='git branch '
+alias gb='git branch'
 alias gd='git diff'
-alias go='git checkout '
+alias go='git checkout'
 alias gh='git hist'
 alias gk='gitk --all&'
 

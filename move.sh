@@ -2,13 +2,12 @@
 
 # Dumb script that push all files to right places.
 
-mkdir /tmp/dotfiles-backup
-mv ~/.conkyrc ~/.vim ~/.vimperatorrc ~/.vimrc ~/.zsh ~/.zshrc /tmp/dotfiles-backup
+#mkdir /tmp/dotfiles
+rm -rf ~/.conkyrc ~/.vim ~/.vimperatorrc ~/.vimrc ~/.zsh ~/.zshrc /tmp/dotfiles
 
-cp -r vim ~/
-cp -r zsh ~/
-
-cp conkyrc  ~/
-cp vimperatorrc ~/
-cp vimrc ~/
-cp zshrc ~/
+#ln -s ./vim /home/chesh1r/.vim 
+#ln -s ./zsh /home/chesh1r/.zsh 
+#ln -s ./conkyrc  /home/chesh1r/.conkyrc  
+#ln -s ./vimperatorrc /home/chesh1r/.vimperatorrc 
+#ln -s ./vimrc /home/chesh1r/.vimrc 
+#ln -s ./zshrc /home/chesh1r/.zshrc 
