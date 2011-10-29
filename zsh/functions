@@ -97,6 +97,17 @@ gc(){
     git commit -m "$@"
 }
 
+# Подъем wifi
+#wifi(){
+    #iwconfig wlan0
+    #iwconfig wlan0 mode Ad-Hoc
+    #iwconfig wlan0 channel 2
+    #iwconfig wlan0 essid che
+    #ifconfig wlan0 192.168.0.1
+    #ifconfig wlan0
+    #firestarter --start-hidden
+#}
+
 #
 # Конвертируем всякую дурь
 #

@@ -1,33 +1,3 @@
-#
-# Запуск программ по разрешению.
-#
-autoload -U pick-web-browser
-alias -s {html,htm}=pick-web-browser
-alias -s {avi,mpeg,mpg,mov,m2v,flv}=vlc
-alias -s {ogg,mp3,wav}=amarok
-alias -s txt=vim
-alias -s py=python
-alias -s pl=perl
-alias -s rb=ruby
-alias -s {ogg,mp3,wav,wma}=mplayer
-autoload -U pick-web-browser
-alias -s {html,htm}=pick-web-browser
-
-# В иксах
-alias -s {png,gif,jpg,jpeg}=feh
-alias -s {pdf,djvu}=evince
-# Без иксов
-[[ -z $DISPLAY ]] && {
-	alias -s {odt,doc,sxw,xls,doc,rtf}=catdoc
-	alias -s {png,gif,jpg,jpeg}="fbi -a"
-	alias -s {pdf,djvu}=evince
-}
-
-
-#
-# Aлиасы.
-#
-
 alias iddqd='sudo -i'
 alias apt-get="sudo apt-get"
 alias iftop="sudo iftop"
@@ -87,25 +57,30 @@ alias -g UK="| iconv -c -f utf8 -t koi8r"
 alias -g UC="| iconv -c -f utf8 -t cp1251"
 
 
+
 #
 # Xитрожопые алиасы
 #
 
-# Шортлинк в clck.ru
 # Ноутбучный режим энергосбережения (1-5).
 alias set_etnergy="sudo echo $1 > /proc/sys/vm/laptop_mode"
+
 # Вывод прав циферками.
 alias lls="ls -l | sed -e 's/--x/1/g' -e 's/-w-/2/g' -e 's/-wx/3/g' -e 's/r--/4/g'  -e 's/r-x/5/g' -e 's/rw-/6/g' -e 's/rwx/7/g' -e 's/---/0/g'" 
+
 # Дерево из папки.
 alias dirtree='find . -type d | sed -e "s/[^-][^\/]*\//  |/g" -e "s/|\([^ ]\)/|-\1/"' 
+
 # Удалить пробелы и комментарии.
 alias delspacecomm="sed '/ *#/d; /^ *$/d' $1"
+
 # Рандомный пароль.
 alias genpass="head -c8 /dev/urandom | xxd -ps"
+
 # Узнать айпишник.
 alias myip="lynx --source http://www.formyip.com/ | grep The | awk {'print $5'} | cut -f5 -d ' '"
+
 # Подключаем и отключаем проектор
 alias proj='xrandr --output VGA --mode 800x600 --output LVDS --mode 1024x600'
 alias uproj='xrandr --output VGA --off'
-
 
