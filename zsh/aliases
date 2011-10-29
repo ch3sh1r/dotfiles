@@ -1,8 +1,11 @@
+#
+# Простенькая часть
+#
+
 alias iddqd='sudo -i'
 alias apt-get="sudo apt-get"
 alias iftop="sudo iftop"
 alias wifi="sudo /usr/bin/wifi"
-alias ..='cd ..'
 
 alias ls='ls -FC --color=auto'
 alias l='ls'
@@ -17,7 +20,7 @@ alias ga='git add .'
 alias gb='git branch'
 alias gd='git diff'
 alias go='git checkout'
-alias gh='git hist'
+alias gh='git history'
 alias gk='gitk --all&'
 
 alias recal='cat ~/.zhistory|grep'
@@ -26,6 +29,7 @@ alias du='du -h'
 alias vi='vim'
 alias cvi='vim -u /home/chesh1r/.vimrc_nox'
 alias screen="screen -DR"
+
 alias grep='grep --color=auto'
 alias egrep='egrep --color=auto'
 alias fgrep='fgrep --color=auto'
@@ -35,7 +39,6 @@ alias p='ps auxw'
 alias h='history 20'
 alias c='clear'
 alias i='ipython'
-alias e='sudo ifconfig eth0 192.168.0.1'
 alias s='startx'
 
 alias -g H="| head"
@@ -62,7 +65,18 @@ alias -g UC="| iconv -c -f utf8 -t cp1251"
 # Xитрожопые алиасы
 #
 
-# Ноутбучный режим энергосбережения (1-5).
+# Палевный семпл nmap:
+# O       - определение ОС, сканирование с применением всех скриптов и трассировки
+# sS      - посылать только syn и засчитывать порт открытым при получении syn-ack
+# p-      - сканировать порты до 65k, а не стандартные 1024
+# PS80,22 - онлайн/оффлайн на основе icmp-echo, а не по доступности tcp порта
+# n       - не делать DNS резолв (считывание PTR записей и т.п.)
+# T4      - тайминги маленькие, скорость большая
+# vvv     - максимальная подробность
+# reason  - причина выбора open/closed/filterer/unfiltered
+alias nmp="sudo nmap -A -sS -p- -PS80,22 -n -T4 -vvv --reason"
+
+# Режим энергосбережения (1-5).
 alias set_etnergy="sudo echo $1 > /proc/sys/vm/laptop_mode"
 
 # Вывод прав циферками.
@@ -71,13 +85,10 @@ alias lls="ls -l | sed -e 's/--x/1/g' -e 's/-w-/2/g' -e 's/-wx/3/g' -e 's/r--/4/
 # Дерево из папки.
 alias dirtree='find . -type d | sed -e "s/[^-][^\/]*\//  |/g" -e "s/|\([^ ]\)/|-\1/"' 
 
-# Удалить пробелы и комментарии.
-alias delspacecomm="sed '/ *#/d; /^ *$/d' $1"
-
 # Рандомный пароль.
 alias genpass="head -c8 /dev/urandom | xxd -ps"
 
-# Узнать айпишник.
+# Спросить свой ip извне.
 alias myip="lynx --source http://www.formyip.com/ | grep The | awk {'print $5'} | cut -f5 -d ' '"
 
 # Подключаем и отключаем проектор

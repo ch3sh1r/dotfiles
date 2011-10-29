@@ -1,2 +1,6 @@
 vim/.netrwhist
 vim/.VimballRecord
+*.pyc
+*/*.pyc
+*/*/*.pyc
+*/*/*/*.pyc
