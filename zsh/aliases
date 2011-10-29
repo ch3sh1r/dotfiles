@@ -21,8 +21,7 @@ alias gb='git branch'
 alias gd='git diff'
 alias go='git checkout'
 alias gk='gitk --all&'
-# Для log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short'
-alias gh='git hist'
+alias gh='git hist' # Для log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short'
 
 alias recal='cat ~/.zhistory|grep'
 alias df='df -h'
@@ -42,6 +41,14 @@ alias c='clear'
 alias i='ipython'
 alias s='startx'
 
+alias ifconfig.me='curl ifconfig.me/all'
+alias myip='curl ifconfig.me/ip'
+
+
+#
+# Глобальные алиасы
+# 
+
 alias -g H="| head"
 alias -g T="| tail"
 alias -g G="| grep"
@@ -53,6 +60,7 @@ alias -g LL="2>&1 | less"
 alias -g CA="2>&1 | cat -A"
 alias -g NE="2> /dev/null"
 alias -g NUL="> /dev/null 2>&1"
+
 # Конвертим вывод в utf8
 alias -g KU="| iconv -c -f koi8r -t utf8"
 alias -g CU="| iconv -c -f cp1251 -t utf8"
@@ -88,9 +96,6 @@ alias dirtree='find . -type d | sed -e "s/[^-][^\/]*\//  |/g" -e "s/|\([^ ]\)/|-
 
 # Рандомный пароль.
 alias genpass="head -c8 /dev/urandom | xxd -ps"
-
-# Спросить свой ip извне.
-alias myip="lynx --source http://www.formyip.com/ | grep The | awk {'print $5'} | cut -f5 -d ' '"
 
 # Подключаем и отключаем проектор
 alias proj='xrandr --output VGA --mode 800x600 --output LVDS --mode 1024x600'
