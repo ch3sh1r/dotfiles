@@ -1,7 +1,3 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =5
-let g:netrw_dirhist_1='/proc/2349/attr'
-let g:netrw_dirhist_2='/proc/2349/cwd'
-let g:netrw_dirhist_3='/tmp/vmware-root'
-let g:netrw_dirhist_4='/tmp'
-let g:netrw_dirhist_5='/home/chesh1r/Metasploitable'
+let g:netrw_dirhist_cnt =1
+let g:netrw_dirhist_1='/usr/local/share/nmap/nselib'
