@@ -1,9 +1,11 @@
-#
-# Функции.
-#
+# Создать директорию и перейти в нее.
+function take() {
+  mkdir -p $1
+  cd $1
+}
 
 # Перестановка.
-rot13() {
+function rot13() {
 	if [ $# = 0 ] ; then
 		tr "[a-m][n-z][A-M][N-Z]" "[n-z][a-m][N-Z][A-M]"
 	else
@@ -12,7 +14,7 @@ rot13() {
 }
 
 # Распаковка архива...
-upack() {
+function upack() {
     if [ -f $1 ] ; then
         case $1 in
             *.tar.bz2)   tar xjf $1;;
@@ -33,7 +35,7 @@ upack() {
     fi
 }
 # ... и упаковка.
-pack() {
+function pack() {
     if [ $1 ] ; then
         case $1 in
             tbz)    tar cjvf $2.tar.bz2 $2;;
@@ -51,7 +53,7 @@ pack() {
 }
 
 # pastebin
-pbin(){
+function pbin(){
         fload(){
                 TFILE=`cat $1|sed 's|%|%25|g;s|&|%26|g;s|+|%2b|g;s|;|%3b|g'`
                 curl --data "paste_code='$TFILE'" "http://pastebin.com/api_public.php"
@@ -83,17 +85,17 @@ pbin(){
 }
 
 # Локальное зеркало сайта.
-lmirror(){
+function lmirror(){
     wget -r -l inf -k -p $1
 }
 
 # Шортлинк в clck
-clck(){
+function clck(){
     curl http://clck.ru/--?url=$1
 }
 
 # Коммит с комментарием в git
-gc(){
+function gc(){
     git commit -m "$@"
 }
 
@@ -101,31 +103,31 @@ gc(){
 # Конвертируем всякую дурь
 #
 
-mp32utf() { 
+function mp32utf() { 
     find -iname '*.mp3' -print0 | xargs -0 mid3iconv -eCP1251 --remove-v1
 }
 
-mpg2flv() { 
+function mpg2flv() { 
     ffmpeg -i $1 -ar 22050 -ab 32 -f flv -s 320x240 `echo $1 | awk -F . '{print $1}'`.flv 
 }
 
-flv2xvid() { 
+function flv2xvid() { 
     mencoder "$1" -vf scale=320:240  -ovc xvid -xvidencopts bitrate=250:autoaspect -vf pp=lb -oac mp3lame  -lameopts fast:preset=standard -o  "./basename $1.avi" 
 }
 
-flv2divx() {
+function flv2divx() {
     mencoder "$1" --vf scale=320:240  -ovc lavc -lavcopts vcodec=mpeg4:vbitrate=250:mbd=2:v4mv:autoaspect -vf pp=lb -oac mp3lame  -lameopts fast:preset=standard -o  "./basename $1.avi" 
 }
 
-iso2cd() {
+function iso2cd() {
     "cdrecord -s dev=`cdrecord --devices 2>&1 | grep "\(rw\|dev=\)" | awk {'print $2'} | cut -f'2' -d'=' | head -n1` gracetime=1 driveropts=burnfree -dao -overburn -v"
 }
 
-nrg2iso() {
+function nrg2iso() {
     "dd bs=1k if=$1 of=$2 skip=300"
 }
 
-win2utf() {
+function win2utf() {
     "iconv -f CP1251 -t UTF-8 $1 > $1"
 }
 

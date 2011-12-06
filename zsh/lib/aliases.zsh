@@ -2,6 +2,7 @@
 # Простенькая часть
 #
 
+alias _='sudo'
 alias iddqd='sudo -i'
 alias apt-get="sudo apt-get"
 alias iftop="sudo iftop"
@@ -43,6 +44,17 @@ alias s='startx'
 
 alias ifconfig.me='curl ifconfig.me/all'
 alias myip='curl ifconfig.me/ip'
+
+# Разукрашиваем некоторые команды с помощью grc
+[[ -f /usr/bin/grc ]] && {
+  alias ping="grc --colour=auto ping"
+  alias traceroute="grc --colour=auto traceroute"
+  alias make="grc --colour=auto make"
+  alias diff="grc --colour=auto diff"
+  alias cvs="grc --colour=auto cvs"
+  alias netstat="grc --colour=auto netstat"
+}
+
 
 
 #
