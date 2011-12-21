@@ -3,10 +3,11 @@
 #
 
 alias _='sudo'
-alias iddqd='sudo -i'
+alias iddqd='sudo -s'
 alias apt-get="sudo apt-get"
 alias iftop="sudo iftop"
 alias wifi="sudo /usr/bin/wifi"
+alias service="sudo /usr/sbin/service"
 
 alias ls='ls -FC --color=auto'
 alias l='ls'
@@ -28,7 +29,7 @@ alias recal='cat ~/.zhistory|grep'
 alias df='df -h'
 alias du='du -h'
 alias vi='vim'
-alias cvi='vim -u /home/chesh1r/.vimrc_nox'
+alias cvi='vim -c :colorscheme\ default'
 alias screen="screen -DR"
 
 alias grep='grep --color=auto'
@@ -86,7 +87,7 @@ alias -g UC="| iconv -c -f utf8 -t cp1251"
 # Xитрожопые алиасы
 #
 
-# Палевный семпл nmap:
+# Палевный семпл nmap (и ооочень тормозной):
 # O       - определение ОС, сканирование с применением всех скриптов и трассировки
 # sS      - посылать только syn и засчитывать порт открытым при получении syn-ack
 # p-      - сканировать порты до 65k, а не стандартные 1024
