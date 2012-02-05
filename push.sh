@@ -19,7 +19,7 @@ function link_files() {
         ln -s $PWD"/"$file $HOME"/."$file
     done
     rm $HOME"/.push.sh" 
-    rm $HOME"/.readme.md"
+    rm $HOME"/.README.md"
 }
 
 cd "$(dirname "$0")"
@@ -29,6 +29,7 @@ elif [ "$1" == "--link" -o "$1" == "-l" ]; then
     link_files
 else
     read -p "This will overwrite existing files in your home directory. Proceed? (y/n) " -n 1
+    git pull
     echo
     if [[ $REPLY =~ ^[Yy]$ ]]; then
         push_files
