@@ -4,4 +4,7 @@ vim/.VimballRecord
 */*.pyc
 */*/*.pyc
 */*/*/*.pyc
+*/*/*/*/*.pyc
+*/*/*/*/*/*.pyc
+*/*/*/*/*/*/*.pyc
 *.swp
