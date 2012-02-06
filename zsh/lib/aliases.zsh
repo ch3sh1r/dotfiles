@@ -6,7 +6,6 @@ alias _='sudo'
 alias iddqd='sudo -s'
 alias apt-get="sudo apt-get"
 alias iftop="sudo iftop"
-alias wifi="sudo /usr/bin/wifi"
 alias service="sudo /usr/sbin/service"
 
 alias ls='ls -FC --color=auto'

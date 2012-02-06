@@ -4,6 +4,29 @@ function take() {
   cd $1
 }
 
+# Вкл/выкл точку типа ad-hoc.
+function wifi() {
+    if [ $1 ] ; then
+        case $1 in
+            -u)
+                sudo iwconfig wlan0 mode Ad-Hoc
+                sudo iwconfig wlan0 channel 4
+                sudo iwconfig wlan0 essid NW
+                sudo ifconfig wlan0 up 192.168.0.1
+                sudo firestarter --start-hidden > /dev/null &
+            ;;
+            -d)
+                sudo ifconfig wlan0 down
+                sudo killall -9 firestarter > /dev/null
+            ;;
+        esac
+    else
+        echo "Usage:"
+        echo "  wifi -d : create ad-hoc."
+        echo "  wifi -u : remove ad-hoc."       
+    fi
+}
+
 # Перестановка.
 function rot13() {
 	if [ $# = 0 ] ; then
@@ -28,10 +51,10 @@ function upack() {
             *.zip)       unzip $1;;
             *.Z)         uncompress $1;;
             *.7z)        7z x $1;;
-            *)           echo "Cannot unpack '$1'..." ;;
+            *)           echo "ERROR: '$1' unknown type." ;;
         esac
     else
-        echo "'$1' is not a valid file"
+        echo "ERROR: '$1' is not a valid file."
     fi
 }
 # ... и упаковка.
@@ -45,43 +68,41 @@ function pack() {
             gz)     gzip -c -9 -n $2 > $2.gz;;
             zip)    zip -r $2.zip $2;;
             7z)     7z a $2.7z $2;;
-            *)      echo "'$1' Cannot be packed via pack()";;
+            *)      echo "ERROR: '$1' Cannot be packed via pack.";;
         esac
     else
-        echo "'$1' is not a valid file"
+        echo "ERROR: '$1' is not a valid file."
     fi
 }
 
 # pastebin
 function pbin(){
-        fload(){
-                TFILE=`cat $1|sed 's|%|%25|g;s|&|%26|g;s|+|%2b|g;s|;|%3b|g'`
-                curl --data "paste_code='$TFILE'" "http://pastebin.com/api_public.php"
-                echo
-        }
-        case $1 in
-        
-        -h)
-                echo "Usage:"
-                echo "        pastebin filename 	for paste a file"
-                echo "        pastebin 			for edit/paste on fly"       
-        ;;
-        *)      if [ -n "$1" -a -f "$1" ];then
-                        if [ -s "$1" ];then
-                                fload $1
-                        else
-                                echo file $1 is empty
-                        fi
-                else
-                        TEMPFILE=`mktemp -q /tmp/pastebin.XXXXXX`
-                        $EDITOR $TEMPFILE
-                        if [ -s "$TEMPFILE" ]; then
-                                fload $TEMPFILE
-                        fi
-                        rm ${TEMPFILE}*
-                fi
-        ;;
-    esac
+    fload(){
+        tfile=`cat $1|sed 's|%|%25|g;s|&|%26|g;s|+|%2b|g;s|;|%3b|g'`
+        curl --data "paste_code='$tfile'" "http://pastebin.com/api_public.php"
+        echo
+    }
+    
+    if [ $1 ] ; then
+        if [ -n "$1" -a -f "$1" ];then
+            if [ -s "$1" ];then
+                fload $1
+            else
+                echo "ERROR: File $1 is empty."
+            fi
+        else
+            TEMPFILE=`mktemp -q /tmp/pastebin.XXXXXX`
+            $EDITOR $TEMPFILE
+            if [ -s "$TEMPFILE" ]; then
+                fload $TEMPFILE
+            fi
+            rm ${TEMPFILE}*
+        fi
+    else
+        echo "Usage:"
+        echo "  pastebin <file> - paste a file."
+        echo "  pastebin - create paste on fly."       
+    fi
 }
 
 # Локальное зеркало сайта.
@@ -98,6 +119,7 @@ function clck(){
 function gc(){
     git commit -m "$@"
 }
+
 
 #
 # Конвертируем всякую дурь
