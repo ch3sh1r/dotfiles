@@ -4,6 +4,7 @@ compinit -D
 PATH="$HOME/bin:$HOME/.bin:/usr/local/homebrew/bin:/usr/local/bin:/usr/local/sbin:/usr/local/mysql/bin:/usr/local/git/bin:/var/lib/gems/bin/:$PATH" && export PATH
 MANPATH="/usr/local/man:/usr/local/mysql/man:/usr/local/git/man:$MANPATH" && export MANPATH
 MAIL=/var/spool/mail/chesh1r && export MAIL
+EDITOR=vim
 
 # Дописываем путь к функциям
 fpath=($ZSH/functions $ZSH/completions $fpath)
