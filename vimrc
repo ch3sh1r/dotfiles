@@ -4,8 +4,11 @@
 
 " Загрузка pathogen'a (https://github.com/tpope/vim-pathogen)
 filetype off
+call pathogen#infect()
+call pathogen#helptags()
 call pathogen#runtime_append_all_bundles()
 filetype plugin indent on
+syntax on
 
 set nocompatible            " Предпочтение настройкам Vim относительно Vi
 set ruler                   " Показывать положение курсора всё время
@@ -62,7 +65,6 @@ set t_Co=256                " Ставим терминалу 256 цветов
 " Подстветка
     let g:solarized_termcolors = 256
     let python_highlight_all = 1
-    syntax enable
     set background=dark
     colorscheme solarized
     autocmd BufRead *.conf :set filetype=sh
@@ -90,9 +92,9 @@ set t_Co=256                " Ставим терминалу 256 цветов
     function MyKeyMapHighlight()
        if &iminsert == 0
            " TODO Определяь цвет относительно gui
-           hi StatusLine ctermfg=blue guifg=blue
+           hi StatusLine ctermfg=blue guifg=lightblue
        else
-           hi StatusLine ctermfg=red guifg=red
+           hi StatusLine ctermfg=red guifg=lightred
        endif
     endfunction
     call MyKeyMapHighlight()
@@ -201,7 +203,7 @@ set t_Co=256                " Ставим терминалу 256 цветов
     set completeopt-=preview
     set completeopt+=longest
     set mps-=[:]
-    map \T :TlistToggle<cr>
+    "map \T :TlistToggle<cr>
 
 " Настройки для OmniComletion 
     autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
@@ -213,8 +215,7 @@ set t_Co=256                " Ставим терминалу 256 цветов
     autocmd FileType c set omnifunc=ccomplete#Complete
 
 " Настройки для Tasklist 
-    map T :TaskList<cr>
-    map P :TlistToggle<cr>
+    map \T :TaskList<cr>
 
 
 
@@ -247,11 +248,13 @@ nmap tn :tabnew
     
 " leader-шорткаты
     " \rr - запуск Python скриптов в стиле perl-support
-    autocmd BufRead *.py nnoremap <leader>rr :!python %<cr>
-    autocmd BufRead *.py nnoremap <leader>rp :!python % 
+    "autocmd BufRead *.py nnoremap <leader>rr :!python %<cr>
+    "autocmd BufRead *.py nnoremap <leader>rp :!python % 
+    let g:pymode_run_key = '<leader>r'
+    let g:pymode_doc = '<leader>l'
 
-    " \rr - для C
-    autocmd BufRead *.c nnoremap <leader>rr :!tcc -run %<cr>
+    " \r - для C
+    autocmd BufRead *.c nnoremap <leader>r :!tcc -run %<cr>
 
     " \r. - для LaTeX
     autocmd BufRead *.tex nnoremap <leader>rr :!latex %<cr>
