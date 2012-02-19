@@ -91,7 +91,6 @@ set t_Co=256                " Ставим терминалу 256 цветов
     " Индикация выбранной в данный момент раскладки
     function MyKeyMapHighlight()
        if &iminsert == 0
-           " TODO Определяь цвет относительно gui
            hi StatusLine ctermfg=blue guifg=lightblue
        else
            hi StatusLine ctermfg=red guifg=lightred
@@ -187,25 +186,21 @@ set t_Co=256                " Ставим терминалу 256 цветов
 
 
 "---------------------------------------------------
-"--------------------- МОДУЛИ ----------------------
+"--------------------- ПЛАГИНЫ ---------------------
 "---------------------------------------------------
 
-" Настройки для PyDiction
-    let g:pydiction_location = '/home/chesh1r/.vim/pydiction/complete-dict' 
-    let g:pydiction_menu_height = 10
-
-" Настройки для SessionMgr 
+" SessionMgr 
     let g:SessionMgr_AutoManage = 0
     let g:SessionMgr_DefaultName = "mysession"
 
-" Настройки для Tlist (показвать только текущий файл в окне навигации по коду) 
+" Tlist (показвать только текущий файл в окне навигации по коду) 
     let g:Tlist_Show_One_File = 1
     set completeopt-=preview
     set completeopt+=longest
     set mps-=[:]
     "map \T :TlistToggle<cr>
 
-" Настройки для OmniComletion 
+" OmniComletion 
     autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
     autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
     autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
@@ -214,9 +209,11 @@ set t_Co=256                " Ставим терминалу 256 цветов
     autocmd FileType css set omnifunc=csscomplete#CompleteCSS
     autocmd FileType c set omnifunc=ccomplete#Complete
 
-" Настройки для Tasklist 
+" Tasklist 
     map \T :TaskList<cr>
 
+" Самопальные шаблоны
+    autocmd! BufNewFile * silent! 0r ~/.vim/templates/template.%:e
 
 
 "---------------------------------------------------
@@ -247,9 +244,7 @@ nmap tn :tabnew
     vnoremap / /\v
     
 " leader-шорткаты
-    " \rr - запуск Python скриптов в стиле perl-support
-    "autocmd BufRead *.py nnoremap <leader>rr :!python %<cr>
-    "autocmd BufRead *.py nnoremap <leader>rp :!python % 
+    " \r - запуск Python скриптов
     let g:pymode_run_key = '<leader>r'
     let g:pymode_doc = '<leader>l'
 
