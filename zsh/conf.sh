@@ -1,13 +1,13 @@
 compinit -D 				
 
 # Переменные среды.
-PATH="$HOME/bin:$HOME/.bin:/usr/local/homebrew/bin:/usr/local/bin:/usr/local/sbin:/usr/local/mysql/bin:/usr/local/git/bin:/var/lib/gems/bin/:$PATH" && export PATH
+PATH="$HOME/.bin:$ZSH/script:/usr/local/bin:/usr/local/sbin:/var/lib/gems/bin/:$PATH" && export PATH
 MANPATH="/usr/local/man:/usr/local/mysql/man:/usr/local/git/man:$MANPATH" && export MANPATH
 MAIL=/var/spool/mail/chesh1r && export MAIL
 EDITOR=vim
 
 # Дописываем путь к функциям
-fpath=($ZSH/functions $ZSH/completions $fpath)
+fpath=($ZSH/functions $fpath)
 
 # Подгружаем все, что похоже оканчивается на .zsh
 for config_file ($ZSH/lib/*.zsh) source $config_file
@@ -25,3 +25,4 @@ done
 
 # Автоматическое удаление одинакового
 typeset -U path cdpath fpath manpath
+

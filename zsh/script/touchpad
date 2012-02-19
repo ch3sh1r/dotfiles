@@ -1,0 +1,10 @@
+#!/usr/bin/env python
+#-*-coding:utf-8-*-
+
+import os
+a = os.popen('synclient -l').readlines()
+if a[33][-2] == '0':
+    os.popen('synclient TouchpadOff=1')
+else:
+    os.popen('synclient TouchpadOff=0')
+

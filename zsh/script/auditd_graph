@@ -1,0 +1,101 @@
+#!/bin/sh
+# From http://people.redhat.com/sgrubb/audit/visualize/mkgrap
+#
+# Copyright 2005 Red Hat Inc., Durham, North Carolina.
+# All Rights Reserved.
+# This software may be freely redistributed and/or modified under the
+# terms of the GNU General Public License as published by the Free
+# Software Foundation; either version 2, or (at your option) any
+# later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program; see the file COPYING. If not, write to the
+# Free Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+#
+# Author: Steve Grubb <sgrubb@redhat.com>
+#
+########
+#
+# This program will take stdin and produce a graph for it. The input
+# should be 2 objects per line separated by a space.
+# Some interesting uses:
+#
+# See what syscalls a program makes
+# aureport -s -i | awk '/^[0-9]/ { printf "%s %s\n", $6, $4 }' | sort | uniq | ./mkgraph
+#
+# See avc denied subject to object map
+# aureport -a --failed -i | awk '/^[0-9]/ { printf "%s %s\n", $5, $8 }' | sort | uniq | ./mkgraph
+#
+# See who is accessing files
+#aureport -f -i | awk '/^[0-9]/ { printf "%s %s\n", $8, $4 }' | sort | uniq | ./mkgraph
+#
+# See what account is running which exes
+# aureport -u -i | awk '/^[0-9]/ { printf "%s %s\n", $4, $7 }' | sort | uniq | ./mkgraph
+#
+# See what accounts are being used by remote hosts
+#aureport -h -i | awk '/^[0-9]/ { printf "%s %s\n", $4, $6 }' | sort | uniq | ./mkgraph
+#
+# Graphs can be combined, too. For example, to see what host people logged in
+# from and the commands they ran:
+#aureport -h -i | awk '/^[0-9]/ { printf "%s %s\n", $4, $6 }' | sort | uniq > tmp.rpt
+#aureport -u -i | awk '/^[0-9]/ { printf "%s %s\n", $4, $7 }' | sort | uniq >> tmp.rpt
+#cat tmp.rpt | ./mkgraph
+
+if [ x"$1" != "x" ] ; then
+	OUT="$1"
+else
+	OUT="gr"
+fi
+DOT_CMD=`which dot 2>/dev/null`
+DOT_FILE="./$OUT.dot"
+IDX_FILE="./$OUT.index"
+# use png, ps, or jpg
+EXT="ps"
+if [ x"$DOT_CMD" = "x" ] ; then
+        echo "graphviz is not installed. Exiting."
+        exit 1
+fi
+echo "digraph G {" > $DOT_FILE
+# Some options you may want to set
+#echo -e "\torientation=landscape" >> $DOT_FILE
+#echo -e "\tsize=\"60,18\"" >> $DOT_FILE
+#echo -e "\tranksep=\"1.25\"" >> $DOT_FILE
+#echo -e "\tratio=fill" >> $DOT_FILE
+#echo -e "\tpage=\"8.5,11\";" >> $DOT_FILE
+
+while [ 1 ]
+do
+	read -t 5 line 2>/dev/null
+	if [ $? -ne 0 ] ; then
+		break
+	fi
+	if [ x"$line" != "x" ] ; then
+		echo $line | awk '{ printf("\t\"%s\" -> \"%s\";\n", $1, $2); }'  >> $DOT_FILE
+	fi
+done
+echo "}" >> $DOT_FILE
+echo " " >> $DOT_FILE
+
+$DOT_CMD -T$EXT -o ./$OUT.$EXT $DOT_FILE 1>&2  2>/dev/null
+if [ $? -ne 0 ] ; then
+        echo "Error rendering"
+	rm -f $DOT_FILE
+        exit 1
+fi
+rm -f $DOT_FILE
+if [ "$EXT" = "ps" ] ; then
+	echo "Gzipping graph..."
+	rm -f ./$OUT.ps.gz 2>/dev/null
+	gzip --best ./$OUT.ps
+	echo "Graph was written to $OUT.$EXT.gz"
+else
+	echo "Graph was written to $OUT.$EXT"
+fi
+exit 0
+
+

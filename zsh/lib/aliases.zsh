@@ -21,6 +21,7 @@ alias ga='git add .'
 alias gb='git branch'
 alias gd='git diff'
 alias go='git checkout'
+alias gp='git push --all'
 alias gk='gitk --all&'
 alias gh='git hist' # Для log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short'
 
@@ -44,6 +45,7 @@ alias s='startx'
 
 alias ifconfig.me='curl ifconfig.me/all'
 alias myip='curl ifconfig.me/ip'
+alias gist='gist -f'
 
 # Разукрашиваем некоторые команды с помощью grc
 [[ -f /usr/bin/grc ]] && {
