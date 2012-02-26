@@ -22,7 +22,6 @@ set scrolloff=3             "   краю экрана, чтобы поднять
 set shortmess+=I            " И больше не будет детей Уганды
 set history=128             " Хранить больше истории команд
 set undolevels=2048         "   и правок
-set t_Co=256                " Ставим терминалу 256 цветов
 
 " Выключить звук на ошибки 
     set noerrorbells
@@ -63,6 +62,7 @@ set t_Co=256                " Ставим терминалу 256 цветов
     set hlsearch            "   по набору текста
 
 " Подстветка
+    set t_Co=256
     let g:solarized_termcolors = 256
     let python_highlight_all = 1
     set background=dark
