@@ -9,3 +9,6 @@ setopt SH_WORD_SPLIT
 # Не считать Control+C за выход из оболочки
 setopt  IGNORE_EOF
 
+bindkey "\e[A" up-line-or-search # Верхняя стелка := вверх по истории
+bindkey "\e[B" down-line-or-search # Нижняя стелка := вниз по истории
+
