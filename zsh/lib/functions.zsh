@@ -67,6 +67,10 @@ function gc(){
     git commit -m "$@"
 }
 
+# Запуск gvim
+function g(){
+    gvim -p $@ &
+}
 
 #
 # Конвертируем всякую дурь

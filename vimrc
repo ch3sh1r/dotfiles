@@ -77,29 +77,6 @@ set undolevels=2048         "   и правок
     menu Encoding.cp866 :e ++enc=cp866<cr>
     menu Encoding.utf-8 :e ++enc=utf8<cr>
 
-" Переключение на русскую/английскую раскладку по Ctrl-/ 
-    set termencoding=utf-8
-    set fileencodings=utf-8,latin1,cp1251
-    set keymap=russian-jcukenwin   
-    set iminsert=0 
-    set imsearch=0 
-    cmap  <C-^>
-    map   <C-^>X<Esc>:call MyKeyMapHighlight()<CR>a<C-H>
-    imap  <Esc>a<C-^><Esc>:call MyKeyMapHighlight()<CR>a
-    nmap  a<C-^><Esc>:call MyKeyMapHighlight()<CR>
-    vmap  <Esc>a<C-^><Esc>:call MyKeyMapHighlight()<CR>gv
-    " Индикация выбранной в данный момент раскладки
-    function MyKeyMapHighlight()
-       if &iminsert == 0
-           hi StatusLine ctermfg=blue guifg=lightblue
-       else
-           hi StatusLine ctermfg=red guifg=lightred
-       endif
-    endfunction
-    call MyKeyMapHighlight()
-    " При изменении активного окна будет выполняться обновление индикации текущей раскладки
-    au WinEnter * :call MyKeyMapHighlight()
-
 " Сохранение резервных копий в ~/.backup 
     set backup
     function! BackupDir()
@@ -133,55 +110,97 @@ set undolevels=2048         "   и правок
 " Cпецифичные для maemo
     " Скроллинг пальцем
     " http://www.vim.org/scripts/script.php?script_id=3141
-    "func! MScroll()
-      "let l:done=0
-      "let l:n = -1
-      "let l:w0 = line("w0")
-      "let l:last = line("$")
-      "while done!=1
-        "let l:g = getchar()
-        "if l:g != "\<LeftDrag>"
-          "let done = 1
-        "else
-          "if l:n == -1
-            "let l:n = v:mouse_lnum
-            "let l:fln = v:mouse_lnum
-          "else
-            "let l:new = l:w0 - v:mouse_lnum + l:n
-            "if l:new<1
-              "let l:new = 1
-            "endif
-            "let l:diff = -v:mouse_lnum + l:n
-            "let l:nd = line("w$")
-            "if l:nd+l:diff>l:last
-              "let l:new = l:last - winheight(0) + 1
-              "if l:new<1
-                "let l:new = 1
-              "endif
-            "end
-            "let l:wn = "normal ".string(l:new)."zt"
-            "if (l:n != v:mouse_lnum)
-              "exec(l:wn)
-              "redraw
-            "endif
-            "let l:w0 = line("w0")
-            "let l:n = v:mouse_lnum + l:diff
-          "endif
-        "endif
-      "endwhile
-      ":call cursor(v:mouse_lnum,v:mouse_col)
-    "endfunc
-    ":set mouse=a
-    ":noremap <silent> <LeftMouse> :call MScroll()<CR>
-    ":noremap <LeftRelease> <Nop>
-    ":noremap <LeftDrag> <Nop>
+    func! MScroll()
+      let l:done=0
+      let l:n = -1
+      let l:w0 = line("w0")
+      let l:last = line("$")
+      while done!=1
+    func! MScroll()
+      let l:done=0
+      let l:n = -1
+      let l:w0 = line("w0")
+      let l:last = line("$")
+      while done!=1
+        let l:g = getchar()
+        if l:g != "\<LeftDrag>"
+          let done = 1
+        else
+          if l:n == -1
+            let l:n = v:mouse_lnum
+            let l:fln = v:mouse_lnum
+          else
+            let l:new = l:w0 - v:mouse_lnum + l:n
+            if l:new<1
+              let l:new = 1
+            endif
+            let l:diff = -v:mouse_lnum + l:n
+            let l:nd = line("w$")
+            if l:nd+l:diff>l:last
+              let l:new = l:last - winheight(0) + 1
+              if l:new<1
+                let l:new = 1
+              endif
+            end
+            let l:wn = "normal ".string(l:new)."zt"
+            if (l:n != v:mouse_lnum)
+              exec(l:wn)
+              redraw
+            endif
+            let l:w0 = line("w0")
+            let l:n = v:mouse_lnum + l:diff
+          endif
+        endif
+      endwhile
+      :call cursor(v:mouse_lnum,v:mouse_col)
+    endfunc
+    :set mouse=a
+    :noremap <silent> <LeftMouse> :call MScroll()<CR>
+    :noremap <LeftRelease> <Nop>
+    :noremap <LeftDrag> <Nop>
+        let l:g = getchar()
+        if l:g != "\<LeftDrag>"
+          let done = 1
+        else
+          if l:n == -1
+            let l:n = v:mouse_lnum
+            let l:fln = v:mouse_lnum
+          else
+            let l:new = l:w0 - v:mouse_lnum + l:n
+            if l:new<1
+              let l:new = 1
+            endif
+            let l:diff = -v:mouse_lnum + l:n
+            let l:nd = line("w$")
+            if l:nd+l:diff>l:last
+              let l:new = l:last - winheight(0) + 1
+              if l:new<1
+                let l:new = 1
+              endif
+            end
+            let l:wn = "normal ".string(l:new)."zt"
+            if (l:n != v:mouse_lnum)
+              exec(l:wn)
+              redraw
+            endif
+            let l:w0 = line("w0")
+            let l:n = v:mouse_lnum + l:diff
+          endif
+        endif
+      endwhile
+      :call cursor(v:mouse_lnum,v:mouse_col)
+    endfunc
+    :set mouse=a
+    :noremap <silent> <LeftMouse> :call MScroll()<CR>
+    :noremap <LeftRelease> <Nop>
+    :noremap <LeftDrag> <Nop>
 
     " Ctrl-Space (переключение языка) ничего не ломает.
-    "imap <Nul> <Nop>
-    "map <Nul> <Nop>
-    "vmap <Nul> <Nop>
-    "cmap <Nul> <Nop>
-    "nmap <Nul> <Nop>
+    imap <Nul> <Nop>
+    map <Nul> <Nop>
+    vmap <Nul> <Nop>
+    cmap <Nul> <Nop>
+    nmap <Nul> <Nop>
 
 
 
