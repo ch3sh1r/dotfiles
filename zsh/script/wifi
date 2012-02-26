@@ -3,20 +3,27 @@
 
 if [ $1 ] ; then
     case $1 in
-        -u)
+        up)
             sudo iwconfig wlan0 mode Ad-Hoc
             sudo iwconfig wlan0 channel 4
             sudo iwconfig wlan0 essid NW
             sudo ifconfig wlan0 up 192.168.0.1
             sudo firestarter --start-hidden > /dev/null &
         ;;
-        -d)
+        down)
             sudo ifconfig wlan0 down
             sudo killall -9 firestarter > /dev/null
+        ;;
+        setup)
+            sudo rmmod acer_wmi
+            sudo modprobe acer_wmi
+            sudo rfkill unblock all
+            sudo rmmod -f acer_wmi
         ;;
     esac
 else
     echo "Usage:"
-    echo "  wifi -d : create ad-hoc."
-    echo "  wifi -u : remove ad-hoc."       
+    echo "  wifi up     create ad-hoc."
+    echo "  wifi down   remove ad-hoc."       
+    echo "  wifi setup  b570e quickfix."       
 fi
