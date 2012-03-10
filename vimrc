@@ -146,7 +146,7 @@ set undolevels=2048         "   и правок
             let g:pymode_run_key = '<leader>r'
         " Проверка
             let g:pymode_lint = 1
-            let g:pymode_lint_config = "$HOME/.pylintrc"
+            let g:pymode_lint_config = $HOME . "/.pylintrc"
             let g:pymode_lint_checker = "pylint"            " pylint или pyflakes
             let g:pymode_lint_write = 0                     " Проверка при записи
             let g:pymode_lint_onfly = 0                     " Проверка в процессе
@@ -173,6 +173,7 @@ set undolevels=2048         "   и правок
             let g:pymode_rope_guess_project = 1
             let g:pymode_rope_goto_def_newwin = 0
             let g:pymode_rope_always_show_complete_menu = 0
+            let g:pydiction_location = $HOME . "vim/bundle/pydiction/complete-dict"
         " Подсветка
             let g:pymode_syntax = 1                                         " Enable pymode's custom syntax highlighting
             let g:pymode_syntax_all = 1                                     " Enable all python highlightings

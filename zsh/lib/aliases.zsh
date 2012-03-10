@@ -36,13 +36,6 @@ alias grep='grep --color=auto'
 alias egrep='egrep --color=auto'
 alias fgrep='fgrep --color=auto'
 
-alias d='pwd'
-alias p='ps auxw'
-alias h='history 20'
-alias c='clear'
-alias i='ipython'
-alias s='startx'
-
 alias ifconfig.me='curl ifconfig.me/all'
 alias myip='curl ifconfig.me/ip'
 alias gist='gist -f'
