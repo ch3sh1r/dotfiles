@@ -23,7 +23,7 @@ alias gd='git diff'
 alias go='git checkout'
 alias gp='git push --all'
 alias gk='gitk --all&'
-alias gh='git hist' # Для log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short'
+alias gh='git hist' # Для log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
 
 alias recal='cat ~/.zhistory|grep'
 alias df='df -h'
@@ -39,6 +39,7 @@ alias fgrep='fgrep --color=auto'
 alias ifconfig.me='curl ifconfig.me/all'
 alias myip='curl ifconfig.me/ip'
 alias gist='gist -f'
+alias proxylan='export http_proxy="http://proxy.lan:3128" https_proxy="https://proxy.lan:3128"'
 
 # Разукрашиваем некоторые команды с помощью grc
 [[ -f /usr/bin/grc ]] && {
