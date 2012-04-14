@@ -2,12 +2,12 @@
 set gui=nonavigation
 
 " Переход по табам
-map <A-,> gT
-map <A-.> gt
+map <A-Right> gT
+map <A-Left> gt
 
 " Перемешение табов
-map <S-Right> :tabmove! +1<CR>
-map <S-Left> :tabmove! -1<CR>
+map <S-Right> :tabmove! +1<cr>
+map <S-Left> :tabmove! -1<cr>
 
 " Русские маппинги
 map ё `
