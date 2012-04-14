@@ -63,10 +63,7 @@ set undolevels=2048         "   и правок
 
     " Подстветка
         set t_Co=256
-        let g:solarized_termcolors = 256
-        let python_highlight_all = 1
-        set background=dark
-        colorscheme solarized
+        colorscheme wombat256mod
         autocmd BufRead *.conf :set filetype=sh
 
     " Меню выбора кодировки текста 
@@ -77,28 +74,13 @@ set undolevels=2048         "   и правок
         menu Encoding.cp866 :e ++enc=cp866<cr>
         menu Encoding.utf-8 :e ++enc=utf8<cr>
 
-    " Переключение на русскую/английскую раскладку по Ctrl-/ 
+    " Русская раскладка и кодировки
         set termencoding=utf-8
         set fileencodings=utf-8,latin1,cp1251
-        set keymap=russian-jcukenwin   
-        set iminsert=0 
-        set imsearch=0 
-        cmap  <C-^>
-        map   <C-^>X<Esc>:call MyKeyMapHighlight()<CR>a<C-H>
-        imap  <Esc>a<C-^><Esc>:call MyKeyMapHighlight()<CR>a
-        nmap  a<C-^><Esc>:call MyKeyMapHighlight()<CR>
-        vmap  <Esc>a<C-^><Esc>:call MyKeyMapHighlight()<CR>gv
-        " Индикация выбранной в данный момент раскладки
-        function MyKeyMapHighlight()
-           if &iminsert == 0
-               hi StatusLine ctermfg=blue guifg=lightblue
-           else
-               hi StatusLine ctermfg=red guifg=lightred
-           endif
-        endfunction
-        call MyKeyMapHighlight()
-        " При изменении активного окна будет выполняться обновление индикации текущей раскладки
-        au WinEnter * :call MyKeyMapHighlight()
+        set langmap=ФИСВУАПРШОЛДЬТЩЗЙКЫЕГМЦЧНЯ;ABCDEFGHIJKLMNOPQRSTUVWXYZ,фисвуапршолдьтщзйкыегмцчня;abcdefghijklmnopqrstuvwxyz
+        imap ё `
+        nmap ё `
+        vmap ё `
 
     " Сохранение резервных копий в ~/.backup 
         set backup
@@ -288,9 +270,9 @@ set undolevels=2048         "   и правок
             
     " F<номер>-шорткаты
         " F1 - больше не поможет
-            inoremap <F1> <ESC>
-            nnoremap <F1> <ESC>
-            vnoremap <F1> <ESC>
+            imap <F1> <ESC>
+            nmap <F1> <ESC>
+            vmap <F1> <ESC>
 
         " `+F2 - быстрое сохранение без вопросов
             nmap `<F2> :w!<cr>
