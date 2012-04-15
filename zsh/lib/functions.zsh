@@ -93,14 +93,18 @@ function flv2divx() {
 }
 
 function iso2cd() {
-    "cdrecord -s dev=`cdrecord --devices 2>&1 | grep "\(rw\|dev=\)" | awk {'print $2'} | cut -f'2' -d'=' | head -n1` gracetime=1 driveropts=burnfree -dao -overburn -v"
+    cdrecord -s dev=`cdrecord --devices 2>&1 | grep "\(rw\|dev=\)" | awk {'print $2'} | cut -f'2' -d'=' | head -n1` gracetime=1 driveropts=burnfree -dao -overburn -v
 }
 
 function nrg2iso() {
-    "dd bs=1k if=$1 of=$2 skip=300"
+    dd bs=1k if=$1 of=$2 skip=300
 }
 
 function win2utf() {
-    "iconv -f CP1251 -t UTF-8 $1 > $1"
+    iconv -f CP1251 -t UTF-8 $1 > $1
+}
+
+function djvu2pdf() {
+    ddjvu -format=pdf $1 $1.pdf
 }
 

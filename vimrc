@@ -65,6 +65,7 @@ set undolevels=2048         "   и правок
         set t_Co=256
         colorscheme wombat256mod
         autocmd BufRead *.conf :set filetype=sh
+        set cursorline
 
     " Меню выбора кодировки текста 
         set wildmenu

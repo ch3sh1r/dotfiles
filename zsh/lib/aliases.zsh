@@ -25,6 +25,8 @@ alias gp='git push --all'
 alias gk='gitk --all&'
 alias gh='git hist' # Для log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
 
+alias p='ps auxw'
+alias df='df -h'
 alias recal='cat ~/.zhistory|grep'
 alias df='df -h'
 alias du='du -h'
