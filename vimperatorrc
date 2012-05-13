@@ -9,6 +9,9 @@ map <A-Left> gt
 map <S-Right> :tabmove! +1<cr>
 map <S-Left> :tabmove! -1<cr>
 
+" Поисковик по умолчанию
+set defsearch=g
+
 " Русские маппинги
 map ё `
 map й q
