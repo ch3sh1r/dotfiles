@@ -23,7 +23,8 @@ if [ $1 ] ; then
     esac
 else
     echo "Usage:"
-    echo "  wifi up     create ad-hoc."
-    echo "  wifi down   remove ad-hoc."       
-    echo "  wifi setup  b570e quickfix."       
+    echo "  wifi up    - create ad-hoc."
+    echo "  wifi down  - remove ad-hoc."       
+    echo "  wifi setup - b570e quickfix."       
 fi
+
