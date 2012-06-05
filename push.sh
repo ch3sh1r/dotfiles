@@ -7,24 +7,32 @@ function _push_files() {
     rsync --exclude ".git/" \
           --exclude ".DS_Store" \
           --exclude "push.sh" \
+          --exclude "config" \
           --exclude "README.markdown" \
           -av . $temp > /dev/null
-    for file in `ls $temp`; do
-        mv -f $temp"/"$file $temp"/."$file
+    for dotfile in `ls $temp`; do
+        mv -f $temp"/"$dotfile $temp"/."$dotfile
     done
-    rsync -av $temp"/." $HOME > /dev/null
+    rsync -av $temp"/." ${HOME} > /dev/null
     rm -rf $temp
 }
 
 function _link_files() {
-    for file in `ls`
+    for dotfile in `ls`
     do
-        if [ $file == "push.sh" -o $file == "README.markdown" ]
+        if [ $dotfile == "push.sh" -o $dotfile == "README.markdown" ]
         then
             false
+        elif [ $dotfile == "config" ]
+        then
+            for config in `ls config`
+            do
+                rm -rf ${HOME}"/.config/"$config
+                ln -s ${PWD}"/config/"$config ${HOME}"/.config/"$config
+            done
         else
-            rm -rf $HOME"/."$file
-            ln -s $PWD"/"$file $HOME"/."$file
+            rm -rf ${HOME}"/."$dotfile
+            ln -s ${PWD}"/"$dotfile ${HOME}"/."$dotfile
         fi
     done
 }
