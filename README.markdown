@@ -2,29 +2,24 @@
 
 ## Installation
 
-### Using Git and the push script
+### Using Git
 
-You can clone the repository wherever you want. (I like to keep it in `~/Projects/dotfiles`, with symlinks to `~`) Pusher script will pull in the latest version and copy the files to your home folder.
+You can clone the repository wherever you want (i like to keep it in 
+`~/<long_way_to_code_directory>/dotfiles`, with symlinks to `~`):
 
-    git clone https://github.com/ch3sh1r/dotfiles.git && cd dotfiles && ./push.sh
+    git clone https://github.com/ch3sh1r/dotfiles.git && cd dotfiles && ./push.sh -l
 
-To update, `cd` into your local `dotfiles` repository and then:
-
-    ./push.sh
-
-To update while avoiding the confirmation prompt:
-
-    ./push.sh -f
-
-To create symlinks instead of update:
+But some times it's comfortable just minimal installation without 
+dependencies. When only needed files (without wm configuration for me)
+can be copied to `~` by:
 
     ./push.sh -f
 
-### Git-free install
+### Git-free
 
-To get these dotfiles without Git:
+To get these dotfiles tarball without Git:
 
     cd; wget https://github.com/ch3sh1r/dotfiles/tarball/master
 
-Then unpack them and execute `push.sh` manually.
+Then unpack them by `tar xzf dotfiles` and execute `./push.sh` manually.
 
