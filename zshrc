@@ -8,3 +8,5 @@ source $ZSH/conf.sh
 # Использовать .localrc для использования на машине
 [[ -f ~/.localrc ]] && . ~/.localrc
 
+
+PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting

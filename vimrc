@@ -211,13 +211,13 @@ set undolevels=2048         "   и правок
         inoremap <silent><S-Tab> <C-r>=InsertTabWrapper()<cr> 
 
     " Поиск и замена слова под курсором
-        nmap ; :%s/\<<c-r>=expand("<cword>")<cr>\>/           
+        nmap ; :%s/\<<c-r>=expand("<cword>")<cr>\>/
 
     " Убрать мусор из прошлого поиска
-        nnoremap <leader><space> :noh<cr>                     
+        nnoremap <leader><space> :noh<cr>
 
     " Новый таб
-        nmap tn :tabnew                                       
+        nmap tn :tabnew
 
     " Беглые скачки
         nmap <Space> <PageDown>
