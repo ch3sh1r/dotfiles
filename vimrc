@@ -115,71 +115,6 @@ set undolevels=2048         "   и правок
 
 
 "--------------------- ПЛАГИНЫ ---------------------
-    " SessionMgr 
-        let g:SessionMgr_DefaultName = "mysession"
-        let g:SessionMgr_AutoManage = 0
-
-    " py-mode (https://github.com/klen/python-mode)
-        " Документация
-            let g:pymode_doc = 1
-            let g:pydoc = 'pydoc'
-            let g:pymode_doc = 'K'
-        " Запуск
-            let g:pymode_run = 1
-            let g:pymode_run_key = '<leader>r'
-        " Проверка
-            let g:pymode_lint = 1
-            let g:pymode_lint_config = $HOME . "/.pylintrc"
-            let g:pymode_lint_checker = "pylint"            " pylint или pyflakes
-            let g:pymode_lint_write = 0                     " Проверка при записи
-            let g:pymode_lint_onfly = 0                     " Проверка в процессе
-            let g:pymode_lint_cwindow = 0                   " Открывать cwindow при найденных
-            let g:pymode_lint_message = 1                   " Сообшение о ошибке при наводе курсора
-            let g:pymode_lint_jump = 0                      " Автоматический прыжок на найденную ошибку
-            let g:pymode_lint_signs = 1                     " Отметки об ошибках в левой панели
-            let g:pymode_lint_minheight = 3                 " Минимальная...
-            let g:pymode_lint_maxheight = 6                 "  ...и максимальная высота окошка с ошибками
-        " Рефакторинг
-            let g:pymode_rope = 1
-            let g:pymode_rope_auto_project = 1
-            let g:pymode_rope_enable_autoimport = 1
-            let g:pymode_rope_autoimport_generate = 1
-            let g:pymode_rope_autoimport_underlineds = 0
-            let g:pymode_rope_codeassist_maxfixes = 10
-            let g:pymode_rope_sorted_completions = 1
-            let g:pymode_rope_extended_complete = 1
-            let g:pymode_rope_autoimport_modules = ["os","shutil","datetime"]
-            let g:pymode_rope_confirm_saving = 1
-            let g:pymode_rope_global_prefix = "<C-x>p"
-            let g:pymode_rope_local_prefix = "<C-c>r"
-            let g:pymode_rope_vim_completion = 1
-            let g:pymode_rope_guess_project = 1
-            let g:pymode_rope_goto_def_newwin = 0
-            let g:pymode_rope_always_show_complete_menu = 0
-            let g:pydiction_location = $HOME . "vim/bundle/pydiction/complete-dict"
-        " Подсветка
-            let g:pymode_syntax = 1                                         " Enable pymode's custom syntax highlighting
-            let g:pymode_syntax_all = 1                                     " Enable all python highlightings
-            let g:pymode_syntax_print_as_function = 0                       " Highlight 'print' as function
-            let g:pymode_syntax_indent_errors = g:pymode_syntax_all         " Highlight indentation errors
-            let g:pymode_syntax_space_errors = g:pymode_syntax_all          " Highlight trailing spaces
-            let g:pymode_syntax_string_formatting = g:pymode_syntax_all     " Highlight string formatting
-            let g:pymode_syntax_string_format = g:pymode_syntax_all         " Highlight str.format syntax
-            let g:pymode_syntax_string_templates = g:pymode_syntax_all      " Highlight string.Template syntax
-            let g:pymode_syntax_doctests = g:pymode_syntax_all              " Highlight doc-tests
-            let g:pymode_syntax_builtin_objs = g:pymode_syntax_all          " Highlight builtin objects (__doc__, self, etc)
-            let g:pymode_syntax_builtin_funcs = g:pymode_syntax_all         " Highlight builtin functions
-            let g:pymode_syntax_highlight_exceptions = g:pymode_syntax_all  " Highlight exceptions
-            let g:pymode_syntax_slow_sync = 0                               " For fast machines
-        let g:pymode_motion = 1                     " Load python objects and motion
-        let g:pymode_breakpoint = 1                 " Load breakpoints plugin
-        let g:pymode_breakpoint_key = '<leader>b'   " Key for set/unset breakpoint
-        let g:pymode_utils_whitespaces = 1          " Autoremove unused whitespaces
-        let g:pymode_virtualenv = 1                 " Auto fix vim python paths if virtualenv enabled
-        let g:pymode_options_indent = 1             " Set default pymode python indent options
-        let g:pymode_options_fold = 1               " Set default pymode python fold options
-        let g:pymode_options_other = 1              " Set default pymode python other options
-
     " Tlist (показвать только текущий файл в окне навигации по коду) 
         let g:Tlist_Show_One_File = 1
         set completeopt-=preview
@@ -195,9 +130,6 @@ set undolevels=2048         "   и правок
         autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
         autocmd FileType css set omnifunc=csscomplete#CompleteCSS
         autocmd FileType c set omnifunc=ccomplete#Complete
-
-    " SnipetsEmu
-        let g:snippetsEmu_key = "<C-j>"
 
     " Tasklist 
         map <leader>T :TaskList<cr>
