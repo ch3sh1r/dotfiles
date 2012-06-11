@@ -28,6 +28,7 @@ function upack() {
             *.zip)       unzip $1;;
             *.Z)         uncompress $1;;
             *.7z)        7z x $1;;
+            *.lzma)      lzma -d $1;;
             *)           echo "ERROR: '$1' unknown type." ;;
         esac
     else
@@ -45,6 +46,7 @@ function pack() {
             gz)     gzip -c -9 -n $2 > $2.gz;;
             zip)    zip -r $2.zip $2;;
             7z)     7z a $2.7z $2;;
+            lzma)   lzma -z $1;;
             *)      echo "ERROR: '$1' Cannot be packed via pack.";;
         esac
     else

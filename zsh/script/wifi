@@ -8,6 +8,7 @@ if [ $1 ] ; then
             sudo iwconfig wlan0 channel 4
             sudo iwconfig wlan0 essid NW
             sudo ifconfig wlan0 up 192.168.0.1
+            sudo firestarter > /dev/null &
             #sudo firestarter --start-hidden > /dev/null &
         ;;
         down)

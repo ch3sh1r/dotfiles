@@ -3,7 +3,7 @@
 #
 
 alias _='sudo'
-alias iddqd='sudo -i'
+alias iddqd='sudo -s'
 alias apt-get="sudo apt-get"
 alias iftop="sudo iftop"
 alias service="sudo /usr/sbin/service"
