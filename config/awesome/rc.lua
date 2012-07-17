@@ -39,10 +39,10 @@ require("debian.menu")
 
 -- {{{ Variable definitions
     -- Themes define colours, icons, and wallpapers
-    beautiful.init("/home/ch3sh1r/.config/awesome/theme.lua")
+    beautiful.init("/home/ch3sh1r/.config/awesome/themes/fox/theme.lua")
 
     -- This is used later as the default terminal and editor to run.
-    terminal = "x-terminal-emulator"
+    terminal = "gnome-terminal"
     editor = "vim"
     editor_cmd = terminal .. " -e " .. editor
 
@@ -69,13 +69,13 @@ require("debian.menu")
     tags = {}
     for s = 1, screen.count() do
         -- Each screen has its own tag table.
-        --tags[s] = awful.tag({ "a", 2, 3, 4, 5, 6, 7, 8, 9 }, s, layouts[1])
-        tags[s] = awful.tag({ "α", "β", "δ", "λ", "θ", "Ω"}, s, {layouts[1], layouts[4], layouts[2], layouts[1], layouts[1], layouts[1]})
+        tags[s] = awful.tag({ "α", "β", "δ", "λ", "θ", "Ω"}, s, 
+                            {layouts[1], layouts[4], layouts[2], layouts[1], layouts[1], layouts[1]})
     end
 -- }}}
 
 -- {{{ Menu
-    -- Create a laucher widget and a main menu
+-- Create a laucher widget and a main menu
     myawesomemenu = {
        { "manual", terminal .. " -e man awesome" },
        { "edit config", editor_cmd .. " " .. awesome.conffile },
@@ -84,8 +84,8 @@ require("debian.menu")
     }
 
     mymainmenu = awful.menu({ items = { { "awesome", myawesomemenu, beautiful.awesome_icon },
-                                        { "Debian", debian.menu.Debian_menu.Debian },
-                                        { "open terminal", terminal }
+                                        { "debian", debian.menu.Debian_menu.Debian },
+                                        { "terminal", terminal }
                                       }
                             })
 
@@ -196,7 +196,7 @@ require("debian.menu")
         awful.key({ modkey,           }, "Left",   awful.tag.viewprev       ),
         awful.key({ modkey,           }, "Right",  awful.tag.viewnext       ),
         awful.key({ modkey,           }, "Escape", awful.tag.history.restore),
-
+        awful.key({ modkey,           }, "w", function () mymainmenu:show({keygrabber=true}) end),
         awful.key({ modkey,           }, "j",
             function ()
                 awful.client.focus.byidx( 1)
@@ -207,7 +207,6 @@ require("debian.menu")
                 awful.client.focus.byidx(-1)
                 if client.focus then client.focus:raise() end
             end),
-        awful.key({ modkey,           }, "w", function () mymainmenu:show({keygrabber=true}) end),
 
         -- Layout manipulation
         awful.key({ modkey, "Shift"   }, "j", function () awful.client.swap.byidx(  1)    end),
@@ -227,7 +226,6 @@ require("debian.menu")
         awful.key({ modkey,           }, "Return", function () awful.util.spawn(terminal) end),
         awful.key({ modkey, "Control" }, "r", awesome.restart),
         awful.key({ modkey, "Shift"   }, "q", awesome.quit),
-
         awful.key({ modkey,           }, "l",     function () awful.tag.incmwfact( 0.05)    end),
         awful.key({ modkey,           }, "h",     function () awful.tag.incmwfact(-0.05)    end),
         awful.key({ modkey, "Shift"   }, "h",     function () awful.tag.incnmaster( 1)      end),
@@ -236,7 +234,7 @@ require("debian.menu")
         awful.key({ modkey, "Control" }, "l",     function () awful.tag.incncol(-1)         end),
         awful.key({ modkey,           }, "space", function () awful.layout.inc(layouts,  1) end),
         awful.key({ modkey, "Shift"   }, "space", function () awful.layout.inc(layouts, -1) end),
-
+        awful.key({ modkey, "Control" }, "l", function () awful.util.spawn("xscreensaver-command -lock") end),
         awful.key({ modkey, "Control" }, "n", awful.client.restore),
 
         -- Prompt
@@ -329,7 +327,7 @@ require("debian.menu")
                          focus = true,
                          keys = clientkeys,
                          buttons = clientbuttons } },
-        { rule = { class = "MPlayer" },
+        { rule = { class = "vlc" },
           properties = { floating = true } },
         { rule = { class = "pinentry" },
           properties = { floating = true } },
@@ -370,5 +368,14 @@ require("debian.menu")
 
     client.add_signal("focus", function(c) c.border_color = beautiful.border_focus end)
     client.add_signal("unfocus", function(c) c.border_color = beautiful.border_normal end)
+-- }}}
+
+-- {{{ Autostart
+    awful.util.spawn_with_shell("setxkbmap -layout 'us,ru' -option 'grp:alt_shift_toggle'")
+    awful.util.spawn_with_shell("setxkbmap -option caps:escape")
+    awful.util.spawn_with_shell("xscreensaver -nosplash")
+    awful.util.spawn_with_shell("dropbox start -i")
+    awful.util.spawn_with_shell("nm-applet")
+    awful.util.spawn_with_shell("tomboy")
 -- }}}
 
