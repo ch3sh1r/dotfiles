@@ -1,9 +1,8 @@
 compinit -D 				
 
 # Переменные среды.
-PATH="$HOME/.bin:$ZSH/script:/usr/local/bin:/usr/local/sbin:/var/lib/gems/bin/:$PATH" && export PATH
+PATH="$HOME/.bin:$HOME/.rvm/bin:$ZSH/script:/usr/local/bin:/usr/local/sbin:/var/lib/gems/bin/:$PATH" && export PATH
 MANPATH="/usr/local/man:/usr/local/mysql/man:/usr/local/git/man:$MANPATH" && export MANPATH
-MAIL=/var/spool/mail/chesh1r && export MAIL
 EDITOR=vim
 
 # Дописываем путь к функциям
@@ -12,11 +11,9 @@ fpath=($ZSH/functions $fpath)
 # Подгружаем все, что похоже оканчивается на .zsh
 for config_file ($ZSH/lib/*.zsh) source $config_file
 
-# Дописываем путь к плагинам
+# Подгружаем плагины, запрошенные в ~/.zshrc
 plugin=${plugin:=()}
 for plugin ($plugins) fpath=($ZSH/plugins/$plugin $fpath)
-
-# Подгружаем плагины, запрошенные в ~/.zshrc
 for plugin ($plugins); do
   if [ -f $ZSH/plugins/$plugin/$plugin.plugin.zsh ]; then
     source $ZSH/plugins/$plugin/$plugin.plugin.zsh
