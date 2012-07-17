@@ -1,12 +1,9 @@
+*.pyc
+*.swp
+
 vim/.netrwhist*
 vim/.VimballRecord
-*.pyc
-*/*.pyc
-*/*/*.pyc
-*/*/*/*.pyc
-*/*/*/*/*.pyc
-*/*/*/*/*/*.pyc
-*/*/*/*/*/*/*.pyc
-*.swp
+
 vimperator/info/default/history-command
 vimperator/info/default/history-search
+vimperator/info/default/local-marks
