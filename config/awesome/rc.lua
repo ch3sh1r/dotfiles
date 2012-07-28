@@ -42,7 +42,7 @@ require("debian.menu")
     beautiful.init("/home/ch3sh1r/.config/awesome/themes/fox/theme.lua")
 
     -- This is used later as the default terminal and editor to run.
-    terminal = "gnome-terminal"
+    terminal = "urxvt"
     editor = "vim"
     editor_cmd = terminal .. " -e " .. editor
 

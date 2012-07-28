@@ -1,3 +1,4 @@
+autoload -U compinit 
 compinit -D 				
 
 # Переменные среды.

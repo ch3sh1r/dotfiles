@@ -1,0 +1,76 @@
+!-------------------------------------------------------------------------------
+! Xft settings
+!-------------------------------------------------------------------------------
+
+Xft.dpi: 96
+Xft.antialias: false
+Xft.rgba: rgb
+Xft.hinting: true
+Xft.hintstyle: hintslight
+
+!-------------------------------------------------------------------------------
+! URxvt settings
+! Colours lifted from Solarized (http://ethanschoonover.com/solarized)
+! More info at:
+! http://pod.tst.eu/http://cvs.schmorp.de/rxvt-unicode/doc/rxvt.1.pod
+!-------------------------------------------------------------------------------
+
+URxvt.depth: 32
+URxvt.geometry: 90x30
+URxvt.transparent: false
+URxvt.fading: 0
+! URxvt.urgentOnBell: true
+! URxvt.visualBell: true
+URxvt.loginShell: true
+URxvt.saveLines: 50
+URxvt.internalBorder: 3
+URxvt.lineSpace: 0
+
+! Fonts
+URxvt.allow_bold: false
+/* URxvt.font: -*-terminus-medium-r-normal-*-12-120-72-72-c-60-iso8859-1 */
+URxvt*font: xft:terminus:pixelsize=18
+URxvt*boldFont: xft:terminus:pixelsize=18
+
+! Fix font space
+URxvt*letterSpace: -1
+
+! Scrollbar
+URxvt.scrollStyle: rxvt
+URxvt.scrollBar: false
+
+! Perl extensions
+URxvt.perl-ext-common: default,matcher
+URxvt.matcher.button: 1
+URxvt.urlLauncher: firefox
+
+! Cursor
+URxvt.cursorBlink: true
+URxvt.cursorColor: #657b83
+URxvt.cursorUnderline: false
+
+! Pointer
+URxvt.pointerBlank: true
+
+!colors:
+!scheme: pnevma
+!*foreground: #696969
+!*background: #282626
+*foreground: #6F6767
+*background: #3A3636
+*color0: #363636
+*color8: #424242
+*color1: #C37561
+*color9: #D19485
+*color2: #A0A57E
+*color10: #B6B99D
+*color3: #D1A375
+*color11: #DEBC9C
+*color4: #7985A3
+*color12: #98A1B9
+*color5: #AB716D
+*color13: #BE918E
+*color6: #98B9B1
+*color14: #CBE6CB
+*color7: #D0D0D0
+*color15: #E6E6E6
