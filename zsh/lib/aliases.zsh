@@ -2,46 +2,46 @@
 # Простенькая часть
 #
 
-alias _='sudo'
-alias iddqd='sudo -s'
+alias _="sudo"
+alias iddqd="sudo -s"
 alias apt-get="sudo apt-get"
 alias iftop="sudo iftop"
 alias service="sudo /usr/sbin/service"
 
-alias ls='ls -FC --color=auto'
-alias l='ls'
-alias lr='ls -R'
-alias li='ls -i'
-alias ll='ls -al'
-alias la='ls -A'
-alias lsd='ls -ld .*'
+alias ls="ls -FC --color=auto"
+alias l="ls"
+alias lr="ls -R"
+alias li="ls -i"
+alias ll="ls -al"
+alias la="ls -A"
+alias lsd="ls -ld .*"
 
-alias gs='git status'
-alias ga='git add -A .'
-alias gb='git branch'
-alias gd='git diff'
-alias go='git checkout'
-alias gp='git push --all'
-alias gk='gitk --all&'
-alias gh='git hist' # Для log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
+alias gs="git status"
+alias ga="git add -A ."
+alias gb="git branch"
+alias gd="git diff"
+alias go="git checkout"
+alias gp="git push --all"
+alias gk="gitk --all&"
+alias gh="git hist" # Для log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
 
-alias p='ps auxw'
-alias df='df -h'
-alias recal='cat ~/.zhistory|grep'
-alias df='df -h'
-alias du='du -h'
-alias vi='vim'
-alias cvi='vim -c :colorscheme\ default'
+alias p="ps auxw"
+alias df="df -h"
+alias recal="cat ~/.zhistory|grep"
+alias df="df -h"
+alias du="du -h"
+alias vi="vim"
+alias cvi="vim -c :colorscheme\ default"
 alias screen="screen -DR"
 
-alias grep='grep --color=auto'
-alias egrep='egrep --color=auto'
-alias fgrep='fgrep --color=auto'
+alias grep="grep --color=auto"
+alias egrep="egrep --color=auto"
+alias fgrep="fgrep --color=auto"
 
-alias ifconfig.me='curl ifconfig.me/all'
-alias myip='curl ifconfig.me/ip'
-alias gist='gist -f'
-alias proxylan='export http_proxy="http://proxy.lan:3128" https_proxy="https://proxy.lan:3128"'
+alias ifconfig.me="curl ifconfig.me/all"
+alias myip="curl ifconfig.me/ip"
+alias gist="gist -f"
+alias proxylan="export http_proxy="http://proxy.lan:3128" https_proxy="https://proxy.lan:3128""
 
 # Разукрашиваем некоторые команды с помощью grc
 [[ -f /usr/bin/grc ]] && {
@@ -81,7 +81,10 @@ alias dirtree='find . -type d | sed -e "s/[^-][^\/]*\//  |/g" -e "s/|\([^ ]\)/|-
 # Рандомный пароль.
 alias genpass="head -c8 /dev/urandom | xxd -ps"
 
+# Слепок файлов в директории
+alias snap="find $1 -type f | xargs -I{} ls -l {} > log-`date +%s`"
+
 # Подключаем и отключаем проектор
-alias proj='xrandr --output VGA --mode 800x600 --output LVDS --mode 1024x600'
-alias uproj='xrandr --output VGA --off'
+alias proj="xrandr --output VGA --mode 800x600 --output LVDS --mode 1024x600"
+alias uproj="xrandr --output VGA --off"
 
