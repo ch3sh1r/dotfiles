@@ -8,14 +8,6 @@ alias apt-get="sudo apt-get"
 alias iftop="sudo iftop"
 alias service="sudo /usr/sbin/service"
 
-alias ls="ls -FC --color=auto"
-alias l="ls"
-alias lr="ls -R"
-alias li="ls -i"
-alias ll="ls -al"
-alias la="ls -A"
-alias lsd="ls -ld .*"
-
 alias gs="git status"
 alias ga="git add -A ."
 alias gb="git branch"
@@ -82,7 +74,7 @@ alias dirtree='find . -type d | sed -e "s/[^-][^\/]*\//  |/g" -e "s/|\([^ ]\)/|-
 alias genpass="head -c8 /dev/urandom | xxd -ps"
 
 # Слепок файлов в директории
-alias snap="find $1 -type f | xargs -I{} ls -l {} > log-`date +%s`"
+alias snap="find $1 -type f | xargs -I{} ls -l {} > snap-`date +%s`"
 
 # Подключаем и отключаем проектор
 alias proj="xrandr --output VGA --mode 800x600 --output LVDS --mode 1024x600"

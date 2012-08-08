@@ -2,6 +2,13 @@ setopt auto_name_dirs
 setopt auto_pushd
 setopt pushd_ignore_dups
 
+alias ls="ls -FC --color=auto"
+alias l="ls"
+alias ll="ls -al"
+alias la="ls -A"
+alias lt="ls -ltr"
+alias lsd="ls -ld .*"
+
 alias pu='pushd'
 alias po='popd'
 
@@ -10,7 +17,6 @@ alias cd..='cd ..'
 alias cd...='cd ../..'
 alias cd....='cd ../../..'
 alias cd.....='cd ../../../..'
-alias cd/='cd /'
 alias cdc='cd /home/ch3sh1r/Documents/Code'
 
 alias 1='cd -'
