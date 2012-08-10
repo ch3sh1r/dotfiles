@@ -61,8 +61,9 @@ set nobackup                " Не создавать бекапы
         set hlsearch            "   по набору текста
 
     " Подстветка
-        set t_Co=256
-        colorscheme wombat256mod
+        set t_Co=16
+        set background=dark
+        colorscheme solarized
         autocmd BufRead *.conf :set filetype=sh
         set cursorline
 
