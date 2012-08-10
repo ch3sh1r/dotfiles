@@ -2,7 +2,6 @@
 # Простенькая часть
 #
 
-alias _="sudo"
 alias iddqd="sudo -s"
 alias apt-get="sudo apt-get"
 alias iftop="sudo iftop"
@@ -17,23 +16,26 @@ alias vi="vim"
 alias cvi="vim -c :colorscheme\ default"
 alias screen="screen -DR"
 
-alias grep="grep --color=auto"
-alias egrep="egrep --color=auto"
-alias fgrep="fgrep --color=auto"
-
 alias ifconfig.me="curl ifconfig.me/all"
 alias myip="curl ifconfig.me/ip"
 alias gist="gist -f"
 alias proxylan="export http_proxy="http://proxy.lan:3128" https_proxy="https://proxy.lan:3128""
 
-# Разукрашиваем некоторые команды с помощью grc
-[[ -f /usr/bin/grc ]] && {
+if [ -f /usr/bin/ack-grep ]; then
+    alias grep="/usr/bin/ack-grep"
+else
+    alias grep="grep --color=auto"
+    alias egrep="egrep --color=auto"
+    alias fgrep="fgrep --color=auto"
+fi
+
+if [ -f /usr/bin/grc ]; then
   alias ping="grc --colour=auto ping"
   alias traceroute="grc --colour=auto traceroute"
   alias make="grc --colour=auto make"
   alias diff="grc --colour=auto diff"
   alias netstat="grc --colour=auto netstat"
-}
+fi
 
 
 #
