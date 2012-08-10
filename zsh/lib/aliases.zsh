@@ -8,15 +8,6 @@ alias apt-get="sudo apt-get"
 alias iftop="sudo iftop"
 alias service="sudo /usr/sbin/service"
 
-alias gs="git status"
-alias ga="git add -A ."
-alias gb="git branch"
-alias gd="git diff"
-alias go="git checkout"
-alias gp="git push --all"
-alias gk="gitk --all&"
-alias gh="git hist" # Для log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
-
 alias p="ps auxw"
 alias df="df -h"
 alias recal="cat ~/.zhistory|grep"
@@ -41,7 +32,6 @@ alias proxylan="export http_proxy="http://proxy.lan:3128" https_proxy="https://p
   alias traceroute="grc --colour=auto traceroute"
   alias make="grc --colour=auto make"
   alias diff="grc --colour=auto diff"
-  alias cvs="grc --colour=auto cvs"
   alias netstat="grc --colour=auto netstat"
 }
 
@@ -75,8 +65,4 @@ alias genpass="head -c8 /dev/urandom | xxd -ps"
 
 # Слепок файлов в директории
 alias snap="find $1 -type f | xargs -I{} ls -l {} > snap-`date +%s`"
-
-# Подключаем и отключаем проектор
-alias proj="xrandr --output VGA --mode 800x600 --output LVDS --mode 1024x600"
-alias uproj="xrandr --output VGA --off"
 
