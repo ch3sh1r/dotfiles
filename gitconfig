@@ -1,6 +1,6 @@
 [user]
-	name = Alexey Bednyakov
-	email = ch3sh1r@ya.ru
+    name = Alexey Bednyakov
+    email = ch3sh1r@ya.ru
 
 [alias]
     hist = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
