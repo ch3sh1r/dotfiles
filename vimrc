@@ -31,10 +31,10 @@ set nobackup                " Не создавать бекапы
     " Строка состояния 
         set ch=1                " Сделать строку команд высотой в одну строку
         set laststatus=2        " У последнего окна всегда есть статус
-        set statusline=\ %<%-15.25(%f%)%m%r%h\ %w\ \
-        set statusline+=\ \ \ [%{&ff}/%Y]
-        set statusline+=\ \ \ %<%20.30(%{hostname()}:%{CurDir()}%)\
-        set statusline+=%=%-10.(%l,%c%V%)\ %p%%/%L
+        set statusline=\ %<%-15.25(%f%)%m%r%h\ %w
+        set statusline+=\ [%{&ff}/%Y]
+        set statusline+=\ %20.40(%{hostname()}:%{CurDir()}%)
+        set statusline+=\ %=%-8.(%l,%c%V%)\ %p%%/%L
         function! CurDir()
             let curdir = substitute(getcwd(), $HOME, "~", "")
                 return curdir
@@ -111,6 +111,25 @@ set nobackup                " Не создавать бекапы
     " Поиск нормальными регулярками
         nnoremap / /\v
         vnoremap / /\v
+
+    " ,nm
+        " Изменить способ нумерации (нормальный/относительный)
+        " http://stackoverflow.com/questions/4387210/vim-how-to-map-two-tasks-under-one-shortcut-key
+        let g:relativenumber = 1
+        function! ToogleRelativeNumber()
+          if g:relativenumber == 0
+            let g:relativenumber = 1
+            set norelativenumber
+            set number
+            echo "Show line numbers"
+          elseif g:relativenumber == 1
+            let g:relativenumber = 0
+            set nonumber
+            set relativenumber
+            echo "Show relative line numbers"
+          endif
+        endfunction
+        map <Leader>nm :call ToogleRelativeNumber()<cr>
         
     " leader-шорткаты
         " <leader>e. - смена кодировок 
