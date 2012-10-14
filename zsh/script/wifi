@@ -3,21 +3,16 @@
 if [ $1 ] ; then
     case $1 in
         up)
-            sudo iwconfig wlan0 mode Ad-Hoc
-            sudo iwconfig wlan0 channel 4
-            sudo iwconfig wlan0 essid APnet
-            sudo ifconfig wlan0 192.168.42.1 up
-            sudo service firestarter start 
-        ;;
-        ap)
             sudo ifconfig wlan0 192.168.42.1 up
             sudo service firestarter start 
             sudo service hostapd start
+            sudo service isc-dhcp-server start
         ;;
         down)
             sudo ifconfig wlan0 down
             sudo service firestarter stop 
             sudo service hostapd stop
+            sudo service isc-dhcp-server stop
         ;;
         setup)
             sudo rmmod acer_wmi
