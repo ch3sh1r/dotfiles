@@ -7,10 +7,11 @@ set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
     Bundle 'gmarik/vundle'
     Bundle 'tpope/vim-fugitive'
+    Bundle 'scrooloose/nerdcommenter'
     Bundle 'altercation/vim-colors-solarized'
-    Bundle 'Lokaltog/vim-easymotion'
-    Bundle 'rstacruz/sparkup', {'rtp': 'vim/'}
-    Bundle 'tpope/vim-rails.git'
+    Bundle 'mileszs/ack.vim'
+    Bundle 'vim-scripts/TaskList.vim'
+    Bundle 'vim-scripts/Conque-Shell'
 filetype plugin indent on
 
 set nocompatible            " Предпочтение настройкам Vim относительно Vi
