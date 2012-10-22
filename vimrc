@@ -116,25 +116,6 @@ set nobackup                " Не создавать бекапы
         nnoremap / /\v
         vnoremap / /\v
 
-    " ,nm
-        " Изменить способ нумерации (нормальный/относительный)
-        " http://stackoverflow.com/questions/4387210/vim-how-to-map-two-tasks-under-one-shortcut-key
-        let g:relativenumber = 1
-        function! ToogleRelativeNumber()
-          if g:relativenumber == 0
-            let g:relativenumber = 1
-            set norelativenumber
-            set number
-            echo "Show line numbers"
-          elseif g:relativenumber == 1
-            let g:relativenumber = 0
-            set nonumber
-            set relativenumber
-            echo "Show relative line numbers"
-          endif
-        endfunction
-        map <Leader>nm :call ToogleRelativeNumber()<cr>
-        
     " leader-шорткаты
         " <leader>e. - смена кодировок 
             " <leader>ek - koi8.
@@ -169,17 +150,22 @@ set nobackup                " Не создавать бекапы
             vmap 1<F2> <esc>:w !sudo tee %<cr>
             imap 1<F2> <esc>:w !sudo tee %<cr>
 
-        " F7 - проверка орфографии
-            imap <F7> <Esc>:setlocal spell spelllang=ru_yo,en_us<CR>a
-            nmap <F7> :setlocal spell spelllang=ru_yo,en_us<CR>
-
-        " Shift-F7 - отключить проверку орфографии
-            imap <S-F7> <Esc>:setlocal spell spelllang=<CR>a
-            nmap <S-F7> :setlocal spell spelllang=<CR>
+        " F7 - проверка русской и английской орфографии
+            let g:orthography = 1
+            function! OrthographyToggle()
+              if g:orthography == 0
+                let g:orthography = 1
+                setlocal spell spelllang=ru_yo,en_us
+                echo "Orthography checker toggled on."
+              elseif g:orthography == 1
+                let g:orthography = 0
+                setlocal spell spelllang=
+                echo "Orthography checker toggled off."
+              endif
+            endfunction
+            map <F7> :call OrthographyToggle()<cr>
 
     " Работа с буерами
-        " Быстрый сплит
-        nnoremap <leader>w <C-w>v<C-w>l   
         " Быстрое перемещение
         nnoremap <C-h> <C-w>h
         nnoremap <C-j> <C-w>j
