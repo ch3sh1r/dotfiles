@@ -1,31 +1,37 @@
 #!/bin/bash
+services=( firestarter hostapd isc-dhcp-server )
 
-if [ $1 ] ; then
-    case $1 in
-        up)
-            sudo ifconfig wlan0 192.168.42.1 up
-            sudo service firestarter start 
-            sudo service hostapd start
-            sudo service isc-dhcp-server start
-        ;;
-        down)
-            sudo ifconfig wlan0 down
-            sudo service firestarter stop 
-            sudo service hostapd stop
-            sudo service isc-dhcp-server stop
-        ;;
-        setup)
-            sudo rmmod acer_wmi
-            sudo modprobe acer_wmi
-            sudo rfkill unblock all
-            sudo rmmod -f acer_wmi
-        ;;
-    esac
-else
-    echo "Usage:"
-    echo "  wifi up    - create ad-hoc."
-    echo "  wifi ap    - create access point."
-    echo "  wifi down  - stop all."       
-    echo "  wifi setup - b570e quickfix."       
-fi
-
+case $1 in
+    up)
+        echo "[I] Let's stop all services in case some of them already"
+        echo "    started. For greate good."
+        ~/.zsh/script/wifi down
+        echo "[I] Starting wifi..."
+        sudo ifconfig wlan0 192.168.42.1 up
+        for service in ${services}; do
+            sudo service ${service} start 
+        done
+        echo "[I] Wifi should be started."
+    ;;
+    down)
+        echo "[I] Stopping wifi..."
+        sudo ifconfig wlan0 down
+        for service in ${services}; do
+            sudo service ${service} stop 
+        done
+        echo "[I] Wifi stopped."
+    ;;
+    setup)
+        sudo rmmod acer_wmi
+        sudo modprobe acer_wmi
+        sudo rfkill unblock all
+        sudo rmmod -f acer_wmi
+    ;;
+    *)
+        echo "Usage: wifi [Acton]"
+        echo "Actions:"
+        echo "  up    - create access point."
+        echo "  down  - stop access point"       
+        echo "  setup - lenovo b570e quickfix."       
+    ;;
+esac
