@@ -1,13 +1,17 @@
 " @ch3sh1r vimrc (https://github.com/ch3sh1r/dotfiles)
 " Maintained by Alexey Bednyakov, <ch3sh1r@ya.ru>
 
-" pathogen (https://github.com/tpope/vim-pathogen)
+" Vundle (https://github.com/gmarik/vundle)
 filetype off
-call pathogen#infect()
-call pathogen#helptags()
-call pathogen#runtime_append_all_bundles()
+set rtp+=~/.vim/bundle/vundle/
+call vundle#rc()
+    Bundle 'gmarik/vundle'
+    Bundle 'tpope/vim-fugitive'
+    Bundle 'altercation/vim-colors-solarized'
+    Bundle 'Lokaltog/vim-easymotion'
+    Bundle 'rstacruz/sparkup', {'rtp': 'vim/'}
+    Bundle 'tpope/vim-rails.git'
 filetype plugin indent on
-syntax on
 
 set nocompatible            " Предпочтение настройкам Vim относительно Vi
 set ruler                   " Показывать положение курсора всё время
@@ -29,7 +33,7 @@ set nobackup                " Не создавать бекапы
         set t_vb=   
 
     " Строка состояния 
-        set ch=1                " Сделать строку команд высотой в одну строку
+        set ch=1                " Строка команд высотой в одну строку
         set laststatus=2        " У последнего окна всегда есть статус
         set statusline=\ %<%-15.25(%f%)%m%r%h\ %w
         set statusline+=\ [%{&ff}/%Y]
