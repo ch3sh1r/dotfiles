@@ -13,10 +13,6 @@ alias pu='pushd'
 alias po='popd'
 
 alias ..='cd ..'
-alias cd..='cd ..'
-alias cd...='cd ../..'
-alias cd....='cd ../../..'
-alias cd.....='cd ../../../..'
 alias cdc='cd /home/ch3sh1r/Documents/Code'
 
 alias 1='cd -'

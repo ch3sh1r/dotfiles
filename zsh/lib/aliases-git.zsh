@@ -44,7 +44,7 @@ alias grh='git reset HEAD'
 alias grhh='git reset HEAD --hard'
 
 #
-# Возвращают имя текущей ветки и текущего репозитория
+# Ия текущей ветки и текущего репозитория
 # Использование: git pull origin $(current_branch)
 #
 function current_branch() {

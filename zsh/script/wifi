@@ -1,24 +1,20 @@
 #!/bin/bash
-services=( firestarter hostapd isc-dhcp-server )
 
+services=( firestarter hostapd isc-dhcp-server )
 case $1 in
     up)
-        echo "[I] Let's stop all services in case some of them already"
-        echo "    started. For greate good."
-        ~/.zsh/script/wifi down
+        sudo $0 down
         echo "[I] Starting wifi..."
         sudo ifconfig wlan0 192.168.42.1 up
         for service in ${services}; do
-            sudo service ${service} start 
-        done
+            sudo service ${service} start; done
         echo "[I] Wifi should be started."
     ;;
     down)
         echo "[I] Stopping wifi..."
         sudo ifconfig wlan0 down
         for service in ${services}; do
-            sudo service ${service} stop 
-        done
+            sudo service ${service} stop; done
         echo "[I] Wifi stopped."
     ;;
     setup)

@@ -4,22 +4,18 @@
 
 alias iddqd="sudo -s"
 alias apt-get="sudo apt-get"
-alias iftop="sudo iftop"
 alias service="sudo /usr/sbin/service"
 
 alias p="ps auxw"
 alias df="df -h"
-alias recal="cat ~/.zhistory|grep"
-alias df="df -h"
 alias du="du -h"
+alias recal="cat ~/.zhistory|grep"
 alias vi="vim"
 alias cvi="vim -c :colorscheme\ default"
 alias screen="screen -DR"
 
 alias ifconfig.me="curl ifconfig.me/all"
-alias myip="curl ifconfig.me/ip"
 alias gist="gist -f"
-alias proxylan="export http_proxy="http://proxy.lan:3128" https_proxy="https://proxy.lan:3128""
 
 if [ -f /usr/bin/ack-grep ]; then
     alias grep="/usr/bin/ack-grep"
@@ -37,33 +33,8 @@ if [ -f /usr/bin/grc ]; then
   alias netstat="grc --colour=auto netstat"
 fi
 
-
-#
-# Xитрожопые алиасы
-#
-
-# Палевный семпл nmap (и ооочень тормозной):
-# O       - определение ОС, сканирование с применением всех скриптов и трассировки
-# sS      - посылать только syn и засчитывать порт открытым при получении syn-ack
-# p-      - сканировать порты до 65k, а не стандартные 1024
-# PS80,22 - онлайн/оффлайн на основе icmp-echo, а не по доступности tcp порта
-# n       - не делать DNS резолв (считывание PTR записей и т.п.)
-# T4      - тайминги маленькие, скорость большая
-# vvv     - максимальная подробность
-# reason  - причина выбора open/closed/filterer/unfiltered
-alias nmp="sudo nmap -A -sS -p- -PS80,22 -n -T4 -vvv --reason"
-
-# Режим энергосбережения (1-5).
-alias set_etnergy="sudo echo $1 > /proc/sys/vm/laptop_mode"
-
-# Вывод прав циферками.
-alias lls="ls -l | sed -e 's/--x/1/g' -e 's/-w-/2/g' -e 's/-wx/3/g' -e 's/r--/4/g'  -e 's/r-x/5/g' -e 's/rw-/6/g' -e 's/rwx/7/g' -e 's/---/0/g'" 
-
 # Дерево из папки.
 alias dirtree='find . -type d | sed -e "s/[^-][^\/]*\//  |/g" -e "s/|\([^ ]\)/|-\1/"' 
-
-# Рандомный пароль.
-alias genpass="head -c8 /dev/urandom | xxd -ps"
 
 # Слепок файлов в директории
 alias snap="find $1 -type f | xargs -I{} ls -l {} > snap-`date +%s`"

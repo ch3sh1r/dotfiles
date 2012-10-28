@@ -59,21 +59,6 @@ function lmirror(){
     wget -r -l inf -k -p $1
 }
 
-# Шортлинк в clck
-function clck(){
-    curl http://clck.ru/--?url=$1
-}
-
-# Коммит с комментарием в git
-function gc(){
-    git commit -m "$@"
-}
-
-# Запуск gvim
-function g(){
-    gvim -p "$@"
-}
-
 #
 # Конвертируем всякую дурь
 #
