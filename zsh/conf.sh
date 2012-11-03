@@ -1,18 +1,15 @@
-autoload -U compinit 
-compinit -D 				
-
-# Переменные среды.
-PATH="$HOME/.bin:$HOME/.rvm/bin:$ZSH/script:/usr/local/bin:/usr/local/sbin:/var/lib/gems/bin/:$PATH" && export PATH
+# Переменные среды
+PATH="$HOME/.bin:$HOME/.rvm/bin:$HOME/.zsh/script:/usr/local/bin:/usr/local/sbin:/var/lib/gems/bin/:$PATH" && export PATH
 MANPATH="/usr/local/man:/usr/local/mysql/man:/usr/local/git/man:$MANPATH" && export MANPATH
-EDITOR=vim
+EDITOR="vim" && export EDITOR
 
-# Дописываем путь к функциям
-fpath=($ZSH/functions $fpath)
+# Автодополнение к скриптам
+fpath=($ZSH/script $fpath)
 
-# Подгружаем все, что похоже оканчивается на .zsh
+# Библиотеки
 for config_file ($ZSH/lib/*.zsh) source $config_file
 
-# Подгружаем плагины, запрошенные в ~/.zshrc
+# Плагины, запрошенные в ~/.zshrc
 plugin=${plugin:=()}
 for plugin ($plugins) fpath=($ZSH/plugins/$plugin $fpath)
 for plugin ($plugins); do
@@ -21,6 +18,11 @@ for plugin ($plugins); do
   fi
 done
 
-# Автоматическое удаление одинакового
+# Инициализация
 typeset -U path cdpath fpath manpath
+autoload -U compinit 
+compinit -D 				
+
+# Показывать меню если есть хотя бы 2 опции
+zstyle ':completion:*' menu select=2
 

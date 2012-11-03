@@ -2,20 +2,26 @@
 
 services=( firestarter hostapd isc-dhcp-server )
 case $1 in
-    up)
-        sudo $0 down
+    start)
+        sudo $0 stop
         echo "[I] Starting wifi..."
         sudo ifconfig wlan0 192.168.42.1 up
-        for service in ${services}; do
+        for service in ${services[@]}; do
             sudo service ${service} start; done
         echo "[I] Wifi should be started."
     ;;
-    down)
+    stop)
         echo "[I] Stopping wifi..."
         sudo ifconfig wlan0 down
-        for service in ${services}; do
+        for service in ${services[@]}; do
             sudo service ${service} stop; done
         echo "[I] Wifi stopped."
+    ;;
+    status)
+        echo "[I] Checking wifi..."
+        ifconfig wlan0
+        for service in ${services[@]}; do
+            service ${service} status; done
     ;;
     setup)
         sudo rmmod acer_wmi
@@ -26,8 +32,10 @@ case $1 in
     *)
         echo "Usage: wifi [Acton]"
         echo "Actions:"
-        echo "  up    - create access point."
-        echo "  down  - stop access point"       
-        echo "  setup - lenovo b570e quickfix."       
+        echo "  up     - create access point."
+        echo "  down   - stop access point"       
+        echo "  status - check access point"       
+        echo "  setup  - lenovo b570e quickfix."       
     ;;
 esac
+

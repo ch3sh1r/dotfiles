@@ -1,0 +1,3 @@
+#compdef wifi
+
+_arguments "1: :(start stop status setup)"
