@@ -18,10 +18,10 @@ set nocompatible            " Предпочтение настройкам Vim 
 set ruler                   " Показывать положение курсора всё время
 set showcmd                 " Показывать незавершённые команды в статусбаре
 set nu                      " Нумерация строк
-set foldmethod=indent       " Фолдинг по отсупам
+set foldmethod=indent       " Фолдинг по отступам
 set modelines=0             " Во-первых не нужны, во-вторых - дырки (http://clck.ru/Lx2G)
 set scrolljump=3            " Теперь нет необходимости передвигать курсор к 
-set scrolloff=3             "   краю экрана, чтобы подняться/отпуститься
+set scrolloff=3             "   краю экрана, чтобы подняться/опуститься
 set history=128             " Хранить больше истории команд
 set undolevels=2048         "   и правок
 set nobackup                " Не создавать бекапы
@@ -152,7 +152,7 @@ set nobackup                " Не создавать бекапы
             imap 1<F2> <esc>:w !sudo tee %<cr>
 
         " F7 - проверка русской и английской орфографии
-            let g:orthography = 1
+            let g:orthography = 0
             function! OrthographyToggle()
               if g:orthography == 0
                 let g:orthography = 1
