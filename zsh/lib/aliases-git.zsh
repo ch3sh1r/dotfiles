@@ -1,7 +1,8 @@
 alias g='git'
 compdef g=git
 
-alias ga="git add -A ."
+alias ga='git add'
+compdef _git gc=git-add
 alias gc='git commit -v'
 compdef _git gc=git-commit
 alias gca='git commit -v -a'
