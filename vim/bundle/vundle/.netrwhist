@@ -1,6 +1,10 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =4
+let g:netrw_dirhist_cnt =8
 let g:netrw_dirhist_1='/home/ch3sh1r/Documents/Code/python/sos-keeper/lib'
 let g:netrw_dirhist_2='/etc/udisks2'
 let g:netrw_dirhist_3='/etc'
 let g:netrw_dirhist_4='/home/ch3sh1r/Documents/Code/nix/dotfiles/zsh/script'
+let g:netrw_dirhist_5='/home/ch3sh1r/Documents/Code/nix/dotfiles/zsh/plugins'
+let g:netrw_dirhist_6='/home/ch3sh1r/Documents/Code/python/cryptoanalysis/cipher/__pycache__'
+let g:netrw_dirhist_7='/home/ch3sh1r/Documents/Code/python/cryptoanalysis/cipher'
+let g:netrw_dirhist_8='/home/ch3sh1r/Documents/Code/python/cryptanalysis/cipher/__pycache__'
