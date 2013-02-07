@@ -1,5 +1,5 @@
 alias g='git'
-compdef g=git
+compdef _git g=git
 
 alias ga='git add'
 compdef _git gc=git-add
@@ -29,7 +29,7 @@ alias gss='git status -s'
 compdef _git gss=git-status
 alias gk="gitk --all&"
 alias gcount='git shortlog -sn'
-compdef gcount=git
+compdef _git gcount=git
 alias gcp='git cherry-pick'
 compdef _git gcp=git-cherry-pick
 alias glg='git log --stat --max-count=5'
@@ -45,21 +45,21 @@ alias grh='git reset HEAD'
 alias grhh='git reset HEAD --hard'
 
 #
-# Ия текущей ветки и текущего репозитория
+# Имя текущей ветки и текущего репозитория
 # Использование: git pull origin $(current_branch)
 #
 function current_branch() {
-  ref=$(git symbolic-ref HEAD 2> /dev/null) || return
-  echo ${ref#refs/heads/}
+ ref=$(git symbolic-ref HEAD 2> /dev/null) || return
+ echo ${ref#refs/heads/}
 }
 function current_repository() {
-  ref=$(git symbolic-ref HEAD 2> /dev/null) || return
-  echo $(git remote -v | cut -d':' -f 2)
+ ref=$(git symbolic-ref HEAD 2> /dev/null) || return
+ echo $(git remote -v | cut -d':' -f 2)
 }
 alias ggpull='git pull origin $(current_branch)'
-compdef ggpull=git
+compdef _git ggpull=git
 alias ggpush='git push origin $(current_branch)'
-compdef ggpush=git
+compdef _git ggpush=git
 alias ggpnp='git pull origin $(current_branch) && git push origin $(current_branch)'
-compdef ggpnp=git
+compdef _git ggpnp=git
 
