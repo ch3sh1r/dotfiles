@@ -8,6 +8,7 @@ call vundle#rc()
     Bundle 'gmarik/vundle'
     Bundle 'tpope/vim-fugitive'
     Bundle 'scrooloose/nerdcommenter'
+    Bundle 'davidhalter/jedi-vim'
     Bundle 'altercation/vim-colors-solarized'
     Bundle 'mileszs/ack.vim'
     Bundle 'vim-scripts/TaskList.vim'
