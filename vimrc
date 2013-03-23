@@ -120,16 +120,16 @@ set nobackup                " Не создавать бекапы
 
     " leader-шорткаты
         " <leader>e. - смена кодировок 
-            " <leader>ek - koi8.
+            " <leader>ek - koi8
             nmap <leader>ek :e ++enc=koi8-r<cr>
-            " <leader>ew - cp1251 она же win.
+            " <leader>ew - cp1251, она же win
             nmap <leader>ew :e ++enc=cp1251<cr>
-            " <leader>ec - cp866.
+            " <leader>ec - cp866
             nmap <leader>ec :e ++enc=cp866<cr>
-            " <leader>eu - utf8. Yarr!
+            " <leader>eu - utf8
             nmap <leader>eu :e ++enc=utf8<cr>
-            " <leader>eu - rot13 до конца файла.
-            nmap <leader>er g?G <cr>
+            " <leader>eu - rot13
+            nmap <leader>er ggg?G <cr>
 
         " <leader>g. - Fugitive
             " <leader>gc - commit.
