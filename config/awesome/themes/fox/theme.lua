@@ -1,4 +1,5 @@
 -- crown, awesome3 theme, by by zhuravlik, based on Zenburn
+-- TODO solarized colors
 
 --{{{ Main
 require("awful.util")
@@ -22,8 +23,8 @@ themedir      = themes .. themename
 
 wallpaper1    = themedir .. "/background.jpg"
 wallpaper2    = themedir .. "/background.png"
-wallpaper3    = sharedthemes .. "/zenburn/zenburn-background.png"
-wallpaper4    = sharedthemes .. "/default/background.png"
+wallpaper3    = themedir .. "/background.png"
+wallpaper4    = themedir .. "/background.png"
 wpscript      = home .. "/.wallpaper"
 
 if awful.util.file_readable(wallpaper1) then
