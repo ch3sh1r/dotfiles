@@ -17,7 +17,7 @@ filetype plugin indent on
 
 set nocompatible            " Предпочтение настройкам Vim относительно Vi
 set ruler                   " Показывать положение курсора всё время
-set showcmd                 " Показывать незавершённые команды в статусбаре
+set showcmd                 " Показывать незавершенные команды в статусбаре
 set nu                      " Нумерация строк
 set foldmethod=indent       " Фолдинг по отступам
 set modelines=0             " Во-первых не нужны, во-вторых - дырки (http://clck.ru/Lx2G)
@@ -25,10 +25,10 @@ set scrolljump=3            " Теперь нет необходимости п�
 set scrolloff=3             "   краю экрана, чтобы подняться/опуститься
 set history=128             " Хранить больше истории команд
 set undolevels=2048         "   и правок
-set nobackup                " Не создавать бекапы
+set nobackup                " Не создавать бэкапы
 
 "--------------------- СРЕДА -----------------------
-    " Выключить звук на ошибки 
+    " Выключить звуки
         set noerrorbells
         set novisualbell            
         set tm=500
@@ -46,7 +46,7 @@ set nobackup                " Не создавать бекапы
                 return curdir
         endfunction
 
-    " Отступов и табов 
+    " Отступы и табы 
         set autoindent
         set expandtab
         set shiftwidth=4
@@ -73,14 +73,6 @@ set nobackup                " Не создавать бекапы
         autocmd BufRead *.conf :set filetype=sh
         set cursorline
 
-    " Меню выбора кодировки текста 
-        set wildmenu
-        set wcm=<Tab> 
-        menu Encoding.koi8-r :e ++enc=koi8-r<cr>
-        menu Encoding.windows-1251 :e ++enc=cp1251<cr>
-        menu Encoding.cp866 :e ++enc=cp866<cr>
-        menu Encoding.utf-8 :e ++enc=utf8<cr>
-
     " Русская раскладка и кодировки
         set termencoding=utf-8
         set fileencodings=utf-8,latin1,cp1251
@@ -89,15 +81,13 @@ set nobackup                " Не создавать бекапы
         nmap ё `
         vmap ё `
 
-
-"--------------------- ПЛАГИНЫ ---------------------
     " Самопальные шаблоны
         autocmd! BufNewFile * silent! 0r ~/.vim/templates/template.%:e
 
 
 "--------------------- ХОТКЕИ ----------------------
     " Замена <leader> на "," со стандартного "\"
-    let mapleader = ","
+        let mapleader = ","
 
     " Поиск и замена слова под курсором
         nmap ; :%s/\<<c-r>=expand("<cword>")<cr>\>/
@@ -106,7 +96,7 @@ set nobackup                " Не создавать бекапы
         nnoremap <leader><space> :noh<cr>
 
     " Новый таб
-        nmap tn :tabnew
+        nmap tn :tabnew 
 
     " Беглые скачки
         nmap <Space> <PageDown>
@@ -121,25 +111,25 @@ set nobackup                " Не создавать бекапы
     " leader-шорткаты
         " <leader>e. - смена кодировок 
             " <leader>ek - koi8
-            nmap <leader>ek :e ++enc=koi8-r<cr>
-            " <leader>ew - cp1251, она же win
-            nmap <leader>ew :e ++enc=cp1251<cr>
+                nmap <leader>ek :e ++enc=koi8-r<cr>
+            " <leader>ew - cp1251
+                nmap <leader>ew :e ++enc=cp1251<cr>
             " <leader>ec - cp866
-            nmap <leader>ec :e ++enc=cp866<cr>
+                nmap <leader>ec :e ++enc=cp866<cr>
             " <leader>eu - utf8
-            nmap <leader>eu :e ++enc=utf8<cr>
+                nmap <leader>eu :e ++enc=utf8<cr>
             " <leader>eu - rot13
-            nmap <leader>er ggg?G <cr>
+                nmap <leader>er ggg?G <cr>
 
         " <leader>g. - Fugitive
-            " <leader>gc - commit.
-            nmap <leader>gc :Gcommit<cr>
-            " <leader>gh - add сохраненные изменения в текущем файле.
-            nmap <leader>ga :Git add %<cr><cr>
+            " <leader>gc - commit
+                nmap <leader>gc :Gcommit<cr>
+            " <leader>gh - add сохраненные изменения в текущем файле
+                nmap <leader>ga :Git add %<cr><cr>
             " <leader>gh - hist (модификация log)
-            nmap <leader>gh :Git hist<cr>
+                nmap <leader>gh :Git hist<cr>
             " <leader>gd - diff
-            nmap <leader>gd :Gvdiff<cr>
+                nmap <leader>gd :Gvdiff<cr><C-w>w
             
     " F<номер>-шорткаты
         " `+F2 - быстрое сохранение без вопросов
@@ -169,8 +159,8 @@ set nobackup                " Не создавать бекапы
 
     " Работа с буерами
         " Быстрое перемещение
-        nnoremap <C-h> <C-w>h
-        nnoremap <C-j> <C-w>j
-        nnoremap <C-k> <C-w>k
-        nnoremap <C-l> <C-w>l
+            nnoremap <C-h> <C-w>h
+            nnoremap <C-j> <C-w>j
+            nnoremap <C-k> <C-w>k
+            nnoremap <C-l> <C-w>l
 
