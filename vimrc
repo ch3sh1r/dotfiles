@@ -130,6 +130,16 @@ set nobackup                " Не создавать бекапы
             nmap <leader>eu :e ++enc=utf8<cr>
             " <leader>eu - rot13 до конца файла.
             nmap <leader>er g?G <cr>
+
+        " <leader>g. - Fugitive
+            " <leader>gc - commit.
+            nmap <leader>gc :Gcommit<cr>
+            " <leader>gh - add сохраненные изменения в текущем файле.
+            nmap <leader>ga :Git add %<cr><cr>
+            " <leader>gh - hist (модификация log)
+            nmap <leader>gh :Git hist<cr>
+            " <leader>gd - diff
+            nmap <leader>gd :Gvdiff<cr>
             
     " F<номер>-шорткаты
         " `+F2 - быстрое сохранение без вопросов
