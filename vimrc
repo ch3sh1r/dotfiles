@@ -122,24 +122,14 @@ set nobackup                " Не создавать бекапы
         " <leader>e. - смена кодировок 
             " <leader>ek - koi8.
             nmap <leader>ek :e ++enc=koi8-r<cr>
-            vmap <leader>ek :e ++enc=koi8-r<cr>
-            imap <leader>ek :e ++enc=koi8-r<cr>
             " <leader>ew - cp1251 она же win.
             nmap <leader>ew :e ++enc=cp1251<cr>
-            vmap <leader>ew :e ++enc=cp1251<cr>
-            imap <leader>ew :e ++enc=cp1251<cr>
             " <leader>ec - cp866.
             nmap <leader>ec :e ++enc=cp866<cr>
-            vmap <leader>ec :e ++enc=cp866<cr>
-            imap <leader>ec :e ++enc=cp866<cr>
             " <leader>eu - utf8. Yarr!
             nmap <leader>eu :e ++enc=utf8<cr>
-            vmap <leader>eu :e ++enc=utf8<cr>
-            imap <leader>eu :e ++enc=utf8<cr>
             " <leader>eu - rot13 до конца файла.
             nmap <leader>er g?G <cr>
-            vmap <leader>er g?G <cr>
-            imap <leader>er g?G <cr>
             
     " F<номер>-шорткаты
         " `+F2 - быстрое сохранение без вопросов
