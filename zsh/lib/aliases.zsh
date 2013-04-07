@@ -39,3 +39,6 @@ alias dirtree='find . -type d | sed -e "s/[^-][^\/]*\//  |/g" -e "s/|\([^ ]\)/|-
 # Слепок файлов в директории
 alias snap="find $1 -type f | xargs -I{} ls -l {} > snap-`date +%s`"
 
+# Запись скринкаста
+alias recdesktop='ffmpeg -f x11grab -s 1920x1080 -r 8 -i :0.0 -sameq '
+
