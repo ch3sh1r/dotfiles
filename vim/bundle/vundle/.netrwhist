@@ -1,3 +1,5 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =1
+let g:netrw_dirhist_cnt =3
 let g:netrw_dirhist_1='/usr/share/libpam-script'
+let g:netrw_dirhist_2='/home/ch3sh1r/.ssh'
+let g:netrw_dirhist_3='/home/ch3sh1r/Documents/Code/nix/pxe/debian/root/root'

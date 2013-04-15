@@ -10,6 +10,7 @@ call vundle#rc()
     Bundle 'scrooloose/nerdcommenter'
     Bundle 'davidhalter/jedi-vim'
     Bundle 'altercation/vim-colors-solarized'
+    Bundle 'terryma/vim-multiple-cursors'
     Bundle 'mileszs/ack.vim'
     Bundle 'vim-scripts/TaskList.vim'
     Bundle 'vim-scripts/Conque-Shell'
