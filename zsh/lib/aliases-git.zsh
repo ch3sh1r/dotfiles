@@ -30,13 +30,20 @@ compdef _git gss=git-status
 alias gk="gitk --all&"
 alias gcount='git shortlog -sn'
 compdef _git gcount=git
+
 alias gcp='git cherry-pick'
 compdef _git gcp=git-cherry-pick
+
+alias gd='git diff --word-diff'
+compdef _git gd=git-diff
+
 alias glg='git log --stat --max-count=5'
 compdef _git glg=git-log
 alias glgg='git log --graph --max-count=5'
 compdef _git glgg=git-log
-alias gh="git hist" # Для log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
+alias gh="git hist"
+compdef _git gh=git-log
+alias gt="git time"
 compdef _git gh=git-log
 gdv() { git diff -w "$@" | view - }
 compdef _git gdv=git-diff
