@@ -21,7 +21,7 @@ done
 # Инициализация
 typeset -U path cdpath fpath manpath
 autoload -U compinit 
-compinit -D 				
+compinit -i -D
 
 # Показывать меню если есть хотя бы 2 опции
 zstyle ':completion:*' menu select=2
