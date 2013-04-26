@@ -69,8 +69,8 @@ require("debian.menu")
     tags = {}
     for s = 1, screen.count() do
         -- Each screen has its own tag table.
-        tags[s] = awful.tag({ "α", "β", "δ", "λ", "θ", "Ω"}, s, 
-                            {layouts[1], layouts[4], layouts[2], layouts[1], layouts[1], layouts[1]})
+        tags[s] = awful.tag({ "def", "prg", "web", "rnd"}, s, 
+                            {layouts[1], layouts[4], layouts[2], layouts[1]})
     end
 -- }}}
 
