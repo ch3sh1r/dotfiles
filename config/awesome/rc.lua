@@ -39,7 +39,7 @@ require("debian.menu")
 
 -- {{{ Variable definitions
     -- Themes define colours, icons, and wallpapers
-    beautiful.init("/home/ch3sh1r/.config/awesome/themes/fox/theme.lua")
+    beautiful.init("/home/ch3sh1r/.config/awesome/themes/def/theme.lua")
 
     -- This is used later as the default terminal and editor to run.
     terminal = "urxvt"
