@@ -1,0 +1,12 @@
+#!/bin/bash
+
+if [[ $1 =~ ^([0-9]{1,3}\.){2}[0-9]{1,3}$ ]]; then
+    nmap -sn ${1}.0/24 | grep "Nmap scan" | sed "s/.*\(${1}.[0-9]\?[0-9]\?[0-9]\).*/\1/g"
+elif [[ $1 =~ ^[0-9]{1,3}\.[0-9]{1,3}$ ]]; then
+    nmap -sn ${1}.0.0/16 | grep "Nmap scan" | sed "s/.*\($1.[0-9]\?[0-9]\?[0-9]\).*/\1/g"
+elif [[ $1 =~ ^[0-9]{1,3}$ ]]; then
+    nmap -sn ${1}.0/8 | grep "Nmap scan" | sed "s/.*\($1.[0-9]\?[0-9]\?[0-9]\).*/\1/g"
+else
+    echo "Usage: list-live [ip range]"
+    echo "  Example: list-live 192.168.1"
+fi
