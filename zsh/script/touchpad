@@ -2,9 +2,11 @@
 #-*-coding:utf-8-*-
 
 import os
-a = os.popen('synclient -l').readlines()
-if a[33][-2] == '0':
-    os.popen('synclient TouchpadOff=1')
-else:
+output = os.popen('synclient -l').readlines()
+options = {i.split()[0] : float(i.split()[2]) for i in output[1:]}
+if options['TouchpadOff']:
+    print('synclient TouchpadOff=0')
     os.popen('synclient TouchpadOff=0')
-
+else:
+    print('synclient TouchpadOff=1')
+    os.popen('synclient TouchpadOff=1')
