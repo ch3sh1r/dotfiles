@@ -10,3 +10,8 @@ vimperator/info/default/history-search
 vimperator/info/default/local-marks
 
 zsh/cache
+
+msf4/history
+msf4/local/*
+msf4/logs/*
+msf4/loot/*
