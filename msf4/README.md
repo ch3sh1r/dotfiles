@@ -1,17 +1,18 @@
 Contents
 --------
 
-* staaldraad/metasploit (Jun 19 10:18)
-    modules/auxiliary/gather/enum_domain_user.rb - domain user enumeration on active session.
+1) staaldraad/metasploit (Jun 19 10:18)
+    modules/auxiliary/gather/enum_domain_user.rb - domain user enumeration 
+        on active session.
 
-* darkoperator/Metasploit-Plugins (Jun 19 10:18)
+2) darkoperator/Metasploit-Plugins (Jun 19 10:18)
     plugins/auto_exploit.rb
     plugins/growl.rb
     plugins/pentest.rb
     plugins/post_auto.rb
     plugins/twitt.rb
 
-* darkoperator/Meterpreter-Scripts.git (Jun 19 10:18)
+3) darkoperator/Meterpreter-Scripts.git (Jun 19 10:18)
     post/windows/gather/get_sam_files.rb
     post/windows/gather/shadow_hashdump.rb
     scripts/meterpreter/pshexec.rb
@@ -23,8 +24,10 @@ Contents
     auxiliary/gather/dns_srv.rb
     auxiliary/scanner/smb/psexec_scanner.rb
 
-* mubix/q
-    plugins/arachni.rb - an exploitation platform for web app vulnerabilities discovered by the Arachni WebApp Security Scaner Framework (https://github.com/Arachni/arachni)
+4) mubix/q (Jun 19 14:40)
+    plugins/arachni.rb - an exploitation platform for web app 
+        vulnerabilities discovered by the Arachni WebApp Security 
+        Scaner Framework (https://github.com/Arachni/arachni)
 
     modules/exploits/sap/sap_rfc_abap_install_and_run_cmd_execution.rb
     modules/exploits/securestate/sap_rfc_sxpg_command_exec.rb
@@ -77,4 +80,5 @@ Contents
     scripts/search_hash_creds.rc
     scripts/virusscan_bypass8_8.rb
 
-* hatsecure/metasploit (Jun 19 14:40)
+5) hatsecure/metasploit (Jun 19 14:40)
+    modules/exploits/windows/ms13_037_ie_textnode_uaf.rb
