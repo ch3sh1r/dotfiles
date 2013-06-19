@@ -76,3 +76,5 @@ Contents
     scripts/getsessions.rb
     scripts/search_hash_creds.rc
     scripts/virusscan_bypass8_8.rb
+
+* hatsecure/metasploit (Jun 19 14:40)
