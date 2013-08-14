@@ -1,5 +1,5 @@
 ZSH=$HOME"/.zsh"
-plugins=(python pip)
+plugins=(python pip screen)
 source $ZSH/conf.sh
 
 # .localrc для использования на машине
