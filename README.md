@@ -2,22 +2,23 @@
 
 В целом, все настройки понадерганы из десятков мест по всем 
 интернетам. Идея записать что и откуда пришло возникла не сразу.
-По этому если вы нашли не хватающее - сообщите мне пожалуйста.
+По этому если вы нашли не хватающее — сообщите мне пожалуйста.
 
 Zsh:
-1. [@robbyrussell](https://github.com/robbyrussell)/
-   [oh-my-zsh](https://github.com/robbyrussell/oh-my-zsh)
+
+* [@robbyrussell](https://github.com/robbyrussell) — 
+  [oh-my-zsh](https://github.com/robbyrussell/oh-my-zsh).
 
 Metasploit:
-1. [@staaldraad](https://github.com/staaldraad)/
-   [metasploit](https://github.com/staaldraad/metasploit)
-2. [@darkoperator](https://github.com/darkoperator)/
-   [Metasploit-Plugins](https://github.com/darkoperator/Metasploit-Plugins)
-   [Meterpreter-Scripts](https://github.com/darkoperator/Meterpreter-Scripts)
-4. [@mubix](https://github.com/mubix)
-   [q](https://github.com/mubix/q)
-5. [@hatsecure](https://github.com/hatsecure/metasploit)/
-   [metasploit](https://github.com/hatsecure)
+* [@staaldraad](https://github.com/staaldraad) — 
+  [metasploit](https://github.com/staaldraad/metasploit).
+* [@darkoperator](https://github.com/darkoperator) — 
+  [Metasploit-Plugins](https://github.com/darkoperator/Metasploit-Plugins),
+  [Meterpreter-Scripts](https://github.com/darkoperator/Meterpreter-Scripts).
+* [@mubix](https://github.com/mubix) — 
+  [q](https://github.com/mubix/q).
+* [@hatsecure](https://github.com/hatsecure/metasploit) — 
+  [metasploit](https://github.com/hatsecure).
 
 ## Установка
 
