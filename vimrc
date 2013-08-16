@@ -134,16 +134,6 @@ set nobackup                " Не создавать бэкапы
                 nmap <leader>gd :Gvdiff<cr><C-w>w
             
     " F<номер>-шорткаты
-        " `+F2 - быстрое сохранение без вопросов
-            nmap `<F2> :w!<cr>
-            vmap `<F2> <esc>:w!<cr>
-            imap `<F2> <esc>:w!<cr>
-
-        " 1+F2 - быстрое sudo-сохранение
-            nmap 1<F2> :w !sudo tee %<cr>
-            vmap 1<F2> <esc>:w !sudo tee %<cr>
-            imap 1<F2> <esc>:w !sudo tee %<cr>
-
         " F7 - проверка русской и английской орфографии
             let g:orthography = 0
             function! OrthographyToggle()
@@ -165,4 +155,3 @@ set nobackup                " Не создавать бэкапы
             nnoremap <C-j> <C-w>j
             nnoremap <C-k> <C-w>k
             nnoremap <C-l> <C-w>l
-
