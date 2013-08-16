@@ -1,7 +1,10 @@
 # Переменные среды
-PATH="$HOME/.bin:$HOME/.rvm/bin:$HOME/.zsh/script:/usr/local/bin:/usr/local/sbin:/var/lib/gems/bin/:$PATH" && export PATH
-MANPATH="/usr/local/man:/usr/local/mysql/man:/usr/local/git/man:$MANPATH" && export MANPATH
-EDITOR="vim" && export EDITOR
+PATH="$HOME/.bin:$HOME/.rvm/bin:$HOME/.zsh/script:/usr/local/bin:/usr/local/sbin:/var/lib/gems/bin/:/usr/local/heroku/bin:$PATH"
+MANPATH="/usr/local/man:/usr/local/mysql/man:/usr/local/git/man:$MANPATH"
+EDITOR="vim"
+export PATH
+export EDITOR
+export MANPATH
 
 # Автодополнение к скриптам
 fpath=($ZSH/script $fpath)
@@ -26,7 +29,7 @@ then
   ((N=(RANDOM%N)+1))
   RANDOM_THEME=${themes[$N]}
   source "$RANDOM_THEME"
-  echo "[oh-my-zsh] Random theme '$RANDOM_THEME' loaded..."
+  echo "Random theme '$RANDOM_THEME' loaded"
 else
   if [ ! "$ZSH_THEME" = ""  ]
   then
@@ -49,4 +52,3 @@ compinit -i -D
 
 # Показывать меню если есть хотя бы 2 опции
 zstyle ':completion:*' menu select=2
-
