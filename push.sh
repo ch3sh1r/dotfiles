@@ -8,6 +8,9 @@ if [ $1 ] ; then
             temp="$(mktemp -t ".dfXXXXXXX" -d)"
             rsync --exclude ".*" \
                   --exclude "push.sh" \
+                  --exclude "gvimrc" \
+                  --exclude "vimperator" \
+                  --exclude "vimperatorrc" \
                   --exclude "config" \
                   --exclude "msf4" \
                   --exclude "README.md" \
@@ -18,7 +21,7 @@ if [ $1 ] ; then
             rsync -av $temp"/." ${HOME} > /dev/null
             rm -rf $temp
         ;;
-        -l) #for workstation
+        -l) #for workstations (and work groups)
             for dotfile in `ls`
             do
                 if [ $dotfile == "push.sh" -o \
