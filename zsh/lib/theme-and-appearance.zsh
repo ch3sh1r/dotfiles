@@ -14,9 +14,6 @@ then
   fi
 fi
 
-# Вопрос на автокоррекцию
-SPROMPT='zsh: Change '\''%R'\'' to '\''%r'\''? [y/N/a/e] '
-
 # Экранируем спецсимволы в url (например &, ?, ~)
 autoload -U url-quote-magic
 zle -N self-insert url-quote-magic
