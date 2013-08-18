@@ -1,15 +1,22 @@
 # Куда писать историю
-HISTFILE=~/.zhistory
+if [ -z $HISTFILE ]; then
+    HISTFILE=$HOME/.zsh_history
+fi
 
 # Число команд, сохраняемых в истории
-SAVEHIST=7000
+HISTSIZE=10000
+SAVEHIST=10000
 
 # Не писать в историю команды, начинающиеся с пробела
-setopt HIST_IGNORE_SPACE
+setopt hist_ignore_space
 
-# Игнорировать все повторения команд
-setopt HIST_IGNORE_ALL_DUPS
+# Игнорировать повторения команд
+setopt hist_ignore_dups
+setopt hist_expire_dups_first
 
-# Игнорировать лишние пробелы
-setopt HIST_IGNORE_SPACE
-
+setopt append_history
+setopt extended_history
+setopt hist_ignore_space
+setopt hist_verify
+setopt inc_append_history
+setopt share_history

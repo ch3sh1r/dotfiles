@@ -8,8 +8,7 @@ function my_git_prompt_info() {
 }
 
 PROMPT='%(#.%{$bg[red]%}.%{$fg[magenta]%})%n%{$reset_color%}%{$fg[lightgrey]%}@%m%{$reset_color%} %{$fg_bold[blue]%}%2~%{$reset_color%} $(my_git_prompt_info)%{$reset_color%}
-%B>>%b '
-RPS1="${return_code}"
+%(?.%{$fg[lightgrey]%}.%{$bg[red]%})>>%{$reset_color%} '
 
 ZSH_THEME_GIT_PROMPT_PREFIX="%{$fg[yellow]%}("
 ZSH_THEME_GIT_PROMPT_SUFFIX=") %{$reset_color%}"
