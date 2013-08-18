@@ -12,6 +12,9 @@ require("naughty")
 -- Load Debian menu entries
 require("debian.menu")
 
+--- Load volume wiget
+require("volume")
+
 -- {{{ Error handling
     -- Check if awesome encountered an error during startup and fell back to
     -- another config (This code will only ever execute for the fallback config)
@@ -42,7 +45,7 @@ require("debian.menu")
     beautiful.init("/home/ch3sh1r/.config/awesome/themes/def/theme.lua")
 
     -- This is used later as the default terminal and editor to run.
-    terminal = "urxvt"
+    terminal = "gnome-terminal"
     editor = "vim"
     editor_cmd = terminal .. " -e " .. editor
 
@@ -69,7 +72,7 @@ require("debian.menu")
     tags = {}
     for s = 1, screen.count() do
         -- Each screen has its own tag table.
-        tags[s] = awful.tag({ "def", "prg", "web", "rnd"}, s, 
+        tags[s] = awful.tag({ "def", "term", "vms", "rnd"}, s, 
                             {layouts[1], layouts[4], layouts[2], layouts[1]})
     end
 -- }}}
@@ -176,6 +179,7 @@ require("debian.menu")
             },
             mylayoutbox[s],
             mytextclock,
+            volume_widget,
             s == 1 and mysystray or nil,
             mytasklist[s],
             layout = awful.widget.layout.horizontal.rightleft
@@ -235,12 +239,20 @@ require("debian.menu")
         awful.key({ modkey,           }, "space", function () awful.layout.inc(layouts,  1) end),
         awful.key({ modkey, "Shift"   }, "space", function () awful.layout.inc(layouts, -1) end),
         awful.key({ modkey, "Control" }, "l", function () awful.util.spawn("xscreensaver-command -lock") end),
+        awful.key({ modkey,           }, "n", function () awful.util.spawn("nautilus --no-desktop") end),
         awful.key({ modkey, "Control" }, "n", awful.client.restore),
+
+        -- Volume control
+       awful.key({ }, "XF86AudioRaiseVolume", function ()
+           awful.util.spawn("amixer set Master 9%+") end),
+       awful.key({ }, "XF86AudioLowerVolume", function ()
+           awful.util.spawn("amixer set Master 9%-") end),
+       awful.key({ }, "XF86AudioMute", function ()
+           awful.util.spawn("amixer sset Master toggle") end),
 
         -- Prompt
         awful.key({ modkey },            "r",     function () mypromptbox[mouse.screen]:run() end),
-
-        awful.key({ modkey }, "x",
+        awful.key({ modkey },            "x",
                   function ()
                       awful.prompt.run({ prompt = "Run Lua code: " },
                       mypromptbox[mouse.screen].widget,
@@ -334,9 +346,9 @@ require("debian.menu")
           properties = { floating = true } },
         { rule = { class = "gimp" },
           properties = { floating = true } },
-        -- Set Firefox to always map on tags number 2 of screen 1.
-        -- { rule = { class = "Firefox" },
-        --   properties = { tag = tags[1][2] } },
+        -- Set Firefox to always map on tags number 1 of screen 1.
+        { rule = { class = "Firefox" },
+          properties = { tag = tags[1][1] } },
     }
 -- }}}
 
@@ -376,7 +388,5 @@ require("debian.menu")
     awful.util.spawn_with_shell("setxkbmap -option caps:escape")
     awful.util.spawn_with_shell("xscreensaver -nosplash")
     awful.util.spawn_with_shell("dropbox start -i")
-    awful.util.spawn_with_shell("nm-applet")
-    awful.util.spawn_with_shell("tomboy")
+    awful.util.spawn_with_shell("runone nm-applet")
 -- }}}
-
