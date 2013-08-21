@@ -10,3 +10,5 @@ let g:solarized_termcolors = 256
 let python_highlight_all = 1
 set background=dark
 colorscheme solarized
+" Шрифт
+set guifont=Droid\ Sans\ Mono\ 11
