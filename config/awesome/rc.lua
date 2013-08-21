@@ -346,9 +346,6 @@ require("volume")
           properties = { floating = true } },
         { rule = { class = "gimp" },
           properties = { floating = true } },
-        -- Set Firefox to always map on tags number 1 of screen 1.
-        { rule = { class = "Firefox" },
-          properties = { tag = tags[1][1] } },
     }
 -- }}}
 
@@ -389,4 +386,5 @@ require("volume")
     awful.util.spawn_with_shell("xscreensaver -nosplash")
     awful.util.spawn_with_shell("dropbox start -i")
     awful.util.spawn_with_shell("runone nm-applet")
+    awful.util.spawn_with_shell("everpad")
 -- }}}
