@@ -12,6 +12,7 @@ local naughty = require("naughty")
 local menubar = require("menubar")
 -- Custom awesome library
 require("custom.volume")
+require("custom.util")
 
 -- {{{ Error handling
     -- Check if awesome encountered an error during startup and fell back to
@@ -170,9 +171,9 @@ require("custom.volume")
 
         -- Widgets that are aligned to the right
         local right_layout = wibox.layout.fixed.horizontal()
-        right_layout:add(volume_widget)
-        if s == 1 then right_layout:add(wibox.widget.systray()) end
-        right_layout:add(mytextclock)
+        if s == 1 then right_layout:add(build_bracketed(wibox.widget.systray())) end
+        right_layout:add(build_bracketed(volume_widget))
+        right_layout:add(build_bracketed(mytextclock))
         right_layout:add(mylayoutbox[s])
 
         -- Now bring it all together (with the tasklist in the middle)

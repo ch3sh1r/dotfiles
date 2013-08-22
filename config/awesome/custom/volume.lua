@@ -20,7 +20,7 @@ function update_volume(widget)
    else
        volume = volume .. "M"
    end
-   volume = "Vol:" ..  volume .. " "
+   volume = "Vol:" ..  volume
    widget:set_markup(volume)
 end
  
