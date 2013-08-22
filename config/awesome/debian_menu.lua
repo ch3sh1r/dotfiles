@@ -1,8 +1,7 @@
 -- automatically generated file. Do not edit (see /usr/share/doc/menu/html)
 
-module("debian.menu")
 
-Debian_menu = {}
+local Debian_menu = {}
 
 Debian_menu["Debian_Applications_Accessibility"] = {
 	{"Xmag","xmag"},
@@ -214,3 +213,4 @@ Debian_menu["Debian"] = {
 	{ "Help", Debian_menu["Debian_Help"] },
 	{ "Screen", Debian_menu["Debian_Screen"] },
 }
+return Debian_menu
