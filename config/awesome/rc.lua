@@ -226,6 +226,15 @@ require("custom.util")
                 end
             end),
 
+        -- Brightness manipulation
+        awful.key({ }, "XF86MonBrightnessDown", function () awful.util.spawn("xbacklight -dec 15") end),
+        awful.key({ }, "XF86MonBrightnessUp",   function () awful.util.spawn("xbacklight -inc 15") end),
+
+        -- Layout manipulation
+        awful.key({ }, "XF86AudioRaiseVolume", function () awful.util.spawn("amixer set Master 9%+") end),
+        awful.key({ }, "XF86AudioLowerVolume", function () awful.util.spawn("amixer set Master 9%-") end),
+        awful.key({ }, "XF86AudioMute",        function () awful.util.spawn("amixer sset Master toggle") end),
+
         -- Standard program
         awful.key({ modkey,           }, "Return", function () awful.util.spawn(terminal) end),
         awful.key({ modkey,           }, "n", function () awful.util.spawn(file_manager) end),
