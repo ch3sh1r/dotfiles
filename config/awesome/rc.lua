@@ -3,15 +3,20 @@ local gears = require("gears")
 local awful = require("awful")
 awful.rules = require("awful.rules")
 require("awful.autofocus")
+
 -- Widget and layout library
 local wibox = require("wibox")
+
 -- Theme handling library
 local beautiful = require("beautiful")
+
 -- Notification library
 local naughty = require("naughty")
 local menubar = require("menubar")
+
 -- Custom awesome library
 require("custom.volume")
+require("custom.battery")
 require("custom.util")
 
 -- {{{ Error handling
@@ -41,7 +46,7 @@ require("custom.util")
 
 -- {{{ Variable definitions
     -- Themes define colours, icons, and wallpapers
-    beautiful.init(awful.util.getdir ("config") .. "/themes/zenburn/theme.lua")
+    beautiful.init(awful.util.getdir("config") .. "/themes/zenburn/theme.lua")
 
     -- Wallpaper
     if beautiful.wallpaper then
@@ -53,12 +58,8 @@ require("custom.util")
     -- This is used later as the default terminal and editor to run.
     terminal = "gnome-terminal"
     editor = "vim"
-    editor_cmd = terminal .. " -e " .. editor
-
-    music_player = "rhythmbox"
-    im = "pidgin"
-
-    editor = "gvim"
+    editor_cli = terminal .. " -e " .. editor
+    editor_gui = "gvim"
     browser = "firefox"
     file_manager = "nautilus --no-desktop"
 
@@ -87,8 +88,8 @@ require("custom.util")
     tags = {}
     for s = 1, screen.count() do
         -- Each screen has its own tag table.
-        tags[s] = awful.tag({ "def",      "term",     "virt",     "media",    "rand"     }, s, 
-                            { layouts[1], layouts[2], layouts[2], layouts[1], layouts[1]})
+        tags[s] = awful.tag({ "def",      "term",     "vms",      "rand"     }, s, 
+                            { layouts[1], layouts[2], layouts[2], layouts[1]})
     end
 -- }}}
 
@@ -173,6 +174,7 @@ require("custom.util")
         local right_layout = wibox.layout.fixed.horizontal()
         if s == 1 then right_layout:add(build_bracketed(wibox.widget.systray())) end
         right_layout:add(build_bracketed(volume_widget))
+        right_layout:add(build_bracketed(battery_widget))
         right_layout:add(build_bracketed(mytextclock))
         right_layout:add(mylayoutbox[s])
 
@@ -184,14 +186,6 @@ require("custom.util")
 
         mywibox[s]:set_widget(layout)
     end
--- }}}
-
--- {{{ Mouse bindings
-    root.buttons(awful.util.table.join(
-        awful.button({ }, 3, function () mymainmenu:toggle() end),
-        awful.button({ }, 4, awful.tag.viewnext),
-        awful.button({ }, 5, awful.tag.viewprev)
-    ))
 -- }}}
 
 -- {{{ Key bindings
@@ -230,7 +224,13 @@ require("custom.util")
         awful.key({ }, "XF86MonBrightnessDown", function () awful.util.spawn("xbacklight -dec 15") end),
         awful.key({ }, "XF86MonBrightnessUp",   function () awful.util.spawn("xbacklight -inc 15") end),
 
-        -- Layout manipulation
+        -- MDP manipulation
+        awful.key({ }, "XF86AudioNext",function () awful.util.spawn( "mpc next" ) end),
+        awful.key({ }, "XF86AudioPrev",function () awful.util.spawn( "mpc prev" ) end),
+        awful.key({ }, "XF86AudioPlay",function () awful.util.spawn( "mpc play" ) end),
+        awful.key({ }, "XF86AudioStop",function () awful.util.spawn( "mpc pause" ) end),
+
+        -- Sound manipulation
         awful.key({ }, "XF86AudioRaiseVolume", function () awful.util.spawn("amixer set Master 9%+") end),
         awful.key({ }, "XF86AudioLowerVolume", function () awful.util.spawn("amixer set Master 9%-") end),
         awful.key({ }, "XF86AudioMute",        function () awful.util.spawn("amixer sset Master toggle") end),
@@ -238,6 +238,12 @@ require("custom.util")
         -- Standard program
         awful.key({ modkey,           }, "Return", function () awful.util.spawn(terminal) end),
         awful.key({ modkey,           }, "n", function () awful.util.spawn(file_manager) end),
+        awful.key({ modkey,           }, "f", function () awful.util.spawn(browser) end),
+        awful.key({ modkey,           }, "e", function () awful.util.spawn(editor) end),
+
+        awful.key({ modkey, "Shift"   }, "p", function () awful.util.spawn("pidgin") end),
+        awful.key({ modkey, "Shift"   }, "s", function () awful.util.spawn("skype") end),
+
         awful.key({ modkey,           }, "l", function () awful.util.spawn("xscreensaver-command --lock") end),
         awful.key({ modkey, "Control" }, "r", awesome.restart),
         awful.key({ modkey, "Shift"   }, "q", awesome.quit),
@@ -343,15 +349,18 @@ require("custom.util")
                          keys = clientkeys,
                          size_hints_honor = false,
                          buttons = clientbuttons } },
-        { rule = { class = "MPlayer" },
+        { rule = { class = "Keepassx" },
           properties = { floating = true } },
-        { rule = { class = "pinentry" },
+        { rule = { class = "Gimp" },
           properties = { floating = true } },
-        { rule = { class = "gimp" },
-          properties = { floating = true } },
-        -- Set Firefox to always map on tags number 2 of screen 1.
-        -- { rule = { class = "Firefox" },
-        --   properties = { tag = tags[1][2] } },
+
+        -- Tag rules
+        { rule = { class = "Vmware" },
+          properties = { tag = tags[1][3] } },
+        { rule = { class = "VirtualBox" },
+          properties = { tag = tags[1][3] } },
+        { rule = { class = "Firefox" },
+          properties = { tag = tags[1][1] } },
     }
 -- }}}
 
@@ -431,8 +440,9 @@ require("custom.util")
 -- {{{ Autostart
     awful.util.spawn_with_shell("setxkbmap -layout 'us,ru' -option 'grp:alt_shift_toggle'")
     awful.util.spawn_with_shell("setxkbmap -option caps:escape")
-    awful.util.spawn_with_shell("xscreensaver -nosplash")
     awful.util.spawn_with_shell("dropbox start -i")
+
+    awful.util.spawn_with_shell("runone xscreensaver -nosplash")
+    awful.util.spawn_with_shell("runone everpad")
     awful.util.spawn_with_shell("runone nm-applet")
-    awful.util.spawn_with_shell("everpad")
 -- }}}

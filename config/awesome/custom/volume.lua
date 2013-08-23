@@ -16,12 +16,11 @@ function update_volume(widget)
    else
        volume = volume .. "M"
    end
-   volume = "Vol:" ..  volume
+   volume = "♫" ..  volume
    widget:set_markup(volume)
 end
  
 update_volume(volume_widget)
- 
-mytimer = timer({ timeout = 0.2 })
-mytimer:connect_signal("timeout", function () update_volume(volume_widget) end)
-mytimer:start()
+volume_widget_timer = timer({ timeout = 1 })
+volume_widget_timer:connect_signal("timeout", function () update_volume(volume_widget) end)
+volume_widget_timer:start()
