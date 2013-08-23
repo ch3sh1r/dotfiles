@@ -353,6 +353,21 @@ require("custom.util")
           properties = { floating = true } },
         { rule = { class = "Gimp" },
           properties = { floating = true } },
+        { rule = { class = "Pidgin" },
+          properties = { floating = true } },
+        { rule = { class = "Skype" },
+          properties = { floating = true } },
+        { rule = { class = "Nautilus" },
+          properties = { floating = true } },
+
+        { rule = { class = "libreoffice-startcenter" },
+          properties = { floating = true } },
+        { rule = { class = "libreoffice-writer" },
+          properties = { floating = true } },
+        { rule = { class = "libreoffice-calc" },
+          properties = { floating = true } },
+        { rule = { class = "libreoffice-impress" },
+          properties = { floating = true } },
 
         -- Tag rules
         { rule = { class = "Vmware" },
