@@ -1,5 +1,5 @@
 # Подключаемые плагины
-plugins=(python pip screen)
+plugins=(python pip taskwarrior)
 
 # Имя цветовой темы
 ZSH_THEME="ch3sh1r"

@@ -89,7 +89,7 @@ require("custom.util")
     for s = 1, screen.count() do
         -- Each screen has its own tag table.
         tags[s] = awful.tag({ "def",      "term",     "vms",      "rand"     }, s, 
-                            { layouts[1], layouts[2], layouts[2], layouts[1]})
+                            { layouts[4], layouts[2], layouts[2], layouts[1]})
     end
 -- }}}
 
@@ -237,14 +237,14 @@ require("custom.util")
 
         -- Standard program
         awful.key({ modkey,           }, "Return", function () awful.util.spawn(terminal) end),
-        awful.key({ modkey,           }, "n", function () awful.util.spawn(file_manager) end),
-        awful.key({ modkey,           }, "f", function () awful.util.spawn(browser) end),
-        awful.key({ modkey,           }, "e", function () awful.util.spawn(editor) end),
-
+        awful.key({ modkey, "Shift"   }, "n", function () awful.util.spawn(file_manager) end),
+        awful.key({ modkey, "Shift"   }, "f", function () awful.util.spawn(browser) end),
+        awful.key({ modkey, "Shift"   }, "e", function () awful.util.spawn(editor) end),
         awful.key({ modkey, "Shift"   }, "p", function () awful.util.spawn("pidgin") end),
         awful.key({ modkey, "Shift"   }, "s", function () awful.util.spawn("skype") end),
+        awful.key({ modkey, "Shift"   }, "w", function () awful.util.spawn("vmware") end),
 
-        awful.key({ modkey,           }, "l", function () awful.util.spawn("xscreensaver-command --lock") end),
+        awful.key({ modkey, "Control" }, "l", function () awful.util.spawn("xscreensaver-command --lock") end),
         awful.key({ modkey, "Control" }, "r", awesome.restart),
         awful.key({ modkey, "Shift"   }, "q", awesome.quit),
 
@@ -358,6 +358,8 @@ require("custom.util")
         { rule = { class = "Skype" },
           properties = { floating = true } },
         { rule = { class = "Nautilus" },
+          properties = { floating = true } },
+        { rule = { class = "File-roller" },
           properties = { floating = true } },
 
         { rule = { class = "libreoffice-startcenter" },
