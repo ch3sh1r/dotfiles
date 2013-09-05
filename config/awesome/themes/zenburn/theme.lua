@@ -12,7 +12,7 @@ theme.wallpaper = "/home/ch3sh1r/.config/awesome/themes/zenburn/zenburn-backgrou
 -- }}}
 
 -- {{{ Styles
-theme.font      = "sans 8"
+theme.font      = "ubuntu 8"
 
 -- {{{ Colors
 theme.fg_normal  = "#DCDCCC"

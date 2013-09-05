@@ -70,9 +70,8 @@ require("custom.util")
     local layouts =
     {
         awful.layout.suit.floating,
-        awful.layout.suit.tile,
+        awful.layout.suit.tile.left,
         awful.layout.suit.tile.bottom,
-        awful.layout.suit.magnifier,
         awful.layout.suit.max,
         --awful.layout.suit.spiral,
         --awful.layout.suit.fair,
@@ -88,8 +87,8 @@ require("custom.util")
     tags = {}
     for s = 1, screen.count() do
         -- Each screen has its own tag table.
-        tags[s] = awful.tag({ "def",      "term",     "vms",      "rand"     }, s, 
-                            { layouts[4], layouts[2], layouts[2], layouts[1]})
+        tags[s] = awful.tag({ "def",      "term",     "vms",      "media",    "rand"     }, s, 
+                            { layouts[2], layouts[2], layouts[2], layouts[4], layouts[1] })
     end
 -- }}}
 
@@ -173,6 +172,7 @@ require("custom.util")
         -- Widgets that are aligned to the right
         local right_layout = wibox.layout.fixed.horizontal()
         if s == 1 then right_layout:add(build_bracketed(wibox.widget.systray())) end
+
         right_layout:add(build_bracketed(volume_widget))
         right_layout:add(build_bracketed(battery_widget))
         right_layout:add(build_bracketed(mytextclock))
@@ -225,10 +225,10 @@ require("custom.util")
         awful.key({ }, "XF86MonBrightnessUp",   function () awful.util.spawn("xbacklight -inc 15") end),
 
         -- MDP manipulation
-        awful.key({ }, "XF86AudioNext",function () awful.util.spawn( "mpc next" ) end),
-        awful.key({ }, "XF86AudioPrev",function () awful.util.spawn( "mpc prev" ) end),
-        awful.key({ }, "XF86AudioPlay",function () awful.util.spawn( "mpc play" ) end),
-        awful.key({ }, "XF86AudioStop",function () awful.util.spawn( "mpc pause" ) end),
+        awful.key({ }, "XF86AudioNext",function () awful.util.spawn("mpc next") end),
+        awful.key({ }, "XF86AudioPrev",function () awful.util.spawn("mpc prev") end),
+        awful.key({ }, "XF86AudioPlay",function () awful.util.spawn("mpc play") end),
+        awful.key({ }, "XF86AudioStop",function () awful.util.spawn("mpc pause") end),
 
         -- Sound manipulation
         awful.key({ }, "XF86AudioRaiseVolume", function () awful.util.spawn("amixer set Master 9%+") end),
@@ -243,6 +243,7 @@ require("custom.util")
         awful.key({ modkey, "Shift"   }, "p", function () awful.util.spawn("pidgin") end),
         awful.key({ modkey, "Shift"   }, "s", function () awful.util.spawn("skype") end),
         awful.key({ modkey, "Shift"   }, "w", function () awful.util.spawn("vmware") end),
+        awful.key({ modkey, "Shift"   }, "v", function () awful.util.spawn("virtualbox") end),
 
         awful.key({ modkey, "Control" }, "l", function () awful.util.spawn("xscreensaver-command --lock") end),
         awful.key({ modkey, "Control" }, "r", awesome.restart),
@@ -363,21 +364,33 @@ require("custom.util")
           properties = { floating = true } },
 
         { rule = { class = "libreoffice-startcenter" },
-          properties = { floating = true } },
+          properties = { floating = true, 
+                         maximized_vertical = false, 
+                         maximized_horizontal = false } },
         { rule = { class = "libreoffice-writer" },
-          properties = { floating = true } },
+          properties = { floating = true, 
+                         maximized_vertical = false, 
+                         maximized_horizontal = false } },
         { rule = { class = "libreoffice-calc" },
-          properties = { floating = true } },
+          properties = { floating = true, 
+                         maximized_vertical = false, 
+                         maximized_horizontal = false } },
         { rule = { class = "libreoffice-impress" },
-          properties = { floating = true } },
+          properties = { floating = true, 
+                         maximized_vertical = false, 
+                         maximized_horizontal = false } },
 
-        -- Tag rules
+        { rule = { class = "vlc" },
+          properties = { tag = tags[1][4] } },
         { rule = { class = "Vmware" },
           properties = { tag = tags[1][3] } },
         { rule = { class = "VirtualBox" },
           properties = { tag = tags[1][3] } },
         { rule = { class = "Firefox" },
-          properties = { tag = tags[1][1] } },
+          properties = { tag = tags[1][1], 
+                         floating = false, 
+                         maximized_vertical = false, 
+                         maximized_horizontal = false } },
     }
 -- }}}
 
@@ -455,11 +468,10 @@ require("custom.util")
 -- }}}
 
 -- {{{ Autostart
-    awful.util.spawn_with_shell("setxkbmap -layout 'us,ru' -option 'grp:alt_shift_toggle'")
-    awful.util.spawn_with_shell("setxkbmap -option caps:escape")
     awful.util.spawn_with_shell("dropbox start -i")
-
     awful.util.spawn_with_shell("runone xscreensaver -nosplash")
     awful.util.spawn_with_shell("runone everpad")
     awful.util.spawn_with_shell("runone nm-applet")
+    awful.util.spawn_with_shell("setxkbmap -layout 'us,ru' -option 'grp:alt_shift_toggle'")
+    awful.util.spawn_with_shell("setxkbmap -option caps:escape")
 -- }}}
