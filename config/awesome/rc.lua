@@ -204,7 +204,6 @@ require("custom.util")
                 awful.client.focus.byidx(-1)
                 if client.focus then client.focus:raise() end
             end),
-        awful.key({ modkey,           }, "w", function () mymainmenu:show() end),
 
         -- Layout manipulation
         awful.key({ modkey, "Shift"   }, "j", function () awful.client.swap.byidx(  1)    end),
@@ -225,7 +224,7 @@ require("custom.util")
         awful.key({ }, "XF86MonBrightnessUp",   function () awful.util.spawn("xbacklight -inc 15") end),
 
         -- MDP manipulation
-        awful.key({ }, "XF86AudioNext",function () awful.util.spawn("mpc next") end),
+        awful.key({ }, "XF86AudioNext",function () awful.util.spawn('mpc next && notify-send "$(mpc|head -n2)"') end),
         awful.key({ }, "XF86AudioPrev",function () awful.util.spawn("mpc prev") end),
         awful.key({ }, "XF86AudioPlay",function () awful.util.spawn("mpc play") end),
         awful.key({ }, "XF86AudioStop",function () awful.util.spawn("mpc pause") end),
