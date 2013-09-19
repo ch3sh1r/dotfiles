@@ -224,10 +224,10 @@ require("custom.util")
         awful.key({ }, "XF86MonBrightnessUp",   function () awful.util.spawn("xbacklight -inc 15") end),
 
         -- MDP manipulation
-        awful.key({ }, "XF86AudioNext",function () awful.util.spawn("mpc next") end),
-        awful.key({ }, "XF86AudioPrev",function () awful.util.spawn("mpc prev") end),
-        awful.key({ }, "XF86AudioPlay",function () awful.util.spawn("mpc play") end),
-        awful.key({ }, "XF86AudioStop",function () awful.util.spawn("mpc pause") end),
+        awful.key({ }, "XF86AudioNext",function () awful.util.spawn("/home/ch3sh1r/.config/awesome/bin/mpd_next") end),
+        awful.key({ }, "XF86AudioPrev",function () awful.util.spawn("/home/ch3sh1r/.config/awesome/bin/mpd_prev") end),
+        awful.key({ }, "XF86AudioPlay",function () awful.util.spawn("/home/ch3sh1r/.config/awesome/bin/mpd_playpause") end),
+        awful.key({ }, "XF86AudioStop",function () awful.util.spawn("/home/ch3sh1r/.config/awesome/bin/mpd_stop") end),
 
         -- Sound manipulation
         awful.key({ }, "XF86AudioRaiseVolume", function () awful.util.spawn("amixer set Master 9%+") end),
