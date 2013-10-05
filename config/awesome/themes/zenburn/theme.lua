@@ -12,7 +12,7 @@
 -- }}}
 
 -- {{{ Styles
-    theme.font      = "ubuntu 8"
+    theme.font      = "dejavu sans 8"
 
     -- {{{ Colors
         theme.fg_normal  = "#dcdccc"

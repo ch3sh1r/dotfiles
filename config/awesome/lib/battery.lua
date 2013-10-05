@@ -7,9 +7,9 @@ function update_battery(widget)
     local fd=io.popen("acpitool -b", "r")
     local line=fd:read()
     fd:close()
-    local battery_load_num = tonumber(string.match(line, " (%d*\.%d+)%%"))
+    local battery_load_num = tonumber(string.match(line, " (%d*.%d+)%%"))
     local battery_load = string.format("%.d", battery_load_num)
-    local time_rem = string.match(line, "(%d+\:%d+)\:%d+")
+    local time_rem = string.match(line, "(%d+:%d+):%d+")
 
     local battery = "⚡ " .. battery_load .. "%"
     if time_rem then

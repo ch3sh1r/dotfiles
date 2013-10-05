@@ -15,9 +15,9 @@ local naughty = require("naughty")
 local menubar = require("menubar")
 
 -- Custom awesome library
-require("custom.volume")
-require("custom.battery")
-require("custom.util")
+require("lib.volume")
+require("lib.battery")
+require("lib.util")
 
 -- {{{ Error handling
     -- Check if awesome encountered an error during startup and fell back to
