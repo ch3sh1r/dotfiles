@@ -3,9 +3,6 @@
 #
 
 alias iddqd="sudo -s"
-alias apt-get="sudo apt-get"
-alias service="sudo /usr/sbin/service"
-
 alias p="ps auxw"
 alias df="df -h"
 alias du="du -h"
