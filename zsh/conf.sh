@@ -1,3 +1,8 @@
+# Инициализация
+typeset -U path cdpath fpath manpath
+autoload -U compinit 
+compinit -i -D
+
 # Переменные среды
 PATH="$HOME/.bin:$HOME/.rvm/bin:$HOME/.zsh/script:/usr/local/bin:/usr/local/sbin:/var/lib/gems/bin/:/usr/local/heroku/bin:$PATH"
 MANPATH="/usr/local/man:/usr/local/mysql/man:/usr/local/git/man:$MANPATH"
@@ -44,11 +49,6 @@ else
     fi
   fi
 fi
-
-# Инициализация
-typeset -U path cdpath fpath manpath
-autoload -U compinit 
-compinit -i -D
 
 # Показывать меню если есть хотя бы 2 опции
 zstyle ':completion:*' menu select=2
