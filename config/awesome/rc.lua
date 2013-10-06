@@ -87,7 +87,7 @@ require("lib.util")
     tags = {}
     for s = 1, screen.count() do
         -- Each screen has its own tag table.
-        tags[s] = awful.tag({ "def",      "term",     "vms",      "media",    "rand"     }, s, 
+        tags[s] = awful.tag({ "1", "2", "3", "4", "5" }, s, 
                             { layouts[2], layouts[2], layouts[2], layouts[4], layouts[1] })
     end
 -- }}}

@@ -7,22 +7,16 @@ defaults.windowTitle = 'Termit'
 defaults.tabName = 'Terminal'
 defaults.encoding = 'UTF-8'
 defaults.wordChars = '+-AA-Za-z0-9,./?%&#:_~'
-defaults.font = 'Ubuntu Mono 13'
---defaults.foregroundColor = 'gray'
---defaults.backgroundColor = 'black'
+defaults.font = 'Terminus 12'
 defaults.showScrollbar = true
 defaults.transparency = 0.0
---defaults.imageFile = '/tmp/img.png'
 defaults.hideSingleTab = false
 defaults.hideTabbar = false
 defaults.hideMenubar = false
---defaults.fillTabbar = false
 defaults.fillTabbar = true
 defaults.scrollbackLines = 4096
 defaults.geometry = '80x24'
 defaults.allowChangingTitle = false
---defaults.backspaceBinding = 'AsciiBksp'
---defaults.deleteBinding = 'AsciiDel'
 defaults.setStatusbar = function (tabInd)
     tab = tabs[tabInd]
     if tab then
@@ -30,11 +24,6 @@ defaults.setStatusbar = function (tabInd)
     end
     return ''
 end
---defaults.changeTitle = function (title)
---    print('title='..title)
---    newTitle = 'Termit: '..title
---    return newTitle
---end
 defaults.colormap = {
     '#070736364242',
     '#dcdc32322f2f',
@@ -54,8 +43,6 @@ defaults.colormap = {
     '#fdfdf6f6e3e3',
 }
 defaults.matches = {['http[^ ]+'] = function (url) print('Matching url: '..url) end}
---defaults.tabs = {{title = 'Test new tab 1'; workingDir = '/tmp'};
-    --{title = 'Test new tab 2'; workingDir = '/tmp'}}
 setOptions(defaults)
 
 bindKey('Ctrl-Page_Up', prevTab)
@@ -70,10 +57,8 @@ bindKey('Ctrl-w', nil)
 bindKey('CtrlShift-w', closeTab)
 
 setKbPolicy('keycode')
-
 bindMouse('DoubleClick', openTab)
 
--- 
 userMenu = {}
 table.insert(userMenu, {name='Close tab', action=closeTab})
 table.insert(userMenu, {name='New tab name', action=function () setTabTitle('New tab name') end})
@@ -118,15 +103,3 @@ function changeTabFontSize(delta)
     tab = tabs[currentTabIndex()]
     setTabFont(string.sub(tab.font, 1, string.find(tab.font, '%d+$') - 1)..(tab.fontSize + delta))
 end
-
-table.insert(userMenu, {name='Increase font size', action=function () changeTabFontSize(1) end})
-table.insert(userMenu, {name='Decrease font size', action=function () changeTabFontSize(-1) end})
-table.insert(userMenu, {name='feed example', action=function () feed('example') end})
-table.insert(userMenu, {name='feedChild example', action=function () feedChild('date\n') end})
-table.insert(userMenu, {name='User quit', action=quit})
-
-addMenu(userMenu, "User menu")
-addPopupMenu(userMenu, "User menu")
-
-addMenu(termit.utils.encMenu(), "Encodings")
-addPopupMenu(termit.utils.encMenu(), "Encodings")
