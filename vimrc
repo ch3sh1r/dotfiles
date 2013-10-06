@@ -22,7 +22,6 @@ set showcmd                 " Показывать незавершенные к
 set nu                      " Нумерация строк
 set wrap                    " Включаем перенос строк
 set linebreak               " Перенос строк по словам, а не по буквам
-set syntax=on               " Подсветка всегда включена
 set foldmethod=indent       " Фолдинг по отступам
 set modelines=0             " Во-первых не нужны, во-вторых - дырки (http://clck.ru/Lx2G)
 set scrolljump=3            " Теперь нет необходимости передвигать курсор к 
@@ -71,10 +70,12 @@ set nobackup                " Не создавать бэкапы
         set hlsearch            "   по набору текста
 
     " Подстветка
+        syntax on
+        filetype plugin on
+        autocmd BufRead *.conf :set filetype=sh
         set t_Co=16
         set background=dark
         colorscheme solarized
-        autocmd BufRead *.conf :set filetype=sh
         set cursorline
 
     " Русская раскладка и кодировки
