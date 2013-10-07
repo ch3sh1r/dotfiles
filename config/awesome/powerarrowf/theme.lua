@@ -15,6 +15,7 @@ theme.bg_urgent     = "#3f3f3f"
 theme.bg_systray    = theme.bg_normal
 
 theme.fg_normal     = "#AAAAAA"
+theme.fg_focus      = "#535d6c"
 theme.fg_urgent     = "#3F3F3F"
 theme.border_width  = 2
 theme.border_normal = "#000000"
