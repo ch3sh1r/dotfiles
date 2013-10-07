@@ -10,8 +10,8 @@ pathToConfig = "/home/ch3sh1r/.config/awesome/"
 theme.font          = "sans 8"
 
 theme.bg_normal     = "#222222"
-theme.bg_focus      = "#1E2320"
-theme.bg_urgent     = "#3F3F3F"
+theme.bg_focus      = "#1e2320"
+theme.bg_urgent     = "#3f3f3f"
 theme.bg_systray    = theme.bg_normal
 
 theme.fg_normal     = "#AAAAAA"
@@ -79,6 +79,7 @@ theme.layout_tilebottom = pathToConfig  .. "powerarrowf/layouts/tilebottom.png"
 theme.layout_tileleft   = pathToConfig .. "powerarrowf/layouts/tileleft.png"
 theme.layout_tile = pathToConfig .. "powerarrowf/layouts/tile.png"
 theme.layout_tiletop = pathToConfig .. "powerarrowf/layouts/tiletop.png"
+theme.layout_max = pathToConfig .. "powerarrowf/layouts/max.png"
 
 --{{ For the Dark Theme }} --
 
@@ -87,12 +88,7 @@ theme.arrl_ld = pathToConfig .. "powerarrowf/icons/arrl_ld.png"
 theme.arrl_dl = pathToConfig .. "powerarrowf/icons/arrl_dl.png"
 
 --{{ For the time and date clock icon }} --
-theme.clock = pathToConfig .. "powerarrowf/icons/myclocknew.png"
-
---{{ For the wifi icon }} --
-theme.netlow = pathToConfig .. "powerarrowf/icons/netlow.png"
-theme.netmed = pathToConfig .. "powerarrowf/icons/netmedium.png"
-theme.nethigh = pathToConfig .. "powerarrowf/icons/nethigh.png"
+theme.clock = pathToConfig .. "powerarrowf/icons/clock.png"
 
 --{{ For the charging (AC adaptor) icon }} --
 theme.ac = pathToConfig .. "powerarrowf/icons/ac.png"
@@ -103,16 +99,6 @@ theme.hdd = pathToConfig .. "powerarrowf/icons/hdd.png"
 --{{ For the volume icons }} --
 theme.mute = pathToConfig .. "powerarrowf/icons/mute.png"
 theme.music = pathToConfig .. "powerarrowf/icons/music.png"
-
---{{ For the CPU icon }} --
-theme.cpu = pathToConfig .. "powerarrowf/icons/cpu.png"
-
---{{ For the Memory icon }} --
-theme.mem = pathToConfig .. "powerarrowf/icons/mem.png"
-
---{{ For the mail icons }} --
-theme.mail = pathToConfig .. "powerarrowf/icons/mail.png"
-theme.mailopen = pathToConfig .. "powerarrowf/icons/mailopen.png"
 
 -- Define the icon theme for application icons. If not set then the icons
 -- from /usr/share/icons and /usr/share/icons/hicolor will be used.

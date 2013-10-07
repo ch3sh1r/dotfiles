@@ -78,6 +78,7 @@ local layouts =
     awful.layout.suit.tile.left,
     awful.layout.suit.tile.bottom,
     awful.layout.suit.tile.top,
+    awful.layout.suit.max,
 }
 -- }}}
 
@@ -122,9 +123,15 @@ menubar.utils.terminal = terminal -- Set the terminal for applications that requ
     -- Create a textclock widget
     mytextclock = awful.widget.textclock()
 
+    -- Battery Widget
+    batwidget = wibox.widget.textbox()
+    vicious.register(batwidget, vicious.widgets.bat, '<span font="Inconsolata 11" color="#AAAAAA" background="#313131">$1$2% </span>', 30, "BAT0")
+    baticon = wibox.widget.imagebox()
+    baticon:set_image(beautiful.ac)
+
     -- Volume Widget
     volume = wibox.widget.textbox()
-    vicious.register(volume, vicious.widgets.volume, '<span font="Inconsolata 11" color="#AAAAAA" background="#313131"> Vol:$1 </span>', 0.2, "Master")
+    vicious.register(volume, vicious.widgets.volume, '<span font="Inconsolata 11" color="#AAAAAA" background="#1e2320">$1% </span>', 0.2, "Master")
     volumeicon = wibox.widget.imagebox()
     vicious.register(volumeicon, vicious.widgets.volume, function(widget, args)
             local paraone = tonumber(args[1])
@@ -138,12 +145,6 @@ menubar.utils.terminal = terminal -- Set the terminal for applications that requ
                     volumeicon:set_image(beautiful.music)
             end
     end, 0.3, "Master")
-
-    -- Battery Widget
-    batwidget = wibox.widget.textbox()
-    vicious.register(batwidget, vicious.widgets.bat, '<span font="Inconsolata 11" color="#AAAAAA" background="#1F2428">$1$2% </span>', 30, "BAT0")
-    baticon = wibox.widget.imagebox()
-    baticon:set_image(beautiful.ac)
 
     -- Time and Date Widget
     tdwidget = wibox.widget.textbox()
@@ -229,11 +230,11 @@ menubar.utils.terminal = terminal -- Set the terminal for applications that requ
         local right_layout = wibox.layout.fixed.horizontal()
         if s == 1 then right_layout:add(wibox.widget.systray()) end
         right_layout:add(arrl_ld)
-        right_layout:add(volumeicon)
-        right_layout:add(volume)
-        right_layout:add(arrl_dl)
         right_layout:add(baticon)
         right_layout:add(batwidget)
+        right_layout:add(arrl_dl)
+        right_layout:add(volumeicon)
+        right_layout:add(volume)
         right_layout:add(arrl_ld)
         right_layout:add(clockicon)
         right_layout:add(tdwidget)
