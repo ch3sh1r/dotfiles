@@ -1,4 +1,0 @@
-#!/bin/bash
-
-mpc stop
-notify-send "MPD playback stopped."
