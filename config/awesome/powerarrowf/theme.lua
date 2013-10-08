@@ -14,9 +14,10 @@ theme.bg_focus      = "#1e2320"
 theme.bg_urgent     = "#3f3f3f"
 theme.bg_systray    = theme.bg_normal
 
-theme.fg_normal     = "#AAAAAA"
-theme.fg_focus      = "#535d6c"
+theme.fg_normal     = "#535d6c"
+theme.fg_focus      = "#AAAAAA"
 theme.fg_urgent     = "#3F3F3F"
+
 theme.border_width  = 2
 theme.border_normal = "#000000"
 theme.border_focus  = "#535d6c"

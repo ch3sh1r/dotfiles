@@ -66,7 +66,7 @@ local vicious = require("vicious")
     local layouts =
     {
         awful.layout.suit.floating,
-        awful.layout.suit.tile.right,
+        awful.layout.suit.tile.left,
         awful.layout.suit.tile.bottom,
         awful.layout.suit.max,
         --awful.layout.suit.spiral,
@@ -120,7 +120,7 @@ end
             else
                     volumeicon:set_image(beautiful.music)
             end
-    end, 10000, "Master")
+    end, 120, "Master")
 
     -- Time and Date Widget
     tdwidget = wibox.widget.textbox()
