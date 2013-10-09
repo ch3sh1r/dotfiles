@@ -101,7 +101,7 @@ end
 
     -- Battery Widget
     batwidget = wibox.widget.textbox()
-    vicious.register(batwidget, vicious.widgets.bat, '<span font="Inconsolata 11" color="#AAAAAA" background="#313131">$1$2% $3 </span>', 10000, "BAT1")
+    vicious.register(batwidget, vicious.widgets.bat, '<span font="Inconsolata 11" color="#AAAAAA" background="#313131">$1$2% $3 </span>', 120, "BAT1")
     baticon = wibox.widget.imagebox()
     baticon:set_image(beautiful.ac)
 

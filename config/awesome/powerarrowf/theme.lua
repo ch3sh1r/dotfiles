@@ -14,13 +14,13 @@ theme.bg_focus      = "#1e2320"
 theme.bg_urgent     = "#3f3f3f"
 theme.bg_systray    = theme.bg_normal
 
-theme.fg_normal     = "#535d6c"
+theme.fg_normal     = "#657894"
 theme.fg_focus      = "#AAAAAA"
-theme.fg_urgent     = "#3F3F3F"
+theme.fg_urgent     = theme.bg_urgent
 
 theme.border_width  = 2
-theme.border_normal = "#000000"
-theme.border_focus  = "#535d6c"
+theme.border_normal = theme.bg_normal
+theme.border_focus  = theme.fg_normal
 theme.border_marked = "#91231c"
 
 -- There are other variable sets
