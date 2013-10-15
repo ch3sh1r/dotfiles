@@ -281,7 +281,7 @@ end
         awful.key({ modkey, "Shift"   }, "w", function () awful.util.spawn("vmware") end),
         awful.key({ modkey, "Shift"   }, "v", function () awful.util.spawn("virtualbox") end),
 
-        awful.key({ modkey, "Control" }, "l", function () awful.util.spawn("xscreensaver-command --lock") end),
+        awful.key({ modkey, "Control" }, "l", function () awful.util.spawn("gnome-screensaver-command --lock") end),
         awful.key({ modkey, "Control" }, "r", awesome.restart),
         awful.key({ modkey, "Shift"   }, "q", awesome.quit),
 
@@ -524,6 +524,6 @@ end
     --awful.util.spawn_with_shell("runone everpad")
     awful.util.spawn_with_shell("setxkbmap -layout 'us,ru' -option 'grp:alt_shift_toggle'")
     awful.util.spawn_with_shell("setxkbmap -option caps:escape")
-    run_once("xscreensaver -nosplash")
+    run_once("gnome-screensaver")
     run_once("nm-applet")
 -- }}}
