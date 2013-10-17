@@ -94,7 +94,7 @@ local shifty = require("shifty")
             layout    = awful.layout.suit.max,
             mwfact    = 0.60,
             exclusive = false,
-            position  = 1,
+            position  = 2,
             init      = true,
             screen    = 1,
             slave     = true,
@@ -104,7 +104,7 @@ local shifty = require("shifty")
             mwfact      = 0.65,
             exclusive   = true,
             max_clients = 1,
-            position    = 4,
+            position    = 1,
             spawn       = browser,
         },
         mail = {
@@ -567,6 +567,9 @@ shifty.init()
                 client.focus = c
             end
         end)
+
+        -- Disable gaps between terminals.
+        c.size_hints_honor = false
 
         if not startup then
             -- Set the windows at the slave,
