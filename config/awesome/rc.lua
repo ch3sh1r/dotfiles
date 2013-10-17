@@ -11,7 +11,7 @@ local beautiful = require("beautiful")
 local naughty = require("naughty")
 local menubar = require("menubar")
 local vicious = require("vicious")
-local shifty = require("shifty")
+local shifty = require("lib/shifty")
 
 -- {{{ Error handling
     -- Check if awesome encountered an error during startup and fell back to
@@ -40,9 +40,8 @@ local shifty = require("shifty")
 
 -- {{{ Variable definitions
     -- Themes define colours, icons, and wallpapers
-    config_dir = ("/home/ch3sh1r/.config/awesome/")
-    themes_dir = (config_dir .. "/powerarrowf")
-    beautiful.init(themes_dir .. "/theme.lua")
+    theme_dir = ("/home/ch3sh1r/.config/awesome/lib/theme/")
+    beautiful.init(theme_dir .. "theme.lua")
 
     -- This is used later as the default terminal, browser and editor to run.
     terminal = "gnome-terminal"
@@ -110,7 +109,7 @@ local shifty = require("shifty")
             layout    = awful.layout.suit.tile,
             mwfact    = 0.55,
             exclusive = false,
-            position  = 5,
+            position  = 6,
             spawn     = mail,
             slave     = true
         },
@@ -135,7 +134,7 @@ local shifty = require("shifty")
     -- order here matters, early rules will be applied first
     shifty.config.apps = {
         {
-            match = { "Vimperator", },
+            match = { "Navigator", },
             tag = "web",
         },
         {
@@ -170,7 +169,7 @@ local shifty = require("shifty")
         },
     }
 
-    -- SHIFTY: default tag creation rules
+    -- Shifty default tag creation rules
     -- parameter description
     shifty.config.defaults = {
         layout = awful.layout.suit.tile.left,
@@ -375,12 +374,12 @@ local shifty = require("shifty")
         awful.key({ modkey, "Control" }, "r", awesome.restart),
         awful.key({ modkey, "Shift"   }, "q", awesome.quit),
 
-        awful.key({ modkey,           }, "l",     function () awful.tag.incmwfact( 0.05)    end),
-        awful.key({ modkey,           }, "h",     function () awful.tag.incmwfact(-0.05)    end),
-        awful.key({ modkey, "Shift"   }, "h",     function () awful.tag.incnmaster( 1)      end),
-        awful.key({ modkey, "Shift"   }, "l",     function () awful.tag.incnmaster(-1)      end),
-        awful.key({ modkey, "Control" }, "h",     function () awful.tag.incncol( 1)         end),
-        awful.key({ modkey, "Control" }, "l",     function () awful.tag.incncol(-1)         end),
+        awful.key({ modkey,           }, "l",     function () awful.tag.incmwfact( 0.05) end),
+        awful.key({ modkey,           }, "h",     function () awful.tag.incmwfact(-0.05) end),
+        awful.key({ modkey, "Shift"   }, "h",     function () awful.tag.incnmaster( 1) end),
+        awful.key({ modkey, "Shift"   }, "l",     function () awful.tag.incnmaster(-1) end),
+        awful.key({ modkey, "Control" }, "h",     function () awful.tag.incncol( 1) end),
+        awful.key({ modkey, "Control" }, "l",     function () awful.tag.incncol(-1) end),
         awful.key({ modkey,           }, "space", function () awful.layout.inc(layouts,  1) end),
         awful.key({ modkey, "Shift"   }, "space", function () awful.layout.inc(layouts, -1) end),
 
@@ -402,11 +401,11 @@ local shifty = require("shifty")
 
     clientkeys = awful.util.table.join(
         awful.key({ modkey,           }, "f",      function (c) c.fullscreen = not c.fullscreen  end),
-        awful.key({ modkey, "Shift"   }, "c",      function (c) c:kill()                         end),
-        awful.key({ modkey, "Control" }, "space",  awful.client.floating.toggle                     ),
+        awful.key({ modkey, "Shift"   }, "c",      function (c) c:kill() end),
+        awful.key({ modkey, "Control" }, "space",  awful.client.floating.toggle),
         awful.key({ modkey, "Control" }, "Return", function (c) c:swap(awful.client.getmaster()) end),
-        awful.key({ modkey,           }, "o",      awful.client.movetoscreen                        ),
-        awful.key({ modkey,           }, "t",      function (c) c.ontop = not c.ontop            end),
+        awful.key({ modkey,           }, "o",      awful.client.movetoscreen),
+        awful.key({ modkey,           }, "t",      function (c) c.ontop = not c.ontop end),
         awful.key({ modkey,           }, "n",
             function (c)
                 -- The client currently has the input focus, so it cannot be
@@ -424,48 +423,43 @@ local shifty = require("shifty")
     -- Be careful: we use keycodes to make it works on any keyboard layout.
     -- This should map on the top row of your keyboard, usually 1 to 9.
     for i = 1, 9 do
+        globalkeys = awful.util.table.join(
+                            globalkeys,
+                            awful.key({modkey}, i,
+                                function()
+                                    awful.tag.viewonly(shifty.getpos(i))
+                                end))
+        globalkeys = awful.util.table.join(
+                            globalkeys,
+                            awful.key({modkey, "Control"}, i,
+                                function ()
+                                    local t = shifty.getpos(i)
+                                    t.selected = not t.selected
+                                end))
         globalkeys = awful.util.table.join(globalkeys,
-            awful.key({ modkey }, "#" .. i + 9,
-                      function ()
-                            local screen = mouse.screen
-                            local tag = awful.tag.gettags(screen)[i]
-                            if tag then
-                               awful.tag.viewonly(tag)
-                            end
-                      end),
-            awful.key({ modkey, "Control" }, "#" .. i + 9,
-                      function ()
-                          local screen = mouse.screen
-                          local tag = awful.tag.gettags(screen)[i]
-                          if tag then
-                             awful.tag.viewtoggle(tag)
-                          end
-                      end),
-            awful.key({ modkey, "Shift" }, "#" .. i + 9,
-                      function ()
-                          local tag = awful.tag.gettags(client.focus.screen)[i]
-                          if client.focus and tag then
-                              awful.client.movetotag(tag)
-                         end
-                      end),
-            awful.key({ modkey, "Control", "Shift" }, "#" .. i + 9,
-                      function ()
-                          local tag = awful.tag.gettags(client.focus.screen)[i]
-                          if client.focus and tag then
-                              awful.client.toggletag(tag)
-                          end
-                      end))
+                                    awful.key({modkey, "Control", "Shift"}, i,
+                    function ()
+                        if client.focus then
+                            awful.client.toggletag(shifty.getpos(i))
+                        end
+                    end))
+        -- move clients to other tags
+        globalkeys = awful.util.table.join(
+                        globalkeys,
+                        awful.key({modkey, "Shift"}, i,
+                            function ()
+                                if client.focus then
+                                    local t = shifty.getpos(i)
+                                    awful.client.movetotag(t)
+                                    awful.tag.viewonly(t)
+                                end
+                            end))
     end
 
     clientbuttons = awful.util.table.join(
         awful.button({ }, 1, function (c) client.focus = c; c:raise() end),
         awful.button({ modkey }, 1, awful.mouse.client.move),
         awful.button({ modkey }, 3, awful.mouse.client.resize))
-
-    -- SHIFTY: assign client keys to shifty for use in
-    -- match() function(manage hook)
-    shifty.config.clientkeys = clientkeys
-    shifty.config.modkey = modkey
 
     -- Bind all key numbers to tags.
     -- Be careful: we use keycodes to make it works on any keyboard layout.
@@ -498,11 +492,12 @@ local shifty = require("shifty")
 
     -- Set keys
     root.keys(globalkeys)
--- }}}
 
--- {{{ Initialize shifty
--- the assignment of shifty.taglist must always be after its actually
--- initialized with awful.widget.taglist.new()
+    -- Initialize shifty
+    -- the assignment of shifty.taglist must always be after its actually
+    -- initialized with awful.widget.taglist.new()
+    shifty.config.clientkeys = clientkeys
+    shifty.config.modkey = modkey
     shifty.taglist = mytaglist
     shifty.init()
 -- }}}
@@ -531,51 +526,6 @@ local shifty = require("shifty")
                 awful.placement.no_overlap(c)
                 awful.placement.no_offscreen(c)
             end
-        end
-
-        local titlebars_enabled = false
-        if titlebars_enabled and (c.type == "normal" or c.type == "dialog") then
-            -- buttons for the titlebar
-            local buttons = awful.util.table.join(
-                    awful.button({ }, 1, function()
-                        client.focus = c
-                        c:raise()
-                        awful.mouse.client.move(c)
-                    end),
-                    awful.button({ }, 3, function()
-                        client.focus = c
-                        c:raise()
-                        awful.mouse.client.resize(c)
-                    end)
-                    )
-
-            -- Widgets that are aligned to the left
-            local left_layout = wibox.layout.fixed.horizontal()
-            left_layout:add(awful.titlebar.widget.iconwidget(c))
-            left_layout:buttons(buttons)
-
-            -- Widgets that are aligned to the right
-            local right_layout = wibox.layout.fixed.horizontal()
-            right_layout:add(awful.titlebar.widget.floatingbutton(c))
-            right_layout:add(awful.titlebar.widget.maximizedbutton(c))
-            right_layout:add(awful.titlebar.widget.stickybutton(c))
-            right_layout:add(awful.titlebar.widget.ontopbutton(c))
-            right_layout:add(awful.titlebar.widget.closebutton(c))
-
-            -- The title goes in the middle
-            local middle_layout = wibox.layout.flex.horizontal()
-            local title = awful.titlebar.widget.titlewidget(c)
-            title:set_align("center")
-            middle_layout:add(title)
-            middle_layout:buttons(buttons)
-
-            -- Now bring it all together
-            local layout = wibox.layout.align.horizontal()
-            layout:set_left(left_layout)
-            layout:set_right(right_layout)
-            layout:set_middle(middle_layout)
-
-            awful.titlebar(c):set_widget(layout)
         end
     end)
 

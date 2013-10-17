@@ -3,12 +3,9 @@
 ---------------------------
 
 theme = {}
-
--- Todo:  Change the $USER to yourself.
-pathToConfig = "/home/ch3sh1r/.config/awesome/"
+theme_dir = ("/home/ch3sh1r/.config/awesome/lib/theme/")
 
 theme.font          = "sans 8"
-
 theme.bg_normal     = "#222222"
 theme.bg_focus      = "#1e2320"
 theme.bg_urgent     = "#3f3f3f"
@@ -34,8 +31,8 @@ theme.border_marked = "#91231c"
 --theme.taglist_bg_focus = "#ff0000"
 
 -- Display the taglist squares
-theme.taglist_squares_sel   = pathToConfig .. "powerarrowf/icons/square_sel.png"
-theme.taglist_squares_unsel = pathToConfig .. "powerarrowf/icons/square_unsel.png"
+theme.taglist_squares_sel   = theme_dir .. "/icons/square_sel.png"
+theme.taglist_squares_unsel = theme_dir .. "/icons/square_unsel.png"
 
 -- Variables set for theming the menu:
 -- menu_[bg|fg]_[normal|focus]
@@ -73,34 +70,34 @@ theme.titlebar_maximized_button_focus_inactive  = "/usr/share/awesome/themes/def
 theme.titlebar_maximized_button_normal_active = "/usr/share/awesome/themes/default/titlebar/maximized_normal_active.png"
 theme.titlebar_maximized_button_focus_active  = "/usr/share/awesome/themes/default/titlebar/maximized_focus_active.png"
 
-theme.wallpaper = pathToConfig .. "powerarrowf/pattern.png"
+theme.wallpaper = theme_dir .. "/pattern.png"
 
 -- You can use your own layout icons like this:
-theme.layout_floating  = pathToConfig .. "powerarrowf/layouts/floating.png"
-theme.layout_tilebottom = pathToConfig  .. "powerarrowf/layouts/tilebottom.png"
-theme.layout_tileleft   = pathToConfig .. "powerarrowf/layouts/tileleft.png"
-theme.layout_tile = pathToConfig .. "powerarrowf/layouts/tile.png"
-theme.layout_tiletop = pathToConfig .. "powerarrowf/layouts/tiletop.png"
-theme.layout_max = pathToConfig .. "powerarrowf/layouts/max.png"
+theme.layout_floating  = theme_dir .. "/layouts/floating.png"
+theme.layout_tilebottom = theme_dir  .. "/layouts/tilebottom.png"
+theme.layout_tileleft   = theme_dir .. "/layouts/tileleft.png"
+theme.layout_tile = theme_dir .. "/layouts/tile.png"
+theme.layout_tiletop = theme_dir .. "/layouts/tiletop.png"
+theme.layout_max = theme_dir .. "/layouts/max.png"
 
 --{{ For the Dark Theme }} --
 
-theme.arrl = pathToConfig .. "powerarrowf/icons/arrl.png"
-theme.arrl_ld = pathToConfig .. "powerarrowf/icons/arrl_ld.png"
-theme.arrl_dl = pathToConfig .. "powerarrowf/icons/arrl_dl.png"
+theme.arrl = theme_dir .. "/icons/arrl.png"
+theme.arrl_ld = theme_dir .. "/icons/arrl_ld.png"
+theme.arrl_dl = theme_dir .. "/icons/arrl_dl.png"
 
 --{{ For the time and date clock icon }} --
-theme.clock = pathToConfig .. "powerarrowf/icons/clock.png"
+theme.clock = theme_dir .. "/icons/clock.png"
 
 --{{ For the charging (AC adaptor) icon }} --
-theme.ac = pathToConfig .. "powerarrowf/icons/ac.png"
+theme.ac = theme_dir .. "/icons/ac.png"
 
 --{{ For the hard drive icon }} --
-theme.hdd = pathToConfig .. "powerarrowf/icons/hdd.png"
+theme.hdd = theme_dir .. "/icons/hdd.png"
 
 --{{ For the volume icons }} --
-theme.mute = pathToConfig .. "powerarrowf/icons/mute.png"
-theme.music = pathToConfig .. "powerarrowf/icons/music.png"
+theme.mute = theme_dir .. "/icons/mute.png"
+theme.music = theme_dir .. "/icons/music.png"
 
 -- Define the icon theme for application icons. If not set then the icons
 -- from /usr/share/icons and /usr/share/icons/hicolor will be used.
