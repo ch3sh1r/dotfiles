@@ -107,15 +107,13 @@ end
 
     -- Volume Widget
     volume = wibox.widget.textbox()
-    vicious.register(volume, vicious.widgets.volume, '<span font="Inconsolata 11" color="#AAAAAA" background="#1e2320">$1% </span>', 0.2, "Master")
+    vicious.register(volume, vicious.widgets.volume, '<span font="Inconsolata 11" color="#AAAAAA" background="#1e2320">$1% </span>', 1, "Master")
     volumeicon = wibox.widget.imagebox()
     vicious.register(volumeicon, vicious.widgets.volume, function(widget, args)
             local paraone = tonumber(args[1])
             if args[2] == "♩" or paraone == 0 then
                     volumeicon:set_image(beautiful.mute)
-            elseif paraone >= 67 and paraone <= 100 then
-                    volumeicon:set_image(beautiful.music)
-            elseif paraone >= 33 and paraone <= 66 then
+            elseif paraone >= 33 and paraone <= 100 then
                     volumeicon:set_image(beautiful.music)
             else
                     volumeicon:set_image(beautiful.music)
@@ -124,7 +122,7 @@ end
 
     -- Time and Date Widget
     tdwidget = wibox.widget.textbox()
-    vicious.register(tdwidget, vicious.widgets.date, '<span font="Inconsolata 11" color="#AAAAAA" background="#313131"> %b %d %I:%M </span>', 20)
+    vicious.register(tdwidget, vicious.widgets.date, '<span font="Inconsolata 11" color="#AAAAAA" background="#313131"> %b %d %R </span>', 20)
     clockicon = wibox.widget.imagebox()
     clockicon:set_image(beautiful.clock)
 
@@ -524,6 +522,10 @@ end
     --awful.util.spawn_with_shell("runone everpad")
     awful.util.spawn_with_shell("setxkbmap -layout 'us,ru' -option 'grp:alt_shift_toggle'")
     awful.util.spawn_with_shell("setxkbmap -option caps:escape")
+    awful.util.spawn_with_shell('xinput set-prop "TPPS/2 IBM TrackPoint" "Evdev Wheel Emulation" 1')
+    awful.util.spawn_with_shell('xinput set-prop "TPPS/2 IBM TrackPoint" "Evdev Wheel Emulation Button" 2')
+    awful.util.spawn_with_shell('xinput set-prop "TPPS/2 IBM TrackPoint" "Evdev Wheel Emulation Timeout" 200')
+    awful.util.spawn_with_shell('xinput set-prop "TPPS/2 IBM TrackPoint" "Evdev Wheel Emulation Axes" 6 7 4 5')
     run_once("gnome-screensaver")
     run_once("nm-applet")
 -- }}}
