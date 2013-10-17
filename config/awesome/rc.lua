@@ -80,17 +80,17 @@ local shifty = require("shifty")
 -- }}}
 
 -- {{{ Wallpaper
-if beautiful.wallpaper then
-    for s = 1, screen.count() do
-        gears.wallpaper.maximized(beautiful.wallpaper, s, true)
+    if beautiful.wallpaper then
+        for s = 1, screen.count() do
+            gears.wallpaper.maximized(beautiful.wallpaper, s, true)
+        end
     end
-end
 -- }}}
 
 -- {{{ Shifty
-    -- Tags
+    -- Shifty configured tags.
     shifty.config.tags = {
-        w1 = {
+        def = {
             layout    = awful.layout.suit.max,
             mwfact    = 0.60,
             exclusive = false,
@@ -126,8 +126,8 @@ end
         },
     }
 
-    -- Application matching rules
-    -- Order here matters, early rules will be applied first
+    -- SHIFTY: application matching rules
+    -- order here matters, early rules will be applied first
     shifty.config.apps = {
         {
             match = {
@@ -352,6 +352,26 @@ end
         awful.key({ modkey,           }, "Right",  awful.tag.viewnext       ),
         awful.key({ modkey,           }, "Escape", awful.tag.history.restore),
 
+        -- Shifty: keybindings specific to shifty
+        awful.key({modkey, "Shift"}, "d", shifty.del), -- delete a tag
+        awful.key({modkey, "Shift"}, "n", shifty.send_prev), -- client to prev tag
+        awful.key({modkey}, "n", shifty.send_next), -- client to next tag
+        awful.key({modkey, "Control"},
+                  "n",
+                  function()
+                      local t = awful.tag.selected()
+                      local s = awful.util.cycle(screen.count(), awful.tag.getscreen(t) + 1)
+                      awful.tag.history.restore()
+                      t = shifty.tagtoscr(s, t)
+                      awful.tag.viewonly(t)
+                  end),
+        awful.key({modkey}, "a", shifty.add), -- creat a new tag
+        awful.key({modkey, "Shift"}, "r", shifty.rename), -- rename a tag
+        awful.key({modkey, "Shift"}, "a", -- nopopup new tag
+        function()
+            shifty.add({nopopup = true})
+        end),
+
         awful.key({ modkey,           }, "j",
             function ()
                 awful.client.focus.byidx( 1)
@@ -493,67 +513,49 @@ end
         awful.button({ modkey }, 1, awful.mouse.client.move),
         awful.button({ modkey }, 3, awful.mouse.client.resize))
 
+    -- SHIFTY: assign client keys to shifty for use in
+    -- match() function(manage hook)
+    shifty.config.clientkeys = clientkeys
+    shifty.config.modkey = modkey
+
+    -- Bind all key numbers to tags.
+    -- Be careful: we use keycodes to make it works on any keyboard layout.
+    -- This should map on the top row of your keyboard, usually 1 to 9.
+    for i = 1, (shifty.config.maxtags or 9) do
+        globalkeys = awful.util.table.join(globalkeys,
+            awful.key({ modkey }, "#" .. i + 9,
+                      function ()
+                          awful.tag.viewonly(shifty.getpos(i))
+                      end),
+            awful.key({ modkey, "Control" }, "#" .. i + 9,
+                      function ()
+                          awful.tag.viewtoggle(shifty.getpos(i))
+                      end),
+            awful.key({ modkey, "Shift" }, "#" .. i + 9,
+                      function ()
+                          if client.focus then
+                              local t = shifty.getpos(i)
+                              awful.client.movetotag(t)
+                              awful.tag.viewonly(t)
+                           end
+                      end),
+            awful.key({ modkey, "Control", "Shift" }, "#" .. i + 9,
+                      function ()
+                          if client.focus then
+                              awful.client.toggletag(shifty.getpos(i))
+                          end
+                      end))
+    end
+
     -- Set keys
     root.keys(globalkeys)
 -- }}}
 
--- {{{ Rules
-    awful.rules.rules = {
-        -- All clients will match this rule.
-        { rule = { },
-          properties = { border_width = beautiful.border_width,
-                         border_color = beautiful.border_normal,
-                         focus = awful.client.focus.filter,
-                         keys = clientkeys,
-                         size_hints_honor = false,
-                         buttons = clientbuttons } },
-        { rule = { class = "Keepassx" },
-          properties = { floating = true } },
-        { rule = { class = "Gimp" },
-          properties = { floating = true } },
-        { rule = { class = "Pidgin" },
-          properties = { floating = true } },
-        { rule = { class = "Skype" },
-          properties = { floating = true } },
-        { rule = { class = "Everpad" },
-          properties = { floating = true } },
-        { rule = { class = "Nautilus" },
-          properties = { floating = true } },
-        { rule = { class = "File-roller" },
-          properties = { floating = true } },
-
-        { rule = { class = "libreoffice-startcenter" },
-          properties = { floating = true, 
-                         maximized_vertical = false, 
-                         maximized_horizontal = false } },
-        { rule = { class = "libreoffice-writer" },
-          properties = { floating = true, 
-                         maximized_vertical = false, 
-                         maximized_horizontal = false } },
-        { rule = { class = "libreoffice-calc" },
-          properties = { floating = true, 
-                         maximized_vertical = false, 
-                         maximized_horizontal = false } },
-        { rule = { class = "libreoffice-impress" },
-          properties = { floating = true, 
-                         maximized_vertical = false, 
-                         maximized_horizontal = false } },
-
-        { rule = { class = "vlc" },
-          properties = { tag = tags[1][4] } },
-        { rule = { class = "Vmware" },
-          properties = { tag = tags[1][3] } },
-        { rule = { class = "VirtualBox" },
-          properties = { tag = tags[1][3] } },
-        { rule = { class = "Thunderbird" },
-          properties = { tag = tags[1][5] } },
-        { rule = { class = "Firefox" },
-          properties = { tag = tags[1][1], 
-                         floating = false, 
-                         maximized_vertical = false, 
-                         maximized_horizontal = false } },
-    }
--- }}}
+-- SHIFTY: initialize shifty
+-- the assignment of shifty.taglist must always be after its actually
+-- initialized with awful.widget.taglist.new()
+shifty.taglist = mytaglist
+shifty.init()
 
 -- {{{ Signals
     -- Signal function to execute when a new client appears.
