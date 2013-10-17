@@ -82,7 +82,7 @@ local shifty = require("shifty")
 -- {{{ Wallpaper
     if beautiful.wallpaper then
         for s = 1, screen.count() do
-            gears.wallpaper.maximized(beautiful.wallpaper, s, true)
+            gears.wallpaper.tiled(beautiful.wallpaper, s)
         end
     end
 -- }}}
@@ -91,8 +91,8 @@ local shifty = require("shifty")
     -- Shifty configured tags.
     shifty.config.tags = {
         def = {
-            layout    = awful.layout.suit.max,
-            mwfact    = 0.60,
+            layout    = awful.layout.suit.tile.left,
+            mwfact    = 0.5,
             exclusive = false,
             position  = 2,
             init      = true,
@@ -101,8 +101,7 @@ local shifty = require("shifty")
         },
         web = {
             layout      = awful.layout.suit.tile.bottom,
-            mwfact      = 0.65,
-            exclusive   = true,
+            exclusive   = false,
             max_clients = 1,
             position    = 1,
             spawn       = browser,
@@ -115,6 +114,12 @@ local shifty = require("shifty")
             spawn     = mail,
             slave     = true
         },
+        virtual = {
+            layout    = awful.layout.suit.tile,
+            exclusive = false,
+            spawn     = virtual,
+            position  = 7,
+        },
         media = {
             layout    = awful.layout.suit.float,
             exclusive = false,
@@ -126,65 +131,30 @@ local shifty = require("shifty")
         },
     }
 
-    -- SHIFTY: application matching rules
+    -- Shifty application matching rules
     -- order here matters, early rules will be applied first
     shifty.config.apps = {
         {
-            match = {
-                "Navigator",
-                "Vimperator",
-                "Gran Paradiso",
-            },
+            match = { "Vimperator", },
             tag = "web",
         },
         {
-            match = {
-                "Shredder.*",
-                "Thunderbird",
-                "mutt",
-            },
+            match = { "Thunderbird", "mutt", },
             tag = "mail",
         },
         {
-            match = {
-                "pcmanfm",
-            },
-            slave = true
-        },
-        {
-            match = {
-                "OpenOffice.*",
-                "Abiword",
-                "Gnumeric",
-            },
+            match = { "LibreOffice.*", },
             tag = "office",
         },
         {
-            match = {
-                "Mplayer.*",
-                "Mirage",
-                "gimp",
-                "gtkpod",
-                "Ufraw",
-                "easytag",
-            },
+            match = { "gimp", "easytag", },
             tag = "media",
             nopopup = true,
         },
         {
-            match = {
-                "MPlayer",
-                "Gnuplot",
-                "galculator",
-            },
-            float = true,
-        },
-        {
-            match = {
-                terminal,
-            },
-            honorsizehints = false,
-            slave = true,
+            match = { "VirtualBox", },
+            tag = "virtual",
+            nopopup = true,
         },
         {
             match = {""},
@@ -202,19 +172,13 @@ local shifty = require("shifty")
 
     -- SHIFTY: default tag creation rules
     -- parameter description
-    --  * floatBars : if floating clients should always have a titlebar
-    --  * guess_name : should shifty try and guess tag names when creating
-    --                 new (unconfigured) tags?
-    --  * guess_position: as above, but for position parameter
-    --  * run : function to exec when shifty creates a new tag
-    --  * all other parameters (e.g. layout, mwfact) follow awesome's tag API
     shifty.config.defaults = {
-        layout = awful.layout.suit.tile.bottom,
+        layout = awful.layout.suit.tile.left,
         ncol = 1,
         mwfact = 0.60,
         floatBars = true,
         guess_name = true,
-        guess_position = true,
+        guess_position = false,
     }
 -- }}}
 
@@ -352,25 +316,10 @@ local shifty = require("shifty")
         awful.key({ modkey,           }, "Right",  awful.tag.viewnext       ),
         awful.key({ modkey,           }, "Escape", awful.tag.history.restore),
 
-        -- Shifty: keybindings specific to shifty
-        awful.key({modkey, "Shift"}, "d", shifty.del), -- delete a tag
-        awful.key({modkey, "Shift"}, "n", shifty.send_prev), -- client to prev tag
-        awful.key({modkey}, "n", shifty.send_next), -- client to next tag
-        awful.key({modkey, "Control"},
-                  "n",
-                  function()
-                      local t = awful.tag.selected()
-                      local s = awful.util.cycle(screen.count(), awful.tag.getscreen(t) + 1)
-                      awful.tag.history.restore()
-                      t = shifty.tagtoscr(s, t)
-                      awful.tag.viewonly(t)
-                  end),
-        awful.key({modkey}, "a", shifty.add), -- creat a new tag
-        awful.key({modkey, "Shift"}, "r", shifty.rename), -- rename a tag
-        awful.key({modkey, "Shift"}, "a", -- nopopup new tag
-        function()
-            shifty.add({nopopup = true})
-        end),
+        -- Shifty keybindings
+        awful.key({ modkey,           }, "d", shifty.del),
+        awful.key({ modkey,           }, "i", shifty.rename),
+        awful.key({ modkey,           }, "a", shifty.add),
 
         awful.key({ modkey,           }, "j",
             function ()
@@ -402,10 +351,10 @@ local shifty = require("shifty")
         awful.key({ }, "XF86MonBrightnessUp",   function () awful.util.spawn("xbacklight -inc 15") end),
 
         -- MDP manipulation
-        awful.key({ }, "XF86AudioNext",function () awful.util.spawn("/home/ch3sh1r/.config/awesome/bin/mpd_next") end),
-        awful.key({ }, "XF86AudioPrev",function () awful.util.spawn("/home/ch3sh1r/.config/awesome/bin/mpd_prev") end),
-        awful.key({ }, "XF86AudioPlay",function () awful.util.spawn("/home/ch3sh1r/.config/awesome/bin/mpd_playpause") end),
-        awful.key({ }, "XF86AudioStop",function () awful.util.spawn("/home/ch3sh1r/.config/awesome/bin/mpd_stop") end),
+        awful.key({ }, "XF86AudioNext", function () awful.util.spawn("/home/ch3sh1r/.config/awesome/bin/mpd_next") end),
+        awful.key({ }, "XF86AudioPrev", function () awful.util.spawn("/home/ch3sh1r/.config/awesome/bin/mpd_prev") end),
+        awful.key({ }, "XF86AudioPlay", function () awful.util.spawn("/home/ch3sh1r/.config/awesome/bin/mpd_playpause") end),
+        awful.key({ }, "XF86AudioStop", function () awful.util.spawn("/home/ch3sh1r/.config/awesome/bin/mpd_stop") end),
 
         -- Sound manipulation
         awful.key({ }, "XF86AudioRaiseVolume", function () awful.util.spawn("amixer set Master 9%+") end),
@@ -551,11 +500,12 @@ local shifty = require("shifty")
     root.keys(globalkeys)
 -- }}}
 
--- SHIFTY: initialize shifty
+-- {{{ Initialize shifty
 -- the assignment of shifty.taglist must always be after its actually
 -- initialized with awful.widget.taglist.new()
-shifty.taglist = mytaglist
-shifty.init()
+    shifty.taglist = mytaglist
+    shifty.init()
+-- }}}
 
 -- {{{ Signals
     -- Signal function to execute when a new client appears.
