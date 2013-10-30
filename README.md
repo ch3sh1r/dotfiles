@@ -1,23 +1,34 @@
 # @ch3sh1r's dotfiles
 
-В целом, все настройки понадерганы из десятков мест по всем 
-интернетам. Идея записать что и откуда пришло возникла не сразу.
-По этому если вы нашли не хватающее — сообщите мне пожалуйста.
+Все настройки понадерганы из десятков мест по всем 
+интернетам. А идея записать что и откуда пришло возникла не сразу.
+По этому если вы видете что чего-то не хватающет в списке — 
+сообщите мне пожалуйста.
 
 Zsh:
-* [@robbyrussell](https://github.com/robbyrussell) — 
-  [oh-my-zsh](https://github.com/robbyrussell/oh-my-zsh).
+* [oh-my-zsh](https://github.com/robbyrussell/oh-my-zsh)
+  by [@robbyrussell](https://github.com/robbyrussell).
 
 Metasploit:
-* [@staaldraad](https://github.com/staaldraad) — 
-  [metasploit](https://github.com/staaldraad/metasploit).
-* [@darkoperator](https://github.com/darkoperator) — 
-  [Metasploit-Plugins](https://github.com/darkoperator/Metasploit-Plugins),
-  [Meterpreter-Scripts](https://github.com/darkoperator/Meterpreter-Scripts).
-* [@mubix](https://github.com/mubix) — 
-  [q](https://github.com/mubix/q).
-* [@hatsecure](https://github.com/hatsecure/metasploit) — 
-  [metasploit](https://github.com/hatsecure).
+* [metasploit](https://github.com/staaldraad/metasploit)
+  by [@staaldraad](https://github.com/staaldraad).
+* [Metasploit-Plugins](https://github.com/darkoperator/Metasploit-Plugins) and
+  [Meterpreter-Scripts](https://github.com/darkoperator/Meterpreter-Scripts)
+  by [@darkoperator](https://github.com/darkoperator).
+* [q](https://github.com/mubix/q)
+  by [@mubix](https://github.com/mubix).
+* [metasploit](https://github.com/hatsecure)
+  by [@hatsecure](https://github.com/hatsecure/metasploit).
+
+Gnome:
+* [gnome-terminal-colors-solarized](https://github.com/sigurdga/gnome-terminal-colors-solarized)
+  by [@sigurdga](https://github.com/sigurdga).
+* [Ambiance Crunchy](http://gnome-look.org/content/show.php?content=151181) gtk theme
+  by [frombenny](http://gnome-look.org/usermanager/search.php?username=frombenny)
+
+Awesome WM:
+* [powerarrow-dark](https://github.com/esn89/powerarrow-dark)
+  by [@esn89](https://github.com/esn89).
 
 ## Внешний вид
 
