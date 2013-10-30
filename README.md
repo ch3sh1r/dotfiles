@@ -1,12 +1,10 @@
 # @ch3sh1r's dotfiles
 
-[Демонстрация](http://ascii.io/a/4852).
 В целом, все настройки понадерганы из десятков мест по всем 
 интернетам. Идея записать что и откуда пришло возникла не сразу.
 По этому если вы нашли не хватающее — сообщите мне пожалуйста.
 
 Zsh:
-
 * [@robbyrussell](https://github.com/robbyrussell) — 
   [oh-my-zsh](https://github.com/robbyrussell/oh-my-zsh).
 
@@ -20,6 +18,13 @@ Metasploit:
   [q](https://github.com/mubix/q).
 * [@hatsecure](https://github.com/hatsecure/metasploit) — 
   [metasploit](https://github.com/hatsecure).
+
+## Внешний вид
+
+![floating](http://dl.dropboxusercontent.com/u/12576522/linked/github-dotfiles/floating.png)
+![tile](http://dl.dropboxusercontent.com/u/12576522/linked/github-dotfiles/tile.png)
+
+А еще есть [демонстрация](http://ascii.io/a/4852).
 
 ## Установка
 
