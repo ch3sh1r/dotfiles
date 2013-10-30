@@ -115,7 +115,7 @@ local shifty = require("lib/shifty")
             slave     = true
         },
         virtual = {
-            layout    = awful.layout.suit.tile,
+            layout    = awful.layout.suit.tile.left,
             exclusive = false,
             spawn     = virtual,
             position  = 7,
@@ -126,7 +126,7 @@ local shifty = require("lib/shifty")
             position  = 8,
         },
         office = {
-            layout   = awful.layout.suit.tile,
+            layout    = awful.layout.suit.tile.left,
             position = 9,
         },
     }
@@ -155,7 +155,6 @@ local shifty = require("lib/shifty")
             match = { "Pidgin", "Skype", },
             slave = true,
             float = true,
-            wfact = 0.3,
         },
         {
             match = { "VirtualBox", "vmware" },
@@ -557,10 +556,10 @@ local shifty = require("lib/shifty")
     --awful.util.spawn_with_shell("runone everpad")
     awful.util.spawn_with_shell("setxkbmap -layout 'us,ru' -option 'grp:alt_shift_toggle'")
     awful.util.spawn_with_shell("setxkbmap -option caps:escape")
-    awful.util.spawn_with_shell('xinput set-prop "TPPS/2 IBM TrackPoint" "Evdev Wheel Emulation" 1')
-    awful.util.spawn_with_shell('xinput set-prop "TPPS/2 IBM TrackPoint" "Evdev Wheel Emulation Button" 2')
-    awful.util.spawn_with_shell('xinput set-prop "TPPS/2 IBM TrackPoint" "Evdev Wheel Emulation Timeout" 200')
-    awful.util.spawn_with_shell('xinput set-prop "TPPS/2 IBM TrackPoint" "Evdev Wheel Emulation Axes" 6 7 4 5')
+    awful.util.spawn_with_shell('xinput --set-prop "TPPS/2 IBM TrackPoint" "Evdev Wheel Emulation" 1')
+    awful.util.spawn_with_shell('xinput --set-prop "TPPS/2 IBM TrackPoint" "Evdev Wheel Emulation Button" 2')
+    awful.util.spawn_with_shell('xinput --set-prop "TPPS/2 IBM TrackPoint" "Evdev Wheel Emulation Timeout" 200')
+    awful.util.spawn_with_shell('xinput --set-prop "TPPS/2 IBM TrackPoint" "Evdev Wheel Emulation Axes" 6 7 4 5')
     run_once("gnome-screensaver")
     run_once("nm-applet")
 -- }}}
