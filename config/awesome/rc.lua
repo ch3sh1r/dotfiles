@@ -100,19 +100,16 @@ local shifty = require("lib/shifty")
         },
         web = {
             layout      = awful.layout.suit.tile.left,
-            mwfact    = 0.3,
+            mwfact      = 0.3,
             exclusive   = false,
             max_clients = 1,
             position    = 1,
             spawn       = browser,
         },
-        mail = {
-            layout    = awful.layout.suit.tile.left,
-            mwfact    = 0.4,
+        media = {
+            layout    = awful.layout.suit.float,
             exclusive = false,
             position  = 6,
-            spawn     = mail,
-            slave     = true
         },
         virtual = {
             layout    = awful.layout.suit.tile.left,
@@ -120,10 +117,13 @@ local shifty = require("lib/shifty")
             spawn     = virtual,
             position  = 7,
         },
-        media = {
-            layout    = awful.layout.suit.float,
+        mail = {
+            layout    = awful.layout.suit.tile.left,
+            mwfact    = 0.4,
             exclusive = false,
             position  = 8,
+            spawn     = mail,
+            slave     = true
         },
         office = {
             layout    = awful.layout.suit.tile.left,
