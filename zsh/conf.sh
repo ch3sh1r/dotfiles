@@ -4,7 +4,7 @@ autoload -U compinit
 compinit -i -D
 
 # Переменные среды
-PATH="$HOME/.bin:$HOME/.rvm/bin:$HOME/.zsh/script:/usr/local/bin:/usr/local/sbin:/var/lib/gems/bin/:/usr/local/heroku/bin:$PATH"
+PATH="$HOME/.gem/ruby/2.0.0/bin:$HOME/.bin:$HOME/.rvm/bin:$HOME/.zsh/script:/usr/local/bin:/usr/local/sbin:/var/lib/gems/bin/:/usr/local/heroku/bin:$PATH"
 MANPATH="/usr/local/man:/usr/local/mysql/man:/usr/local/git/man:$MANPATH"
 EDITOR="vim"
 export PATH
