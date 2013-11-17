@@ -2,8 +2,8 @@
 set gui=nonavigation
 
 " Переход по табам
-map <A-Right> gT
-map <A-Left> gt
+map <A-Right> gt
+map <A-Left> gT
 
 " Перемешение табов
 map <S-Right> :tabmove! +1<cr>
