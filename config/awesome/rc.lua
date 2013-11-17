@@ -394,15 +394,17 @@ local shifty = require("lib/shifty")
         -- Prompt
         awful.key({ modkey },            "r",     function () mypromptbox[mouse.screen]:run() end),
 
+        -- Menubar
+        awful.key({ modkey, "Shift"   }, "r", function() menubar.show() end),
+
+        -- Run Lua code
         awful.key({ modkey }, "x",
                   function ()
                       awful.prompt.run({ prompt = "Run Lua code: " },
                       mypromptbox[mouse.screen].widget,
                       awful.util.eval, nil,
                       awful.util.getdir("cache") .. "/history_eval")
-                  end),
-        -- Menubar
-        awful.key({ modkey }, "p", function() menubar.show() end)
+                  end)
     )
 
     clientkeys = awful.util.table.join(
