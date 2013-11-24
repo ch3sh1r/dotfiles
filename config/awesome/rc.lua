@@ -9,6 +9,7 @@ local wibox = require("wibox")
 local beautiful = require("beautiful")
 -- Notification library
 local naughty = require("naughty")
+
 local menubar = require("menubar")
 local vicious = require("vicious")
 local shifty = require("lib/shifty")
@@ -185,13 +186,25 @@ local shifty = require("lib/shifty")
 
     -- Battery Widget
     batwidget = wibox.widget.textbox()
-    vicious.register(batwidget, vicious.widgets.bat, '<span color="#AAAAAA">$1$2% $3</span>', 120, "BAT1")
+    vicious.register(batwidget, vicious.widgets.bat, '<span color="#AAAAAA">$1$2% $3</span>', 5, "BAT1")
     baticon = wibox.widget.imagebox()
-    baticon:set_image(beautiful.ac)
+    vicious.register(baticon, vicious.widgets.bat, function(widget, args)
+            local paraone = tonumber(args[2])
+            if paraone <= 20 then
+                baticon:set_image(beautiful.ac_low)
+                naughty.notify({ preset = naughty.config.presets.critical,
+                                 title = "Battery discharging!",
+                                 text = "Connect to power source. Now." })
+            elseif paraone <= 70 then
+                baticon:set_image(beautiful.ac_med)
+            else
+                baticon:set_image(beautiful.ac_full)
+            end
+    end, 120, "BAT1")
 
     -- Volume Widget
     volumewidget = wibox.widget.textbox()
-    vicious.register(volumewidget, vicious.widgets.volume, '<span color="#AAAAAA">$1%</span>', 1, "Master")
+    vicious.register(volumewidget, vicious.widgets.volume, '<span color="#AAAAAA">$1%</span>', 2, "Master")
     volumeicon = wibox.widget.imagebox()
     vicious.register(volumeicon, vicious.widgets.volume, function(widget, args)
             local paraone = tonumber(args[1])
@@ -200,7 +213,7 @@ local shifty = require("lib/shifty")
             else
                     volumeicon:set_image(beautiful.music)
             end
-    end, 120, "Master")
+    end, 2, "Master")
 
     -- Time and Date Widget
     clockwidget = wibox.widget.textbox()

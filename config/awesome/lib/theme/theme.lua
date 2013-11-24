@@ -68,20 +68,10 @@ theme.layout_tile = theme_dir .. "/icons/tile.png"
 theme.layout_tiletop = theme_dir .. "/icons/tiletop.png"
 theme.layout_max = theme_dir .. "/icons/max.png"
 
---{{ For the Dark Theme }} --
-
-theme.arrl = theme_dir .. "/icons/arrl.png"
-theme.arrl_ld = theme_dir .. "/icons/arrl_ld.png"
-theme.arrl_dl = theme_dir .. "/icons/arrl_dl.png"
-
---{{ For the time and date clock icon }} --
-theme.clock = theme_dir .. "/icons/clock.png"
-
 --{{ For the charging (AC adaptor) icon }} --
-theme.ac = theme_dir .. "/icons/ac.png"
-
---{{ For the hard drive icon }} --
-theme.hdd = theme_dir .. "/icons/hdd.png"
+theme.ac_full = theme_dir .. "/icons/ac_full.png"
+theme.ac_med = theme_dir .. "/icons/ac_med.png"
+theme.ac_low = theme_dir .. "/icons/ac_low.png"
 
 --{{ For the volume icons }} --
 theme.mute = theme_dir .. "/icons/mute.png"
