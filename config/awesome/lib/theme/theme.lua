@@ -5,10 +5,10 @@
 theme = {}
 theme_dir = ("/home/ch3sh1r/.config/awesome/lib/theme/")
 
-theme.font          = "sans 8"
-theme.bg_normal     = "#222222"
-theme.bg_focus      = "#1e2320"
-theme.bg_urgent     = "#3f3f3f"
+theme.font          = "terminus 9"
+theme.bg_normal     = "#3c3b37"
+theme.bg_urgent     = theme.bg_normal
+theme.bg_focus      = theme.bg_normal
 theme.bg_systray    = theme.bg_normal
 
 theme.fg_normal     = "#708090"
@@ -18,7 +18,7 @@ theme.fg_urgent     = theme.bg_urgent
 theme.border_width  = 2
 theme.border_normal = theme.bg_normal
 theme.border_focus  = theme.fg_normal
-theme.border_marked = "#91231c"
+theme.border_marked = theme.fg_normal
 
 -- There are other variable sets
 -- overriding the default one when
@@ -33,18 +33,6 @@ theme.border_marked = "#91231c"
 -- Display the taglist squares
 theme.taglist_squares_sel   = theme_dir .. "/icons/square_sel.png"
 theme.taglist_squares_unsel = theme_dir .. "/icons/square_unsel.png"
-
--- Variables set for theming the menu:
--- menu_[bg|fg]_[normal|focus]
--- menu_[border_color|border_width]
-theme.menu_submenu_icon = "/usr/share/awesome/themes/default/submenu.png"
-theme.menu_height = 15
-theme.menu_width  = 100
-
--- You can add as many variables as
--- you wish and access them by using
--- beautiful.variable in your rc.lua
---theme.bg_widget = "#cc0000"
 
 -- Define the image to load
 theme.titlebar_close_button_normal = "/usr/share/awesome/themes/default/titlebar/close_normal.png"
@@ -73,12 +61,12 @@ theme.titlebar_maximized_button_focus_active  = "/usr/share/awesome/themes/defau
 theme.wallpaper = theme_dir .. "/pattern.png"
 
 -- You can use your own layout icons like this:
-theme.layout_floating  = theme_dir .. "/layouts/floating.png"
-theme.layout_tilebottom = theme_dir  .. "/layouts/tilebottom.png"
-theme.layout_tileleft   = theme_dir .. "/layouts/tileleft.png"
-theme.layout_tile = theme_dir .. "/layouts/tile.png"
-theme.layout_tiletop = theme_dir .. "/layouts/tiletop.png"
-theme.layout_max = theme_dir .. "/layouts/max.png"
+theme.layout_floating  = theme_dir .. "/icons/floating.png"
+theme.layout_tilebottom = theme_dir  .. "/icons/tilebottom.png"
+theme.layout_tileleft   = theme_dir .. "/icons/tileleft.png"
+theme.layout_tile = theme_dir .. "/icons/tile.png"
+theme.layout_tiletop = theme_dir .. "/icons/tiletop.png"
+theme.layout_max = theme_dir .. "/icons/max.png"
 
 --{{ For the Dark Theme }} --
 

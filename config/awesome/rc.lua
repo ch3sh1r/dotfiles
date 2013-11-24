@@ -51,14 +51,6 @@ local shifty = require("lib/shifty")
     browser = "firefox"
     file_manager = "nautilus --no-desktop"
 
-    -- Powerarrow-dark separators
-    arrl = wibox.widget.imagebox()
-    arrl:set_image(beautiful.arrl)
-    arrl_ld = wibox.widget.imagebox()
-    arrl_ld:set_image(beautiful.arrl_ld)
-    arrl_dl = wibox.widget.imagebox()
-    arrl_dl:set_image(beautiful.arrl_dl)
-
     -- Default modkey.
     modkey = "Mod4"
 
@@ -188,35 +180,31 @@ local shifty = require("lib/shifty")
 -- }}}
 
 -- {{{ Wibox
-    -- Create a textclock widget
-    mytextclock = awful.widget.textclock()
+    -- Separator Widget
+    separator = wibox.widget.textbox("  ")
 
     -- Battery Widget
     batwidget = wibox.widget.textbox()
-    vicious.register(batwidget, vicious.widgets.bat, '<span font="Inconsolata 11" color="#AAAAAA" background="#313131">$1$2% $3 </span>', 120, "BAT1")
+    vicious.register(batwidget, vicious.widgets.bat, '<span color="#AAAAAA">$1$2% $3</span>', 120, "BAT1")
     baticon = wibox.widget.imagebox()
     baticon:set_image(beautiful.ac)
 
     -- Volume Widget
-    volume = wibox.widget.textbox()
-    vicious.register(volume, vicious.widgets.volume, '<span font="Inconsolata 11" color="#AAAAAA" background="#1e2320">$1% </span>', 1, "Master")
+    volumewidget = wibox.widget.textbox()
+    vicious.register(volumewidget, vicious.widgets.volume, '<span color="#AAAAAA">$1%</span>', 1, "Master")
     volumeicon = wibox.widget.imagebox()
     vicious.register(volumeicon, vicious.widgets.volume, function(widget, args)
             local paraone = tonumber(args[1])
             if args[2] == "♩" or paraone == 0 then
                     volumeicon:set_image(beautiful.mute)
-            elseif paraone >= 33 and paraone <= 100 then
-                    volumeicon:set_image(beautiful.music)
             else
                     volumeicon:set_image(beautiful.music)
             end
     end, 120, "Master")
 
     -- Time and Date Widget
-    tdwidget = wibox.widget.textbox()
-    vicious.register(tdwidget, vicious.widgets.date, '<span font="Inconsolata 11" color="#AAAAAA" background="#313131"> %b %d %R </span>', 20)
-    clockicon = wibox.widget.imagebox()
-    clockicon:set_image(beautiful.clock)
+    clockwidget = wibox.widget.textbox()
+    vicious.register(clockwidget, vicious.widgets.date, '<span color="#AAAAAA">%b %d %R</span>', 20)
 
     -- Create a wibox for each screen and add it
     mywibox = {}
@@ -284,7 +272,7 @@ local shifty = require("lib/shifty")
         mytasklist[s] = awful.widget.tasklist(s, awful.widget.tasklist.filter.currenttags, mytasklist.buttons)
 
         -- Create the wibox
-        mywibox[s] = awful.wibox({ position = "top", screen = s, height = "16" })
+        mywibox[s] = awful.wibox({ position = "top", screen = s, height = "15" })
 
         -- Widgets that are aligned to the left
         local left_layout = wibox.layout.fixed.horizontal()
@@ -294,16 +282,15 @@ local shifty = require("lib/shifty")
         -- Widgets that are aligned to the right
         local right_layout = wibox.layout.fixed.horizontal()
         if s == 1 then right_layout:add(wibox.widget.systray()) end
-        right_layout:add(arrl_ld)
+        right_layout:add(separator)
         right_layout:add(baticon)
         right_layout:add(batwidget)
-        right_layout:add(arrl_dl)
+        right_layout:add(separator)
         right_layout:add(volumeicon)
-        right_layout:add(volume)
-        right_layout:add(arrl_ld)
-        right_layout:add(clockicon)
-        right_layout:add(tdwidget)
-        right_layout:add(arrl_dl)
+        right_layout:add(volumewidget)
+        right_layout:add(separator)
+        right_layout:add(clockwidget)
+        right_layout:add(separator)
         right_layout:add(mylayoutbox[s])
 
         -- Now bring it all together (with the tasklist in the middle)

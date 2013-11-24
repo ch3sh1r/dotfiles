@@ -26,10 +26,6 @@ Gnome:
 * [Ambiance Crunchy](http://gnome-look.org/content/show.php?content=151181) gtk theme
   by [frombenny](http://gnome-look.org/usermanager/search.php?username=frombenny)
 
-Awesome WM:
-* [powerarrow-dark](https://github.com/esn89/powerarrow-dark)
-  by [@esn89](https://github.com/esn89).
-
 ## Внешний вид
 
 ![floating](http://dl.dropboxusercontent.com/u/12576522/linked/github-dotfiles/floating.png)
