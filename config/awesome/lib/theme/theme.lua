@@ -70,7 +70,9 @@ theme.layout_max = theme_dir .. "/icons/max.png"
 
 --{{ For the charging (AC adaptor) icon }} --
 theme.ac_full = theme_dir .. "/icons/ac_full.png"
+theme.ac_medb = theme_dir .. "/icons/ac_medb.png"
 theme.ac_med = theme_dir .. "/icons/ac_med.png"
+theme.ac_medl = theme_dir .. "/icons/ac_medl.png"
 theme.ac_low = theme_dir .. "/icons/ac_low.png"
 
 --{{ For the volume icons }} --

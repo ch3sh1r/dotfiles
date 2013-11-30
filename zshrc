@@ -1,5 +1,5 @@
 # Подключаемые плагины
-plugins=(python pip archlinux taskwarrior)
+plugins=(python pip archlinux)
 
 # Имя цветовой темы
 ZSH_THEME="ch3sh1r"

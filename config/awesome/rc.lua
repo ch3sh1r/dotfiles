@@ -190,17 +190,21 @@ local shifty = require("lib/shifty")
     baticon = wibox.widget.imagebox()
     vicious.register(baticon, vicious.widgets.bat, function(widget, args)
             local paraone = tonumber(args[2])
-            if paraone <= 20 then
+            if paraone <= 10 then
                 baticon:set_image(beautiful.ac_low)
                 naughty.notify({ preset = naughty.config.presets.critical,
                                  title = "Battery discharging!",
                                  text = "Connect to power source. Now." })
-            elseif paraone <= 70 then
+            elseif paraone <= 35 then
+                baticon:set_image(beautiful.ac_medl)
+            elseif paraone <= 60 then
                 baticon:set_image(beautiful.ac_med)
+            elseif paraone <= 85 then
+                baticon:set_image(beautiful.ac_medb)
             else
                 baticon:set_image(beautiful.ac_full)
             end
-    end, 120, "BAT1")
+    end, 300, "BAT1")
 
     -- Volume Widget
     volumewidget = wibox.widget.textbox()
