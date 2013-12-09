@@ -23,11 +23,21 @@ else
 fi
 
 if [ -f /usr/bin/grc ]; then
-  alias ping="grc --colour=auto ping"
-  alias traceroute="grc --colour=auto traceroute"
-  alias make="grc --colour=auto make"
-  alias diff="grc --colour=auto diff"
-  alias netstat="grc --colour=auto netstat"
+    alias ping="grc --colour=auto ping"
+    alias traceroute="grc --colour=auto traceroute"
+    alias make="grc --colour=auto make"
+    alias diff="grc --colour=auto diff"
+    alias wdiff="grc --colour=auto wdiff"
+    alias netstat="grc --colour=auto netstat"
+    alias ifconfig="grc --colour=auto ifconfig"
+    alias configure="grc --colour=auto configure"
+    alias gcc="grc --colour=auto gcc"
+    alias last="grc --colour=auto last"
+    alias ldap="grc --colour=auto ldap"
+    alias mount="grc --colour=auto mount"
+    alias mtr="grc --colour=auto mtr"
+    alias ps="grc --colour=auto ps"
+    alias dig="grc --colour=auto dig"
 fi
 
 # Дерево из папки.
