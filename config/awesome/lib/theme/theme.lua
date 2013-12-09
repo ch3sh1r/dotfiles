@@ -17,7 +17,7 @@ theme.fg_urgent     = theme.bg_urgent
 
 theme.border_width  = 2
 theme.border_normal = theme.bg_normal
-theme.border_focus  = theme.fg_normal
+theme.border_focus  = theme.fg_focus
 theme.border_marked = theme.fg_normal
 
 -- There are other variable sets
