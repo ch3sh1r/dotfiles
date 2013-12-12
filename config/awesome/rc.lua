@@ -560,14 +560,12 @@ local shifty = require("lib/shifty")
 -- }}
 
 -- {{{ Autostart
-    --awful.util.spawn_with_shell("dropbox start -i")
-    --awful.util.spawn_with_shell("runone everpad")
-    awful.util.spawn_with_shell("setxkbmap -layout 'us,ru' -option 'grp:alt_shift_toggle'")
-    awful.util.spawn_with_shell("setxkbmap -option caps:escape")
-    awful.util.spawn_with_shell('xinput --set-prop "TPPS/2 IBM TrackPoint" "Evdev Wheel Emulation" 1')
-    awful.util.spawn_with_shell('xinput --set-prop "TPPS/2 IBM TrackPoint" "Evdev Wheel Emulation Button" 2')
-    awful.util.spawn_with_shell('xinput --set-prop "TPPS/2 IBM TrackPoint" "Evdev Wheel Emulation Timeout" 200')
-    awful.util.spawn_with_shell('xinput --set-prop "TPPS/2 IBM TrackPoint" "Evdev Wheel Emulation Axes" 6 7 4 5')
+    awful.util.spawn_with_shell("sleep 3; setxkbmap -layout 'us,ru' -option 'grp:alt_shift_toggle'")
+    awful.util.spawn_with_shell("sleep 3; setxkbmap -option caps:escape")
+    awful.util.spawn_with_shell('sleep 3; xinput --set-prop "TPPS/2 IBM TrackPoint" "Evdev Wheel Emulation" 1')
+    awful.util.spawn_with_shell('sleep 3; xinput --set-prop "TPPS/2 IBM TrackPoint" "Evdev Wheel Emulation Button" 2')
+    awful.util.spawn_with_shell('sleep 3; xinput --set-prop "TPPS/2 IBM TrackPoint" "Evdev Wheel Emulation Timeout" 200')
+    awful.util.spawn_with_shell('sleep 3; xinput --set-prop "TPPS/2 IBM TrackPoint" "Evdev Wheel Emulation Axes" 6 7 4 5')
     run_once("gnome-screensaver")
     run_once("nm-applet")
 -- }}}
