@@ -128,12 +128,14 @@ local shifty = require("lib/shifty")
     -- order here matters, early rules will be applied first
     shifty.config.apps = {
         {
-            match = { "Navigator", },
+            match = { "Navigator", "Firefox", },
             tag = "web",
+            nopopup = true,
         },
         {
             match = { "Thunderbird", "mutt", },
             tag = "mail",
+            nopopup = true,
         },
         {
             match = { "LibreOffice.*", },
