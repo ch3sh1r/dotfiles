@@ -128,7 +128,7 @@ local shifty = require("lib/shifty")
     -- order here matters, early rules will be applied first
     shifty.config.apps = {
         {
-            match = { "Navigator", "Firefox", },
+            match = { "Navigator", "Chromium", },
             tag = "web",
             nopopup = true,
         },

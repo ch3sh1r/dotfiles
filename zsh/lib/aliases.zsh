@@ -29,7 +29,6 @@ if [ -f /usr/bin/grc ]; then
     alias diff="grc --colour=auto diff"
     alias wdiff="grc --colour=auto wdiff"
     alias netstat="grc --colour=auto netstat"
-    alias ifconfig="grc --colour=auto ifconfig"
     alias configure="grc --colour=auto configure"
     alias gcc="grc --colour=auto gcc"
     alias last="grc --colour=auto last"
