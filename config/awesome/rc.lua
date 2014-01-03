@@ -40,10 +40,6 @@ local shifty = require("lib/shifty")
 -- }}}
 
 -- {{{ Variable definitions
-    -- Themes define colours, icons, and wallpapers
-    theme_dir = ("/home/ch3sh1r/.config/awesome/lib/theme/")
-    beautiful.init(theme_dir .. "theme.lua")
-
     -- This is used later as the default terminal, browser and editor to run.
     terminal = "gnome-terminal"
     editor = "vim"
@@ -71,10 +67,13 @@ local shifty = require("lib/shifty")
     }
 -- }}}
 
--- {{{ Wallpaper
+-- {{{ Wallpaper and theme definitions
+    theme_dir = ("/home/ch3sh1r/.config/awesome/lib/theme/")
+    beautiful.init(theme_dir .. "theme.lua")
+
     if beautiful.wallpaper then
         for s = 1, screen.count() do
-            gears.wallpaper.tiled(beautiful.wallpaper, s)
+            gears.wallpaper.maximized(beautiful.wallpaper, s)
         end
     end
 -- }}}
@@ -97,7 +96,11 @@ local shifty = require("lib/shifty")
             exclusive   = false,
             max_clients = 1,
             position    = 1,
-            spawn       = browser,
+        },
+        game = {
+            layout    = awful.layout.suit.max,
+            exclusive = false,
+            position  = 5,
         },
         media = {
             layout    = awful.layout.suit.float,
@@ -107,7 +110,6 @@ local shifty = require("lib/shifty")
         virtual = {
             layout    = awful.layout.suit.tile.left,
             exclusive = false,
-            spawn     = virtual,
             position  = 7,
         },
         office = {
@@ -119,7 +121,6 @@ local shifty = require("lib/shifty")
             mwfact    = 0.4,
             exclusive = false,
             position  = 9,
-            spawn     = mail,
             slave     = true
         },
     }
@@ -138,6 +139,11 @@ local shifty = require("lib/shifty")
             nopopup = true,
         },
         {
+            match = { "Steam", },
+            tag = "game",
+            nopopup = true,
+        },
+        {
             match = { "LibreOffice.*", },
             tag = "office",
         },
@@ -145,11 +151,6 @@ local shifty = require("lib/shifty")
             match = { "gimp", "easytag", },
             tag = "media",
             nopopup = true,
-        },
-        {
-            match = { "Pidgin", "Skype", },
-            slave = true,
-            float = true,
         },
         {
             match = { "VirtualBox", "vmware" },
@@ -187,8 +188,9 @@ local shifty = require("lib/shifty")
     separator = wibox.widget.textbox("  ")
 
     -- Battery Widget
+    local batn = "BAT1"
     batwidget = wibox.widget.textbox()
-    vicious.register(batwidget, vicious.widgets.bat, '<span color="#AAAAAA">$1$2% $3</span>', 5, "BAT1")
+    vicious.register(batwidget, vicious.widgets.bat, '<span color="#AAAAAA">$1$2%</span>', 5, batn)
     baticon = wibox.widget.imagebox()
     vicious.register(baticon, vicious.widgets.bat, function(widget, args)
             local paraone = tonumber(args[2])
@@ -206,7 +208,7 @@ local shifty = require("lib/shifty")
             else
                 baticon:set_image(beautiful.ac_full)
             end
-    end, 300, "BAT1")
+    end, 300, batn)
 
     -- Volume Widget
     volumewidget = wibox.widget.textbox()
