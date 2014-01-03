@@ -1,7 +1,3 @@
-#
-# Простенькая часть
-#
-
 alias iddqd="sudo -s"
 alias p="ps auxw"
 alias df="df -h"
@@ -10,6 +6,7 @@ alias recal="cat ~/.zsh_history|grep"
 alias vi="vim"
 alias cvi="vim -c :colorscheme\ default"
 alias screen="screen -DR"
+alias genpasswd='openssl rand -base64 12'
 
 alias ifconfig.me="curl ifconfig.me/all"
 alias gist="gist -f"
