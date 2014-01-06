@@ -40,14 +40,6 @@ local shifty = require("lib/shifty")
 -- }}}
 
 -- {{{ Variable definitions
-    -- This is used later as the default terminal, browser and editor to run.
-    terminal = "gnome-terminal"
-    editor = "vim"
-    editor_cmd = terminal .. " -e " .. editor
-    editor_gui = "gvim"
-    browser = "firefox"
-    file_manager = "nautilus --no-desktop"
-
     -- Default modkey.
     modkey = "Mod4"
 
@@ -375,9 +367,9 @@ local shifty = require("lib/shifty")
         awful.key({ }, "XF86AudioMute",        function () awful.util.spawn("amixer sset Master toggle") end),
 
         -- Standard program
-        awful.key({ modkey,           }, "Return", function () awful.util.spawn(terminal) end),
-        awful.key({ modkey, "Shift"   }, "n", function () awful.util.spawn(file_manager) end),
-        awful.key({ modkey, "Shift"   }, "f", function () awful.util.spawn(browser) end),
+        awful.key({ modkey,           }, "Return", function () awful.util.spawn("gnome-terminal") end),
+        awful.key({ modkey, "Shift"   }, "n", function () awful.util.spawn("nautilus --no-desktop") end),
+        awful.key({ modkey, "Shift"   }, "f", function () awful.util.spawn("firefox") end),
         awful.key({ modkey, "Shift"   }, "t", function () awful.util.spawn("thunderbird") end),
         awful.key({ modkey, "Shift"   }, "p", function () awful.util.spawn("pidgin") end),
         awful.key({ modkey, "Shift"   }, "s", function () awful.util.spawn("skype") end),
