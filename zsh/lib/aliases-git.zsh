@@ -69,4 +69,3 @@ alias ggpush='git push origin $(current_branch)'
 compdef _git ggpush=git
 alias ggpnp='git pull origin $(current_branch) && git push origin $(current_branch)'
 compdef _git ggpnp=git
-
