@@ -2,9 +2,8 @@ alias iddqd="sudo -s"
 alias p="ps auxw"
 alias df="df -h"
 alias du="du -h"
-alias recal="cat ~/.zsh_history|grep"
 alias vi="vim"
-alias screen="screen -DR"
+alias recal="cat ${HISTFILE}|grep"
 alias genpasswd='openssl rand -base64 12'
 
 if [ -f /usr/bin/ack-grep ]; then
