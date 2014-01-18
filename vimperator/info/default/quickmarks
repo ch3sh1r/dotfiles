@@ -1,6 +1,7 @@
 {
 "D":"about:downloads",
 "M":"http://dropmail.me/",
+"S":"https://stepic.org/",
 "a":"http://freelansim.ru/my/responses",
 "b":"https://bitbucket.org/",
 "c":"https://www.coursera.org/",
@@ -16,9 +17,9 @@
 "o":"https://www.odesk.com/find-work-home/",
 "p":"https://portal.bugcrowd.com/bounties",
 "r":"http://cloud.feedly.com/#my",
-"s":"https://beta.stepic.org/",
+"s":"http://www.soundslice.com/top-requested/",
 "t":"https://twitter.com/",
 "v":"https://vk.com/feed",
 "w":"http://watch.is/login",
-"y":"http://2gis.ru/",
+"y":"http://2gis.ru/"
 }
