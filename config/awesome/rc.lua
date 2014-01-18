@@ -182,7 +182,7 @@ local shifty = require("lib/shifty")
     -- Battery Widget
     local batn = "BAT1"
     batwidget = wibox.widget.textbox()
-    vicious.register(batwidget, vicious.widgets.bat, '<span color="#AAAAAA">$1$2%</span>', 5, batn)
+    vicious.register(batwidget, vicious.widgets.bat, '<span color="#AAAAAA">$1$2% $3</span>', 5, batn)
     baticon = wibox.widget.imagebox()
     vicious.register(baticon, vicious.widgets.bat, function(widget, args)
             local paraone = tonumber(args[2])
