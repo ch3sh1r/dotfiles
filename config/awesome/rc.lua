@@ -140,7 +140,7 @@ local shifty = require("lib/shifty")
             tag = "office",
         },
         {
-            match = { "gimp", "easytag", },
+            match = { "gimp", "easytag", "vlc", },
             tag = "media",
             nopopup = true,
         },
