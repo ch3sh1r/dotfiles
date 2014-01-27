@@ -99,9 +99,6 @@ set nobackup                " Не создавать бэкапы
     " Замена <leader> на "," со стандартного "\"
         let mapleader = ","
 
-    " Поиск и замена слова под курсором
-        nmap ; :%s/\<<c-r>=expand("<cword>")<cr>\>/
-
     " Убрать мусор из прошлого поиска
         nnoremap <leader><space> :noh<cr>
 
