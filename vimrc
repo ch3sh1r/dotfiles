@@ -30,7 +30,7 @@ set history=128             " Хранить больше истории ком�
 set undolevels=2048         "   и правок
 set nobackup                " Не создавать бэкапы
 
-"--------------------- СРЕДА -----------------------
+""" Настройки среды
     " Выключить звуки
         set noerrorbells
         set novisualbell            
@@ -72,7 +72,6 @@ set nobackup                " Не создавать бэкапы
     " Подстветка
         syntax on
         filetype plugin on
-        autocmd BufRead *.conf :set filetype=sh
         set t_Co=16
         set background=dark
         colorscheme solarized
@@ -89,8 +88,14 @@ set nobackup                " Не создавать бэкапы
     " Самопальные шаблоны
         autocmd! BufNewFile * silent! 0r ~/.vim/templates/template.%:e
 
+    " Автоматическая проверка правописания
+        autocmd BufRead,BufNewFile *.md setlocal spell spelllang=ru_yo,en_us
+        autocmd BufRead,BufNewFile *.markdown setlocal spell spelllang=ru_yo,en_us
+        autocmd BufRead,BufNewFile *.tex setlocal spell spelllang=ru_yo,en_us
+        autocmd BufRead,BufNewFile *.htm setlocal spell spelllang=ru_yo,en_us
+        autocmd BufRead,BufNewFile *.html setlocal spell spelllang=ru_yo,en_us
 
-"--------------------- ХОТКЕИ ----------------------
+""" Подвешивание клавиатурных сочетаний
     " Замена <leader> на "," со стандартного "\"
         let mapleader = ","
 
