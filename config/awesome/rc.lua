@@ -109,11 +109,8 @@ local shifty = require("lib/shifty")
             position  = 8,
         },
         mail = {
-            layout    = awful.layout.suit.tile.left,
-            mwfact    = 0.4,
-            exclusive = false,
+            layout    = awful.layout.suit.max,
             position  = 9,
-            slave     = true
         },
     }
 
@@ -126,7 +123,7 @@ local shifty = require("lib/shifty")
             nopopup = true,
         },
         {
-            match = { "Thunderbird", "mutt", },
+            match = { "Thunderbird", },
             tag = "mail",
             nopopup = true,
         },
