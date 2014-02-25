@@ -553,4 +553,5 @@ local shifty = require("lib/shifty")
 -- {{{ Autostart
     run_once("gnome-screensaver")
     run_once("nm-applet")
+    run_once("bluetooth-applet")
 -- }}}

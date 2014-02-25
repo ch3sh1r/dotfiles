@@ -23,8 +23,7 @@ Metasploit:
 Gnome:
 * [gnome-terminal-colors-solarized](https://github.com/sigurdga/gnome-terminal-colors-solarized)
   by [@sigurdga](https://github.com/sigurdga).
-* [Ambiance Crunchy](http://gnome-look.org/content/show.php?content=151181) gtk theme
-  by [frombenny](http://gnome-look.org/usermanager/search.php?username=frombenny)
+* [Numix](http://numixproject.org/) gtk theme.
 
 ## Внешний вид
 
