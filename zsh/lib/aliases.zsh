@@ -3,7 +3,7 @@ alias p="ps auxw"
 alias df="df -h"
 alias du="du -h"
 alias vi="vim"
-alias recal="cat ${HISTFILE}|grep"
+alias recal="cat $HISTFILE | cut -d';' -f2 | grep"
 alias genpasswd='openssl rand -base64 12'
 
 if [ -f /usr/bin/ack-grep ]; then
@@ -17,7 +17,6 @@ fi
 if [ -f /usr/bin/grc ]; then
     alias ping="grc --colour=auto ping"
     alias traceroute="grc --colour=auto traceroute"
-    #alias make="grc --colour=auto make"
     alias diff="grc --colour=auto diff"
     alias wdiff="grc --colour=auto wdiff"
     alias netstat="grc --colour=auto netstat"

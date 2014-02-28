@@ -94,7 +94,6 @@ local shifty = require("lib/shifty")
         media = {
             layout    = awful.layout.suit.float,
             mwfact    = 0.4,
-            max_clients = 1,
             position  = 6,
         },
         virtual = {
