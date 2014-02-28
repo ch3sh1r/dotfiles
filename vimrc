@@ -6,7 +6,6 @@ filetype off
 set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
     Bundle 'altercation/vim-colors-solarized'
-    Bundle 'davidhalter/jedi-vim'
     Bundle 'gmarik/vundle'
     Bundle 'mileszs/ack.vim'
     Bundle 'scrooloose/nerdcommenter'
