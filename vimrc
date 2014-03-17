@@ -6,12 +6,10 @@ filetype off
 set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
     Bundle 'gmarik/vundle'
-    Bundle 'altercation/vim-colors-solarized'
     Bundle 'scrooloose/nerdcommenter'
     Bundle 'tpope/vim-fugitive'
-    Bundle 'Valloric/YouCompleteMe'
-    Bundle 'vim-scripts/Conque-Shell'
-    Bundle 'vim-scripts/TaskList.vim'
+    Bundle 'valloric/youcompleteme'
+    Bundle 'vim-scripts/conque-shell'
 filetype plugin indent on
 
 set nocompatible            " Предпочтение настройкам Vim относительно Vi
