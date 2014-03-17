@@ -1,3 +1,6 @@
+" Цвета
+colorscheme solarized
+
 " Убираем лишнее
 set gui=nonavigation
 
