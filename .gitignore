@@ -1,9 +1,9 @@
 *.pyc
 *.swp
 
+vim/bundle
 vim/.netrwhist*
 vim/.VimballRecord
-vim/bundle/vundle/.netrwhis*
 
 vimperator/info/default/history-command
 vimperator/info/default/history-search
