@@ -3,7 +3,7 @@ alias p="ps auxw"
 alias df="df -h"
 alias du="du -h"
 alias vi="vim"
-alias recal="cat $HISTFILE | cut -d';' -f2 | grep"
+alias recal="cat ~/.zsh_history | cut -d';' -f2 | grep"
 alias genpasswd='openssl rand -base64 12'
 
 if [ -f /usr/bin/ack-grep ]; then
@@ -19,7 +19,6 @@ if [ -f /usr/bin/grc ]; then
     alias traceroute="grc --colour=auto traceroute"
     alias diff="grc --colour=auto diff"
     alias wdiff="grc --colour=auto wdiff"
-    alias netstat="grc --colour=auto netstat"
     alias configure="grc --colour=auto configure"
     alias gcc="grc --colour=auto gcc"
     alias last="grc --colour=auto last"
