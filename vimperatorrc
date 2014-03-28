@@ -13,7 +13,7 @@ map <S-Right> :tabmove! +1<cr>
 map <S-Left> :tabmove! -1<cr>
 
 " Поисковик по умолчанию
-set defsearch=google
+set defsearch=ya
 
 " Русские маппинги
 map ё `
