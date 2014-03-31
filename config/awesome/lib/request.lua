@@ -6,7 +6,7 @@ local tyrannical = nil
 capi.client.disconnect_signal("request::activate",ewmh.activate)
 capi.client.connect_signal("request::activate",function(c)
     if not tyrannical then
-        tyrannical = require("tyrannical")
+        tyrannical = require("lib/tyrannical")
     end
     local sel_tags = nil --TODO check if the current tag prevent _out stealing
     local tags = c:tags()
