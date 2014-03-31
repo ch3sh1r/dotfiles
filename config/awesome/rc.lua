@@ -123,6 +123,12 @@ local tyrannical = require("lib/tyrannical")
             class     = { "Thunderbird", },
         },
     }
+
+    -- Ignore the tag "exclusive" property for the following clients (matched by classes)
+    tyrannical.properties.intrusive = { "gnome-terminal", }
+
+    -- Ignore the tiled layout for the matching clients
+    tyrannical.properties.floating = { "gtksu", }
 -- }}}
 
 -- {{{ Wibox
