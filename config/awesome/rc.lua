@@ -281,11 +281,41 @@ local tyrannical = require("lib/tyrannical")
         awful.key({ modkey,           }, "Left",   awful.tag.viewprev       ),
         awful.key({ modkey,           }, "Right",  awful.tag.viewnext       ),
         awful.key({ modkey,           }, "Escape", awful.tag.history.restore),
-
-        -- Shifty keybindings
-        --awful.key({ modkey,           }, "d", shifty.del),
-        --awful.key({ modkey,           }, "i", shifty.rename),
-        --awful.key({ modkey,           }, "a", shifty.add),
+        awful.key({ modkey,           }, "d",      awful.tag.delete         ),
+        awful.key({ modkey,           }, "i",
+            function ()
+                awful.prompt.run({ prompt = "Tag new name: " },
+                    mypromptbox[mouse.screen].widget,
+                    function(new_name)
+                       if not new_name or #new_name == 0 then
+                          return
+                       else
+                          local screen = mouse.screen
+                          local tag = awful.tag.selected(screen)
+                          if tag then
+                             tag.name = new_name
+                          end
+                       end
+                    end)
+            end),
+        awful.key({ modkey,           }, "a",
+            function ()
+                awful.prompt.run({ prompt = "New tag name: " },
+                    mypromptbox[mouse.screen].widget,
+                    function(new_name)
+                        if not new_name or #new_name == 0 then
+                            return
+                        else
+                            props = {selected = true}
+                            if tyrannical.tags_by_name[new_name] then
+                               props = tyrannical.tags_by_name[new_name]
+                            end
+                            t = awful.tag.add(new_name, props)
+                            awful.tag.viewonly(t)
+                        end
+                    end
+                    )
+            end),
 
         awful.key({ modkey,           }, "j",
             function ()
