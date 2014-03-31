@@ -12,7 +12,7 @@ local naughty = require("naughty")
 
 local menubar = require("menubar")
 local vicious = require("vicious")
-local shifty = require("lib/shifty")
+local tyrannical = require("lib/tyrannical")
 
 -- {{{ Error handling
     -- Check if awesome encountered an error during startup and fell back to
@@ -70,101 +70,58 @@ local shifty = require("lib/shifty")
     end
 -- }}}
 
--- {{{ Shifty
-    -- Shifty configured tags.
-    shifty.config.tags = {
-        def = {
+-- {{{ Tyrannical
+    tyrannical.settings.default_layout =  awful.layout.suit.tile.left
+    tyrannical.settings.mwfact = 0.5
+
+    -- Теги
+    tyrannical.tags = {
+        {
+            name      = "main",
             layout    = awful.layout.suit.tile.left,
-            mwfact    = 0.5,
-            position  = 2,
+            position  = 1,
             init      = true,
-            screen    = 1,
         },
-        web = {
+        {
+            name        = "web",
             layout      = awful.layout.suit.tile.left,
             mwfact      = 0.35,
             max_clients = 1,
-            position    = 1,
+            position    = 2,
+            class       = { "Firefox", "Chromium", },
         },
-        game = {
-            layout    = awful.layout.suit.max,
+        {
+            name        = "game",
+            layout      = awful.layout.suit.max,
             leave_kills = true,
-            position  = 5,
+            position    = 5,
+            class       = { "Steam", },
         },
-        media = {
+        {
+            name      = "media",
             layout    = awful.layout.suit.float,
             mwfact    = 0.4,
             position  = 6,
+            class     = { "gimp", "easytag", "vlc", },
         },
-        virtual = {
+        {
+            name      = "virtual",
             layout    = awful.layout.suit.tile.left,
             position  = 7,
+            class     = { "VirtualBox", "vmware" },
         },
-        office = {
+        {
+            name      = "office",
             layout    = awful.layout.suit.tile.left,
             position  = 8,
+            class     = { "LibreOffice.*", },
         },
-        mail = {
+        {
+            name      = "mail",
             layout    = awful.layout.suit.max,
             position  = 9,
+            class     = { "Thunderbird", },
         },
-    }
-
-    -- Shifty application matching rules
-    -- order here matters, early rules will be applied first
-    shifty.config.apps = {
-        {
-            match = { "Navigator", "Chromium", },
-            tag = "web",
-            nopopup = true,
-        },
-        {
-            match = { "Thunderbird", },
-            tag = "mail",
-            nopopup = true,
-        },
-        {
-            match = { "Steam", },
-            tag = "game",
-            nopopup = true,
-        },
-        {
-            match = { "LibreOffice.*", },
-            tag = "office",
-        },
-        {
-            match = { "gimp", "easytag", "vlc", },
-            tag = "media",
-            nopopup = true,
-        },
-        {
-            match = { "VirtualBox", "vmware" },
-            tag = "virtual",
-            nopopup = true,
-        },
-        {
-            match = {""},
-            buttons = awful.util.table.join(
-                awful.button({}, 1, function (c) client.focus = c; c:raise() end),
-                awful.button({modkey}, 1, function(c)
-                    client.focus = c
-                    c:raise()
-                    awful.mouse.client.move(c)
-                    end),
-                awful.button({modkey}, 3, awful.mouse.client.resize)
-                )
-        },
-    }
-
-    -- Shifty default tag creation rules
-    -- parameter description
-    shifty.config.defaults = {
-        layout = awful.layout.suit.tile.left,
-        ncol = 1,
-        mwfact = 0.60,
-        floatBars = true,
-        guess_name = true,
-        guess_position = false,
     }
 -- }}}
 

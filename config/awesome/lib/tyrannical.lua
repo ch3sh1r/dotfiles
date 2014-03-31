@@ -235,7 +235,7 @@ if capi.awesome.startup == nil then
     end
 else
     -- Restore the old behavior in newer Awesome
-    require("tyrannical.extra.request")
+    require("request")
 end
 
 awful.tag.viewonly = function(t)
