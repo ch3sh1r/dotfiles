@@ -77,10 +77,10 @@ local tyrannical = require("lib/tyrannical")
     -- Теги
     tyrannical.tags = {
         {
-            name      = "main",
-            layout    = awful.layout.suit.tile.left,
-            position  = 1,
-            init      = true,
+            name     = "main",
+            layout   = awful.layout.suit.tile.left,
+            position = 1,
+            init     = true,
         },
         {
             name        = "web",
@@ -88,39 +88,44 @@ local tyrannical = require("lib/tyrannical")
             mwfact      = 0.35,
             max_clients = 1,
             position    = 2,
+            init        = false,
             class       = { "Firefox", "Chromium", },
         },
         {
-            name        = "game",
-            layout      = awful.layout.suit.max,
-            leave_kills = true,
-            position    = 5,
-            class       = { "Steam", },
+            name     = "game",
+            layout   = awful.layout.suit.max,
+            position = 5,
+            init     = false,
+            class    = { "Steam", },
         },
         {
-            name      = "media",
-            layout    = awful.layout.suit.float,
-            mwfact    = 0.4,
-            position  = 6,
-            class     = { "gimp", "easytag", "vlc", },
+            name     = "media",
+            layout   = awful.layout.suit.float,
+            mwfact   = 0.4,
+            position = 6,
+            init     = false,
+            class    = { "gimp", "easytag", "vlc", },
         },
         {
-            name      = "virtual",
-            layout    = awful.layout.suit.tile.left,
-            position  = 7,
-            class     = { "VirtualBox", "vmware" },
+            name     = "virtual",
+            layout   = awful.layout.suit.tile.left,
+            position = 7,
+            init     = false,
+            class    = { "VirtualBox", "vmware" },
         },
         {
-            name      = "office",
-            layout    = awful.layout.suit.tile.left,
-            position  = 8,
-            class     = { "LibreOffice.*", },
+            name     = "office",
+            layout   = awful.layout.suit.tile.left,
+            position = 8,
+            init     = false,
+            class    = { "LibreOffice.*", },
         },
         {
-            name      = "mail",
-            layout    = awful.layout.suit.max,
-            position  = 9,
-            class     = { "Thunderbird", },
+            name     = "mail",
+            layout   = awful.layout.suit.max,
+            position = 9,
+            init     = false,
+            class    = { "Thunderbird", },
         },
     }
 
@@ -469,6 +474,27 @@ local tyrannical = require("lib/tyrannical")
 
     -- Set keys
     root.keys(globalkeys)
+-- }}}
+
+-- {{{ Rules
+    awful.rules.rules = {
+        -- All clients will match this rule.
+        { rule = { },
+          properties = { border_width = beautiful.border_width,
+                         border_color = beautiful.border_normal,
+                         focus = awful.client.focus.filter,
+                         keys = clientkeys,
+                         buttons = clientbuttons } },
+        { rule = { class = "MPlayer" },
+          properties = { floating = true } },
+        { rule = { class = "pinentry" },
+          properties = { floating = true } },
+        { rule = { class = "gimp" },
+          properties = { floating = true } },
+        -- Set Firefox to always map on tags number 2 of screen 1.
+        -- { rule = { class = "Firefox" },
+        --   properties = { tag = tags[1][2] } },
+    }
 -- }}}
 
 -- {{{ Signals
