@@ -81,6 +81,7 @@ local tyrannical = require("lib/tyrannical")
             layout   = awful.layout.suit.tile.left,
             position = 1,
             init     = true,
+            selected    = true,
         },
         {
             name        = "web",
