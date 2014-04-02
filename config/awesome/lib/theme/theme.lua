@@ -62,6 +62,7 @@ theme.wallpaper = theme_dir .. "/grumpy.png"
 
 -- You can use your own layout icons like this:
 theme.layout_floating  = theme_dir .. "/icons/floating.png"
+theme.layout_spiral  = theme_dir .. "/icons/spiral.png"
 theme.layout_tilebottom = theme_dir  .. "/icons/tilebottom.png"
 theme.layout_tileleft   = theme_dir .. "/icons/tileleft.png"
 theme.layout_tile = theme_dir .. "/icons/tile.png"
