@@ -47,10 +47,10 @@ local tyrannical = require("lib/tyrannical")
     local layouts =
     {
         awful.layout.suit.floating,
+        awful.layout.suit.spiral,
         awful.layout.suit.tile.left,
         awful.layout.suit.tile.bottom,
         awful.layout.suit.max,
-        --awful.layout.suit.spiral,
         --awful.layout.suit.fair,
         --awful.layout.suit.fair.horizontal,
         --awful.layout.suit.spiral.dwindle,
@@ -78,7 +78,7 @@ local tyrannical = require("lib/tyrannical")
     tyrannical.tags = {
         {
             name     = "main",
-            layout   = awful.layout.suit.tile.left,
+            layout   = awful.layout.suit.spiral,
             position = 1,
             init     = true,
             selected    = true,
@@ -109,8 +109,9 @@ local tyrannical = require("lib/tyrannical")
         },
         {
             name     = "virtual",
-            layout   = awful.layout.suit.tile.left,
+            layout   = awful.layout.suit.max,
             position = 7,
+            max_clients = 1,
             init     = false,
             class    = { "VirtualBox", "vmware" },
         },
@@ -118,8 +119,11 @@ local tyrannical = require("lib/tyrannical")
             name     = "office",
             layout   = awful.layout.suit.tile.left,
             position = 8,
+            max_clients = 1,
             init     = false,
-            class    = { "LibreOffice.*", },
+            class    = { "libreoffice-writer", "libreoffice-calc",
+                         "libreoffice-calc", "libreoffice-startcenter",
+                         "libreoffice-math", },
         },
         {
             name     = "mail",
@@ -516,12 +520,12 @@ local tyrannical = require("lib/tyrannical")
                          focus = awful.client.focus.filter,
                          keys = clientkeys,
                          buttons = clientbuttons } },
-        { rule = { class = "MPlayer" },
-          properties = { floating = true } },
-        { rule = { class = "pinentry" },
-          properties = { floating = true } },
-        { rule = { class = "gimp" },
-          properties = { floating = true } },
+        --{ rule = { class = "MPlayer" },
+          --properties = { floating = true } },
+        --{ rule = { class = "pinentry" },
+          --properties = { floating = true } },
+        --{ rule = { class = "gimp" },
+          --properties = { floating = true } },
         -- Set Firefox to always map on tags number 2 of screen 1.
         -- { rule = { class = "Firefox" },
         --   properties = { tag = tags[1][2] } },
