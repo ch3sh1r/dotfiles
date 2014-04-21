@@ -1,4 +1,0 @@
-#!/bin/bash
-
-mpc next
-notify-send "$(mpc current)"
