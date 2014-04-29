@@ -5,10 +5,13 @@ vim/bundle/*
 vim/.netrwhist*
 vim/.VimballRecord
 
-vimperator/info/default/history-command
-vimperator/info/default/history-search
-vimperator/info/default/local-marks
-vimperator/info/default/macros
+pentadactyl/info/default/cache
+pentadactyl/info/default/command-history
+pentadactyl/info/default/ignored-keys
+pentadactyl/info/default/local-marks
+pentadactyl/info/default/register-ring
+pentadactyl/info/default/registers
+pentadactyl/info/default/url-marks
 
 zsh/cache
 
