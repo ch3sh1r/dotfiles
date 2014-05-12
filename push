@@ -3,7 +3,7 @@
 
 for dotfile in `ls`
 do
-    if [ $dotfile == "push.sh" -o \
+    if [ $dotfile == `basename $0` -o \
          $dotfile == "README.md" ]; then
         false
 
