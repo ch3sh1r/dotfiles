@@ -1,0 +1,35 @@
+#!/bin/bash
+# Push all files at right places.
+
+for dotfile in `ls`
+do
+    if [ $dotfile == "push.sh" -o \
+         $dotfile == "README.md" ]; then
+        false
+
+    elif [ $dotfile == "config" ]; then
+        if ! [ -d "${HOME}/.config" ]; then 
+            mkdir "${HOME}/.config" 
+        fi
+        for config in `ls config`; do
+            rm -rf "${HOME}/.config/${config}"
+            ln -s "${PWD}/config/${config}" "${HOME}/.config/${config}"
+        done
+
+    elif [ $dotfile == "msf4" ]; then
+        msftemp="$(mktemp --tmpdir="${HOME}" -t ".msf4XXXXXXX" -d)"
+        for msffile in history local logs loot; do
+            [ -f "${HOME}/.msf4/${msffile}" ] && \
+                mv "${HOME}/.msf4/${msffile}" ${msftemp}; done
+        rm -rf "${HOME}/.msf4"
+        ln -s "${PWD}/msf4" "${HOME}/.$dotfile"
+        for msffile in history local logs loot; do
+            [ -f "${msftemp}/${msffile}" ] && \
+                mv "${msftemp}/${msffile}" "${HOME}/.msf4"; done
+        rm -rf ${msftemp}
+
+    else
+        rm -rf "${HOME}/.${dotfile}"
+        ln -s "${PWD}/$dotfile" "${HOME}/.$dotfile"
+    fi
+done
