@@ -1,8 +1,8 @@
 # Подключаемые плагины
-plugins=(python pip vagrant)
+plugins=()
 
 # Имя цветовой темы
-ZSH_THEME="ch3sh1r"
+ZSH_THEME="random"
 
 # .localrc для использования на машине
 [[ -f ~/.localrc ]] && . ~/.localrc
