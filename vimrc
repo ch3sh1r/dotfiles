@@ -1,17 +1,6 @@
 " @ch3sh1r vimrc (https://github.com/ch3sh1r/dotfiles)
 " Maintained by Alexey Bednyakov, <ch3sh1r@ya.ru>
 
-" Vundle (https://github.com/gmarik/vundle)
-filetype off
-set rtp+=~/.vim/bundle/vundle/
-call vundle#rc()
-    Bundle 'gmarik/vundle'
-    Bundle 'scrooloose/nerdcommenter'
-    Bundle 'tpope/vim-fugitive'
-    Bundle 'valloric/youcompleteme'
-    Bundle 'vim-scripts/conque-shell'
-filetype plugin indent on
-
 set nocompatible            " Предпочтение настройкам Vim относительно Vi
 set ruler                   " Показывать положение курсора всё время
 set showcmd                 " Показывать незавершенные команды в статусбаре
@@ -54,11 +43,6 @@ set bs=2                    " Backspace работает как всегда
         set tabstop=4
         set smartindent
         set smarttab
-
-    " Поддержка мыши 
-        set mouse=a             " Использовать мышь, если терминал позволяет
-        set mousemodel=popup    " Выдавать меню по правому клику
-        set mousehide           " Скрывать указатель мыши когда печатаем
 
     " Поиск 
         set ignorecase          " Поиск не чувствительный к регистру 
