@@ -2,7 +2,7 @@
     "B":"https://svbtle.com/dashboard",
     "C":"https://calendar.yandex.ru/week",
     "D":"about:downloads",
-    "F":"https://www.facebook.com/",
+    "F":"http://www.last.fm/user/chesh1r",
     "M":"http://dropmail.me/",
     "S":"https://stepic.org/",
     "a":"http://freelansim.ru/my/responses",
@@ -10,7 +10,7 @@
     "c":"https://www.coursera.org/",
     "d":"https://www.dropbox.com/home",
     "e":"https://www.evernote.com/Home.action#st=p&n=4ca49bdf-4246-499a-a6f1-7a60b4317500",
-    "f":"http://www.last.fm/user/chesh1r",
+    "f":"https://www.facebook.com/",
     "g":"https://github.com/ch3sh1r",
     "h":"http://habrahabr.ru/top/",
     "i":"http://instudies.com/tool/activity",
@@ -24,5 +24,5 @@
     "t":"https://twitter.com/",
     "v":"https://vk.com/feed",
     "w":"http://watch.is/login",
-    "y":"http://2gis.ru/"
+    "y":"http://2gis.ru/",
 }
