@@ -10,22 +10,28 @@
 `~/<long_way_to_code_directory>/dotfiles`) и из него кидаются 
 симлинки в `~`:
 
-    git clone https://github.com/ch3sh1r/dotfiles.git && cd dotfiles && ./push.sh -l
+    git clone https://github.com/ch3sh1r/dotfiles.git 
+    cd dotfiles
+    ./push
 
 Иногда удобнее скопировать минимально необходимое и обойтись 
-без зависимостей в виде симлинков. На этот случай `./push.sh -f`
-скопирует все без настроек awesome и еще какой-то шелухи.
+без зависимостей в виде симлинков. На этот случай есть ветка 
+[server](https://github.com/ch3sh1r/dotfiles/tree/server).
+
+    git clone https://github.com/ch3sh1r/dotfiles.git 
+    cd dotfiles
+    git checkout server
+    ./push
 
 ### Установка без Git
-Можно скачать архив со свежайшими комитами:
+Можно скачать архив текущей версии:
 
     cd; wget https://github.com/ch3sh1r/dotfiles/tarball/master
 
-Затем ручками распаковать (`tar xzf dotfiles`) и выполнить `./push.sh`.
+Затем ручками распаковать (`tar xzf dotfiles`) и выполнить `./push`.
 
 ## Зависимости
-Все когда-то работало на Ubuntu до 12.10. Сейчас я пересел на Arch и все 
-запускается вот с [таким]() списком пакетов.
+Все работает на Ubuntu (с [ppa](https://launchpad.net/~klaus-vormweg/+archive/awesome) от Klaus Vormweg) и ArchLinux.
 
 Настройки понадерганы по всем интернетам, а идея записать что и 
 откуда пришло возникла не сразу. По этому если вы видете что чего-то в
