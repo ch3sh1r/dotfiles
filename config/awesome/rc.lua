@@ -579,4 +579,5 @@ local tyrannical = require("lib/tyrannical")
     run_once("gnome-screensaver")
     run_once("nm-applet")
     run_once("bluetooth-applet")
+    awful.util.spawn_with_shell("bash ~/.xprofile")
 -- }}}
