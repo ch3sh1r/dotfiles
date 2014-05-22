@@ -1,6 +1,9 @@
 " Цвета
 colorscheme solarized-light
 
+" Подсветка результатов поиска
+set hlfind
+
 " Переход по табам
 map <A-Right> gt
 map <A-Left> gT
