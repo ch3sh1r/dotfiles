@@ -1,6 +1,7 @@
 #!/bin/sh
 
 setxkbmap -layout 'us,ru' -option 'grp:alt_shift_toggle'
+setxkbmap -layout 'us,ru' -option 'grp:alt_space_toggle'
 setxkbmap -option caps:escape
 xinput --set-prop "TPPS/2 IBM TrackPoint" "Evdev Wheel Emulation" 1
 xinput --set-prop "TPPS/2 IBM TrackPoint" "Evdev Wheel Emulation Button" 2
