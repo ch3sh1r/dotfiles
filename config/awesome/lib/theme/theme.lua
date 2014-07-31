@@ -6,7 +6,7 @@ theme = {}
 theme_dir = ("/home/ch3sh1r/.config/awesome/lib/theme/")
 
 theme.font          = "terminus 9"
-theme.bg_normal     = "#2d2d2d"
+theme.bg_normal     = "#3c3b37"
 theme.bg_urgent     = theme.bg_normal
 theme.bg_focus      = theme.bg_normal
 theme.bg_systray    = theme.bg_normal
