@@ -1,7 +1,7 @@
 *.pyc
 *.swp
 
-vim/bundle/*
+vim/bundle/youcompleteme
 vim/.netrwhist*
 vim/.VimballRecord
 
