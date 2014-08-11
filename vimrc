@@ -86,11 +86,9 @@ set bs=2                    " Backspace работает как всегда
         autocmd! BufNewFile * silent! 0r ~/.vim/templates/template.%:e
 
     " Автоматическая проверка правописания
-        autocmd BufRead,BufNewFile *.md setlocal spell spelllang=ru_yo,en_us
-        autocmd BufRead,BufNewFile *.markdown setlocal spell spelllang=ru_yo,en_us
-        autocmd BufRead,BufNewFile *.tex setlocal spell spelllang=ru_yo,en_us
-        autocmd BufRead,BufNewFile *.htm setlocal spell spelllang=ru_yo,en_us
-        autocmd BufRead,BufNewFile *.html setlocal spell spelllang=ru_yo,en_us
+        for glob in ["*.md", "*.markdown", "*.tex", "*.htm", "*.html"]
+            autocmd BufRead,BufNewFile glob setlocal spell spelllang=ru_yo,en_us
+        endfor
 
 """ Подвешивание клавиатурных сочетаний
     " Замена <leader> на "," со стандартного "\"
