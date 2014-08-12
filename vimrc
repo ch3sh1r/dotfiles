@@ -20,7 +20,7 @@ set wrap                    " Включаем перенос строк
 set linebreak               " Перенос строк по словам, а не по буквам
 set foldmethod=indent       " Фолдинг по отступам
 set modelines=0             " Во-первых не нужны, во-вторых - дырки (http://clck.ru/Lx2G)
-set scrolljump=3            " Теперь нет необходимости передвигать курсор к 
+set scrolljump=3            " Теперь нет необходимости передвигать курсор к
 set scrolloff=3             "   краю экрана, чтобы подняться/опуститься
 set history=128             " Хранить больше истории команд
 set undolevels=2048         "   и правок
@@ -30,11 +30,11 @@ set bs=2                    " Backspace работает как всегда
 """ Настройки среды
     " Выключить звуки
         set noerrorbells
-        set novisualbell            
+        set novisualbell
         set tm=500
-        set t_vb=   
+        set t_vb=
 
-    " Строка состояния 
+    " Строка состояния
         set ch=1                " Строка команд высотой в одну строку
         set laststatus=2        " У последнего окна всегда есть статус
         set statusline=\ %<%-15.25(%f%)%m%r%h\ %w
@@ -46,7 +46,7 @@ set bs=2                    " Backspace работает как всегда
                 return curdir
         endfunction
 
-    " Отступы и табы 
+    " Отступы и табы
         set autoindent
         set expandtab
         set shiftwidth=4
@@ -55,14 +55,14 @@ set bs=2                    " Backspace работает как всегда
         set smartindent
         set smarttab
 
-    " Поддержка мыши 
+    " Поддержка мыши
         set mouse=a             " Использовать мышь, если терминал позволяет
         set mousemodel=popup    " Выдавать меню по правому клику
         set mousehide           " Скрывать указатель мыши когда печатаем
 
-    " Поиск 
-        set ignorecase          " Поиск не чувствительный к регистру 
-        set smartcase           "   сообразительный 
+    " Поиск
+        set ignorecase          " Поиск не чувствительный к регистру
+        set smartcase           "   сообразительный
         set incsearch           "   с подсветкой
         set hlsearch            "   по набору текста
 
@@ -90,6 +90,10 @@ set bs=2                    " Backspace работает как всегда
             autocmd BufRead,BufNewFile glob setlocal spell spelllang=ru_yo,en_us
         endfor
 
+    " Правила оформления Ruby в Metasploit
+    " https://github.com/rapid7/metasploit-framework/wiki/Style-Tips
+        autocmd BufRead,BufNewFile *.rb set shiftwidth=2 tabstop=2 softtabstop=2 textwidth=78
+
 """ Подвешивание клавиатурных сочетаний
     " Замена <leader> на "," со стандартного "\"
         let mapleader = ","
@@ -98,7 +102,7 @@ set bs=2                    " Backspace работает как всегда
         nnoremap <leader><space> :noh<cr>
 
     " Новый таб
-        nmap tn :tabnew 
+        nmap tn :tabnew
 
     " Беглые скачки
         nmap <Space> <PageDown>
@@ -111,7 +115,7 @@ set bs=2                    " Backspace работает как всегда
         vnoremap / /\v
 
     " leader-шорткаты
-        " <leader>e. - смена кодировок 
+        " <leader>e. - смена кодировок
             " <leader>ek - koi8
                 nmap <leader>ek :e ++enc=koi8-r<cr>
             " <leader>ew - cp1251
