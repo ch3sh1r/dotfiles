@@ -9,7 +9,7 @@ map <A-Right> gt
 map <A-Left> gT
 
 " Поисковик по умолчанию
-set defsearch=google
+set defsearch=ya
 
 " Русские маппинги
 map ё `
