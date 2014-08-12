@@ -2,6 +2,10 @@
 *.swp
 
 vim/bundle/youcompleteme
+vim/bundle/conque-shell
+vim/bundle/nerdcommenter
+vim/bundle/vim-fugitive
+vim/bundle/youcompleteme
 vim/.netrwhist*
 vim/.VimballRecord
 
