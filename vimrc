@@ -1,17 +1,6 @@
 " @ch3sh1r vimrc (https://github.com/ch3sh1r/dotfiles)
 " Maintained by Alexey Bednyakov, <ch3sh1r@ya.ru>
 
-" Vundle (https://github.com/gmarik/vundle)
-filetype off
-set rtp+=~/.vim/bundle/vundle/
-call vundle#rc()
-    Bundle 'gmarik/vundle'
-    Bundle 'scrooloose/nerdcommenter'
-    Bundle 'tpope/vim-fugitive'
-    Bundle 'valloric/youcompleteme'
-    Bundle 'vim-scripts/conque-shell'
-filetype plugin indent on
-
 set nocompatible            " Предпочтение настройкам Vim относительно Vi
 set ruler                   " Показывать положение курсора всё время
 set showcmd                 " Показывать незавершенные команды в статусбаре
@@ -27,135 +16,90 @@ set undolevels=2048         "   и правок
 set nobackup                " Не создавать бэкапы
 set bs=2                    " Backspace работает как всегда
 
-""" Настройки среды
-    " Выключить звуки
-        set noerrorbells
-        set novisualbell
-        set tm=500
-        set t_vb=
+" Выключить звуки
+    set noerrorbells
+    set novisualbell
+    set tm=500
+    set t_vb=
 
-    " Строка состояния
-        set ch=1                " Строка команд высотой в одну строку
-        set laststatus=2        " У последнего окна всегда есть статус
-        set statusline=\ %<%-15.25(%f%)%m%r%h\ %w
-        set statusline+=\ [%{&ff}/%Y]
-        set statusline+=\ %20.40(%{hostname()}:%{CurDir()}%)
-        set statusline+=\ %=%-8.(%l,%c%V%)\ %p%%/%L
-        function! CurDir()
-            let curdir = substitute(getcwd(), $HOME, "~", "")
-                return curdir
-        endfunction
+" Строка состояния
+    set ch=1                " Строка команд высотой в одну строку
+    set laststatus=2        " У последнего окна всегда есть статус
+    set statusline=\ %<%-15.25(%f%)%m%r%h\ %w
+    set statusline+=\ %20.40(%{hostname()}:%{CurDir()}%)
+    set statusline+=\ %=%-8.(%l,%c%V%)\ %p%%/%L
+    function! CurDir()
+        let curdir = substitute(getcwd(), $HOME, "~", "")
+            return curdir
+    endfunction
 
-    " Отступы и табы
-        set autoindent
-        set expandtab
-        set shiftwidth=4
-        set softtabstop=4
-        set tabstop=4
-        set smartindent
-        set smarttab
+" Отступы и табы
+    set autoindent
+    set expandtab
+    set shiftwidth=4
+    set softtabstop=4
+    set tabstop=4
+    set smartindent
+    set smarttab
 
-    " Поддержка мыши
-        set mouse=a             " Использовать мышь, если терминал позволяет
-        set mousemodel=popup    " Выдавать меню по правому клику
-        set mousehide           " Скрывать указатель мыши когда печатаем
+" Поддержка мыши
+    set mouse=a             " Использовать мышь, если терминал позволяет
+    set mousemodel=popup    " Выдавать меню по правому клику
+    set mousehide           " Скрывать указатель мыши когда печатаем
 
-    " Поиск
-        set ignorecase          " Поиск не чувствительный к регистру
-        set smartcase           "   сообразительный
-        set incsearch           "   с подсветкой
-        set hlsearch            "   по набору текста
+" Поиск
+    set ignorecase          " Поиск не чувствительный к регистру
+    set smartcase           "   сообразительный
+    set incsearch           "   с подсветкой
+    set hlsearch            "   по набору текста
 
-    " Подстветка
-        syntax on
-        filetype plugin on
-        set t_Co=16
-        set background=dark
-        colorscheme solarized
-        set cursorline
+" Подстветка
+    syntax on
+    filetype plugin on
+    set t_Co=16
+    set background=dark
+    colorscheme solarized
+    set cursorline
 
-    " Русская раскладка и кодировки
-        set termencoding=utf-8
-        set fileencodings=utf-8,latin1,cp1251
-        set langmap=ФИСВУАПРШОЛДЬТЩЗЙКЫЕГМЦЧНЯ;ABCDEFGHIJKLMNOPQRSTUVWXYZ,фисвуапршолдьтщзйкыегмцчня;abcdefghijklmnopqrstuvwxyz
-        imap ё `
-        nmap ё `
-        vmap ё `
+" Правила оформления Ruby в Metasploit
+" https://github.com/rapid7/metasploit-framework/wiki/Style-Tips
+    autocmd BufRead,BufNewFile *.rb set shiftwidth=2 tabstop=2 softtabstop=2 textwidth=78
 
-    " Самопальные шаблоны
-        autocmd! BufNewFile * silent! 0r ~/.vim/templates/template.%:e
+" Русская раскладка и кодировки
+    set termencoding=utf-8
+    set fileencodings=utf-8,latin1,cp1251
+    set langmap=ФИСВУАПРШОЛДЬТЩЗЙКЫЕГМЦЧНЯ;ABCDEFGHIJKLMNOPQRSTUVWXYZ,фисвуапршолдьтщзйкыегмцчня;abcdefghijklmnopqrstuvwxyz
+    imap ё `
+    nmap ё `
+    vmap ё `
 
-    " Автоматическая проверка правописания
-        for glob in ["*.md", "*.markdown", "*.tex", "*.htm", "*.html"]
-            autocmd BufRead,BufNewFile glob setlocal spell spelllang=ru_yo,en_us
-        endfor
+" Замена <leader> на "," со стандартного "\"
+    let mapleader = ","
 
-    " Правила оформления Ruby в Metasploit
-    " https://github.com/rapid7/metasploit-framework/wiki/Style-Tips
-        autocmd BufRead,BufNewFile *.rb set shiftwidth=2 tabstop=2 softtabstop=2 textwidth=78
+" Убрать мусор из прошлого поиска
+    nnoremap <leader><space> :noh<cr>
 
-""" Подвешивание клавиатурных сочетаний
-    " Замена <leader> на "," со стандартного "\"
-        let mapleader = ","
+" Новый таб
+    nmap tn :tabnew
 
-    " Убрать мусор из прошлого поиска
-        nnoremap <leader><space> :noh<cr>
+" Беглые скачки
+    nmap <Space> <PageDown>
+    vmap <Space> <PageDown>
+    nmap b <PageUp>
+    vmap b <PageUp>
 
-    " Новый таб
-        nmap tn :tabnew
+" Поиск нормальными регулярками
+    nnoremap / /\v
+    vnoremap / /\v
 
-    " Беглые скачки
-        nmap <Space> <PageDown>
-        vmap <Space> <PageDown>
-        nmap b <PageUp>
-        vmap b <PageUp>
-
-    " Поиск нормальными регулярками
-        nnoremap / /\v
-        vnoremap / /\v
-
-    " leader-шорткаты
-        " <leader>e. - смена кодировок
-            " <leader>ek - koi8
-                nmap <leader>ek :e ++enc=koi8-r<cr>
-            " <leader>ew - cp1251
-                nmap <leader>ew :e ++enc=cp1251<cr>
-            " <leader>ec - cp866
-                nmap <leader>ec :e ++enc=cp866<cr>
-            " <leader>eu - utf8
-                nmap <leader>eu :e ++enc=utf8<cr>
-            " <leader>eu - rot13
-                nmap <leader>er ggg?G <cr>
-
-        " <leader>g. - Fugitive
-            " <leader>gc - commit
-                nmap <leader>gc :Gcommit<cr>
-            " <leader>gh - add сохраненные изменения в текущем файле
-                nmap <leader>ga :Git add %<cr><cr>
-            " <leader>gh - hist (модификация log)
-                nmap <leader>gh :Git hist<cr>
-            " <leader>gd - diff
-                nmap <leader>gd :Gvdiff<cr><C-w>w
-            
-    " F<номер>-шорткаты
-        " F7 - проверка русской и английской орфографии
-            let g:orthography = 0
-            function! OrthographyToggle()
-              if g:orthography == 0
-                let g:orthography = 1
-                setlocal spell spelllang=ru_yo,en_us
-                echo "Orthography checker toggled on."
-              elseif g:orthography == 1
-                let g:orthography = 0
-                setlocal spell spelllang=
-                echo "Orthography checker toggled off."
-              endif
-            endfunction
-            map <F7> :call OrthographyToggle()<cr>
-
-    " Работа с буерами
-        " Быстрое перемещение
-            nnoremap <C-h> <C-w>h
-            nnoremap <C-j> <C-w>j
-            nnoremap <C-k> <C-w>k
-            nnoremap <C-l> <C-w>l
+" <leader>e. - смена кодировок
+    " <leader>ek - koi8
+        nmap <leader>ek :e ++enc=koi8-r<cr>
+    " <leader>ew - cp1251
+        nmap <leader>ew :e ++enc=cp1251<cr>
+    " <leader>ec - cp866
+        nmap <leader>ec :e ++enc=cp866<cr>
+    " <leader>eu - utf8
+        nmap <leader>eu :e ++enc=utf8<cr>
+    " <leader>eu - rot13
+        nmap <leader>er ggg?G <cr>
