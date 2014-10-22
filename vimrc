@@ -5,14 +5,14 @@ set nocompatible            " Предпочтение настройкам Vim 
 set ruler                   " Показывать положение курсора всё время
 set showcmd                 " Показывать незавершенные команды в статусбаре
 set nu                      " Нумерация строк
-set wrap                    " Включаем перенос строк
+set wrap                    " Перенос строк
 set linebreak               " Перенос строк по словам, а не по буквам
 set foldmethod=indent       " Фолдинг по отступам
 set modelines=0             " Во-первых не нужны, во-вторых - дырки (http://clck.ru/Lx2G)
 set scrolljump=3            " Теперь нет необходимости передвигать курсор к
-set scrolloff=3             "   краю экрана, чтобы подняться/опуститься
+set scrolloff=3             "  краю экрана, чтобы подняться/опуститься
 set history=128             " Хранить больше истории команд
-set undolevels=2048         "   и правок
+set undolevels=2048         "  и правок
 set nobackup                " Не создавать бэкапы
 set bs=2                    " Backspace работает как всегда
 
@@ -45,13 +45,13 @@ set bs=2                    " Backspace работает как всегда
 " Поддержка мыши
     set mouse=a             " Использовать мышь, если терминал позволяет
     set mousemodel=popup    " Выдавать меню по правому клику
-    set mousehide           " Скрывать указатель мыши когда печатаем
+    set mousehide           " Скрывать указатель мыши во время печати
 
 " Поиск
     set ignorecase          " Поиск не чувствительный к регистру
-    set smartcase           "   сообразительный
-    set incsearch           "   с подсветкой
-    set hlsearch            "   по набору текста
+    set smartcase           "  сообразительный
+    set incsearch           "  по набору текста
+    set hlsearch            "  с подсветкой
 
 " Подстветка
     syntax on
