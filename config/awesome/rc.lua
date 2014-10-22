@@ -98,7 +98,6 @@ local tyrannical = require("lib/tyrannical")
         },
         {
             name     = "media",
-            layout   = awful.layout.suit.float,
             mwfact   = 0.4,
             init     = false,
             class    = { "gimp", "easytag", "vlc", },
@@ -120,17 +119,21 @@ local tyrannical = require("lib/tyrannical")
         {
             name     = "office",
             layout   = awful.layout.suit.tile.left,
-            max_clients = 1,
             init     = false,
             class    = { "libreoffice-writer", "libreoffice-calc",
                          "libreoffice-calc", "libreoffice-startcenter",
                          "libreoffice-math", },
         },
         {
+            name     = "remote",
+            init     = false,
+            class    = { "remmina",  },
+        },
+        {
             name     = "mail",
             layout   = awful.layout.suit.max,
             init     = false,
-            class    = { "Thunderbird", },
+            class    = { "Thunderbird", "Claws-Mail",  },
         },
     }
 
@@ -579,5 +582,6 @@ local tyrannical = require("lib/tyrannical")
     run_once("gnome-screensaver")
     run_once("nm-applet")
     run_once("bluetooth-applet")
+    --run_once("dropbox start")
     awful.util.spawn_with_shell("bash ~/.xprofile")
 -- }}}
