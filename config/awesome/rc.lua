@@ -88,7 +88,7 @@ local tyrannical = require("lib/tyrannical")
             mwfact      = 0.35,
             max_clients = 1,
             init        = false,
-            class       = { "Firefox", "Chromium", },
+            class       = { "Firefox", "Chromium", "dwb" },
         },
         {
             name     = "game",
@@ -368,7 +368,7 @@ local tyrannical = require("lib/tyrannical")
         -- Standard program
         awful.key({ modkey,           }, "Return", function () awful.util.spawn("gnome-terminal") end),
         awful.key({ modkey, "Shift"   }, "n", function () awful.util.spawn("nautilus --no-desktop") end),
-        awful.key({ modkey, "Shift"   }, "f", function () awful.util.spawn("firefox") end),
+        awful.key({ modkey, "Shift"   }, "d", function () awful.util.spawn("dwb") end),
         awful.key({ modkey, "Shift"   }, "t", function () awful.util.spawn("thunderbird") end),
         awful.key({ modkey, "Shift"   }, "g", function () awful.util.spawn("gajim") end),
         awful.key({ modkey, "Shift"   }, "s", function () awful.util.spawn("skype") end),

@@ -9,17 +9,24 @@ vim/bundle/youcompleteme
 vim/.netrwhist*
 vim/.VimballRecord
 
-pentadactyl/info/default/cache
-pentadactyl/info/default/command-history
-pentadactyl/info/default/ignored-keys
-pentadactyl/info/default/local-marks
-pentadactyl/info/default/register-ring
-pentadactyl/info/default/registers
-pentadactyl/info/default/url-marks
-
 zsh/cache
 
 msf4/history
 msf4/local/*
 msf4/logs/*
 msf4/loot/*
+
+config/dwb/default/custom_keys
+config/dwb/default/commands.history
+config/dwb/default/plugins.allow
+config/dwb/default/navigate.history
+config/dwb/default/history
+config/dwb/default/hsts
+config/dwb/default/session
+config/dwb/default/cookies
+config/dwb/default/cookies.allow
+config/dwb/default/scripts.allow
+config/dwb/default/search.history
+config/dwb/default/cookies_session.allow
+config/dwb/keys
+config/dwb/mimetypes
