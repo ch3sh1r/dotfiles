@@ -127,7 +127,7 @@ local tyrannical = require("lib/tyrannical")
         {
             name     = "remote",
             init     = false,
-            class    = { "remmina",  },
+            class    = { "remmina", "TeamViewer.exe", },
         },
         {
             name     = "mail",
