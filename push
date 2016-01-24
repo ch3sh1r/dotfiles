@@ -17,7 +17,7 @@ do
         done
 
     elif [ $dotfile == "msf4" ]; then
-        msftemp="$(mktemp --tmpdir="${HOME}" -t ".msf4XXXXXXX" -d)"
+        msftemp="$(mktemp -t ".msf4XXXXXXX" -d)"
         for msffile in history local logs loot; do
             [ -f "${HOME}/.msf4/${msffile}" ] && \
                 mv "${HOME}/.msf4/${msffile}" ${msftemp}; done
