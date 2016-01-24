@@ -1,97 +1,231 @@
-# Создать директорию и перейти в нее.
+function zsh_stats() {
+  fc -l 1 | awk '{CMD[$2]++;count++;}END { for (a in CMD)print CMD[a] " " CMD[a]/count*100 "% " a;}' | grep -v "./" | column -c3 -s " " -t | sort -nr | nl |  head -n20
+}
+
+function uninstall_oh_my_zsh() {
+  env ZSH=$ZSH /bin/sh $ZSH/tools/uninstall.sh
+}
+
+function upgrade_oh_my_zsh() {
+  env ZSH=$ZSH /bin/sh $ZSH/tools/upgrade.sh
+}
+
 function take() {
-    mkdir -p /tmp/$1
-    cd /tmp/$1
+  mkdir -p $1
+  cd $1
 }
 
-# Перестановка.
-function rot13() {
-	if [ $# = 0 ] ; then
-		tr "[a-m][n-z][A-M][N-Z]" "[n-z][a-m][N-Z][A-M]"
-	else
-		tr "[a-m][n-z][A-M][N-Z]" "[n-z][a-m][N-Z][A-M]" < $1
-	fi
-}
+function open_command() {
+  emulate -L zsh
+  setopt shwordsplit
 
-# Распаковка архива...
-function upack() {
-    if [ -f $1 ] ; then
-        case $1 in
-            *.tar.bz2)   tar xjf $1;;
-            *.tar.gz)    tar xzf $1;;
-            *.bz2)       bunzip2 $1;;
-            *.rar)       unrar x $1;;
-            *.gz)        gunzip $1;;
-            *.tar)       tar xf $1;;
-            *.tbz2)      tar xjf $1;;
-            *.tgz)       tar xzf $1;;
-            *.zip)       unzip $1;;
-            *.Z)         uncompress $1;;
-            *.7z)        7z x $1;;
-            *.lzma)      lzma -d $1;;
-            *)           echo "ERROR: '$1' unknown type." ;;
-        esac
-    else
-        echo "ERROR: '$1' is not a valid file."
-    fi
-}
-# ... и упаковка.
-function pack() {
-    if [ $1 ] ; then
-        case $1 in
-            tbz)    tar cjvf $2.tar.bz2 $2;;
-            tgz)    tar czvf $2.tar.gz  $2;;
-            tar)    tar cpvf $2.tar  $2;;
-            bz2)    bzip $2;;
-            gz)     gzip -c -9 -n $2 > $2.gz;;
-            zip)    zip -r $2.zip $2;;
-            7z)     7z a $2.7z $2;;
-            lzma)   lzma -z $1;;
-            *)      echo "ERROR: '$1' Cannot be packed via pack.";;
-        esac
-    else
-        echo "ERROR: '$1' is not a valid file."
-    fi
-}
+  local open_cmd
 
-# Локальное зеркало сайта.
-function lmirror(){
-    wget -r -l inf -k -p $1
+  # define the open command
+  case "$OSTYPE" in
+    darwin*)  open_cmd='open' ;;
+    cygwin*)  open_cmd='cygstart' ;;
+    linux*)   open_cmd='xdg-open' ;;
+    msys*)    open_cmd='start ""' ;;
+    *)        echo "Platform $OSTYPE not supported"
+              return 1
+              ;;
+  esac
+
+  # don't use nohup on OSX
+  if [[ "$OSTYPE" == darwin* ]]; then
+    $open_cmd "$@" &>/dev/null
+  else
+    nohup $open_cmd "$@" &>/dev/null
+  fi
 }
 
 #
-# Конвертируем всякую дурь
+# Get the value of an alias.
 #
-
-function mp32utf() { 
-    find -iname '*.mp3' -print0 | xargs -0 mid3iconv -eCP1251 --remove-v1
+# Arguments:
+#    1. alias - The alias to get its value from
+# STDOUT:
+#    The value of alias $1 (if it has one).
+# Return value:
+#    0 if the alias was found,
+#    1 if it does not exist
+#
+function alias_value() {
+    alias "$1" | sed "s/^$1='\(.*\)'$/\1/"
+    test $(alias "$1")
 }
 
-function mpg2flv() { 
-    ffmpeg -i $1 -ar 22050 -ab 32 -f flv -s 320x240 `echo $1 | awk -F . '{print $1}'`.flv 
+#
+# Try to get the value of an alias,
+# otherwise return the input.
+#
+# Arguments:
+#    1. alias - The alias to get its value from
+# STDOUT:
+#    The value of alias $1, or $1 if there is no alias $1.
+# Return value:
+#    Always 0
+#
+function try_alias_value() {
+    alias_value "$1" || echo "$1"
 }
 
-function flv2xvid() { 
-    mencoder "$1" -vf scale=320:240  -ovc xvid -xvidencopts bitrate=250:autoaspect -vf pp=lb -oac mp3lame  -lameopts fast:preset=standard -o  "./basename $1.avi" 
+#
+# Set variable "$1" to default value "$2" if "$1" is not yet defined.
+#
+# Arguments:
+#    1. name - The variable to set
+#    2. val  - The default value
+# Return value:
+#    0 if the variable exists, 3 if it was set
+#
+function default() {
+    test `typeset +m "$1"` && return 0
+    typeset -g "$1"="$2"   && return 3
 }
 
-function flv2divx() {
-    mencoder "$1" --vf scale=320:240  -ovc lavc -lavcopts vcodec=mpeg4:vbitrate=250:mbd=2:v4mv:autoaspect -vf pp=lb -oac mp3lame  -lameopts fast:preset=standard -o  "./basename $1.avi" 
+#
+# Set enviroment variable "$1" to default value "$2" if "$1" is not yet defined.
+#
+# Arguments:
+#    1. name - The env variable to set
+#    2. val  - The default value
+# Return value:
+#    0 if the env variable exists, 3 if it was set
+#
+function env_default() {
+    env | grep -q "^$1=" && return 0
+    export "$1=$2"       && return 3
 }
 
-function iso2cd() {
-    cdrecord -s dev=`cdrecord --devices 2>&1 | grep "\(rw\|dev=\)" | awk {'print $2'} | cut -f'2' -d'=' | head -n1` gracetime=1 driveropts=burnfree -dao -overburn -v
+
+# Required for $langinfo
+zmodload zsh/langinfo
+
+# URL-encode a string
+#
+# Encodes a string using RFC 2396 URL-encoding (%-escaped).
+# See: https://www.ietf.org/rfc/rfc2396.txt
+#
+# By default, reserved characters and unreserved "mark" characters are
+# not escaped by this function. This allows the common usage of passing
+# an entire URL in, and encoding just special characters in it, with
+# the expectation that reserved and mark characters are used appropriately.
+# The -r and -m options turn on escaping of the reserved and mark characters,
+# respectively, which allows arbitrary strings to be fully escaped for
+# embedding inside URLs, where reserved characters might be misinterpreted.
+#
+# Prints the encoded string on stdout.
+# Returns nonzero if encoding failed.
+#
+# Usage:
+#  omz_urlencode [-r] [-m] [-P] <string>
+#
+#    -r causes reserved characters (;/?:@&=+$,) to be escaped
+#
+#    -m causes "mark" characters (_.!~*''()-) to be escaped
+#
+#    -P causes spaces to be encoded as '%20' instead of '+'
+function omz_urlencode() {
+  emulate -L zsh
+  zparseopts -D -E -a opts r m P
+
+  local in_str=$1
+  local url_str=""
+  local spaces_as_plus
+  if [[ -z $opts[(r)-P] ]]; then spaces_as_plus=1; fi
+  local str="$in_str"
+
+  # URLs must use UTF-8 encoding; convert str to UTF-8 if required
+  local encoding=$langinfo[CODESET]
+  local safe_encodings
+  safe_encodings=(UTF-8 utf8 US-ASCII)
+  if [[ -z ${safe_encodings[(r)$encoding]} ]]; then
+    str=$(echo -E "$str" | iconv -f $encoding -t UTF-8)
+    if [[ $? != 0 ]]; then
+      echo "Error converting string from $encoding to UTF-8" >&2
+      return 1
+    fi
+  fi
+
+  # Use LC_CTYPE=C to process text byte-by-byte
+  local i byte ord LC_ALL=C
+  export LC_ALL
+  local reserved=';/?:@&=+$,'
+  local mark='_.!~*''()-'
+  local dont_escape="[A-Za-z0-9"
+  if [[ -z $opts[(r)-r] ]]; then
+    dont_escape+=$reserved
+  fi
+  # $mark must be last because of the "-"
+  if [[ -z $opts[(r)-m] ]]; then
+    dont_escape+=$mark
+  fi
+  dont_escape+="]"
+
+  # Implemented to use a single printf call and avoid subshells in the loop,
+  # for performance (primarily on Windows).
+  local url_str=""
+  for (( i = 1; i <= ${#str}; ++i )); do
+    byte="$str[i]"
+    if [[ "$byte" =~ "$dont_escape" ]]; then
+      url_str+="$byte"
+    else
+      if [[ "$byte" == " " && -n $spaces_as_plus ]]; then
+        url_str+="+"
+      else
+        ord=$(( [##16] #byte ))
+        url_str+="%$ord"
+      fi
+    fi
+  done
+  echo -E "$url_str"
 }
 
-function nrg2iso() {
-    dd bs=1k if=$1 of=$2 skip=300
-}
+# URL-decode a string
+#
+# Decodes a RFC 2396 URL-encoded (%-escaped) string.
+# This decodes the '+' and '%' escapes in the input string, and leaves
+# other characters unchanged. Does not enforce that the input is a
+# valid URL-encoded string. This is a convenience to allow callers to
+# pass in a full URL or similar strings and decode them for human
+# presentation.
+#
+# Outputs the encoded string on stdout.
+# Returns nonzero if encoding failed.
+#
+# Usage:
+#   omz_urldecode <urlstring>  - prints decoded string followed by a newline
+function omz_urldecode {
+  emulate -L zsh
+  local encoded_url=$1
 
-function win2utf() {
-    iconv -f CP1251 -t UTF-8 $1 > $1
-}
+  # Work bytewise, since URLs escape UTF-8 octets
+  local caller_encoding=$langinfo[CODESET]
+  local LC_ALL=C
+  export LC_ALL
 
-function djvu2pdf() {
-    ddjvu -format=pdf $1 $1.pdf
-}
+  # Change + back to ' '
+  local tmp=${encoded_url:gs/+/ /}
+  # Protect other escapes to pass through the printf unchanged
+  tmp=${tmp:gs/\\/\\\\/}
+  # Handle %-escapes by turning them into `\xXX` printf escapes
+  tmp=${tmp:gs/%/\\x/}
+  local decoded
+  eval "decoded=\$'$tmp'"
 
+  # Now we have a UTF-8 encoded string in the variable. We need to re-encode
+  # it if caller is in a non-UTF-8 locale.
+  local safe_encodings
+  safe_encodings=(UTF-8 utf8 US-ASCII)
+  if [[ -z ${safe_encodings[(r)$caller_encoding]} ]]; then
+    decoded=$(echo -E "$decoded" | iconv -f UTF-8 -t $caller_encoding)
+    if [[ $? != 0 ]]; then
+      echo "Error converting string from UTF-8 to $caller_encoding" >&2
+      return 1
+    fi
+  fi
+
+  echo -E "$decoded"
+}

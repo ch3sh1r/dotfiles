@@ -1,5 +1,13 @@
-# correct commands, but not any arguments (correct_all would do that)
-setopt correct
+if [[ "$ENABLE_CORRECTION" == "true" ]]; then
+  alias ebuild='nocorrect ebuild'
+  alias gist='nocorrect gist'
+  alias heroku='nocorrect heroku'
+  alias hpodder='nocorrect hpodder'
+  alias man='nocorrect man'
+  alias mkdir='nocorrect mkdir'
+  alias mv='nocorrect mv'
+  alias mysql='nocorrect mysql'
+  alias sudo='nocorrect sudo'
 
-# Вопрос на автокоррекцию
-SPROMPT='zsh: Change '\''%R'\'' to '\''%r'\''? [y/N/a/e] '
+  setopt correct_all
+fi
