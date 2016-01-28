@@ -1,4 +1,4 @@
--- Standard awesome library
+        -- Standard awesome library
 local gears = require("gears")
 local awful = require("awful")
 awful.rules = require("awful.rules")
@@ -12,7 +12,7 @@ local naughty = require("naughty")
 
 local menubar = require("menubar")
 local vicious = require("vicious")
-local tyrannical = require("lib/tyrannical")
+local tyrannical = require("lib.tyrannical")
 
 -- {{{ Error handling
     -- Check if awesome encountered an error during startup and fell back to
@@ -77,10 +77,11 @@ local tyrannical = require("lib/tyrannical")
     -- Теги
     tyrannical.tags = {
         {
-            name     = "main",
-            layout   = awful.layout.suit.spiral,
-            init     = true,
-            selected = true,
+            name        = "main",
+            layout      = awful.layout.suit.spiral,
+            init        = true,
+            selected    = true,
+            screen      = 1,
         },
         {
             name        = "web",
@@ -91,55 +92,43 @@ local tyrannical = require("lib/tyrannical")
             class       = { "Firefox", "Chromium", "dwb" },
         },
         {
-            name     = "game",
-            layout   = awful.layout.suit.max,
-            init     = false,
-            class    = { "Steam", },
+            name        = "vbox",
+            screen      = 2,
+            init        = false,
+            class       = { "VirtualBox", },
         },
         {
-            name     = "media",
-            mwfact   = 0.4,
-            init     = false,
-            class    = { "gimp", "easytag", "vlc", },
+            name        = "office",
+            layout      = awful.layout.suit.tile.left,
+            init        = false,
+            class       = { "libreoffice-writer", "libreoffice-calc",
+                            "libreoffice-calc", "libreoffice-startcenter",
+                            "libreoffice-math", },
         },
         {
-            name     = "vbox",
-            layout   = awful.layout.suit.max,
-            max_clients = 1,
-            init     = false,
-            class    = { "VirtualBox", },
+            name        = "remote",
+            init        = false,
+            class       = { "remmina", "TeamViewer.exe", },
         },
         {
-            name     = "vmware",
-            layout   = awful.layout.suit.max,
-            max_clients = 1,
-            init     = false,
-            class    = { "vmware", },
+            name        = "mail",
+            layout      = awful.layout.suit.max,
+            init        = false,
+            class       = { "Thunderbird", "Claws-Mail",  },
         },
         {
-            name     = "office",
-            layout   = awful.layout.suit.tile.left,
-            init     = false,
-            class    = { "libreoffice-writer", "libreoffice-calc",
-                         "libreoffice-calc", "libreoffice-startcenter",
-                         "libreoffice-math", },
+            name        = "ide",
+            screen      = 1,
+            layout      = awful.layout.suit.max,
+            init        = false,
+            class       = { "Eclipse", },
         },
         {
-            name     = "remote",
-            init     = false,
-            class    = { "remmina", "TeamViewer.exe", },
-        },
-        {
-            name     = "mail",
-            layout   = awful.layout.suit.max,
-            init     = false,
-            class    = { "Thunderbird", "Claws-Mail",  },
-        },
-        {
-            name     = "ide",
-            layout   = awful.layout.suit.max,
-            init     = false,
-            class    = { "Eclipse", },
+            name        = "doc",
+            init        = false,
+            exclusive   = true,
+            layout      = awful.layout.suit.max,
+            class       = { "Assistant", "Okular" , "Evince", "EPDFviewer", "xpdf", }
         },
     }
 
