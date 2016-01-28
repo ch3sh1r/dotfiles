@@ -60,7 +60,7 @@ local tyrannical = require("lib/tyrannical")
 -- }}}
 
 -- {{{ Wallpaper and theme definitions
-    theme_dir = ("/home/ch3sh1r/.config/awesome/lib/theme/")
+    theme_dir = ("~/.config/awesome/lib/theme/")
     beautiful.init(theme_dir .. "theme.lua")
 
     if beautiful.wallpaper then
@@ -135,6 +135,12 @@ local tyrannical = require("lib/tyrannical")
             init     = false,
             class    = { "Thunderbird", "Claws-Mail",  },
         },
+        {
+            name     = "ide",
+            layout   = awful.layout.suit.max,
+            init     = false,
+            class    = { "Eclipse", },
+        },
     }
 
     -- Ignore the tag "exclusive" property for the following clients (matched by classes)
@@ -147,29 +153,6 @@ local tyrannical = require("lib/tyrannical")
 -- {{{ Wibox
     -- Separator Widget
     separator = wibox.widget.textbox("  ")
-
-    -- Battery Widget
-    local batn = "BAT1"
-    batwidget = wibox.widget.textbox()
-    vicious.register(batwidget, vicious.widgets.bat, '<span color="#AAAAAA">$1$2% $3</span>', 5, batn)
-    baticon = wibox.widget.imagebox()
-    vicious.register(baticon, vicious.widgets.bat, function(widget, args)
-            local paraone = tonumber(args[2])
-            if paraone <= 10 then
-                baticon:set_image(beautiful.ac_low)
-                naughty.notify({ preset = naughty.config.presets.critical,
-                                 title = "Battery discharging!",
-                                 text = "Connect to power source. Now." })
-            elseif paraone <= 35 then
-                baticon:set_image(beautiful.ac_medl)
-            elseif paraone <= 60 then
-                baticon:set_image(beautiful.ac_med)
-            elseif paraone <= 85 then
-                baticon:set_image(beautiful.ac_medb)
-            else
-                baticon:set_image(beautiful.ac_full)
-            end
-    end, 300, batn)
 
     -- Volume Widget
     volumewidget = wibox.widget.textbox()
@@ -265,8 +248,6 @@ local tyrannical = require("lib/tyrannical")
         local right_layout = wibox.layout.fixed.horizontal()
         if s == 1 then right_layout:add(wibox.widget.systray()) end
         right_layout:add(separator)
-        right_layout:add(baticon)
-        right_layout:add(batwidget)
         right_layout:add(separator)
         right_layout:add(volumeicon)
         right_layout:add(volumewidget)
@@ -355,10 +336,10 @@ local tyrannical = require("lib/tyrannical")
         awful.key({ }, "XF86MonBrightnessUp",   function () awful.util.spawn("xbacklight -inc 15") end),
 
         -- MDP manipulation
-        awful.key({ }, "XF86AudioNext", function () awful.util.spawn("/home/ch3sh1r/.config/awesome/bin/mpd_next") end),
-        awful.key({ }, "XF86AudioPrev", function () awful.util.spawn("/home/ch3sh1r/.config/awesome/bin/mpd_prev") end),
-        awful.key({ }, "XF86AudioPlay", function () awful.util.spawn("/home/ch3sh1r/.config/awesome/bin/mpd_playpause") end),
-        awful.key({ }, "XF86AudioStop", function () awful.util.spawn("/home/ch3sh1r/.config/awesome/bin/mpd_stop") end),
+        awful.key({ }, "XF86AudioNext", function () awful.util.spawn("~/.config/awesome/bin/mpd_next") end),
+        awful.key({ }, "XF86AudioPrev", function () awful.util.spawn("~/.config/awesome/bin/mpd_prev") end),
+        awful.key({ }, "XF86AudioPlay", function () awful.util.spawn("~/.config/awesome/bin/mpd_playpause") end),
+        awful.key({ }, "XF86AudioStop", function () awful.util.spawn("~/.config/awesome/bin/mpd_stop") end),
 
         -- Sound manipulation
         awful.key({ }, "XF86AudioRaiseVolume", function () awful.util.spawn("amixer set Master 9%+") end),
@@ -535,7 +516,7 @@ local tyrannical = require("lib/tyrannical")
 -- }}}
 
 -- {{{ Signals
-    -- Signal function to execute when a new client appears.
+-- Signal function to execute when a new client appears.
     client.connect_signal("manage", function (c, startup)
         -- Enable sloppy focus
         c:connect_signal("mouse::enter", function(c)
@@ -544,9 +525,6 @@ local tyrannical = require("lib/tyrannical")
                 client.focus = c
             end
         end)
-
-        -- Disable gaps between terminals.
-        c.size_hints_honor = false
 
         if not startup then
             -- Set the windows at the slave,
@@ -558,11 +536,59 @@ local tyrannical = require("lib/tyrannical")
                 awful.placement.no_overlap(c)
                 awful.placement.no_offscreen(c)
             end
+        elseif not c.size_hints.user_position and not c.size_hints.program_position then
+            -- Prevent clients from being unreachable after screen count change
+            awful.placement.no_offscreen(c)
+        end
+
+        local titlebars_enabled = false
+        if titlebars_enabled and (c.type == "normal" or c.type == "dialog") then
+            -- buttons for the titlebar
+            local buttons = awful.util.table.join(
+                    awful.button({ }, 1, function()
+                        client.focus = c
+                        c:raise()
+                        awful.mouse.client.move(c)
+                    end),
+                    awful.button({ }, 3, function()
+                        client.focus = c
+                        c:raise()
+                        awful.mouse.client.resize(c)
+                    end)
+                    )
+
+            -- Widgets that are aligned to the left
+            local left_layout = wibox.layout.fixed.horizontal()
+            left_layout:add(awful.titlebar.widget.iconwidget(c))
+            left_layout:buttons(buttons)
+
+            -- Widgets that are aligned to the right
+            local right_layout = wibox.layout.fixed.horizontal()
+            right_layout:add(awful.titlebar.widget.floatingbutton(c))
+            right_layout:add(awful.titlebar.widget.maximizedbutton(c))
+            right_layout:add(awful.titlebar.widget.stickybutton(c))
+            right_layout:add(awful.titlebar.widget.ontopbutton(c))
+            right_layout:add(awful.titlebar.widget.closebutton(c))
+
+            -- The title goes in the middle
+            local middle_layout = wibox.layout.flex.horizontal()
+            local title = awful.titlebar.widget.titlewidget(c)
+            title:set_align("center")
+            middle_layout:add(title)
+            middle_layout:buttons(buttons)
+
+            -- Now bring it all together
+            local layout = wibox.layout.align.horizontal()
+            layout:set_left(left_layout)
+            layout:set_right(right_layout)
+            layout:set_middle(middle_layout)
+
+            awful.titlebar(c):set_widget(layout)
         end
     end)
 
     client.connect_signal("focus", function(c) c.border_color = beautiful.border_focus end)
-    client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_normal end)
+    client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_normal end) 
 -- }}}
 
 -- {{ Function to ensure that certain programs only have one

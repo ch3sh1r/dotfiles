@@ -3,7 +3,7 @@
 ---------------------------
 
 theme = {}
-theme_dir = ("/home/ch3sh1r/.config/awesome/lib/theme/")
+theme_dir = ("~/.config/awesome/lib/theme/")
 
 theme.font          = "terminus 9"
 theme.bg_normal     = "#3c3b37"
