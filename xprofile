@@ -3,3 +3,7 @@
 setxkbmap -layout 'us,ru' -option 'grp:alt_shift_toggle'
 setxkbmap -layout 'us,ru' -option 'grp:alt_space_toggle'
 setxkbmap -option caps:escape
+
+IN='HDMI1 '
+EXT='VGA1'
+xrandr --output $IN --auto --primary --output $EXT --auto --right-of $IN

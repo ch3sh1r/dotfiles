@@ -27,6 +27,7 @@ if [ -f /usr/bin/grc ]; then
     alias mtr="grc --colour=auto mtr"
     alias ps="grc --colour=auto ps"
     alias dig="grc --colour=auto dig"
+    alias make="grc --colour=auto make"
 fi
 
 # Дерево из папки.

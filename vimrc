@@ -101,5 +101,5 @@ set bs=2                    " Backspace работает как всегда
         nmap <leader>ec :e ++enc=cp866<cr>
     " <leader>eu - utf8
         nmap <leader>eu :e ++enc=utf8<cr>
-    " <leader>eu - rot13
+    " <leader>er - rot13
         nmap <leader>er ggg?G <cr>

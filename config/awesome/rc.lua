@@ -1,4 +1,4 @@
-        -- Standard awesome library
+-- Standard awesome library
 local gears = require("gears")
 local awful = require("awful")
 awful.rules = require("awful.rules")
@@ -84,6 +84,12 @@ local tyrannical = require("lib.tyrannical")
             screen      = 1,
         },
         {
+            name        = "watch",
+            layout      = awful.layout.suit.spiral,
+            init        = true,
+            screen      = 2,
+        },
+        {
             name        = "web",
             layout      = awful.layout.suit.tile.left,
             mwfact      = 0.35,
@@ -94,7 +100,7 @@ local tyrannical = require("lib.tyrannical")
         {
             name        = "vbox",
             screen      = 2,
-            init        = false,
+            init        = true,
             class       = { "VirtualBox", },
         },
         {
@@ -128,7 +134,7 @@ local tyrannical = require("lib.tyrannical")
             init        = false,
             exclusive   = true,
             layout      = awful.layout.suit.max,
-            class       = { "Assistant", "Okular" , "Evince", "EPDFviewer", "xpdf", }
+            class       = { "Assistant", "Okular", "Evince", "EPDFviewer", "xpdf", }
         },
     }
 
@@ -142,19 +148,6 @@ local tyrannical = require("lib.tyrannical")
 -- {{{ Wibox
     -- Separator Widget
     separator = wibox.widget.textbox("  ")
-
-    -- Volume Widget
-    volumewidget = wibox.widget.textbox()
-    vicious.register(volumewidget, vicious.widgets.volume, '<span color="#AAAAAA">$1%</span>', 2, "Master")
-    volumeicon = wibox.widget.imagebox()
-    vicious.register(volumeicon, vicious.widgets.volume, function(widget, args)
-            local paraone = tonumber(args[1])
-            if args[2] == "♩" or paraone == 0 then
-                    volumeicon:set_image(beautiful.mute)
-            else
-                    volumeicon:set_image(beautiful.music)
-            end
-    end, 2, "Master")
 
     -- Time and Date Widget
     clockwidget = wibox.widget.textbox()
@@ -238,9 +231,6 @@ local tyrannical = require("lib.tyrannical")
         if s == 1 then right_layout:add(wibox.widget.systray()) end
         right_layout:add(separator)
         right_layout:add(separator)
-        right_layout:add(volumeicon)
-        right_layout:add(volumewidget)
-        right_layout:add(separator)
         right_layout:add(clockwidget)
         right_layout:add(separator)
         right_layout:add(mylayoutbox[s])
@@ -319,21 +309,6 @@ local tyrannical = require("lib.tyrannical")
                     client.focus:raise()
                 end
             end),
-
-        -- Brightness manipulation
-        awful.key({ }, "XF86MonBrightnessDown", function () awful.util.spawn("xbacklight -dec 15") end),
-        awful.key({ }, "XF86MonBrightnessUp",   function () awful.util.spawn("xbacklight -inc 15") end),
-
-        -- MDP manipulation
-        awful.key({ }, "XF86AudioNext", function () awful.util.spawn("~/.config/awesome/bin/mpd_next") end),
-        awful.key({ }, "XF86AudioPrev", function () awful.util.spawn("~/.config/awesome/bin/mpd_prev") end),
-        awful.key({ }, "XF86AudioPlay", function () awful.util.spawn("~/.config/awesome/bin/mpd_playpause") end),
-        awful.key({ }, "XF86AudioStop", function () awful.util.spawn("~/.config/awesome/bin/mpd_stop") end),
-
-        -- Sound manipulation
-        awful.key({ }, "XF86AudioRaiseVolume", function () awful.util.spawn("amixer set Master 9%+") end),
-        awful.key({ }, "XF86AudioLowerVolume", function () awful.util.spawn("amixer set Master 9%-") end),
-        awful.key({ }, "XF86AudioMute",        function () awful.util.spawn("amixer sset Master toggle") end),
 
         -- Standard program
         awful.key({ modkey,           }, "Return", function () awful.util.spawn("gnome-terminal") end),
@@ -593,9 +568,12 @@ local tyrannical = require("lib.tyrannical")
 -- }}
 
 -- {{{ Autostart
-    run_once("gnome-screensaver")
-    run_once("nm-applet")
-    run_once("bluetooth-applet")
-    --run_once("dropbox start")
+    awful.util.spawn_with_shell("pkill ibus-ui-gtk3")
     awful.util.spawn_with_shell("bash ~/.xprofile")
+    run_once("gnome-screensaver")
+    run_once("VirtualBox")
+    run_once("nm-applet")
+    run_once("eclipse")
+    run_once("zsh skype")
 -- }}}
+
