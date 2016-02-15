@@ -3,7 +3,6 @@ alias p="ps auxw"
 alias df="df -h"
 alias du="du -h"
 alias vi="vim"
-alias recal="cat ~/.zsh_history | cut -d';' -f2 | grep"
 alias genpasswd='openssl rand -base64 12'
 
 if [ -f /usr/bin/ack-grep ]; then
