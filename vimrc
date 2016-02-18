@@ -16,6 +16,17 @@ set undolevels=2048         "  и правок
 set nobackup                " Не создавать бэкапы
 set bs=2                    " Backspace работает как всегда
 
+call plug#begin('~/.vim/plugged')
+    Plug 'junegunn/vim-easy-align'
+    Plug 'junegunn/vim-github-dashboard'
+    Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
+    Plug 'scrooloose/nerdcommenter'
+    Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
+    Plug 'tpope/vim-fireplace', { 'for': 'clojure' }
+    Plug 'rdnetto/YCM-Generator', { 'branch': 'stable' }
+    Plug 'nsf/gocode', { 'tag': 'v.20150303', 'rtp': 'vim' }
+call plug#end()
+
 " Выключить звуки
     set noerrorbells
     set novisualbell
