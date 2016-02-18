@@ -54,10 +54,9 @@ set bs=2                    " Backspace работает как всегда
     set hlsearch            "  с подсветкой
 
 " Подстветка
-    syntax on
+    syntax enable
     filetype plugin on
     set t_Co=16
-    set background=dark
     colorscheme solarized
     set cursorline
 
