@@ -15,7 +15,7 @@ set background=dark
 colorscheme solarized
 
 " Шрифт
-set guifont=Menlo:h12
+set guifont=Terminus\ 12
 
 " Локальные настройки
 if filereadable(expand("~/.gvimrc.local"))
