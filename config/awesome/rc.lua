@@ -87,6 +87,7 @@ local tyrannical = require("lib.tyrannical")
             name        = "watch",
             layout      = awful.layout.suit.spiral,
             init        = true,
+            selected    = true,
             screen      = 2,
         },
         {
@@ -94,11 +95,14 @@ local tyrannical = require("lib.tyrannical")
             layout      = awful.layout.suit.tile.left,
             mwfact      = 0.35,
             max_clients = 1,
+            screen      = 1,
             init        = false,
             class       = { "Firefox", "Chromium", "dwb" },
         },
         {
             name        = "vbox",
+            layout      = awful.layout.suit.tile.left,
+            mwfact      = 0.35,
             screen      = 2,
             init        = true,
             class       = { "VirtualBox", },
@@ -132,7 +136,6 @@ local tyrannical = require("lib.tyrannical")
         {
             name        = "doc",
             init        = false,
-            exclusive   = true,
             layout      = awful.layout.suit.max,
             class       = { "Assistant", "Okular", "Evince", "EPDFviewer", "xpdf", }
         },
