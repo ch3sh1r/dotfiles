@@ -11,4 +11,4 @@ let python_highlight_all = 1
 set background=dark
 colorscheme solarized
 " Шрифт
-set guifont=Menlo:h12
+set guifont=Terminus\ 12
