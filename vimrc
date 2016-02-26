@@ -18,6 +18,7 @@ set bs=2              " Backspace работает как всегда
 
 call plug#begin('~/.vim/plugged')
     Plug 'altercation/vim-colors-solarized'
+    Plug 'ctrlpvim/ctrlp.vim'
     Plug 'junegunn/vim-easy-align'
     Plug 'junegunn/vim-github-dashboard'
     Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
