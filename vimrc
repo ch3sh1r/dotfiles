@@ -46,14 +46,16 @@ call plug#end()
             return curdir
     endfunction
 
-" Отступы и табы
+" Скрытие блоков кода
     set autoindent
-    set expandtab
-    set shiftwidth=4
-    set softtabstop=4
-    set tabstop=4
     set smartindent
-    set smarttab
+
+" Отступы и табы
+    "set expandtab
+    "set smarttab
+    "set shiftwidth=4
+    "set softtabstop=4
+    "set tabstop=4
 
 " Поддержка мыши
     set mouse=a             " Использовать мышь, если терминал позволяет

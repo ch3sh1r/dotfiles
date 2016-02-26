@@ -1,5 +1,5 @@
 # Подключаемые плагины
-plugins=(python pip vagrant)
+plugins=(python pip)
 
 # Имя цветовой темы
 ZSH_THEME="ch3sh1r"
