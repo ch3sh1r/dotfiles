@@ -13,7 +13,7 @@ else
     alias fgrep="fgrep --color=auto"
 fi
 
-if [ -f /usr/bin/grc ]; then
+if [ -f $(which grc) ]; then
     alias ping="grc --colour=auto ping"
     alias traceroute="grc --colour=auto traceroute"
     alias diff="grc --colour=auto diff"

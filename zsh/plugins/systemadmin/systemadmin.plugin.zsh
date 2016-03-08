@@ -29,7 +29,6 @@ function retlog() {
     fi
 }
 
-alias ping='ping -c 5'
 alias clr='clear;echo "Currently logged in on $(tty), as $USER in directory $PWD."'
 alias path='echo -e ${PATH//:/\\n}'
 alias mkdir='mkdir -pv'
