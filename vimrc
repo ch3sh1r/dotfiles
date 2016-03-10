@@ -12,7 +12,7 @@ set modelines=0       " Во-первых не нужны, во-вторых - �
 set scrolljump=3      " Теперь нет необходимости передвигать курсор к
 set scrolloff=3       "  краю экрана, чтобы подняться/опуститься
 set history=128       " Хранить больше истории команд
-set undolevels=2048   "  и правок
+set undolevels=2048   " Хранить больше истории правок
 set nobackup          " Не создавать бэкапы
 set bs=2              " Backspace работает как всегда
 
@@ -51,11 +51,16 @@ call plug#end()
     set smartindent
 
 " Отступы и табы
-    "set expandtab
-    "set smarttab
-    "set shiftwidth=4
-    "set softtabstop=4
-    "set tabstop=4
+    set smarttab
+    set shiftwidth=4
+    set softtabstop=4
+    set tabstop=4
+    autocmd FileType py set expandtab
+
+" Непечатаемые символы
+	set listchars=eol:¬,tab:\|·,trail:~,extends:>,precedes:<,space:·
+	set list
+    autocmd FileType c,h let &colorcolumn=join(range(121,999),",")
 
 " Поддержка мыши
     set mouse=a             " Использовать мышь, если терминал позволяет
