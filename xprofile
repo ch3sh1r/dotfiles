@@ -4,6 +4,8 @@ setxkbmap -layout 'us,ru' -option 'grp:alt_shift_toggle'
 setxkbmap -layout 'us,ru' -option 'grp:alt_space_toggle'
 setxkbmap -option caps:escape
 
-IN='HDMI1 '
-EXT='VGA1'
-xrandr --output $IN --auto --primary --output $EXT --auto --right-of $IN
+IN='HDMI1'
+EX='VGA1'
+if [ $(xrandr | grep $IN | wc -l) == '1' -a $(xrandr | grep $EX | wc -l) == '1' ]; then
+	xrandr --output $IN --auto --primary --output $EX --auto --right-of $IN
+fi
