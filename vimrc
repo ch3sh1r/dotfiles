@@ -59,8 +59,8 @@ call plug#end()
 
 " Непечатаемые символы
 	set listchars=eol:¶,tab:\|·,trail:~,extends:>,precedes:<,space:·
-	set list
-    autocmd FileType c,h let &colorcolumn=join(range(121,999),",")
+    autocmd FileType c let &colorcolumn=join(range(121,999),",")
+    autocmd FileType c set list
 
 " Поддержка мыши
     set mouse=a             " Использовать мышь, если терминал позволяет
@@ -94,6 +94,16 @@ call plug#end()
 
 " Убрать мусор из прошлого поиска
     nnoremap <leader><space> :noh<cr>
+
+" Убрать непечатные символы
+	function! ToggleList()
+	   if &list
+		  set nolist
+	   else
+		  set list
+	   endif
+	endfunction
+    nnoremap <leader>l :call ToggleList()<cr>
 
 " Поиск регулярками
     nnoremap / /\v
