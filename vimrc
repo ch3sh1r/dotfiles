@@ -17,16 +17,14 @@ set nobackup          " Не создавать бэкапы
 set bs=2              " Backspace работает как всегда
 
 call plug#begin('~/.vim/plugged')
+    Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
+    Plug 'Valloric/YouCompleteMe'
     Plug 'altercation/vim-colors-solarized'
     Plug 'ctrlpvim/ctrlp.vim'
     Plug 'junegunn/vim-easy-align'
-    Plug 'junegunn/vim-github-dashboard'
-    Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
+    Plug 'rdnetto/YCM-Generator', { 'branch': 'stable' }
     Plug 'scrooloose/nerdcommenter'
     Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
-    Plug 'tpope/vim-fireplace', { 'for': 'clojure' }
-    Plug 'rdnetto/YCM-Generator', { 'branch': 'stable' }
-    Plug 'nsf/gocode', { 'tag': 'v.20150303', 'rtp': 'vim' }
 call plug#end()
 
 " Выключить звуки
@@ -59,8 +57,9 @@ call plug#end()
 
 " Непечатаемые символы
 	set listchars=eol:¶,tab:\|·,trail:~,extends:>,precedes:<,space:·
+	autocmd FileType c set list
     autocmd FileType c let &colorcolumn=join(range(121,999),",")
-    autocmd FileType c set list
+    autocmd FileType py let &colorcolumn=join(range(81,999),",")
 
 " Поддержка мыши
     set mouse=a             " Использовать мышь, если терминал позволяет
