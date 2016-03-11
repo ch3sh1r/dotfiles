@@ -58,7 +58,7 @@ call plug#end()
     autocmd FileType py set expandtab
 
 " Непечатаемые символы
-	set listchars=eol:¬,tab:\|·,trail:~,extends:>,precedes:<,space:·
+	set listchars=eol:¶,tab:\|·,trail:~,extends:>,precedes:<,space:·
 	set list
     autocmd FileType c,h let &colorcolumn=join(range(121,999),",")
 
