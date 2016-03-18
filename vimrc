@@ -21,6 +21,7 @@ call plug#begin('~/.vim/plugged')
     Plug 'Valloric/YouCompleteMe'
     Plug 'altercation/vim-colors-solarized'
     Plug 'ctrlpvim/ctrlp.vim'
+    Plug 'jeaye/color_coded'
     Plug 'junegunn/vim-easy-align'
     Plug 'rdnetto/YCM-Generator', { 'branch': 'stable' }
     Plug 'scrooloose/nerdcommenter'
