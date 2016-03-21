@@ -17,6 +17,7 @@ set nobackup          " Не создавать бэкапы
 set bs=2              " Backspace работает как всегда
 
 call plug#begin('~/.vim/plugged')
+	Plug 'junegunn/vim-easy-align'
     Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
     Plug 'Valloric/YouCompleteMe'
     Plug 'altercation/vim-colors-solarized'
