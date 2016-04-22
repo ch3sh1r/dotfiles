@@ -1,11 +1,17 @@
-#!/bin/sh
+#!/bin/bash
 
-setxkbmap -layout 'us,ru' -option 'grp:alt_shift_toggle'
+LEFT='HDMI1'
+RIGHT='VGA1'
+
+gotscreen()
+{
+	xrandr | grep ' connected ' | cut -d' ' -f1 | grep $1 > /dev/null \
+		&& echo true
+}
+
 setxkbmap -layout 'us,ru' -option 'grp:alt_space_toggle'
 setxkbmap -option caps:escape
-
-IN='HDMI1'
-EX='VGA1'
-if [ $(xrandr | grep $IN | wc -l) == '1' -a $(xrandr | grep $EX | wc -l) == '1' ]; then
-	xrandr --output $IN --auto --primary --output $EX --auto --right-of $IN
+if [[ $(gotscreen $LEFT) == 'true' ]] && [[ $(gotscreen $RIGHT) == 'true' ]]; then
+	xrandr --output $LEFT --auto --primary --output $RIGHT --auto --right-of $LEFT
 fi
+
