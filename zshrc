@@ -1,8 +1,8 @@
 # Подключаемые плагины
-plugins=(python pip)
+plugins=(common-aliases extract)
 
 # Имя цветовой темы
-ZSH_THEME="ch3sh1r"
+ZSH_THEME="kennethreitz"
 
 # Правильное отображение цветов
 TERM="xterm-256color"
