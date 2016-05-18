@@ -50,11 +50,12 @@ call plug#end()
 	set shiftwidth=4
 	set softtabstop=4
 	set tabstop=4
-	autocmd FileType py set expandtab
+	set expandtab
+	autocmd FileType c,cpp set noexpandtab
 
 " Подсвечивание правой границы
-	let &colorcolumn=join(range(121,999),",")
-	autocmd FileType py let &colorcolumn=join(range(121,999),",")
+	let &colorcolumn=join(range(121,121),",")
+	autocmd FileType python let &colorcolumn=join(range(81,81),",")
 
 " Поддержка мыши
 	set mouse=a             " Использовать мышь, если терминал позволяет
