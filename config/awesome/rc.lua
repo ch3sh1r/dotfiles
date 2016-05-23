@@ -86,9 +86,9 @@ local tyrannical = require("lib.tyrannical")
         {
             name        = "watch",
             layout      = awful.layout.suit.spiral,
-            init        = true,
-            selected    = true,
-            screen      = 2,
+			init        = false,
+            -- selected    = true,
+            -- screen      = 2,
         },
         {
             name        = "web",
@@ -103,8 +103,8 @@ local tyrannical = require("lib.tyrannical")
             name        = "vbox",
             layout      = awful.layout.suit.tile.left,
             mwfact      = 0.35,
-            screen      = 2,
-            init        = true,
+            init        = false,
+            -- screen      = 2,
             class       = { "VirtualBox", },
         },
         {
@@ -127,11 +127,10 @@ local tyrannical = require("lib.tyrannical")
             class       = { "Thunderbird", "Claws-Mail",  },
         },
         {
-            name        = "ide",
+            name        = "dev",
             screen      = 1,
             layout      = awful.layout.suit.max,
-            init        = false,
-            class       = { "Eclipse", },
+            class       = { "Eclipse", "qtcreator", "designer-qt4", },
         },
         {
             name        = "doc",
@@ -145,7 +144,7 @@ local tyrannical = require("lib.tyrannical")
     tyrannical.properties.intrusive = { "gnome-terminal", }
 
     -- Ignore the tiled layout for the matching clients
-    tyrannical.properties.floating = { "gtksu", }
+    tyrannical.properties.floating = { "gtksu", "skype", }
 -- }}}
 
 -- {{{ Wibox
@@ -322,7 +321,7 @@ local tyrannical = require("lib.tyrannical")
         awful.key({ modkey, "Shift"   }, "s", function () awful.util.spawn("skype") end),
         awful.key({ modkey, "Shift"   }, "v", function () awful.util.spawn("virtualbox") end),
 
-        awful.key({ modkey, "Control" }, "l", function () awful.util.spawn("gnome-screensaver-command --lock") end),
+        awful.key({ modkey, "Control" }, "l", function () awful.util.spawn("dm-tool lock") end),
         awful.key({ modkey, "Control" }, "r", awesome.restart),
         awful.key({ modkey, "Shift"   }, "q", awesome.quit),
 
@@ -573,10 +572,7 @@ local tyrannical = require("lib.tyrannical")
 -- {{{ Autostart
     awful.util.spawn_with_shell("pkill ibus-ui-gtk3")
     awful.util.spawn_with_shell("bash ~/.xprofile")
-    run_once("gnome-screensaver")
-    run_once("VirtualBox")
     run_once("nm-applet")
-    run_once("eclipse")
-    run_once("zsh skype")
+    run_once("skype")
 -- }}}
 
