@@ -117,7 +117,10 @@ call plug#end()
 	" <leader>er - rot13
 		nmap <leader>er ggg?G <cr>
 
-" Start interactive EasyAlign in visual mode (e.g. vipga) and for a motion/text object (e.g. gaip)
+" Запуск EasyAlign в интерактивном режиме в visual mode
 	xmap ga <Plug>(EasyAlign)
 	nmap ga <Plug>(EasyAlign)
+
+" Скрипт для YouCompleteMe
+    let g:ycm_global_ycm_extra_conf = "~/.vim/.ycm_extra_conf.py"
 
