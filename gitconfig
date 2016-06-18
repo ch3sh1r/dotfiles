@@ -8,6 +8,7 @@
     branch = auto
     diff = auto
     status = auto
+    ui = auto
 [color "branch"]
     current = yellow reverse
     local = yellow
@@ -22,8 +23,13 @@
     changed = green
     untracked = cyan
 [push]
-	default = simple
+    default = tracking
 [filter "lfs"]
-	clean = git-lfs clean %f
-	smudge = git-lfs smudge %f
-	required = true
+    clean = git-lfs clean %f
+    smudge = git-lfs smudge %f
+    required = true
+[core]
+    autocrlf = input
+    pager = less -FRSX
+[status]
+    showuntrackedfiles = all
