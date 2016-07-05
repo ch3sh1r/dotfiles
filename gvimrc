@@ -1,21 +1,14 @@
 "Убрать отображение меню
-set guioptions-=m
+"set guioptions-=m
 
-" Убрать отображение тулбара
+" Убрать тулбара
 set guioptions-=T
 
 " Убрать правый скролбар
 set guioptions-=r
 
-" Цвета
-set t_Co=256
-let g:solarized_termcolors = 256
-let python_highlight_all = 1
-set background=dark
-colorscheme solarized
-
 " Шрифт
-set guifont=Terminus\ 12
+set guifont=Meslo\ LG\ S\ Regular\ for\ Powerline:h12
 
 " Локальные настройки
 if filereadable(expand("~/.gvimrc.local"))

@@ -21,13 +21,11 @@ call plug#begin('~/.vim/plugged')
     Plug 'altercation/vim-colors-solarized'
     Plug 'jeaye/color_coded'
     Plug 'junegunn/vim-easy-align'
-    Plug 'rdnetto/YCM-Generator', { 'branch': 'stable' }
     Plug 'scrooloose/nerdcommenter'
     Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
     Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
-    Plug 'Valloric/YouCompleteMe'
-    Plug 'vim-airline/vim-airline'
-    Plug 'vim-airline/vim-airline-themes'
+    Plug 'Valloric/YouCompleteMe' | Plug 'rdnetto/YCM-Generator', { 'branch': 'stable' }
+    Plug 'vim-airline/vim-airline' | Plug 'vim-airline/vim-airline-themes'
     Plug 'vim-ctrlspace/vim-ctrlspace'
 call plug#end()
 
@@ -124,3 +122,6 @@ call plug#end()
 " Скрипт для YouCompleteMe
     let g:ycm_global_ycm_extra_conf = "~/.vim/.ycm_extra_conf.py"
 
+" Airline
+    let g:airline#extensions#tabline#enabled = 1
+    let g:airline_powerline_fonts = 1
