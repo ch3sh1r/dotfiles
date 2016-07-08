@@ -19,7 +19,6 @@ set bs=2                 " Backspace работает как всегда
 
 call plug#begin('~/.vim/plugged')
     Plug 'altercation/vim-colors-solarized'
-    Plug 'jeaye/color_coded'
     Plug 'junegunn/vim-easy-align'
     Plug 'scrooloose/nerdcommenter'
     Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
@@ -124,4 +123,3 @@ call plug#end()
 
 " Airline
     let g:airline#extensions#tabline#enabled = 1
-    let g:airline_powerline_fonts = 1
