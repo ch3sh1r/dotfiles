@@ -1,5 +1,10 @@
 # Подключаемые плагины
-plugins=(git common-aliases extract zsh-syntax-highlighting)
+plugins=(
+    git
+    common-aliases
+    extract
+    zsh-syntax-highlighting
+)
 
 # Имя цветовой темы
 ZSH_THEME="kennethreitz"
