@@ -88,7 +88,9 @@ call plug#end()
     nnoremap <leader><space> :noh<cr>
 
 " Непечатаемые символы
-    set listchars=eol:¶,tab:\|·,trail:~,extends:>,precedes:<,space:·
+    set list
+    set listchars=eol:¶,tab:→\ ,trail:~,extends:❯,precedes:❮,space:·
+    highlight SpecialKey ctermbg=8
     function! ToggleList()
         if &list
             set nolist
