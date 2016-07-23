@@ -5,7 +5,8 @@ set hidden
 set nocompatible         " Предпочтение настройкам Vim относительно Vi
 set ruler                " Показывать положение курсора всё время
 set showcmd              " Показывать незавершенные команды в статусбаре
-set nu                   " Нумерация строк
+set number               " Нумерация строк
+set relativenumber       " Относительная нумерация строк
 set wrap                 " Перенос строк
 set linebreak            " Перенос строк по словам, а не по буквам
 set foldmethod=indent    " Фолдинг по отступам
@@ -23,7 +24,7 @@ call plug#begin('~/.vim/plugged')
     Plug 'scrooloose/nerdcommenter'
     Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
     Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
-    Plug 'Valloric/YouCompleteMe' | Plug 'rdnetto/YCM-Generator', { 'branch': 'stable' }
+    Plug 'Valloric/YouCompleteMe' | Plug 'jeaye/color_coded' | Plug 'rdnetto/YCM-Generator', { 'branch': 'stable' }
     Plug 'vim-airline/vim-airline' | Plug 'vim-airline/vim-airline-themes'
     Plug 'vim-ctrlspace/vim-ctrlspace'
 call plug#end()
@@ -90,7 +91,7 @@ call plug#end()
 " Непечатаемые символы
     set list
     set listchars=eol:¶,tab:→\ ,trail:~,extends:❯,precedes:❮,space:·
-    highlight SpecialKey ctermbg=8
+    highlight SpecialKey ctermbg=8 ctermfg=2
     function! ToggleList()
         if &list
             set nolist
