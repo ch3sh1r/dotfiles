@@ -79,23 +79,27 @@ local tyrannical = require("lib.tyrannical")
         {
             name        = "main",
             layout      = awful.layout.suit.spiral,
-            init        = true,
             selected    = true,
             screen      = 1,
         },
         {
             name        = "watch",
             layout      = awful.layout.suit.spiral,
-			init        = false,
-            -- selected    = true,
-            -- screen      = 2,
+            selected    = true,
+            screen      = 2,
+        },
+        {
+            name        = "dev",
+            screen      = 1,
+            layout      = awful.layout.suit.max,
+            class       = { "Eclipse", "qtcreator", "designer-qt4", },
         },
         {
             name        = "web",
             layout      = awful.layout.suit.tile.left,
             mwfact      = 0.35,
-            max_clients = 1,
-            screen      = 1,
+            max_clients = 2,
+            screen      = 2,
             init        = false,
             class       = { "Firefox", "Chromium", "dwb" },
         },
@@ -104,7 +108,7 @@ local tyrannical = require("lib.tyrannical")
             layout      = awful.layout.suit.tile.left,
             mwfact      = 0.35,
             init        = false,
-            -- screen      = 2,
+            screen      = 2,
             class       = { "VirtualBox", },
         },
         {
@@ -122,20 +126,15 @@ local tyrannical = require("lib.tyrannical")
         },
         {
             name        = "mail",
-            layout      = awful.layout.suit.max,
             init        = false,
+            screen      = 2,
             class       = { "Thunderbird", "Claws-Mail",  },
         },
         {
-            name        = "dev",
-            screen      = 1,
-            layout      = awful.layout.suit.max,
-            class       = { "Eclipse", "qtcreator", "designer-qt4", },
-        },
-        {
             name        = "doc",
-            init        = false,
             layout      = awful.layout.suit.max,
+            init        = false,
+            screen      = 2,
             class       = { "Assistant", "Okular", "Evince", "EPDFviewer", "xpdf", }
         },
     }
