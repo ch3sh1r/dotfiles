@@ -2,8 +2,16 @@
 
 unalias grc 2> /dev/null
 GRC=`command -v grc 2> /dev/null`
+
+func colourify () {
+    if [ -n "$SDKTARGETSYSROOT" ]; then
+        $@
+    else
+        $GRC -es --colour=auto $@
+    fi
+}
+
 if [ "$TERM" != dumb ] && [ -n "$GRC" ]; then
-    alias colourify="$GRC -es --colour=auto"
     alias configure='colourify ./configure'
     alias diff='colourify diff'
     alias make='colourify make'
