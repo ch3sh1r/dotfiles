@@ -27,7 +27,6 @@ call plug#begin('~/.vim/plugged')
     Plug 'Valloric/YouCompleteMe' | Plug 'rdnetto/YCM-Generator', { 'branch': 'stable' }
     Plug 'vim-airline/vim-airline' | Plug 'vim-airline/vim-airline-themes'
     Plug 'vim-ctrlspace/vim-ctrlspace'
-    Plug '~/.vim/plugged/eclim'
 call plug#end()
 
 " Выключить звуки
