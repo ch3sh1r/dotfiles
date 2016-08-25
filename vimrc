@@ -117,6 +117,11 @@ call plug#end()
     " <leader>er - rot13
         nmap <leader>er ggg?G <cr>
 
+" Перемещение по буферам
+    map <Leader>a :bprev<Return>
+    map <Leader>s :bnext<Return>
+    map <Leader>d :bd<Return>
+
 " Запуск EasyAlign в интерактивном режиме в visual mode
     xmap ga <Plug>(EasyAlign)
     nmap ga <Plug>(EasyAlign)
