@@ -91,7 +91,7 @@ call plug#end()
 " Непечатаемые символы
     set list
     set listchars=eol:¶,tab:→\ ,trail:~,extends:❯,precedes:❮,space:·
-    highlight SpecialKey ctermbg=8 ctermfg=2
+    highlight SpecialKey ctermbg=10 ctermfg=8 cterm=italic
     function! ToggleList()
         if &list
             set nolist
@@ -104,6 +104,9 @@ call plug#end()
 " Поиск регулярками
     nnoremap / /\v
     vnoremap / /\v
+
+" Поиск выделенного
+    vnoremap // y/\c<C-R>"<CR>
 
 " <leader>e. - смена кодировок
     " <leader>ek - koi8
