@@ -1,6 +1,6 @@
 local return_code="%(?..%{$fg[red]%}%? ↵%{$reset_color%})"
 
-PROMPT='$(virtualenv_prompt_info)%{[03m%}%{$fg[green]%}%c \
+PROMPT='$(virtualenv_prompt_info)%{$fg[green]%}%c \
 $(git_prompt_info)\
 \
 %{$fg[red]%}%(!.#.»)%{$reset_color%} '
