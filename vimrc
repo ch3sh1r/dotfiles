@@ -45,11 +45,14 @@ call plug#end()
 
 " Отступы и табы
     set smarttab
+    set expandtab
     set shiftwidth=4
     set softtabstop=4
     set tabstop=4
-    set expandtab
-    autocmd FileType c,cpp set noexpandtab
+    autocmd FileType c setlocal noexpandtab
+    autocmd FileType cpp setlocal noexpandtab
+    autocmd FileType html setlocal noexpandtab
+    autocmd FileType javascript setlocal noexpandtab
 
 " Подсвечивание правой границы
     let &colorcolumn=join(range(121,121),",")
@@ -90,7 +93,8 @@ call plug#end()
 
 " Непечатаемые символы
     set list
-    set listchars=eol:¶,tab:→\ ,trail:~,extends:❯,precedes:❮,space:·
+    set listchars=eol:¶,tab:→\ ,trail:~,extends:›,precedes:‹,space:·,nbsp:‡
+    highlight NonText ctermbg=10 ctermfg=8 cterm=italic
     highlight SpecialKey ctermbg=10 ctermfg=8 cterm=italic
     function! ToggleList()
         if &list
@@ -107,6 +111,7 @@ call plug#end()
 
 " Поиск выделенного
     vnoremap // y/\c<C-R>"<CR>
+    vnoremap /? y?\c<C-R>"<CR>
 
 " <leader>e. - смена кодировок
     " <leader>ek - koi8
@@ -130,7 +135,7 @@ call plug#end()
     nmap ga <Plug>(EasyAlign)
 
 " Скрипт для YouCompleteMe
-    let g:ycm_global_ycm_extra_conf = "~/.vim/.ycm_extra_conf.py"
+    let g:ycm_global_ycm_extra_conf = "~/.vim/ycm_extra_conf.py"
 
 " Airline
     let g:airline#extensions#tabline#enabled = 1
