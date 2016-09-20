@@ -3,11 +3,11 @@
 
 for dotfile in `ls`
 do
-    if [ $dotfile == `basename $0` -o \
-         $dotfile == "README.md" ]; then
+    if [ ${dotfile} == `basename $0` -o \
+         ${dotfile} == "README.md" ]; then
         false
 
-    elif [ $dotfile == "config" ]; then
+    elif [ ${dotfile} == "config" ]; then
         if ! [ -d "${HOME}/.config" ]; then 
             mkdir "${HOME}/.config" 
         fi
@@ -18,6 +18,6 @@ do
 
     else
         rm -rf "${HOME}/.${dotfile}"
-        ln -s "${PWD}/$dotfile" "${HOME}/.$dotfile"
+        ln -s "${PWD}/${dotfile}" "${HOME}/.${dotfile}"
     fi
 done
