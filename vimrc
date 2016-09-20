@@ -134,8 +134,5 @@ call plug#end()
     xmap ga <Plug>(EasyAlign)
     nmap ga <Plug>(EasyAlign)
 
-" Скрипт для YouCompleteMe
-    let g:ycm_global_ycm_extra_conf = "~/.vim/ycm_extra_conf.py"
-
 " Airline
     let g:airline#extensions#tabline#enabled = 1
