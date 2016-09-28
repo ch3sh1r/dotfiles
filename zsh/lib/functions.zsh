@@ -2,8 +2,12 @@ function zsh_stats() {
   fc -l 1 | awk '{CMD[$2]++;count++;}END { for (a in CMD)print CMD[a] " " CMD[a]/count*100 "% " a;}' | grep -v "./" | column -c3 -s " " -t | sort -nr | nl |  head -n20
 }
 
-function recal() {
-  cat ~/.zsh_history | grep -i $1 | cut -f 2 -d ";"
+function uninstall_oh_my_zsh() {
+  env ZSH=$ZSH sh $ZSH/tools/uninstall.sh
+}
+
+function upgrade_oh_my_zsh() {
+  env ZSH=$ZSH sh $ZSH/tools/upgrade.sh
 }
 
 function take() {

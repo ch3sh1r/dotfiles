@@ -16,5 +16,5 @@ TERM="xterm-256color"
 [[ -f ~/.localrc ]] && . ~/.localrc
 
 # Запуск инициализации
-ZSH=$HOME"/.zsh"
-source $ZSH/conf.sh
+export ZSH=$HOME/.zsh
+source $ZSH"/oh-my-zsh.sh"
