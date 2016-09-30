@@ -18,8 +18,8 @@ $(DOTFILE_RC):
 
 zsh-custom:
 	$(foreach plugin, $(shell ls $(DOTFILES_PATH)zsh-custom), \
-		[ ! -f $(DOTFILES_PATH)zsh-custom/$(plugin) ] || \
-			ln -s $(DOTFILES_PATH)/zsh-custom/$(plugin) $(DOTFILES_PATH)zsh/custom/plugins;)
+		[ -L $(DOTFILES_PATH)zsh/custom/plugins/$(plugin) ] || \
+			ln -s $(DOTFILES_PATH)zsh-custom/$(plugin) $(DOTFILES_PATH)zsh/custom/plugins;)
 
 $(DOTFILE_CONFIG):
 	mkdir -p ~/.config

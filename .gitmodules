@@ -37,3 +37,6 @@
 [submodule "zsh-custom/zsh-syntax-highlighting"]
 	path = zsh-custom/zsh-syntax-highlighting
 	url = https://github.com/zsh-users/zsh-syntax-highlighting.git
+[submodule "zsh-custom/warhol"]
+	path = zsh-custom/warhol
+	url = https://github.com/unixorn/warhol.plugin.zsh.git

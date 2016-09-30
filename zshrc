@@ -4,6 +4,7 @@ plugins=(
     common-aliases
     extract
     zsh-syntax-highlighting
+    warhol
 )
 
 # Имя цветовой темы
