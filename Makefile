@@ -15,6 +15,9 @@ $(DOTFILE_RC):
 	ln -sf $(DOTFILES_PATH)$@ ~/.$@
 
 zsh-custom:
+	$(foreach file, $(shell ls $(DOTFILES_PATH)zsh-custom/*.zsh), \
+		[ -L $(DOTFILES_PATH)zsh/custom/$(shell basename $(file)) ] || \
+			ln -s $(file) $(DOTFILES_PATH)zsh/custom;)
 	$(foreach plugin, $(shell ls $(DOTFILES_PATH)zsh-custom/plugins), \
 		[ -L $(DOTFILES_PATH)zsh/custom/plugins/$(plugin) ] || \
 			ln -s $(DOTFILES_PATH)zsh-custom/plugins/$(plugin) $(DOTFILES_PATH)zsh/custom/plugins;)
