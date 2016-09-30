@@ -1,10 +1,10 @@
 # Подключаемые плагины
 plugins=(
-    git
     common-aliases
     extract
+    git
+    grc
     zsh-syntax-highlighting
-    warhol
 )
 
 # Имя цветовой темы
