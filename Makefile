@@ -1,31 +1,24 @@
-DOTFILES      := $(dir $(abspath $(lastword $(MAKEFILE_LIST))))
-DTFILE_CONFIG := awesome dwb
-DTFILE        := gitconfig tmux.conf xprofile
+DOTFILES_PATH  := $(dir $(abspath $(lastword $(MAKEFILE_LIST))))
+DOTFILE_RC     := vim zsh
+DOTFILE_CONFIG := awesome dwb
+DOTFILE        := gitconfig tmux.conf xprofile gvimrc
+DOTFILES       := $(DOTFILE_RC) $(DOTFILE_CONFIG) $(DOTFILE)
 
-.PHONY: all default \
-		zsh vim awesome dwb gitconfig tmux.conf xprofile
+.PHONY: all $(DOTFILES)
 
-all: zsh vim awesome dwb gitconfig tmux.conf xprofile
+all: $(DOTFILES)
 
-zsh:
-	rm -Rf ~/.zshrc
-	rm -Rf ~/.zsh
-	ln -sf $(DOTFILES)zshrc ~/.zshrc
-	ln -sf $(DOTFILES)zsh ~/.zsh
+$(DOTFILE_RC):
+	rm -Rf ~/.$@rc
+	rm -Rf ~/.$@
+	ln -sf $(DOTFILES_PATH)$@rc ~/.$@rc
+	ln -sf $(DOTFILES_PATH)$@ ~/.$@
 
-vim:
-	rm -Rf ~/.gvimrc
-	rm -Rf ~/.vimrc
-	rm -Rf ~/.vim
-	ln -sf $(DOTFILES)gvimrc ~/.gvimrc
-	ln -sf $(DOTFILES)vimrc ~/.vimrc
-	ln -sf $(DOTFILES)vim ~/.vim
-
-$(DTFILE_CONFIG):
+$(DOTFILE_CONFIG):
 	mkdir -p ~/.config
 	rm -Rf ~/.config/$@
-	ln -sf $(DOTFILES)$@ ~/.config/$@
+	ln -sf $(DOTFILES_PATH)$@ ~/.config/$@
 
-$(DTFILE):
+$(DOTFILE):
 	rm -Rf ~/.$@
-	ln -sf $(DOTFILES)$@ ~/.$@
+	ln -sf $(DOTFILES_PATH)$@ ~/.$@
