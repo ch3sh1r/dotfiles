@@ -1,6 +1,6 @@
 DOTFILES_PATH  := $(dir $(abspath $(lastword $(MAKEFILE_LIST))))
 DOTFILE_RC     := vim zsh
-DOTFILE_CONFIG := awesome dwb
+DOTFILE_CONFIG := awesome
 DOTFILE        := gitconfig tmux.conf xprofile gvimrc
 DOTFILES       := $(DOTFILE_RC) $(DOTFILE_CONFIG) $(DOTFILE)
 
