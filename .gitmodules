@@ -34,9 +34,6 @@
 [submodule "vim/plugged/vim-snippets"]
 	path = vim/plugged/vim-snippets
 	url = https://git::@github.com/honza/vim-snippets.git
-[submodule "zsh-custom/zsh-syntax-highlighting"]
-	path = zsh-custom/zsh-syntax-highlighting
+[submodule "zsh-custom/plugins/zsh-syntax-highlighting"]
+	path = zsh-custom/plugins/zsh-syntax-highlighting
 	url = https://github.com/zsh-users/zsh-syntax-highlighting.git
-[submodule "zsh-custom/warhol"]
-	path = zsh-custom/warhol
-	url = https://github.com/unixorn/warhol.plugin.zsh.git
