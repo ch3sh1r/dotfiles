@@ -9,8 +9,10 @@ DOTFILES       := $(DOTFILE_RC) $(DOTFILE_CONFIG) $(DOTFILE)
 all: $(DOTFILES) zsh-custom
 
 $(DOTFILE_RC):
-	rm -Rf ~/.$@rc
-	rm -Rf ~/.$@
+	[ -f ~/.$@rc ] || \
+		rm -Rf ~/.$@rc
+	[ -f ~/.$@ ] || \
+		rm -Rf ~/.$@
 	ln -sf $(DOTFILES_PATH)$@rc ~/.$@rc
 	ln -sf $(DOTFILES_PATH)$@ ~/.$@
 
@@ -21,9 +23,11 @@ zsh-custom:
 
 $(DOTFILE_CONFIG):
 	mkdir -p ~/.config
-	rm -Rf ~/.config/$@
+	[ -f ~/.config/$@ ] || \
+		rm -Rf ~/.config/$@
 	ln -sf $(DOTFILES_PATH)$@ ~/.config/$@
 
 $(DOTFILE):
-	rm -Rf ~/.$@
+	[ -f ~/.$@ ] || \
+		rm -Rf ~/.$@
 	ln -sf $(DOTFILES_PATH)$@ ~/.$@
