@@ -2,11 +2,11 @@ DOTFILES_PATH  := $(dir $(abspath $(lastword $(MAKEFILE_LIST))))
 DOTFILE_RC     := vim zsh
 DOTFILE_CONFIG := awesome
 DOTFILE        := gitconfig tmux.conf xprofile gvimrc
-DOTFILES       := $(DOTFILE_RC) $(DOTFILE_CONFIG) $(DOTFILE)
+DOTFILES       := $(DOTFILE_RC) $(DOTFILE_CONFIG) $(DOTFILE) zsh-custom
 
-.PHONY: all $(DOTFILES) zsh-custom
+.PHONY: all $(DOTFILES)
 
-all: $(DOTFILES) zsh-custom
+all: $(DOTFILES)
 
 $(DOTFILE_RC):
 	rm -Rf ~/.$@rc
