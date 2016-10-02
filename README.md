@@ -5,39 +5,48 @@
 
 ## Установка
 
-### Установка с Git
-Репозиторий клонируется куда угодно (у меня обычно получается 
-`~/<long_way_to_code_directory>/dotfiles`) и из него кидаются 
-симлинки в `~`:
+ОСТОРОЖНО! Это сотрет всю текущую сонфигурацию используемых программ.
 
-    git clone https://github.com/ch3sh1r/dotfiles.git 
-    cd dotfiles
-    ./push
+### Ubuntu
 
-Иногда удобнее скопировать минимально необходимое и обойтись 
-без зависимостей в виде симлинков. На этот случай есть ветка 
-[server](https://github.com/ch3sh1r/dotfiles/tree/server).
+Старые версии Ubuntu содержат устаревшую версию пакета awesome,
+поэтому необходимо добавить
+[ppa](https://launchpad.net/~klaus-vormweg/+archive/awesome)
+от Klaus Vormweg).
 
-    git clone https://github.com/ch3sh1r/dotfiles.git 
-    cd dotfiles
-    git checkout server
-    ./push
+```bash
+sudo add-apt-repository ppa:klaus-vormweg/awesome
+sudo apt update
+sudo apt install vim git zsh grc awesome awesome-extra tmux make
+git clone --recurse https://github.com/ch3sh1r/dotfiles ~/.dotfiles
+cd ~/.dotfiles
+make
+```
 
-### Установка без Git
-Можно скачать архив текущей версии:
+В терминале используются цвета палитры
+[Solarized](http://ethanschoonover.com/solarized).
+Для их поддержки в Gnome Terminal нужно установить
+[gnome-terminal-colors-solarized](https://github.com/sigurdga/gnome-terminal-colors-solarized)
+от [@sigurdga](https://github.com/sigurdga).
 
-    cd; wget https://github.com/ch3sh1r/dotfiles/tarball/master
+Для автокомплита в виме используется плагин
+[YouCompleteMe](http://valloric.github.io/YouCompleteMe/)
+от [Val Markovic](https://github.com/Valloric).
+Он построен по клиент-серверной модели и
+требует дополнительных телодвижений при установке и обновлении.
 
-Затем ручками распаковать (`tar xzf dotfiles`) и выполнить `./push`.
+```bash
+cd ~/.vim/plugged/YouCompleteMe
+./install.py
+```
 
 ## Зависимости
-Все работает на Ubuntu (с [ppa](https://launchpad.net/~klaus-vormweg/+archive/awesome) от Klaus Vormweg) и ArchLinux.
 
 Настройки понадерганы по всем интернетам, а идея записать что и 
 откуда пришло возникла не сразу. По этому если вы видете что чего-то в
 списке не хватает — сообщите мне пожалуйста.
 
-Конфигурация zsh основана на 
+Конфигурация zsh основана на
 [oh-my-zsh](https://github.com/robbyrussell/oh-my-zsh)
 от [@robbyrussell](https://github.com/robbyrussell).
 
@@ -51,9 +60,3 @@
   от [@mubix](https://github.com/mubix).
 * [metasploit](https://github.com/hatsecure)
   от [@hatsecure](https://github.com/hatsecure/metasploit).
-
-Gnome:
-* Тема GTK [Numix](http://numixproject.org/).
-* Цвета для gnome-terminal
-  [gnome-terminal-colors-solarized](https://github.com/sigurdga/gnome-terminal-colors-solarized)
-  от [@sigurdga](https://github.com/sigurdga).
