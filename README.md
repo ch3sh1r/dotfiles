@@ -1,6 +1,5 @@
 # @ch3sh1r's dotfiles
 
-![floating](http://dl.dropboxusercontent.com/u/12576522/linked/github-dotfiles/floating.png)
 ![tile](http://dl.dropboxusercontent.com/u/12576522/linked/github-dotfiles/tile.png)
 
 ## Установка
