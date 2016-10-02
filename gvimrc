@@ -1,14 +1,6 @@
-"Убрать отображение меню
-"set guioptions-=m
-
-" Убрать тулбара
-set guioptions-=T
-
-" Убрать правый скролбар
-set guioptions-=r
-
-" Шрифт
-set guifont=Meslo\ LG\ S\ Regular\ for\ Powerline:h12
+set guioptions-=m   " Убрать отображение меню
+set guioptions-=T   " Убрать тулбара
+set guioptions-=r   " Убрать правый скролбар
 
 " Локальные настройки
 if filereadable(expand("~/.gvimrc.local"))
