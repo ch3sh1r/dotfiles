@@ -134,5 +134,8 @@ call plug#end()
     xmap ga <Plug>(EasyAlign)
     nmap ga <Plug>(EasyAlign)
 
-" Airline
+" Перемещение к определению YouCompleteMe
+    nnoremap <Leader>] :YcmCompleter GoTo<cr>
+
+" Верхний бар Airline
     let g:airline#extensions#tabline#enabled = 1
