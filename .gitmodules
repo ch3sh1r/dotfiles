@@ -1,21 +1,9 @@
 [submodule "zsh"]
 	path = zsh
 	url = https://github.com/robbyrussell/oh-my-zsh.git
-[submodule "vim/plugged/YCM-Generator"]
-	path = vim/plugged/YCM-Generator
-	url = https://git::@github.com/rdnetto/YCM-Generator.git
-[submodule "vim/plugged/YouCompleteMe"]
-	path = vim/plugged/YouCompleteMe
-	url = https://git::@github.com/Valloric/YouCompleteMe.git
 [submodule "vim/plugged/nerdcommenter"]
 	path = vim/plugged/nerdcommenter
 	url = https://git::@github.com/scrooloose/nerdcommenter.git
-[submodule "vim/plugged/nerdtree"]
-	path = vim/plugged/nerdtree
-	url = https://git::@github.com/scrooloose/nerdtree.git
-[submodule "vim/plugged/ultisnips"]
-	path = vim/plugged/ultisnips
-	url = https://git::@github.com/SirVer/ultisnips.git
 [submodule "vim/plugged/vim-airline"]
 	path = vim/plugged/vim-airline
 	url = https://git::@github.com/vim-airline/vim-airline.git
@@ -25,15 +13,6 @@
 [submodule "vim/plugged/vim-colors-solarized"]
 	path = vim/plugged/vim-colors-solarized
 	url = https://git::@github.com/altercation/vim-colors-solarized.git
-[submodule "vim/plugged/vim-ctrlspace"]
-	path = vim/plugged/vim-ctrlspace
-	url = https://git::@github.com/vim-ctrlspace/vim-ctrlspace.git
-[submodule "vim/plugged/vim-easy-align"]
-	path = vim/plugged/vim-easy-align
-	url = https://git::@github.com/junegunn/vim-easy-align.git
-[submodule "vim/plugged/vim-snippets"]
-	path = vim/plugged/vim-snippets
-	url = https://git::@github.com/honza/vim-snippets.git
 [submodule "zsh-custom/plugins/zsh-syntax-highlighting"]
 	path = zsh-custom/plugins/zsh-syntax-highlighting
 	url = https://github.com/zsh-users/zsh-syntax-highlighting.git

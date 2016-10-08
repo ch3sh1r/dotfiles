@@ -20,13 +20,8 @@ set bs=2                 " Backspace работает как всегда
 
 call plug#begin('~/.vim/plugged')
     Plug 'altercation/vim-colors-solarized'
-    Plug 'junegunn/vim-easy-align'
     Plug 'scrooloose/nerdcommenter'
-    Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
-    Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
-    Plug 'Valloric/YouCompleteMe' | Plug 'rdnetto/YCM-Generator', { 'branch': 'stable' }
     Plug 'vim-airline/vim-airline' | Plug 'vim-airline/vim-airline-themes'
-    Plug 'vim-ctrlspace/vim-ctrlspace'
 call plug#end()
 
 " Выключить звуки
@@ -51,8 +46,6 @@ call plug#end()
     set tabstop=4
     autocmd FileType c setlocal noexpandtab
     autocmd FileType cpp setlocal noexpandtab
-    autocmd FileType html setlocal noexpandtab
-    autocmd FileType javascript setlocal noexpandtab
 
 " Подсвечивание правой границы
     let &colorcolumn=join(range(121,121),",")
