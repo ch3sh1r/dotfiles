@@ -87,8 +87,8 @@ call plug#end()
 " Непечатаемые символы
     set list
     set listchars=eol:¶,tab:→\ ,trail:~,extends:›,precedes:‹,space:·,nbsp:‡
-    highlight NonText ctermbg=10 ctermfg=8 cterm=italic
-    highlight SpecialKey ctermbg=10 ctermfg=8 cterm=italic
+    highlight NonText ctermbg=8 ctermfg=10
+    highlight SpecialKey ctermbg=8 ctermfg=10
     function! ToggleList()
         if &list
             set nolist
