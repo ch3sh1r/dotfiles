@@ -79,7 +79,7 @@ call plug#end()
     vmap ё `
 
 " Замена <leader> на "," со стандартного "\"
-    let mapleader = ","
+    let mapleader = ' '
 
 " Убрать мусор из прошлого поиска
     nnoremap <leader><space> :noh<cr>
