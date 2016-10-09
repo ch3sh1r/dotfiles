@@ -87,8 +87,8 @@ call plug#end()
 " Непечатаемые символы
     set list
     set listchars=eol:¶,tab:→\ ,trail:~,extends:›,precedes:‹,space:·,nbsp:‡
-    highlight NonText ctermbg=8 ctermfg=10
-    highlight SpecialKey ctermbg=8 ctermfg=10
+    highlight SpecialKey ctermbg=10 ctermfg=8 term=standout cterm=standout
+    highlight NonText    ctermbg=10 ctermfg=8 term=standout cterm=standout
     function! ToggleList()
         if &list
             set nolist
@@ -122,13 +122,6 @@ call plug#end()
     map <Leader>a :bprev<Return>
     map <Leader>s :bnext<Return>
     map <Leader>d :bd<Return>
-
-" Запуск EasyAlign в интерактивном режиме в visual mode
-    xmap ga <Plug>(EasyAlign)
-    nmap ga <Plug>(EasyAlign)
-
-" Перемещение к определению YouCompleteMe
-    nnoremap <Leader>] :YcmCompleter GoTo<cr>
 
 " Верхний бар Airline
     let g:airline#extensions#tabline#enabled = 1
