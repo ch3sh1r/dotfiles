@@ -73,8 +73,6 @@ local tyrannical = require("tyrannical")
 -- {{{ Tyrannical
     tyrannical.settings.default_layout =  awful.layout.suit.tile.left
     tyrannical.settings.mwfact = 0.5
-
-    -- Теги
     tyrannical.tags = {
         {
             name        = "main",
@@ -92,7 +90,12 @@ local tyrannical = require("tyrannical")
             name        = "dev",
             screen      = 1,
             layout      = awful.layout.suit.max,
-            class       = { "Eclipse", "qtcreator", "designer-qt4", },
+            class       = {
+                "designer-qt4",
+                "Eclipse",
+                "Emacs",
+                "qtcreator",
+            },
         },
         {
             name        = "web",
@@ -101,7 +104,10 @@ local tyrannical = require("tyrannical")
             max_clients = 2,
             screen      = 2,
             init        = false,
-            class       = { "Firefox", "Chromium", "dwb" },
+            class       = {
+                "Chromium",
+                "Firefox",
+            },
         },
         {
             name        = "vbox",
@@ -109,33 +115,50 @@ local tyrannical = require("tyrannical")
             mwfact      = 0.35,
             init        = false,
             screen      = 2,
-            class       = { "VirtualBox", },
+            class       = {
+                "VirtualBox",
+            },
         },
         {
             name        = "office",
             layout      = awful.layout.suit.tile.left,
             init        = false,
-            class       = { "libreoffice-writer", "libreoffice-calc",
-                            "libreoffice-calc", "libreoffice-startcenter",
-                            "libreoffice-math", },
+            class       = {
+                "libreoffice-calc",
+                "libreoffice-math",
+                "libreoffice-startcenter",
+                "libreoffice-writer",
+            },
         },
         {
             name        = "remote",
             init        = false,
-            class       = { "remmina", "TeamViewer.exe", },
+            class       = {
+                "remmina",
+                "TeamViewer.exe",
+            },
         },
         {
             name        = "mail",
             init        = false,
             screen      = 2,
-            class       = { "Thunderbird", "Claws-Mail",  },
+            class       = {
+                "Claws-Mail",
+                "Thunderbird",
+            },
         },
         {
             name        = "doc",
             layout      = awful.layout.suit.max,
             init        = false,
             screen      = 2,
-            class       = { "Assistant", "Okular", "Evince", "EPDFviewer", "xpdf", }
+            class       = {
+                "Assistant",
+                "EPDFviewer",
+                "Evince",
+                "Okular",
+                "xpdf",
+            }
         },
     }
 
