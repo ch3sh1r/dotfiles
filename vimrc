@@ -1,22 +1,17 @@
 " @ch3sh1r vimrc (https://github.com/ch3sh1r/dotfiles)
 " Maintained by Alexey Bednyakov, <ch3sh1r@ya.ru>
 
-set hidden
-set nocompatible         " Предпочтение настройкам Vim относительно Vi
-set ruler                " Показывать положение курсора всё время
-set showcmd              " Показывать незавершенные команды в статусбаре
-set number               " Нумерация строк
-set relativenumber       " Относительная нумерация строк
-set wrap                 " Перенос строк
-set linebreak            " Перенос строк по словам, а не по буквам
-set foldmethod=indent    " Фолдинг по отступам
-set modelines=0          " Во-первых не нужны, во-вторых - дырки (http://clck.ru/Lx2G)
-set scrolljump=2         " Теперь нет необходимости передвигать курсор к
-set scrolloff=2          "  краю экрана, чтобы подняться/опуститься
-set history=128          " Хранить больше истории команд
-set undolevels=2048      " Хранить больше истории правок
-set nobackup             " Не создавать бэкапы
-set bs=2                 " Backspace работает как всегда
+set nocompatible                 " Предпочтение настройкам Vim относительно Vi
+set ruler                        " Показывать положение курсора всё время
+set showcmd                      " Показывать незавершенные команды в статусбаре
+set number                       " Нумерация строк
+set relativenumber               " Относительная нумерация строк
+set wrap                         " Перенос строк
+set linebreak                    " Перенос строк по словам, а не по буквам
+set foldmethod=indent            " Фолдинг по отступам
+set scrolljump=2                 " Теперь нет необходимости передвигать курсор к
+set scrolloff=2                  "  краю экрана, чтобы подняться/опуститься
+set backspace=indent,eol,start   " Backspace работает как всегда
 
 call plug#begin('~/.vim/plugged')
     Plug 'altercation/vim-colors-solarized'
@@ -24,17 +19,16 @@ call plug#begin('~/.vim/plugged')
     Plug 'vim-airline/vim-airline' | Plug 'vim-airline/vim-airline-themes'
 call plug#end()
 
-" Выключить звуки
-    set noerrorbells
-    set novisualbell
-    set tm=500
-    set t_vb=
+" История
+    set nobackup                 " Не создавать бэкапы
+    set history=128              " Хранить больше истории команд
+    set undolevels=2048          " Хранить больше истории правок
 
 " Строка состояния
-    set ch=1             " Строка команд высотой в одну строку
-    set laststatus=2     " У последнего окна всегда есть статус
+    set ch=1                     " Строка команд высотой в одну строку
+    set laststatus=2             " У последнего окна всегда есть статус
 
-" Скрытие блоков
+" Автоматические отступы
     set autoindent
     set smartindent
 
@@ -44,23 +38,22 @@ call plug#end()
     set shiftwidth=4
     set softtabstop=4
     set tabstop=4
-    autocmd FileType c setlocal noexpandtab
-    autocmd FileType cpp setlocal noexpandtab
+    autocmd FileType c setlocal tabstop=8 softtabstop=8 shiftwidth=8 noexpandtab
+    autocmd FileType h setlocal tabstop=8 softtabstop=8 shiftwidth=8 noexpandtab
 
 " Подсвечивание правой границы
-    let &colorcolumn=join(range(121,121),",")
-    autocmd FileType python let &colorcolumn=join(range(81,81),",")
+    let &colorcolumn=join(range(81,81),",")
 
 " Поддержка мыши
-    set mouse=a          " Использовать мышь, если терминал позволяет
-    set mousemodel=popup " Выдавать меню по правому клику
-    set mousehide        " Скрывать указатель мыши во время печати
+    set mouse=a                  " Использовать мышь, если терминал позволяет
+    set mousemodel=popup         " Выдавать меню по правому клику
+    set mousehide                " Скрывать указатель мыши во время печати
 
 " Поиск
-    set ignorecase       " Поиск не чувствительный к регистру
-    set smartcase        "  сообразительный
-    set incsearch        "  по набору текста
-    set hlsearch         "  с подсветкой
+    set ignorecase               " Поиск не чувствительный к регистру
+    set smartcase                "  сообразительный
+    set incsearch                "  по набору текста
+    set hlsearch                 "  с подсветкой
 
 " Подстветка
     syntax enable
@@ -78,7 +71,7 @@ call plug#end()
     nmap ё `
     vmap ё `
 
-" Замена <leader> на "," со стандартного "\"
+" Замена <leader> на пробел со стандартного "\"
     let mapleader = ' '
 
 " Убрать мусор из прошлого поиска
