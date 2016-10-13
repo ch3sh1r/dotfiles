@@ -16,9 +16,9 @@
 [submodule "zsh-custom/plugins/zsh-syntax-highlighting"]
 	path = zsh-custom/plugins/zsh-syntax-highlighting
 	url = https://github.com/zsh-users/zsh-syntax-highlighting.git
-[submodule "awesome/lib/tyrannical"]
-	path = awesome/lib/tyrannical
-	url = https://github.com/Elv13/tyrannical.git
 [submodule "emacs.d"]
 	path = emacs.d
 	url = https://github.com/syl20bnr/spacemacs
+[submodule "awesome/tyrannical"]
+	path = awesome/tyrannical
+	url = https://github.com/Elv13/tyrannical

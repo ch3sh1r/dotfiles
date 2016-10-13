@@ -12,7 +12,7 @@ local naughty = require("naughty")
 
 local menubar = require("menubar")
 local vicious = require("vicious")
-local tyrannical = require("lib.tyrannical")
+local tyrannical = require("tyrannical")
 
 -- {{{ Error handling
     -- Check if awesome encountered an error during startup and fell back to
@@ -60,7 +60,7 @@ local tyrannical = require("lib.tyrannical")
 -- }}}
 
 -- {{{ Wallpaper and theme definitions
-    theme_dir = ("~/.config/awesome/lib/theme/")
+    theme_dir = ("~/.config/awesome/theme/")
     beautiful.init(theme_dir .. "theme.lua")
 
     if beautiful.wallpaper then
