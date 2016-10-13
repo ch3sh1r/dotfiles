@@ -8,7 +8,7 @@ plugins=(
 )
 
 # Имя цветовой темы
-ZSH_THEME="terminalparty"
+ZSH_THEME="dogenpunk"
 
 # Правильное отображение цветов
 TERM="xterm-256color"
