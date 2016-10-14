@@ -486,11 +486,15 @@ local tyrannical = require("tyrannical")
     awful.rules.rules = {
         -- All clients will match this rule.
         { rule = { },
-          properties = { border_width = beautiful.border_width,
-                         border_color = beautiful.border_normal,
-                         focus = awful.client.focus.filter,
-                         keys = clientkeys,
-                         buttons = clientbuttons } },
+          properties = {
+              border_color = beautiful.border_normal,
+              border_width = beautiful.border_width,
+              buttons = clientbuttons,
+              focus = awful.client.focus.filter,
+              keys = clientkeys,
+              size_hints_honor = false,
+              },
+          },
         --{ rule = { class = "MPlayer" },
           --properties = { floating = true } },
         --{ rule = { class = "pinentry" },
