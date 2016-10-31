@@ -2,6 +2,7 @@
 plugins=(
     common-aliases
     extract
+    emacs
     git
     grc
     zsh-syntax-highlighting
