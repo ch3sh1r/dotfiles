@@ -111,8 +111,7 @@ local tyrannical = require("tyrannical")
         },
         {
             name        = "vbox",
-            layout      = awful.layout.suit.tile.left,
-            mwfact      = 0.35,
+            layout      = awful.layout.suit.max,
             init        = false,
             screen      = 2,
             class       = {
