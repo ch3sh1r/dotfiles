@@ -9,7 +9,7 @@ plugins=(
 )
 
 # Имя цветовой темы
-ZSH_THEME="dogenpunk"
+ZSH_THEME="cypher"
 
 # Правильное отображение цветов
 TERM="xterm-256color"
