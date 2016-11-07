@@ -3,6 +3,7 @@ local gears = require("gears")
 local awful = require("awful")
 awful.rules = require("awful.rules")
 require("awful.autofocus")
+
 -- Widget and layout library
 local wibox = require("wibox")
 -- Theme handling library
@@ -13,6 +14,7 @@ local naughty = require("naughty")
 local menubar = require("menubar")
 local vicious = require("vicious")
 local tyrannical = require("tyrannical")
+local applist = require("debian.menu")
 
 -- {{{ Error handling
     -- Check if awesome encountered an error during startup and fell back to
@@ -265,6 +267,13 @@ local tyrannical = require("tyrannical")
         layout:set_right(right_layout)
         mywibox[s]:set_widget(layout)
     end
+-- }}}
+
+-- {{{ Mouse bindings
+	applications = awful.menu({ items = applist.Debian_menu.Debian })
+	root.buttons(awful.util.table.join(
+		awful.button({ }, 3, function () applications:toggle() end),
+	))
 -- }}}
 
 -- {{{ Key bindings
