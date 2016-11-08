@@ -272,7 +272,7 @@ local applist = require("debian.menu")
 -- {{{ Mouse bindings
 	applications = awful.menu({ items = applist.Debian_menu.Debian })
 	root.buttons(awful.util.table.join(
-		awful.button({ }, 3, function () applications:toggle() end),
+		awful.button({ }, 3, function () applications:toggle() end)
 	))
 -- }}}
 
