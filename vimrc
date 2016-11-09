@@ -28,17 +28,10 @@ call plug#end()
     set ch=1                     " Строка команд высотой в одну строку
     set laststatus=2             " У последнего окна всегда есть статус
 
-" Автоматические отступы
-    set autoindent
-    set smartindent
-
 " Отступы и табы
     set smarttab
-    set noexpandtab
-    set shiftwidth=8
-    set softtabstop=8
-    set tabstop=8
-    autocmd FileType py setlocal tabstop=4 softtabstop=4 shiftwidth=4 expandtab
+    set tabstop=4 softtabstop=4 shiftwidth=4 expandtab
+    autocmd FileType py setlocal tabstop=8 softtabstop=8 shiftwidth=8 noexpandtab
 
 " Подсвечивание правой границы
     let &colorcolumn=join(range(81,81),",")
@@ -66,15 +59,13 @@ call plug#end()
     set termencoding=utf-8
     set fileencodings=utf-8,latin1,cp1251
     set langmap=ФИСВУАПРШОЛДЬТЩЗЙКЫЕГМЦЧНЯ;ABCDEFGHIJKLMNOPQRSTUVWXYZ,фисвуапршолдьтщзйкыегмцчня;abcdefghijklmnopqrstuvwxyz
-    imap ё `
-    nmap ё `
-    vmap ё `
+    map ё `
 
 " Замена <leader> на пробел со стандартного "\"
     let mapleader = ' '
 
 " Убрать мусор из прошлого поиска
-    nnoremap <leader><space> :noh<cr>
+    nmap <leader><space> :noh<cr>
 
 " Непечатаемые символы
     set list
@@ -88,32 +79,27 @@ call plug#end()
             set list
         endif
     endfunction
-    nnoremap <leader>l :call ToggleList()<cr>
+    nmap <leader>l :call ToggleList()<cr>
 
 " Поиск регулярками
-    nnoremap / /\v
-    vnoremap / /\v
+    nmap / /\v
+    vmap / /\v
 
 " Поиск выделенного
-    vnoremap // y/\c<C-R>"<CR>
-    vnoremap /? y?\c<C-R>"<CR>
+    vmap // y/\c<c-r>"<cr>
+    vmap /? y?\c<c-r>"<cr>
 
 " <leader>e. - смена кодировок
-    " <leader>ek - koi8
-        nmap <leader>ek :e ++enc=koi8-r<cr>
-    " <leader>ew - cp1251
-        nmap <leader>ew :e ++enc=cp1251<cr>
-    " <leader>ec - cp866
-        nmap <leader>ec :e ++enc=cp866<cr>
-    " <leader>eu - utf8
-        nmap <leader>eu :e ++enc=utf8<cr>
-    " <leader>er - rot13
-        nmap <leader>er ggg?G <cr>
+    nmap <leader>ek :e ++enc=koi8-r<cr>
+    nmap <leader>ew :e ++enc=cp1251<cr>
+    nmap <leader>ec :e ++enc=cp866<cr>
+    nmap <leader>eu :e ++enc=utf8<cr>
+    nmap <leader>er ggg?G <cr>
 
 " Перемещение по буферам
-    map <Leader>a :bprev<Return>
-    map <Leader>s :bnext<Return>
-    map <Leader>d :bd<Return>
+    map <leader>a :bprev<return>
+    map <leader>s :bnext<return>
+    map <leader>d :bd<return>
 
 " Верхний бар Airline
     let g:airline#extensions#tabline#enabled = 1
