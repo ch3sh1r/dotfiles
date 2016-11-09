@@ -62,9 +62,7 @@ local applist = require("debian.menu")
 -- }}}
 
 -- {{{ Wallpaper and theme definitions
-    theme_dir = ("~/.config/awesome/theme/")
-    beautiful.init(theme_dir .. "theme.lua")
-
+    beautiful.init("~/.config/awesome/theme/theme.lua")
     if beautiful.wallpaper then
         for s = 1, screen.count() do
             gears.wallpaper.maximized(beautiful.wallpaper, s)
@@ -170,9 +168,54 @@ local applist = require("debian.menu")
     tyrannical.properties.floating = { "gtksu", "skype", }
 -- }}}
 
+-- {{{ Menu
+    applications = awful.menu({ items = applist.Debian_menu.Debian })
+    root.buttons(awful.util.table.join(
+        awful.button({ }, 3, function () applications:toggle() end)
+    ))
+-- }}}
+
 -- {{{ Wibox
     -- Separator Widget
     separator = wibox.widget.textbox("  ")
+
+    -- Battery Widget
+    local batn = "BAT1"
+    batwidget = wibox.widget.textbox()
+    vicious.register(batwidget, vicious.widgets.bat, '<span color="#AAAAAA">$1$2%</span>', 5, batn)
+    baticon = wibox.widget.imagebox()
+    vicious.register(baticon, vicious.widgets.bat, function(widget, args)
+       local paraone = tonumber(args[2])
+       if paraone == 0 then
+           baticon:set_image(beautiful.ac_none)
+       elseif paraone <= 10 then
+           baticon:set_image(beautiful.ac_low)
+           naughty.notify({ preset = naughty.config.presets.critical,
+                            title = "Battery discharging!",
+                            text = "Connect to power source. Now." })
+       elseif paraone <= 35 then
+           baticon:set_image(beautiful.ac_medl)
+       elseif paraone <= 60 then
+           baticon:set_image(beautiful.ac_med)
+       elseif paraone <= 85 then
+           baticon:set_image(beautiful.ac_medb)
+       else
+           baticon:set_image(beautiful.ac_full)
+       end
+    end, 300, batn)
+
+    -- Volume Widget
+    volumewidget = wibox.widget.textbox()
+    vicious.register(volumewidget, vicious.widgets.volume, '<span color="#AAAAAA">$1%</span>', 2, "Master")
+    volumeicon = wibox.widget.imagebox()
+    vicious.register(volumeicon, vicious.widgets.volume, function(widget, args)
+        local paraone = tonumber(args[1])
+        if args[2] == "♩" or paraone == 0 then
+            volumeicon:set_image(beautiful.volume_mute)
+        else
+            volumeicon:set_image(beautiful.volume_on)
+        end
+    end, 2, "Master")
 
     -- Time and Date Widget
     clockwidget = wibox.widget.textbox()
@@ -249,12 +292,18 @@ local applist = require("debian.menu")
         -- Widgets that are aligned to the left
         local left_layout = wibox.layout.fixed.horizontal()
         left_layout:add(mytaglist[s])
+        left_layout:add(separator)
         left_layout:add(mypromptbox[s])
 
         -- Widgets that are aligned to the right
         local right_layout = wibox.layout.fixed.horizontal()
         if s == 1 then right_layout:add(wibox.widget.systray()) end
         right_layout:add(separator)
+        right_layout:add(baticon)
+        right_layout:add(batwidget)
+        right_layout:add(separator)
+        right_layout:add(volumeicon)
+        right_layout:add(volumewidget)
         right_layout:add(separator)
         right_layout:add(clockwidget)
         right_layout:add(separator)
@@ -267,13 +316,6 @@ local applist = require("debian.menu")
         layout:set_right(right_layout)
         mywibox[s]:set_widget(layout)
     end
--- }}}
-
--- {{{ Mouse bindings
-	applications = awful.menu({ items = applist.Debian_menu.Debian })
-	root.buttons(awful.util.table.join(
-		awful.button({ }, 3, function () applications:toggle() end)
-	))
 -- }}}
 
 -- {{{ Key bindings
@@ -367,7 +409,7 @@ local applist = require("debian.menu")
         awful.key({ modkey, "Control" }, "n", awful.client.restore),
 
         -- Prompt
-        awful.key({ modkey },            "r",     function () mypromptbox[mouse.screen]:run() end),
+        awful.key({ modkey            }, "r",     function () mypromptbox[mouse.screen]:run() end),
 
         -- Menubar
         awful.key({ modkey, "Shift"   }, "r", function() menubar.show() end),
