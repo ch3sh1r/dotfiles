@@ -6,4 +6,6 @@ alias l='ls'
 alias p='ps auxw'
 alias vi='vim'
 
+psgrep() { ps up $(pgrep -f $@) 2>&-; }
+
 alias -g D=' | colordiff | less'
