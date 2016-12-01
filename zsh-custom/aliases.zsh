@@ -5,3 +5,5 @@ alias iddqd='sudo -s'
 alias l='ls'
 alias p='ps auxw'
 alias vi='vim'
+
+alias -g D=' | colordiff | less'
