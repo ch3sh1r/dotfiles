@@ -90,6 +90,7 @@ local applist = require("debian.menu")
             name        = "dev",
             screen      = 1,
             layout      = awful.layout.suit.max,
+            init        = false,
             class       = {
                 "designer-qt4",
                 "Eclipse",
