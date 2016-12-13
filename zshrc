@@ -9,7 +9,7 @@ plugins=(
 )
 
 # Имя цветовой темы
-ZSH_THEME="cypher"
+ZSH_THEME="sunrise"
 
 # Правильное отображение цветов
 TERM="xterm-256color"
