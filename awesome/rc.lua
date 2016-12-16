@@ -166,7 +166,7 @@ local applist = require("debian.menu")
     tyrannical.properties.intrusive = { "gnome-terminal", }
 
     -- Ignore the tiled layout for the matching clients
-    tyrannical.properties.floating = { "gtksu", "skype", }
+    tyrannical.properties.floating = { "gtksu", "skype", "telegram", }
 -- }}}
 
 -- {{{ Menu
@@ -651,5 +651,6 @@ local applist = require("debian.menu")
     awful.util.spawn_with_shell("bash ~/.xprofile")
     run_once("nm-applet")
     run_once("skype")
+    run_once("telegram")
 -- }}}
 
