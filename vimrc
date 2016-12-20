@@ -30,8 +30,8 @@ call plug#end()
 
 " Отступы и табы
     set smarttab
-    set tabstop=4 softtabstop=4 shiftwidth=4 expandtab
-    autocmd FileType py setlocal tabstop=8 softtabstop=8 shiftwidth=8 noexpandtab
+    set tabstop=8 softtabstop=8 shiftwidth=8 noexpandtab
+    autocmd FileType py setlocal tabstop=4 softtabstop=4 shiftwidth=4 expandtab
 
 " Подсвечивание правой границы
     let &colorcolumn=join(range(81,81),",")
