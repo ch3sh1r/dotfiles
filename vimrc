@@ -33,9 +33,6 @@ call plug#end()
     set tabstop=8 softtabstop=8 shiftwidth=8 noexpandtab
     autocmd FileType py setlocal tabstop=4 softtabstop=4 shiftwidth=4 expandtab
 
-" Подсвечивание правой границы
-    let &colorcolumn=join(range(81,81),",")
-
 " Поддержка мыши
     set mouse=a                  " Использовать мышь, если терминал позволяет
     set mousemodel=popup         " Выдавать меню по правому клику
@@ -67,7 +64,8 @@ call plug#end()
 " Убрать мусор из прошлого поиска
     nmap <leader><space> :noh<cr>
 
-" Непечатаемые символы
+" Непечатные символы
+    let &colorcolumn=join(range(81,81),",")
     set list
     set listchars=eol:¶,tab:→\ ,trail:~,extends:›,precedes:‹,space:·,nbsp:‡
     highlight SpecialKey ctermbg=10 ctermfg=8 term=standout cterm=standout
@@ -75,8 +73,10 @@ call plug#end()
     function! ToggleList()
         if &list
             set nolist
+            let &colorcolumn=""
         else
             set list
+            let &colorcolumn=join(range(81,81),",")
         endif
     endfunction
     nmap <leader>l :call ToggleList()<cr>
