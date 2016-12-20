@@ -166,7 +166,7 @@ local applist = require("debian.menu")
     tyrannical.properties.intrusive = { "gnome-terminal", }
 
     -- Ignore the tiled layout for the matching clients
-    tyrannical.properties.floating = { "gtksu", "skype", "telegram", }
+    tyrannical.properties.floating = { "gtksu", "skype", "TelegramDesktop", }
 -- }}}
 
 -- {{{ Menu
