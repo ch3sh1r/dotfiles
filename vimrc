@@ -17,6 +17,7 @@ call plug#begin('~/.vim/plugged')
     Plug 'altercation/vim-colors-solarized'
     Plug 'scrooloose/nerdcommenter'
     Plug 'vim-airline/vim-airline' | Plug 'vim-airline/vim-airline-themes'
+    Plug 'rust-lang/rust.vim'
 call plug#end()
 
 " История
@@ -32,6 +33,7 @@ call plug#end()
     set smarttab
     set tabstop=8 softtabstop=8 shiftwidth=8 noexpandtab
     autocmd FileType py setlocal tabstop=4 softtabstop=4 shiftwidth=4 expandtab
+    autocmd FileType rs setlocal tabstop=4 softtabstop=4 shiftwidth=4 expandtab
 
 " Поддержка мыши
     set mouse=a                  " Использовать мышь, если терминал позволяет
