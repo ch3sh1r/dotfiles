@@ -96,21 +96,16 @@ values."
    ;; Press <SPC> T n to cycle to the next theme in the list (works great
    ;; with 2 themes variants, one dark and one light)
    dotspacemacs-themes '(solarized-dark
-                         solarized-light
-                         spacemacs-dark
-                         spacemacs-light
-                         leuven
-                         monokai
-                         zenburn)
+                         solarized-light)
    ;; If non nil the cursor color matches the state color in GUI Emacs.
    dotspacemacs-colorize-cursor-according-to-state t
    ;; Default font. `powerline-scale' allows to quickly tweak the mode-line
    ;; size to make separators look not too crappy.
-   dotspacemacs-default-font '("Terminus"
-                               :size 14
+   dotspacemacs-default-font '("Hack"
+                               :size 12
                                :weight normal
                                :width normal
-                               :powerline-scale 1.5)
+                               :powerline-scale 0.8)
    ;; The leader key
    dotspacemacs-leader-key "SPC"
    ;; The leader key accessible in `emacs state' and `insert state'
@@ -249,23 +244,24 @@ layers configuration.
 This is the place where most of your configurations should be done. Unless it is
 explicitly specified that a variable should be set before a package is loaded,
 you should place your code here."
-  (setq mouse-wheel-scroll-amount '(1 ((shift) . 1))) ;; one line at a time
-  (setq mouse-wheel-progressive-speed nil) ;; don't accelerate scrolling
-  (setq mouse-wheel-follow-mouse 't) ;; scroll window under mouse
-  (setq scroll-step 1) ;; keyboard scroll one line at a time
-
-  (c-add-style "continuum"
-               '("bsd"
-                 (c-tab-always-dent . t)
-                 (c-basic-offset . 4)
-                 (c-offsets-alias . ((substatement-open . 0)))))
+  ;; Low bar default separator
+  (setq powerline-default-separator 'bar)
+  ;; Mouse scroll behavior
+  (setq mouse-wheel-progressive-speed nil)
+  (setq mouse-wheel-follow-mouse 't)
+  (setq scroll-step 1)
+  ;; Continuum code style
+  (c-add-style
+   "continuum"
+   '("bsd"
+     (c-tab-always-dent . t)
+     (c-basic-offset . 4)
+     (c-offsets-alias . ((substatement-open . 0)))))
   (defun my-c-mode-common-hook ()
     (c-set-style "continuum")
     (setq tab-width 8
           indent-tabs-mode t)
-    (c-toggle-auto-newline 1))
-  )
-
+    (c-toggle-auto-newline 1)))
 ;; Do not write anything past this comment. This is where Emacs will
 ;; auto-generate custom variable definitions.
 (custom-set-variables
