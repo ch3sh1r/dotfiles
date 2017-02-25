@@ -7,6 +7,9 @@
 [submodule "vim/plugged/nerdtree"]
 	path = vim/plugged/nerdtree
 	url = https://git::@github.com/scrooloose/nerdtree.git
+[submodule "vim/plugged/rust.vim"]
+	path = vim/plugged/rust.vim
+	url = https://git::@github.com/rust-lang/rust.vim.git
 [submodule "vim/plugged/vim-airline"]
 	path = vim/plugged/vim-airline
 	url = https://git::@github.com/vim-airline/vim-airline.git
