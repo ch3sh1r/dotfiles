@@ -1,4 +1,4 @@
-set guifont=Hack\ Regular:h12   " Шрифт
+set guifont=Hack\ Regular:h14   " Шрифт
 set guioptions-=m               " Убрать отображение меню
 set guioptions-=T               " Убрать тулбара
 set guioptions-=r               " Убрать правый скролбар

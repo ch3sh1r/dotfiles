@@ -32,8 +32,10 @@ call plug#end()
 
 " Отступы и табы
     set smarttab
-    set tabstop=8 softtabstop=8 shiftwidth=8 noexpandtab
-    autocmd FileType py setlocal tabstop=4 softtabstop=4 shiftwidth=4 expandtab
+    set tabstop=4 softtabstop=4 shiftwidth=4 expandtab
+    autocmd FileType c setlocal tabstop=8 softtabstop=8 shiftwidth=8 noexpandtab
+    autocmd FileType html setlocal tabstop=2 softtabstop=2 shiftwidth=2 expandtab
+    autocmd FileType css setlocal tabstop=2 softtabstop=2 shiftwidth=2 expandtab
 
 " Поддержка мыши
     set mouse=a                  " Использовать мышь, если терминал позволяет
