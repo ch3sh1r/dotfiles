@@ -20,3 +20,4 @@ TERM="xterm-256color"
 # Запуск инициализации
 export ZSH=$HOME/.zsh
 source $ZSH"/oh-my-zsh.sh"
+

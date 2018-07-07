@@ -8,17 +8,16 @@ set number                       " Нумерация строк
 set relativenumber               " Относительная нумерация строк
 set wrap                         " Перенос строк
 set linebreak                    " Перенос строк по словам, а не по буквам
-set foldmethod=indent            " Фолдинг по отступам
 set scrolljump=2                 " Теперь нет необходимости передвигать курсор к
 set scrolloff=2                  "  краю экрана, чтобы подняться/опуститься
 set backspace=indent,eol,start   " Backspace работает как всегда
 
 call plug#begin('~/.vim/plugged')
     Plug 'altercation/vim-colors-solarized'
+    Plug 'rust-lang/rust.vim'
     Plug 'scrooloose/nerdcommenter'
     Plug 'scrooloose/nerdtree'
     Plug 'vim-airline/vim-airline' | Plug 'vim-airline/vim-airline-themes'
-    Plug 'rust-lang/rust.vim'
 call plug#end()
 
 " История
@@ -85,10 +84,6 @@ call plug#end()
     endfunction
     nmap <leader>l :call ToggleList()<cr>
 
-" Поиск регулярками
-    nmap / /\v
-    vmap / /\v
-
 " Поиск выделенного
     vmap // y/\c<c-r>"<cr>
     vmap /? y?\c<c-r>"<cr>
@@ -101,8 +96,8 @@ call plug#end()
     nmap <leader>er ggg?G <cr>
 
 " Перемещение по буферам
-    map <leader>a :bprev<return>
-    map <leader>s :bnext<return>
+    map <leader>a :bprev!<return>
+    map <leader>s :bnext!<return>
     map <leader>d :bd<return>
 
 " Верхний бар Airline
