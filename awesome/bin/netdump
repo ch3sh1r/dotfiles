@@ -1,5 +1,0 @@
-#!/bin/sh
-
-NETDUMP="/var/log/net/dump-$(date +'%m-%d-%H-%M-%S')"
-tmux new -d -s tshark "echo Writing to $NETDUMP;tshark -i any -w $NETDUMP" \; \
-     split-window -d "sleep 3; watch du /var/log/net/*"
