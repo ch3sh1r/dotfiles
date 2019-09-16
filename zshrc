@@ -1,9 +1,14 @@
 # Подключаемые плагины
 plugins=(
+    brew
     common-aliases
+    docker
+    docker-compose
     extract
     git
     grc
+    kitchen
+    vagrant
     zsh-syntax-highlighting
 )
 
