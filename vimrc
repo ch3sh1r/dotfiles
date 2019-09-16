@@ -14,7 +14,6 @@ set backspace=indent,eol,start   " Backspace работает как всегд�
 
 call plug#begin('~/.vim/plugged')
     Plug 'altercation/vim-colors-solarized'
-    Plug 'rust-lang/rust.vim'
     Plug 'scrooloose/nerdcommenter'
     Plug 'scrooloose/nerdtree'
     Plug 'vim-airline/vim-airline' | Plug 'vim-airline/vim-airline-themes'
