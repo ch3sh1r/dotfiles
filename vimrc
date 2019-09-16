@@ -68,8 +68,6 @@ call plug#end()
     nmap <leader><space> :noh<cr>
 
 " Непечатные символы
-    let &colorcolumn=join(range(81,81),",")
-    set list
     set listchars=eol:¶,tab:→\ ,trail:~,extends:›,precedes:‹,space:·,nbsp:‡
     highlight SpecialKey ctermbg=10 ctermfg=8 term=standout cterm=standout
     highlight NonText    ctermbg=10 ctermfg=8 term=standout cterm=standout
@@ -79,9 +77,10 @@ call plug#end()
             let &colorcolumn=""
         else
             set list
-            let &colorcolumn=join(range(81,81),",")
+            let &colorcolumn=join(range(121,121),",")
         endif
     endfunction
+    call ToggleList()
     nmap <leader>l :call ToggleList()<cr>
 
 " Поиск выделенного
