@@ -4,11 +4,7 @@ unalias grc 2> /dev/null
 GRC=`command -v grc 2> /dev/null`
 
 func colourify () {
-    if [ -n "$SDKTARGETSYSROOT" ]; then
-        $@
-    else
-        $GRC -es --colour=auto $@
-    fi
+    $GRC -es --colour=auto $@
 }
 
 if [ "$TERM" != dumb ] && [ -n "$GRC" ]; then
