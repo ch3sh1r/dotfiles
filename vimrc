@@ -14,6 +14,7 @@ set backspace=indent,eol,start   " Backspace работает как всегд�
 
 call plug#begin('~/.vim/plugged')
     Plug 'altercation/vim-colors-solarized'
+    Plug 'dyng/ctrlsf.vim'
     Plug 'scrooloose/nerdcommenter'
     Plug 'scrooloose/nerdtree'
     Plug 'vim-airline/vim-airline' | Plug 'vim-airline/vim-airline-themes'
@@ -24,16 +25,9 @@ call plug#end()
     set history=128              " Хранить больше истории команд
     set undolevels=2048          " Хранить больше истории правок
 
-" Строка состояния
-    set ch=1                     " Строка команд высотой в одну строку
-    set laststatus=2             " У последнего окна всегда есть статус
-
 " Отступы и табы
     set smarttab
     set tabstop=4 softtabstop=4 shiftwidth=4 expandtab
-    autocmd FileType c setlocal tabstop=8 softtabstop=8 shiftwidth=8 noexpandtab
-    autocmd FileType html setlocal tabstop=2 softtabstop=2 shiftwidth=2 expandtab
-    autocmd FileType css setlocal tabstop=2 softtabstop=2 shiftwidth=2 expandtab
 
 " Поддержка мыши
     set mouse=a                  " Использовать мышь, если терминал позволяет
@@ -49,16 +43,17 @@ call plug#end()
 " Подстветка
     syntax enable
     filetype plugin on
-    set t_Co=16
-    set background=dark
+    if system("defaults read -g AppleInterfaceStyle") =~ '^Dark'
+        set background=dark
+    else
+        set background=light
+    endif
     colorscheme solarized
-    set cursorline
 
 " Русская раскладка и кодировки
     set termencoding=utf-8
     set fileencodings=utf-8,latin1,cp1251
     set langmap=ФИСВУАПРШОЛДЬТЩЗЙКЫЕГМЦЧНЯ;ABCDEFGHIJKLMNOPQRSTUVWXYZ,фисвуапршолдьтщзйкыегмцчня;abcdefghijklmnopqrstuvwxyz
-    map ё `
 
 " Замена <leader> на пробел со стандартного "\"
     let mapleader = ' '
@@ -68,8 +63,6 @@ call plug#end()
 
 " Непечатные символы
     set listchars=eol:¶,tab:→\ ,trail:~,extends:›,precedes:‹,space:·,nbsp:‡
-    highlight SpecialKey ctermbg=10 ctermfg=8 term=standout cterm=standout
-    highlight NonText    ctermbg=10 ctermfg=8 term=standout cterm=standout
     function! ToggleList()
         if &list
             set nolist
@@ -79,7 +72,6 @@ call plug#end()
             let &colorcolumn=join(range(121,121),",")
         endif
     endfunction
-    call ToggleList()
     nmap <leader>l :call ToggleList()<cr>
 
 " Поиск выделенного
@@ -97,6 +89,16 @@ call plug#end()
     map <leader>a :bprev!<return>
     map <leader>s :bnext!<return>
     map <leader>d :bd<return>
+
+" Поиск по файлам
+    nmap     <C-F>f <Plug>CtrlSFPrompt
+    vmap     <C-F>f <Plug>CtrlSFVwordPath
+    vmap     <C-F>F <Plug>CtrlSFVwordExec
+    nmap     <C-F>n <Plug>CtrlSFCwordPath
+    nmap     <C-F>p <Plug>CtrlSFPwordPath
+    nnoremap <C-F>o :CtrlSFOpen<CR>
+    nnoremap <C-F>t :CtrlSFToggle<CR>
+    inoremap <C-F>t <Esc>:CtrlSFToggle<CR>
 
 " Верхний бар Airline
     let g:airline#extensions#tabline#enabled = 1
