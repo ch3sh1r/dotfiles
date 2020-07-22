@@ -8,15 +8,9 @@
 
 ### Ubuntu
 
-Старые версии Ubuntu содержат устаревшую версию пакета awesome,
-поэтому необходимо добавить
-[ppa](https://launchpad.net/~klaus-vormweg/+archive/awesome)
-от Klaus Vormweg).
-
 ```bash
-sudo add-apt-repository ppa:klaus-vormweg/awesome
 sudo apt update
-sudo apt install vim git zsh grc awesome awesome-extra tmux make
+sudo apt install vim git zsh grc tmux make
 git clone --recurse https://github.com/ch3sh1r/dotfiles ~/.dotfiles
 cd ~/.dotfiles
 make
@@ -28,15 +22,13 @@ make
 [gnome-terminal-colors-solarized](https://github.com/sigurdga/gnome-terminal-colors-solarized)
 от [@sigurdga](https://github.com/sigurdga).
 
-Для автокомплита в виме используется плагин
-[YouCompleteMe](http://valloric.github.io/YouCompleteMe/)
-от [Val Markovic](https://github.com/Valloric).
-Он построен по клиент-серверной модели и
-требует дополнительных телодвижений при установке и обновлении.
+### macOS
 
 ```bash
-cd ~/.vim/plugged/YouCompleteMe
-./install.py
+brew install vim git zsh grc tmux make
+git clone --recurse https://github.com/ch3sh1r/dotfiles ~/.dotfiles
+cd ~/.dotfiles
+make
 ```
 
 ## Зависимости
