@@ -16,22 +16,6 @@ alias gpr='git-quick-stats -r'
 alias brew_link_vim='ln -Fs `find /usr/local -name "MacVim.app"` /Applications/MacVim.app'
 alias converge='cookstyle -a && foodcritic . && kitchen converge'
 
-# Enter container on HW node
-pve() {
-    hw_node=$(prls-find-ve $1)
-    if [ -z "${hw_node}" ]; then
-       echo "VE $1 not found."
-       return 1
-    fi
-
-    if [ "$#" -eq 1 ]; then
-        echo "Connecting to $hw_node, entering $1 node."
-        ssh ${hw_node} -t "sudo /usr/sbin/vzctl enter $1"
-    else
-        ssh ${hw_node} -o LogLevel=QUIET -t "sudo /usr/sbin/vzctl exec $1 '${@:2}'"
-    fi
-}
-
 # Setup Jira hook for repo
 ghj() {
     if [ ! -d .git/hooks ]; then
