@@ -16,6 +16,9 @@ alias gpr='git-quick-stats -r'
 alias brew_link_vim='ln -Fs `find /usr/local -name "MacVim.app"` /Applications/MacVim.app'
 alias converge='cookstyle -a && foodcritic . && kitchen converge'
 
+fdg() { find . -type d -name "*$1*" }
+ffg() { find . -type f -name "*$1*" }
+
 # Setup Jira hook for repo
 ghj() {
     if [ ! -d .git/hooks ]; then
@@ -42,4 +45,10 @@ fi
 EOF
     chmod 755 ${hook_file}
     echo "Created ${hook_file} hook file."
+}
+
+nmap-filtered () {
+    ports=$(nmap -p- --min-rate=500 $1 | grep ^[0-9] | cut -d '/' -f 1 | tr '\n' ',' | sed s/,$//)
+    echo "Found ports: ${ports}."
+    nmap -p$ports -A $1
 }

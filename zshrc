@@ -2,14 +2,10 @@
 plugins=(
     ansible
     brew
+    colorize
     common-aliases
-    docker
-    docker-compose
     extract
     git
-    grc
-    kitchen
-    knife
     pip
     vagrant
     zsh-syntax-highlighting
