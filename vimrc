@@ -17,7 +17,6 @@ call plug#begin('~/.vim/plugged')
     Plug 'dyng/ctrlsf.vim'
     Plug 'scrooloose/nerdcommenter'
     Plug 'scrooloose/nerdtree'
-    Plug 'vim-airline/vim-airline' | Plug 'vim-airline/vim-airline-themes'
 call plug#end()
 
 " История
@@ -41,13 +40,7 @@ call plug#end()
     set hlsearch                 "  с подсветкой
 
 " Подстветка
-    syntax enable
-    filetype plugin on
-    if system("defaults read -g AppleInterfaceStyle") =~ '^Dark'
-        set background=dark
-    else
-        set background=light
-    endif
+    set background=dark
     colorscheme solarized
 
 " Русская раскладка и кодировки
@@ -99,6 +92,3 @@ call plug#end()
     nnoremap <C-F>o :CtrlSFOpen<CR>
     nnoremap <C-F>t :CtrlSFToggle<CR>
     inoremap <C-F>t <Esc>:CtrlSFToggle<CR>
-
-" Верхний бар Airline
-    let g:airline#extensions#tabline#enabled = 1
