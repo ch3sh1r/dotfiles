@@ -16,7 +16,6 @@ call plug#begin('~/.vim/plugged')
     Plug 'altercation/vim-colors-solarized'
     Plug 'dyng/ctrlsf.vim'
     Plug 'scrooloose/nerdcommenter'
-    Plug 'scrooloose/nerdtree'
 call plug#end()
 
 " История

@@ -1,17 +1,11 @@
 DOTFILES_PATH  := $(dir $(abspath $(lastword $(MAKEFILE_LIST))))
 DOTFILE_RC     := vim zsh
 DOTFILE        := gitconfig tmux.conf xprofile gvimrc
-DOTFILES       := $(DOTFILE_RC) $(DOTFILE) emacs zsh-custom
+DOTFILES       := $(DOTFILE_RC) $(DOTFILE) zsh-custom
 
 .PHONY: all $(DOTFILES)
 
 all: $(DOTFILES)
-
-emacs:
-	rm -Rf ~/.spacemacs
-	rm -Rf ~/.emacs.d
-	ln -sf $(DOTFILES_PATH)spacemacs ~/.spacemacs
-	ln -sf $(DOTFILES_PATH)emacs.d ~/.emacs.d
 
 $(DOTFILE_RC):
 	rm -Rf ~/.$@rc

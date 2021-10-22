@@ -1,27 +1,15 @@
 [submodule "zsh"]
 	path = zsh
 	url = https://github.com/robbyrussell/oh-my-zsh.git
+[submodule "vim/plugged/ctrlsf.vim"]
+	path = vim/plugged/ctrlsf.vim
+	url = https://git::@github.com/dyng/ctrlsf.vim.git
 [submodule "vim/plugged/nerdcommenter"]
 	path = vim/plugged/nerdcommenter
 	url = https://git::@github.com/scrooloose/nerdcommenter.git
-[submodule "vim/plugged/nerdtree"]
-	path = vim/plugged/nerdtree
-	url = https://git::@github.com/scrooloose/nerdtree.git
-[submodule "vim/plugged/rust.vim"]
-	path = vim/plugged/rust.vim
-	url = https://git::@github.com/rust-lang/rust.vim.git
-[submodule "vim/plugged/vim-airline"]
-	path = vim/plugged/vim-airline
-	url = https://git::@github.com/vim-airline/vim-airline.git
-[submodule "vim/plugged/vim-airline-themes"]
-	path = vim/plugged/vim-airline-themes
-	url = https://git::@github.com/vim-airline/vim-airline-themes.git
 [submodule "vim/plugged/vim-colors-solarized"]
 	path = vim/plugged/vim-colors-solarized
 	url = https://git::@github.com/altercation/vim-colors-solarized.git
 [submodule "zsh-custom/plugins/zsh-syntax-highlighting"]
 	path = zsh-custom/plugins/zsh-syntax-highlighting
 	url = https://github.com/zsh-users/zsh-syntax-highlighting.git
-[submodule "emacs.d"]
-	path = emacs.d
-	url = https://github.com/syl20bnr/spacemacs.git
