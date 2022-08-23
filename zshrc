@@ -1,9 +1,9 @@
 # Подключаемые плагины
 plugins=(
-    colorize
     common-aliases
     extract
     git
+    ssh-agent
     zsh-syntax-highlighting
 )
 
@@ -15,6 +15,13 @@ TERM="xterm-256color"
 
 # .localrc для использования на машине
 [[ -f ~/.localrc ]] && . ~/.localrc
+
+# Не спрашивать пароли на ключи на старте
+zstyle :omz:plugins:ssh-agent lazy yes
+
+# PIP3 executables
+path+=('/home/ch3sh1r/.local/bin')
+export PATH
 
 # Запуск инициализации
 export ZSH=$HOME/.zsh
