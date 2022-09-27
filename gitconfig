@@ -37,3 +37,5 @@
 	showuntrackedfiles = all
 [init]
 	defaultBranch = master
+[gc]
+	auto = 0
