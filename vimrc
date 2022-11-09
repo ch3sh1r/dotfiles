@@ -91,3 +91,6 @@ call plug#end()
     nnoremap <C-F>o :CtrlSFOpen<CR>
     nnoremap <C-F>t :CtrlSFToggle<CR>
     inoremap <C-F>t <Esc>:CtrlSFToggle<CR>
+
+" Мап для виндового терминала
+    nnoremap <leader>v <c-v>
