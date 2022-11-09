@@ -1,7 +1,8 @@
 DOTFILES_PATH  := $(dir $(abspath $(lastword $(MAKEFILE_LIST))))
 DOTFILE_RC     := vim zsh
+DOTFILE_CONFIG := fish
 DOTFILE        := gitconfig tmux.conf xprofile gvimrc
-DOTFILES       := $(DOTFILE_RC) $(DOTFILE) zsh-custom
+DOTFILES       := $(DOTFILE_RC) $(DOTFILE_CONFIG) $(DOTFILE) zsh-custom
 
 .PHONY: all $(DOTFILES)
 
@@ -21,6 +22,12 @@ zsh-custom:
 		[ -L $(DOTFILES_PATH)zsh/custom/plugins/$(plugin) ] || \
 			ln -s $(DOTFILES_PATH)zsh-custom/plugins/$(plugin) $(DOTFILES_PATH)zsh/custom/plugins;)
 
+$(DOTFILE_CONFIG):
+        mkdir -p ~/.config
+        rm -Rf ~/.config/$@
+        ln -sf $(DOTFILES_PATH)$@ ~/.config/$@
+
 $(DOTFILE):
 	rm -Rf ~/.$@
 	ln -sf $(DOTFILES_PATH)$@ ~/.$@
+
