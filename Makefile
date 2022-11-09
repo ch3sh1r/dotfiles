@@ -23,9 +23,9 @@ zsh-custom:
 			ln -s $(DOTFILES_PATH)zsh-custom/plugins/$(plugin) $(DOTFILES_PATH)zsh/custom/plugins;)
 
 $(DOTFILE_CONFIG):
-        mkdir -p ~/.config
-        rm -Rf ~/.config/$@
-        ln -sf $(DOTFILES_PATH)$@ ~/.config/$@
+	mkdir -p ~/.config
+	rm -Rf ~/.config/$@
+	ln -sf $(DOTFILES_PATH)$@ ~/.config/$@
 
 $(DOTFILE):
 	rm -Rf ~/.$@
