@@ -8,7 +8,10 @@ SETUVAR _fish_abbr_gco:git\x20checkout
 SETUVAR _fish_abbr_gd:git\x20diff
 SETUVAR _fish_abbr_glg:git\x20log\x20\x2d\x2dstat
 SETUVAR _fish_abbr_gp:git\x20push
+SETUVAR _fish_abbr_grhh:git\x20reset\x20\x2d\x2dhard
 SETUVAR _fish_abbr_gss:git\x20status
+SETUVAR _fish_abbr_gsta:git\x20stash\x20push
+SETUVAR _fish_abbr_gstp:git\x20stash\x20pop
 SETUVAR _fish_abbr_gup:git\x20pull
 SETUVAR _fisher_jorgebucaran_2F_fisher_files:\x7e/\x2econfig/fish/functions/fisher\x2efish\x1e\x7e/\x2econfig/fish/completions/fisher\x2efish
 SETUVAR _fisher_plugins:jorgebucaran/fisher
