@@ -10,8 +10,8 @@
 
 ```bash
 sudo apt update
-sudo apt install vim git zsh grc tmux make
-git clone --recurse https://github.com/ch3sh1r/dotfiles ~/.dotfiles
+sudo apt install vim git fish tmux make
+git clone --recursive https://github.com/ch3sh1r/dotfiles ~/.dotfiles
 cd ~/.dotfiles
 make
 ```
@@ -25,8 +25,8 @@ make
 ### macOS
 
 ```bash
-brew install vim git zsh grc tmux make
-git clone --recurse https://github.com/ch3sh1r/dotfiles ~/.dotfiles
+brew install vim git fish tmux make
+git clone --recursive https://github.com/ch3sh1r/dotfiles ~/.dotfiles
 cd ~/.dotfiles
 make
 ```
