@@ -1,7 +1,7 @@
 DOTFILES_PATH  := $(dir $(abspath $(lastword $(MAKEFILE_LIST))))
 DOTFILE_RC     := vim
 DOTFILE_CONFIG := fish
-DOTFILE        := gitconfig tmux.conf xprofile gvimrc
+DOTFILE        := gitconfig tmux.conf gvimrc
 DOTFILES       := $(DOTFILE_RC) $(DOTFILE_CONFIG) $(DOTFILE)
 
 .PHONY: all $(DOTFILES)
