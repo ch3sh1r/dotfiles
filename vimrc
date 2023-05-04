@@ -13,15 +13,10 @@ set scrolloff=2                  "  краю экрана, чтобы подня
 set backspace=indent,eol,start   " Backspace работает как всегда
 
 call plug#begin('~/.vim/plugged')
-    Plug 'altercation/vim-colors-solarized'
+    Plug 'dracula/vim',  { 'as': 'dracula' }
     Plug 'dyng/ctrlsf.vim'
     Plug 'scrooloose/nerdcommenter'
 call plug#end()
-
-" История
-    set nobackup                 " Не создавать бэкапы
-    set history=128              " Хранить больше истории команд
-    set undolevels=2048          " Хранить больше истории правок
 
 " Отступы и табы
     set smarttab
@@ -39,8 +34,7 @@ call plug#end()
     set hlsearch                 "  с подсветкой
 
 " Подстветка
-    set background=dark
-    colorscheme solarized
+    colorscheme dracula
 
 " Русская раскладка и кодировки
     set termencoding=utf-8
