@@ -1,0 +1,56 @@
+general {
+    output_format = "i3bar"
+    interval = 5
+    colors = true
+    color_good = "#bd93f9"
+    color_degraded = "#f1fa8c"
+    color_bad = "#ff5555"
+}
+
+order += "ethernet eth0"
+order += "wireless wlan0"
+order += "ethernet cscotun0"
+order += "ethernet tailscale0"
+order += "ethernet tun0"
+order += "battery 0"
+order += "tztime local"
+
+ethernet eth0 {
+        format_up = "E: %ip"
+        format_down = ""
+}
+
+wireless wlan0 {
+        format_up = "W: (%essid %quality) %ip"
+        format_down = ""
+}
+
+ethernet cscotun0 {
+        format_up = "C: %ip"
+        format_down = ""
+}
+
+ethernet tailscale0 {
+        format_up = "T: %ip"
+        format_down = ""
+}
+
+ethernet tun0 {
+        format_up = "O: %ip"
+        format_down = ""
+}
+
+battery 0 {
+        format = "%status %percentage"
+        status_chr =  "chr"
+        status_bat =  "bat"
+        status_full = ""
+        path = "/sys/class/power_supply/BAT%d/uevent"
+        low_threshold = 10
+}
+
+tztime local {
+        format = "%y-%m-%d %H:%M "
+        hide_if_equals_localtime = false
+}
+
