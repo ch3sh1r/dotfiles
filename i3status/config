@@ -16,41 +16,47 @@ order += "battery 0"
 order += "tztime local"
 
 ethernet eth0 {
-        format_up = "E: %ip"
-        format_down = ""
+    format_up = "E: %ip"
+    format_down = ""
 }
 
 wireless wlan0 {
-        format_up = "W: (%essid %quality) %ip"
-        format_down = ""
+    format_up = "W: (%essid %quality) %ip"
+    format_down = ""
 }
 
 ethernet cscotun0 {
-        format_up = "C: %ip"
-        format_down = ""
+    format_up = "C: %ip"
+    format_down = ""
 }
 
 ethernet tailscale0 {
-        format_up = "T: %ip"
-        format_down = ""
+    format_up = "T: %ip"
+    format_down = ""
 }
 
 ethernet tun0 {
-        format_up = "O: %ip"
-        format_down = ""
+    format_up = "O: %ip"
+    format_down = ""
+}
+
+path_exists VPN {
+    path = "/proc/sys/net/ipv4/conf/wg-mullvad"
 }
 
 battery 0 {
-        format = "%status %percentage"
-        status_chr =  "chr"
-        status_bat =  "bat"
-        status_full = ""
-        path = "/sys/class/power_supply/BAT%d/uevent"
-        low_threshold = 10
+    format = "%status%percentage"
+    status_chr =  "+"
+    status_bat =  "-"
+    status_full = ""
+    path = "/sys/class/power_supply/BAT%d/uevent"
+    low_threshold = 20
+    last_full_capacity = true
+    format_percentage = "%.00f%s"
 }
 
 tztime local {
-        format = "%y-%m-%d %H:%M "
-        hide_if_equals_localtime = false
+    format = "%y-%m-%d %H:%M "
+    hide_if_equals_localtime = false
 }
 
