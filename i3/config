@@ -109,7 +109,7 @@ bindsym $mod+Ctrl+Left  resize shrink width 1 px or 1 ppt
 bindsym $mod+Shift+minus move scratchpad
 bindsym $mod+minus scratchpad show
 
-# Assign windows to workspaces, windows modes
+# Assign windows to workspaces, windows modes (xprop | grep WM_CLASS)
 assign [class="ticktick" instance="ticktick"] → $ws0
 for_window [class="Arandr"] floating enable
 
@@ -117,7 +117,7 @@ for_window [class="Arandr"] floating enable
 bindsym $mod+Shift+r restart
 bindsym $mod+Shift+q exit
 
-## Screenshots
+# Screenshots
 bindsym Print            exec --no-startup-id maim ~/Desktop/$(date +%s).png
 bindsym $mod+Print       exec --no-startup-id maim --window $(xdotool getactivewindow) ~/Desktop/$(date +%s).png
 bindsym Shift+Print      exec --no-startup-id maim --select ~/Desktop/$(date +%s).png
