@@ -13,6 +13,8 @@ function extract --description "Expand or extract bundled & compressed files"
       end
     case tgz  # same as tar.gz
       tar -zxvf $argv[1]
+    case zst
+      tar -xaf $argv[1]
     case bz2  # tar compressed with bzip2
       tar -jxvf $argv[1]
     case rar
