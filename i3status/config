@@ -61,7 +61,7 @@ battery 0 {
 }
 
 tztime local {
-    format = "%y-%m-%d %H:%M "
+    format = "%a %d.%m.%y %H:%M "
     hide_if_equals_localtime = false
 }
 
