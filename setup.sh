@@ -6,20 +6,26 @@ DOTFILE_CONFIG="fish i3 i3status"
 DOTFILES="$DOTFILE_RC $DOTFILE_CONFIG $DOTFILE"
 DOTFILES_PATH=$(dirname $(realpath ${BASH_SOURCE[0]}))
 
+
+prompt_remove_config() {
+    read -p "Remove existing dotfiles? (y/N): " choice
+    case "$choice" in
+        y|Y )
+            return 0
+            ;;
+        * )
+            echo "Setup canceled."
+            exit 1
+            ;;
+    esac
+}
+
+
 install_packages() {
     sudo apt-get update
     sudo apt-get install -y vim fish git i3
 }
 
-all() {
-    if [[ $install_flag == "true" ]]; then
-        install_packages
-    fi
-
-    for dotfile in $DOTFILES; do
-        make_link $dotfile
-    done
-}
 
 make_link() {
     dotfile=$1
@@ -42,14 +48,20 @@ make_link() {
     esac
 }
 
+
 usage() {
     echo "Usage: $0 [-i]"
     echo "Options:"
-    echo "  -i   Install required packages (vim, fish, git, i3)"
+    echo "  -i   Install required packages"
+    echo "  -f   Skip confirmation prompt to remove existing configuration"
 }
 
-while getopts ":i" opt; do
+
+while getopts ":if" opt; do
     case ${opt} in
+        f)
+            force_flag="true"
+            ;;
         i)
             install_flag="true"
             ;;
@@ -62,4 +74,16 @@ while getopts ":i" opt; do
 done
 shift $((OPTIND -1))
 
-all
+if [[ $install_flag == "true" ]]; then
+    install_packages
+fi
+
+if [[ $force_flag != "true" ]]; then
+    prompt_remove_config
+fi
+
+for dotfile in $DOTFILES; do
+    echo "Creating symlink for $dotfile."
+    make_link $dotfile
+done
+
