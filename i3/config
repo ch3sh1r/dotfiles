@@ -110,7 +110,7 @@ bindsym $mod+Shift+minus move scratchpad
 bindsym $mod+minus scratchpad show
 
 # Assign windows to workspaces, windows modes (xprop | grep WM_CLASS)
-assign [class="ticktick" instance="ticktick"] → $ws0
+assign [class="ticktick"] → $ws0
 for_window [class="Arandr"] floating enable
 
 # Restart and exit i3
