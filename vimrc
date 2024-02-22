@@ -1,16 +1,16 @@
 " @ch3sh1r vimrc (https://github.com/ch3sh1r/dotfiles)
-" Maintained by Alexey Bednyakov, <ch3sh1r@ya.ru>
+" Maintained by Aleksei Bedniakov, <x@rxtx.wtf>
 
-set nocompatible                 " Предпочтение настройкам Vim относительно Vi
-set ruler                        " Показывать положение курсора всё время
-set showcmd                      " Показывать незавершенные команды в статусбаре
-set number                       " Нумерация строк
-set relativenumber               " Относительная нумерация строк
-set nowrap                       " Перенос строк
-set linebreak                    " Перенос строк по словам, а не по буквам
-set scrolljump=2                 " Теперь нет необходимости передвигать курсор к
-set scrolloff=2                  "  краю экрана, чтобы подняться/опуститься
-set backspace=indent,eol,start   " Backspace работает как всегда
+set nocompatible
+set ruler
+set showcmd
+set number
+set relativenumber
+set nowrap
+set linebreak
+set scrolljump=2
+set scrolloff=2
+set backspace=indent,eol,start
 
 call plug#begin('~/.vim/plugged')
     Plug 'dracula/vim',  { 'as': 'dracula' }
@@ -18,36 +18,36 @@ call plug#begin('~/.vim/plugged')
     Plug 'scrooloose/nerdcommenter'
 call plug#end()
 
-" Отступы и табы
+" Tabs
     set smarttab
     set tabstop=4 softtabstop=4 shiftwidth=4 expandtab
 
-" Поддержка мыши
+" Mouse support
     set mouse=a                  " Использовать мышь, если терминал позволяет
     set mousemodel=popup         " Выдавать меню по правому клику
     set mousehide                " Скрывать указатель мыши во время печати
 
-" Поиск
+" Search
     set ignorecase               " Поиск не чувствительный к регистру
     set smartcase                "  сообразительный
     set incsearch                "  по набору текста
     set hlsearch                 "  с подсветкой
 
-" Подстветка
+" Colors
     colorscheme dracula
 
-" Русская раскладка и кодировки
+" Russian layout mapping
     set termencoding=utf-8
     set fileencodings=utf-8,latin1,cp1251
     set langmap=ФИСВУАПРШОЛДЬТЩЗЙКЫЕГМЦЧНЯ;ABCDEFGHIJKLMNOPQRSTUVWXYZ,фисвуапршолдьтщзйкыегмцчня;abcdefghijklmnopqrstuvwxyz
 
-" Замена <leader> на пробел со стандартного "\"
+" Change controlling key
     let mapleader = ' '
 
-" Убрать мусор из прошлого поиска
+" Shourtcut to remove trash highlight from previous search
     nmap <leader><space> :noh<cr>
 
-" Непечатные символы
+" Show unprinted symbols
     set listchars=eol:¶,tab:→\ ,trail:~,extends:›,precedes:‹,space:·,nbsp:‡
     function! ToggleList()
         if &list
@@ -60,23 +60,23 @@ call plug#end()
     endfunction
     nmap <leader>l :call ToggleList()<cr>
 
-" Поиск выделенного
+" Search by highlighted
     vmap // y/\c<c-r>"<cr>
     vmap /? y?\c<c-r>"<cr>
 
-" <leader>e. - смена кодировок
+" Change file encoding
     nmap <leader>ek :e ++enc=koi8-r<cr>
     nmap <leader>ew :e ++enc=cp1251<cr>
     nmap <leader>ec :e ++enc=cp866<cr>
     nmap <leader>eu :e ++enc=utf8<cr>
     nmap <leader>er ggg?G <cr>
 
-" Перемещение по буферам
+" Move by buffers
     map <leader>a :bprev!<return>
     map <leader>s :bnext!<return>
     map <leader>d :bd<return>
 
-" Поиск по файлам
+" File search
     nmap     <C-F>f <Plug>CtrlSFPrompt
     vmap     <C-F>f <Plug>CtrlSFVwordPath
     vmap     <C-F>F <Plug>CtrlSFVwordExec
@@ -86,5 +86,3 @@ call plug#end()
     nnoremap <C-F>t :CtrlSFToggle<CR>
     inoremap <C-F>t <Esc>:CtrlSFToggle<CR>
 
-" Мап для виндового терминала
-    nnoremap <leader>v <c-v>
