@@ -33,9 +33,6 @@ call plug#end()
     set incsearch                "  по набору текста
     set hlsearch                 "  с подсветкой
 
-" Colors
-    colorscheme dracula
-
 " Russian layout mapping
     set termencoding=utf-8
     set fileencodings=utf-8,latin1,cp1251
