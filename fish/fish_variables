@@ -2,10 +2,10 @@
 # VERSION: 3.0
 SETUVAR ZO_CMD:zo
 SETUVAR Z_CMD:z
-SETUVAR Z_DATA:/home/ch3sh1r/\x2elocal/share/z/data
-SETUVAR Z_DATA_DIR:/home/ch3sh1r/\x2elocal/share/z
-SETUVAR Z_EXCLUDE:\x5e/home/ch3sh1r\x24
-SETUVAR __fish_initialized:3400
+SETUVAR Z_DATA:/home/kali/\x2elocal/share/z/data
+SETUVAR Z_DATA_DIR:/home/kali/\x2elocal/share/z
+SETUVAR Z_EXCLUDE:\x5e/home/kali\x24
+SETUVAR __fish_initialized:3800
 SETUVAR _fisher_jethrokuan_2F_z_files:\x7e/\x2econfig/fish/functions/__z\x2efish\x1e\x7e/\x2econfig/fish/functions/__z_add\x2efish\x1e\x7e/\x2econfig/fish/functions/__z_clean\x2efish\x1e\x7e/\x2econfig/fish/functions/__z_complete\x2efish\x1e\x7e/\x2econfig/fish/conf\x2ed/z\x2efish
 SETUVAR _fisher_jorgebucaran_2F_fisher_files:\x7e/\x2econfig/fish/functions/fisher\x2efish\x1e\x7e/\x2econfig/fish/completions/fisher\x2efish
 SETUVAR _fisher_oh_2D_my_2D_fish_2F_plugin_2D_extract_files:\x7e/\x2econfig/fish/functions/extract\x2efish
@@ -51,4 +51,4 @@ SETUVAR fish_pager_color_selected_background:\x2d\x2dbackground\x3d44475a
 SETUVAR fish_pager_color_selected_completion:f8f8f2
 SETUVAR fish_pager_color_selected_description:6272a4
 SETUVAR fish_pager_color_selected_prefix:8be9fd
-SETUVAR fish_user_paths:/home/ch3sh1r/\x2elocal/bin
+SETUVAR fish_user_paths:/home/kali/\x2elocal/bin
