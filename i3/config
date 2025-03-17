@@ -153,8 +153,8 @@ bar {
     }
 }
 
-# Grumpy background Dracula colored
-exec --no-startup-id feh --bg-fill ~/.config/i3/rune.png
+# Solid color background
+exec --no-startup-id xsetroot -solid "#282a36"
 
 # Dracula colors
 # class                 border  bground text    indicator child_border
