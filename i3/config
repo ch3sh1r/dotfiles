@@ -1,6 +1,6 @@
 set $mod Mod4
 floating_modifier $mod
-font pango:Figma Code 8
+font pango:Figma Code 10
 
 # Move tiling windows via drag & drop by the title bar
 tiling_drag modifier titlebar
@@ -14,8 +14,8 @@ exec --no-startup-id dex --autostart --environment i3
 bindsym $mod+Control+l exec light-locker-command --lock
 
 # Start app
-bindsym $mod+Return exec i3-sensible-terminal
-bindsym $mod+w      exec brave-browser
+bindsym $mod+Return exec gnome-terminal
+bindsym $mod+w      exec firefox
 bindsym $mod+r      exec --no-startup-id dmenu_run
 
 # Kill focused window
