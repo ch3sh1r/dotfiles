@@ -1,19 +1,13 @@
 {
-    "layer": "top", // Waybar at top layer
-    "position": "top", // Waybar position (top|bottom|left|right)
-    "height": 34, // Waybar height (to be removed for auto height)
-    // "width": 1280, // Waybar width
-    "spacing": 4, // Gaps between modules (4px)
-    // Choose the order of the modules
-    "modules-left": ["hyprland/workspaces", "custom/updates"],
+    "layer": "top",
+    "position": "top",
+    "spacing": 3,
+    "modules-left": ["hyprland/workspaces"],
     "modules-center": ["hyprland/window"],
-    "modules-right": ["hyprland/submap", "hyprland/language", "battery", "network", "custom/notification", "tray", "clock"],
-    // Modules configuration
+    "modules-right": ["pulseaudio", "battery", "network", "tray", "clock"],
      "hyprland/workspaces": {
          "disable-scroll": true,
          "on-click": "activate",
-         // "all-outputs": false,
-         // "format": "{name}: {icon}",
          "format": "{name}",
          "on-scroll-up": "hyprctl dispatch workspace m-1 > /dev/null",
          "on-scroll-down": "hyprctl dispatch workspace m+1 > /dev/null",
@@ -32,72 +26,48 @@
         "max-length": 50,
         "separate-outputs": true
     },
-    "hyprland/language": {
-        "format": "{}",
-        "max-length": 18
-    },
     "tray": {
-        // "icon-size": 21,
         "spacing": 0
     },
     "clock": {
         "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
         "format-alt": "{:%Y-%m-%d}"
     },
+    "pulseaudio": {
+        "format": "{volume} {icon} ",
+        "format-muted": "婢",
+        "on-click": "pavucontrol -t 3",
+        "on-scroll-up": "wpctl set-volume -l 1 @DEFAULT_AUDIO_SINK@ 5%+",
+        "on-scroll-down": "wpctl set-volume -l 1 @DEFAULT_AUDIO_SINK@ 5%-",
+        "tooltip-format": "{icon}  {desc} // {volume}",
+        "format-icons": {
+            "headphone": "",
+            "hands-free": "",
+            "headset": "",
+            "phone": "",
+            "portable": "",
+            "car": "",
+            "default": ["", "", ""]
+        }
+    },
     "battery": {
         "states": {
-            // "good": 95,
             "warning": 30,
             "critical": 15
         },
-        "format": "{capacity}% {icon}",
-        "format-charging": "{capacity}% 🗲",
-        "format-plugged": "{capacity}% ",
+        "format": "{capacity} {icon} ",
+        "format-charging": "{capacity} ",
+        "format-plugged": "{capacity} ",
         "format-alt": "{time} {icon}",
-        // "format-good": "", // An empty format will hide the module
-        // "format-full": "",
         "format-icons": ["", "", "", "", ""]
     },
-    "battery#bat2": {
-        "bat": "BAT2"
-    },
     "network": {
-        "interface": "wlan0", // (Optional) To force the use of this interface
-        "format-wifi": "{essid} ",
+        "interface": "wlan0",
+        "format-wifi": "{essid}",
         "format-ethernet": "{ipaddr}/{cidr} ",
         "tooltip-format": "{ifname} via {gwaddr} ",
         "format-linked": "{ifname} (No IP) ",
         "format-disconnected": "Disconnected ⚠",
         "format-alt": "{ifname}: {ipaddr}/{cidr}"
     },
-    "custom/notification": {
-        "tooltip": false,
-        "format": "{} {icon}",
-        "format-icons": {
-            "notification": "<span foreground='red'><sup></sup></span> ",
-            "none": "",
-            "dnd-notification": "<span foreground='red'><sup></sup></span> ",
-            "dnd-none": "",
-            "inhibited-notification": "<span foreground='red'><sup></sup></span> ",
-            "inhibited-none": "",
-            "dnd-inhibited-notification": "<span foreground='red'><sup></sup></span> ",
-            "dnd-inhibited-none": ""
-        },
-        "return-type": "json",
-        "exec-if": "which swaync-client",
-        "exec": "swaync-client -swb",
-        "on-click": "sleep 0.1 && swaync-client -t -sw",
-        "on-click-right": "swaync-client -d -sw",
-        "escape": true
-    },
-    "custom/updates": {
-        "format": "{} {icon}",
-        "return-type": "json",
-        "format-icons": {
-            "has-updates": "󱍷",
-            "updated": "󰂪"
-        },
-        "exec-if": "which waybar-module-pacman-updates",
-        "exec": "waybar-module-pacman-updates --interval-seconds 5 --network-interval-seconds 300 --tooltip-align-columns 'Source Code Pro'"
-    }
 }
