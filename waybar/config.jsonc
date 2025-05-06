@@ -4,7 +4,7 @@
     "spacing": 3,
     "modules-left": ["hyprland/workspaces"],
     "modules-center": ["hyprland/window"],
-    "modules-right": ["pulseaudio", "battery", "network", "tray", "clock"],
+    "modules-right": ["pulseaudio", "battery", "network", "clock"],
      "hyprland/workspaces": {
          "disable-scroll": true,
          "on-click": "activate",
@@ -35,7 +35,7 @@
     },
     "pulseaudio": {
         "format": "{volume} {icon} ",
-        "format-muted": "婢",
+        "format-muted": "",
         "on-click": "pavucontrol -t 3",
         "on-scroll-up": "wpctl set-volume -l 1 @DEFAULT_AUDIO_SINK@ 5%+",
         "on-scroll-down": "wpctl set-volume -l 1 @DEFAULT_AUDIO_SINK@ 5%-",
@@ -64,9 +64,9 @@
     "network": {
         "interface": "wlan0",
         "format-wifi": "{essid}",
-        "format-ethernet": "{ipaddr}/{cidr} ",
-        "tooltip-format": "{ifname} via {gwaddr} ",
-        "format-linked": "{ifname} (No IP) ",
+        "format-ethernet": "{ipaddr}/{cidr} 󰈀",
+        "tooltip-format": "{ifname} via {gwaddr}",
+        "format-linked": "{ifname} (No IP)",
         "format-disconnected": "Disconnected ⚠",
         "format-alt": "{ifname}: {ipaddr}/{cidr}"
     },
