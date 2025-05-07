@@ -1,25 +1,17 @@
-set $mod Mod4
+set $mod Mod1
 floating_modifier $mod
-font pango:Figma Code 10
+font pango:Hack 10
 
 # Move tiling windows via drag & drop by the title bar
 tiling_drag modifier titlebar
 
-# NetworkManager, XGD and setup script
-exec --no-startup-id nm-applet
-exec --no-startup-id copyq
-exec --no-startup-id dex --autostart --environment i3
-
-# Lock screen
-bindsym $mod+Control+l exec light-locker-command --lock
-
 # Start app
-bindsym $mod+Return exec gnome-terminal
+bindsym $mod+Return exec kitty
 bindsym $mod+w      exec firefox
 bindsym $mod+r      exec --no-startup-id dmenu_run
 
 # Kill focused window
-bindsym $mod+Shift+c kill
+bindsym $mod+c kill
 
 # Change focus
 bindsym $mod+h     focus left
