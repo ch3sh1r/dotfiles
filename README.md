@@ -2,13 +2,11 @@
 
 ## Installation
 
-*WARNING*! Next steps will remove current configuration files.
-
-### Debian based
+WARNING, this will remove your current configuration.
 
 ```bash
-git clone --recursive https://github.com/ch3sh1r/dotfiles ~/.dotfiles
-cd ~/.dotfiles
-./setup.sh
+git clone --recursive https://github.com/ch3sh1r/dotfiles ~/.config/dotfiles
+cd ~/.config/dotfiles
+make
 ```
 
