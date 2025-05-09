@@ -2,6 +2,9 @@ set $mod Mod1
 floating_modifier $mod
 font pango:Hack 10
 
+# Fix capslock
+exec --no-startup-id setxkbmap -option 'caps:escape'
+
 # Move tiling windows via drag & drop by the title bar
 tiling_drag modifier titlebar
 
