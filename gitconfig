@@ -11,7 +11,7 @@
 [core]
 	autocrlf = input
 	pager = less -FRSX
-	editor = vim --nofork
+	editor = nvim
 [status]
 	showuntrackedfiles = all
 [init]

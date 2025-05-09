@@ -32,7 +32,7 @@ abbr -a gstp 'git stash pop'
 abbr -a gup  'git pull'
 
 # Global abbreviations
-abbr -a G --position anywhere               '| grep'
+abbr -a G --position anywhere               '| grep -i'
 abbr -a C --position anywhere --set-cursor '%| xclip -selection clipboard'
 abbr -a L --position anywhere --set-cursor '%| less -R'
 abbr -a T --position anywhere --set-cursor '%| tail'
