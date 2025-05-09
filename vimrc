@@ -12,12 +12,6 @@ set scrolljump=2
 set scrolloff=2
 set backspace=indent,eol,start
 
-call plug#begin('~/.vim/plugged')
-    Plug 'dracula/vim',  { 'as': 'dracula' }
-    Plug 'dyng/ctrlsf.vim'
-    Plug 'scrooloose/nerdcommenter'
-call plug#end()
-
 " Tabs
     set smarttab
     set tabstop=4 softtabstop=4 shiftwidth=4 expandtab
@@ -72,14 +66,4 @@ call plug#end()
     map <leader>a :bprev!<return>
     map <leader>s :bnext!<return>
     map <leader>d :bd<return>
-
-" File search
-    nmap     <C-F>f <Plug>CtrlSFPrompt
-    vmap     <C-F>f <Plug>CtrlSFVwordPath
-    vmap     <C-F>F <Plug>CtrlSFVwordExec
-    nmap     <C-F>n <Plug>CtrlSFCwordPath
-    nmap     <C-F>p <Plug>CtrlSFPwordPath
-    nnoremap <C-F>o :CtrlSFOpen<CR>
-    nnoremap <C-F>t :CtrlSFToggle<CR>
-    inoremap <C-F>t <Esc>:CtrlSFToggle<CR>
 

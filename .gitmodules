@@ -1,9 +1,3 @@
-[submodule "vim/plugged/ctrlsf.vim"]
-	path = vim/plugged/ctrlsf.vim
-	url = https://git::@github.com/dyng/ctrlsf.vim.git
-[submodule "vim/plugged/nerdcommenter"]
-	path = vim/plugged/nerdcommenter
-	url = https://git::@github.com/scrooloose/nerdcommenter.git
 [submodule "vim/plugged/vim-colors-solarized"]
 	path = vim/plugged/vim-colors-solarized
 	url = https://git::@github.com/altercation/vim-colors-solarized.git
