@@ -4,7 +4,7 @@
     "spacing": 3,
     "modules-left": ["hyprland/workspaces"],
     "modules-center": ["hyprland/window"],
-    "modules-right": ["pulseaudio", "battery", "network", "clock"],
+    "modules-right": ["pulseaudio", "battery", "network", "custom/tailscale", "clock"],
      "hyprland/workspaces": {
          "disable-scroll": true,
          "on-click": "activate",
@@ -28,10 +28,6 @@
     },
     "tray": {
         "spacing": 0
-    },
-    "clock": {
-        "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
-        "format-alt": "{:%Y-%m-%d}"
     },
     "pulseaudio": {
         "format": "{volume} {icon} ",
@@ -69,5 +65,22 @@
         "format-linked": "{ifname} (No IP)",
         "format-disconnected": "Disconnected ⚠",
         "format-alt": "{ifname}: {ipaddr}/{cidr}"
+    },
+    "custom/tailscale" : {
+        "exec": "~/.config/waybar/waybar-tailscale.sh --status",
+        "on-click": "exec ~/.config/waybar/waybar-tailscale.sh --toggle",
+        "exec-on-event": true,
+        "format": "{icon} ",
+        "format-icons": {
+            "connected": "",
+            "stopped": ""
+        },
+        "tooltip": true,
+        "return-type": "json",
+        "interval": 3,
+    },
+    "clock": {
+        "tooltip-format": "<big>{:%Y %B}</big>\n<tt><big>{calendar}</big></tt>",
+        "format-alt": "{:%Y-%m-%d}"
     },
 }
