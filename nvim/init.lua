@@ -2,5 +2,5 @@
 require("config.lazy")
 
 if vim.g.neovide then
-  vim.o.guifont = "Hack Nerd Font:h11"
+    vim.o.guifont = "Hack Nerd Font:h11"
 end
