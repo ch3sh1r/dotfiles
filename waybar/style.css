@@ -16,7 +16,7 @@
 @define-color base0F #a16946;
 
 * {
-	font-family: 'Hack', sans-serif;
+	font-family: 'Roboto';
   font-size: 12px;
   min-height: 0;
 }
@@ -59,9 +59,4 @@
 
 #pulseaudio.bluetooth {
   color: @base0C;
-}
-
-#window {
-  font-weight: 400;
-  font-family: sans-serif;
 }
