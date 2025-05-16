@@ -16,14 +16,12 @@
 @define-color base0F #a16946;
 
 * {
-  transition: none;
-  box-shadow: none;
+	font-family: 'Hack', sans-serif;
+  font-size: 12px;
+  min-height: 0;
 }
 
 #waybar {
-	font-family: 'Fira Code', sans-serif;
-	font-size: 1em;
-	font-weight: 400;
   color: @base04;
   background: @base01;
 }
@@ -38,9 +36,6 @@
   color: @base05;
 }
 
-#workspaces button.visible {
-}
-
 #workspaces button.active {
   border-radius: 4px;
   background-color: @base02;
@@ -50,22 +45,7 @@
   color: rgba(238, 46, 36, 1);
 }
 
-#tray {
-  margin: 4px 4px 4px 4px;
-  border-radius: 4px;
-  background-color: @base02;
-}
-
-#tray * {
-  padding: 0 6px;
-  border-left: 1px solid @base00;
-}
-
-#tray *:first-child {
-  border-left: none;
-}
-
-#mode, #battery, #cpu, #memory, #network, #pulseaudio, #idle_inhibitor, #backlight, #custom-storage, #custom-updates, #custom-weather, #custom-mail, #clock, #temperature, #language{
+#mode, #battery, #network, #pulseaudio, #custom-tailscale, #clock{
   margin: 4px 2px;
   padding: 0 6px;
   background-color: @base02;
@@ -81,24 +61,7 @@
   color: @base0C;
 }
 
-#clock {
-  margin-left: 0px;
-  margin-right: 4px;
-  background-color: transparent;
-}
-
-#temperature.critical {
-  color: @base0F;
-}
-
 #window {
-  font-size: 0.9em;
-	font-weight: 400;
-	font-family: sans-serif;
-}
-
-#language {
-	font-size: 0.9em;
-	font-weight: 500;
-	letter-spacing: -1px;
+  font-weight: 400;
+  font-family: sans-serif;
 }

@@ -70,7 +70,7 @@
         "exec": "~/.config/waybar/waybar-tailscale.sh --status",
         "on-click": "exec ~/.config/waybar/waybar-tailscale.sh --toggle",
         "exec-on-event": true,
-        "format": "{icon} ",
+        "format": "{icon}",
         "format-icons": {
             "connected": "",
             "stopped": ""
@@ -81,6 +81,6 @@
     },
     "clock": {
         "tooltip-format": "<big>{:%Y %B}</big>\n<tt><big>{calendar}</big></tt>",
-        "format-alt": "{:%Y-%m-%d}"
+        "format-alt": "{:%a %F %R}"
     },
 }
