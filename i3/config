@@ -1,6 +1,6 @@
 set $mod Mod1
 floating_modifier $mod
-font pango:Hack 10
+font pango:Hack 9
 
 # Fix capslock
 exec --no-startup-id setxkbmap -option 'caps:escape'
