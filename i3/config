@@ -9,7 +9,7 @@ exec --no-startup-id setxkbmap -option 'caps:escape'
 tiling_drag modifier titlebar
 
 # Start app
-bindsym $mod+Return exec kitty
+bindsym $mod+Return exec alacritty
 bindsym $mod+w      exec firefox
 bindsym $mod+r      exec --no-startup-id dmenu_run
 

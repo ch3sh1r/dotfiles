@@ -1,6 +1,7 @@
 1password
 7zip
 aic94xx-firmware
+alacritty
 alsa-utils
 amdgpu-pro-oglp
 amf-amdgpu-pro
@@ -10,11 +11,13 @@ base-devel
 blueman
 bluez
 bluez-utils
+brave-bin
 breeze
 brightnessctl
 clinfo
 cliphist
 cpio
+cpupower
 cursor-bin
 dunst
 efibootmgr
@@ -26,7 +29,6 @@ git
 glm
 grim
 gst-plugin-pipewire
-gtk-theme-elementary
 hashcat
 hashcat-utils
 htop
@@ -43,7 +45,6 @@ ipython
 iwd
 john
 jre-openjdk
-kitty
 kvantum
 less
 lib32-amdgpu-pro-oglp
@@ -57,6 +58,7 @@ linux-firmware
 linux-firmware-qlogic
 man-db
 man-pages
+mesa-utils
 meson
 nano
 neovide
@@ -183,6 +185,7 @@ vulkan-amdgpu-pro
 vulkan-intel
 vulkan-nouveau
 vulkan-radeon
+vulkan-tools
 waybar
 wd719x-firmware
 wget
