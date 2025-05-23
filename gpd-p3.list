@@ -14,11 +14,14 @@ bluez-utils
 brave-bin
 breeze
 brightnessctl
+chromium
 clinfo
 cliphist
 cpio
 cpupower
 cursor-bin
+docker
+docker-compose
 dunst
 efibootmgr
 firefox
@@ -100,6 +103,7 @@ qt6ct-kde
 qt6ct-kde-debug
 remmina
 rocm-opencl-runtime
+rofi-calc
 rofi-wayland
 sddm
 slurp
@@ -191,7 +195,6 @@ wd719x-firmware
 wget
 wireless_tools
 wireplumber
-wofi
 xdg-desktop-portal-hyprland
 xdg-utils
 xf86-video-amdgpu
