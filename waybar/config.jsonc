@@ -5,7 +5,7 @@
     "modules-left": ["hyprland/workspaces"],
     "modules-center": ["hyprland/window"],
     "modules-right": ["pulseaudio", "battery", "network", "custom/tailscale", "clock"],
-     "hyprland/workspaces": {
+    "hyprland/workspaces": {
          "disable-scroll": true,
          "on-click": "activate",
          "format": "{name}",
@@ -21,13 +21,10 @@
              "focused": "",
              "default": ""
          }
-     },
+    },
     "hyprland/window": {
         "max-length": 50,
         "separate-outputs": true
-    },
-    "tray": {
-        "spacing": 0
     },
     "pulseaudio": {
         "format": "{volume} {icon} ",
