@@ -11,7 +11,7 @@ tiling_drag modifier titlebar
 # Start app
 bindsym $mod+Return exec --no-startup-id alacritty
 bindsym $mod+w      exec --no-startup-id firefox
-bindsym $mod+Space  exec --no-startup-id dmenu_run
+bindsym $mod+r      exec --no-startup-id dmenu_run
 
 # Kill focused window
 bindsym $mod+c kill
