@@ -11,19 +11,20 @@ base-devel
 blueman
 bluez
 bluez-utils
-brave-bin
-breeze
 brightnessctl
+bzip3
 chromium
 clinfo
 cliphist
 cpio
 cpupower
 cursor-bin
+discord
 docker
 docker-compose
 dunst
 efibootmgr
+file-roller
 firefox
 fish
 freerdp
@@ -37,7 +38,6 @@ hashcat-utils
 htop
 hyprland
 hyprlock
-hyprpaper
 hyprshot
 iio-hyprland-git
 iio-sensor-proxy
@@ -54,6 +54,7 @@ lib32-amdgpu-pro-oglp
 lib32-mesa
 lib32-vulkan-amdgpu-pro
 libpulse
+libreoffice-still-ru
 libva-intel-driver
 libvncserver
 linux
@@ -112,6 +113,7 @@ sof-firmware
 spotify-launcher
 steam
 steamlink
+swaybg
 tailscale
 tela-circle-icon-theme-dracula
 telegram-desktop
@@ -123,6 +125,7 @@ thunar
 ticktick
 ticktick-debug
 tmux
+tree
 ttf-0xproto-nerd
 ttf-3270-nerd
 ttf-agave-nerd
@@ -180,6 +183,8 @@ ttf-ubuntu-mono-nerd
 ttf-ubuntu-nerd
 ttf-victor-mono-nerd
 ttf-zed-mono-nerd
+unace
+unrar
 unzip
 vim
 virtualbox
@@ -205,4 +210,5 @@ xorg-server
 xorg-xinit
 yay
 yay-debug
+zip
 zram-generator
