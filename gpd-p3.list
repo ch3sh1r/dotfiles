@@ -11,8 +11,11 @@ base-devel
 blueman
 bluez
 bluez-utils
+brave-bin
 brightnessctl
+btop
 bzip3
+calibre
 chromium
 clinfo
 cliphist
@@ -28,6 +31,7 @@ file-roller
 firefox
 fish
 freerdp
+ghostscript
 gimp
 git
 glm
@@ -69,6 +73,7 @@ neovide
 network-manager-applet
 networkmanager
 ninja
+nmap
 noto-fonts-emoji
 nwg-displays
 nwg-look
@@ -92,10 +97,13 @@ pipewire-alsa
 pipewire-jack
 pipewire-pulse
 polkit-kde-agent
+powertop
 python-numpy
 python-opencv
 python-pillow
 python-pip
+python-pipx
+python-pydantic
 python-pytesseract
 qt5-wayland
 qt5ct
@@ -110,7 +118,6 @@ sddm
 slurp
 smartmontools
 sof-firmware
-spotify-launcher
 steam
 steamlink
 swaybg
@@ -122,8 +129,6 @@ tesseract-data-eng
 tesseract-data-rus
 the_silver_searcher
 thunar
-ticktick
-ticktick-debug
 tmux
 tree
 ttf-0xproto-nerd
@@ -198,6 +203,7 @@ vulkan-tools
 waybar
 wd719x-firmware
 wget
+wireless-regdb
 wireless_tools
 wireplumber
 xdg-desktop-portal-hyprland
