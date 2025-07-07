@@ -11,6 +11,7 @@ tiling_drag modifier titlebar
 # Start app
 bindsym $mod+Return exec --no-startup-id alacritty
 bindsym $mod+w      exec --no-startup-id firefox
+bindsym $mod+e      exec --no-startup-id thunar
 bindsym $mod+r      exec --no-startup-id dmenu_run
 
 # Kill focused window
@@ -37,14 +38,14 @@ bindsym $mod+Shift+Up    move up
 bindsym $mod+Shift+Right move right
 
 # Split in vertical or horizontal orientation
-bindsym $mod+v split v
+bindsym $mod+v       split v
 bindsym $mod+Shift+v split h
 
 # Change container layout (fullscreen, stacked, tabbed, toggle split)
 bindsym $mod+f fullscreen toggle
 bindsym $mod+s layout stacking
 bindsym $mod+t layout tabbed
-bindsym $mod+e layout toggle split
+bindsym $mod+p layout toggle split
 
 # Toggle tiling / floating
 bindsym $mod+Shift+Space floating toggle
