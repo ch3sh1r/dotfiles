@@ -4,7 +4,7 @@
     "spacing": 3,
     "modules-left": ["hyprland/workspaces"],
     "modules-center": ["hyprland/window"],
-    "modules-right": ["pulseaudio", "battery", "network", "custom/tailscale", "clock"],
+    "modules-right": ["pulseaudio", "battery", "network", "custom/mullvad", "custom/tailscale", "clock"],
     "hyprland/workspaces": {
          "disable-scroll": true,
          "on-click": "activate",
@@ -48,8 +48,22 @@
         "format-ethernet": "{ipaddr}/{cidr} 󰈀",
         "tooltip-format": "{ifname} via {gwaddr}",
         "format-linked": "{ifname} (No IP)",
-        "format-disconnected": "⚠",
+        "format-disconnected": "󰌙",
         "format-alt": "{ifname}: {ipaddr}/{cidr}"
+    },
+    "custom/mullvad" : {
+        "exec": "~/.config/waybar/waybar-mullvad.sh --status",
+        "on-click": "exec ~/.config/waybar/waybar-mullvad.sh --toggle",
+        "on-click-right": "exec ~/.config/waybar/waybar-mullvad.sh --menu",
+        "exec-on-event": true,
+        "format": "{icon}",
+        "format-icons": {
+            "connected": "󰊠",
+            "stopped": "󱙜"
+        },
+        "tooltip": true,
+        "return-type": "json",
+        "interval": 3,
     },
     "custom/tailscale" : {
         "exec": "~/.config/waybar/waybar-tailscale.sh --status",
@@ -57,8 +71,8 @@
         "exec-on-event": true,
         "format": "{icon}",
         "format-icons": {
-            "connected": "",
-            "stopped": ""
+            "connected": "",
+            "stopped": "󰃎"
         },
         "tooltip": true,
         "return-type": "json",

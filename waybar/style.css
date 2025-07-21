@@ -45,7 +45,7 @@
   color: rgba(238, 46, 36, 1);
 }
 
-#mode, #battery, #network, #pulseaudio, #custom-tailscale, #clock{
+#mode, #battery, #network, #pulseaudio, #custom-mullvad, #custom-tailscale, #clock{
   margin: 4px 2px;
   padding: 0 6px;
   background-color: @base02;
