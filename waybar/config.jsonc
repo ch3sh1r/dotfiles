@@ -17,7 +17,8 @@
     "pulseaudio": {
         "format": "{volume} {icon} ",
         "format-muted": "",
-        "on-click": "pavucontrol -t 3",
+        "on-click": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle",
+        "on-click-right": "pavucontrol -t 3",
         "on-scroll-up": "wpctl set-volume -l 1 @DEFAULT_AUDIO_SINK@ 5%+",
         "on-scroll-down": "wpctl set-volume -l 1 @DEFAULT_AUDIO_SINK@ 5%-",
         "tooltip-format": "{icon}  {desc} // {volume}",
@@ -59,7 +60,7 @@
         "format": "{icon}",
         "format-icons": {
             "connected": "󰊠",
-            "stopped": "󱙜"
+            "disconnected": "󱙜"
         },
         "tooltip": true,
         "return-type": "json",
@@ -72,7 +73,7 @@
         "format": "{icon}",
         "format-icons": {
             "connected": "",
-            "stopped": "󰃎"
+            "stopped": "󰯉"
         },
         "tooltip": true,
         "return-type": "json",
