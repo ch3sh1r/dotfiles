@@ -80,7 +80,22 @@
         "interval": 3,
     },
     "clock": {
-        "tooltip-format": "<big>{:%Y %B}</big>\n<tt><big>{calendar}</big></tt>",
-        "format-alt": "{:%a %F %R}"
-    },
+        "format": "{:%d %H:%M}",
+        "format-alt": "{:%a %F %R}",
+        "tooltip-format": "<tt><small>{calendar}</small></tt>",
+        "calendar": {
+            "mode"          : "year",
+            "mode-mon-col"  : 3,
+            "weeks-pos"     : "right",
+            "on-scroll"     : 1,
+            "on-click-right": "mode",
+            "format": {
+                "months":     "<span color='#bd93f9'><b>{}</b></span>",
+                "days":       "<span color='#f8f8f2'><b>{}</b></span>",
+                "weeks":      "<span color='#8be9fd'><b>W{}</b></span>",
+                "weekdays":   "<span color='#f1fa8c'><b>{}</b></span>",
+                "today":      "<span color='#ff79c6'><b><u>{}</u></b></span>"
+            }
+        }
+    }
 }
