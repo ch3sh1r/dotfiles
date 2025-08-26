@@ -80,7 +80,7 @@
         "interval": 3,
     },
     "clock": {
-        "format": "{:%d %H:%M}",
+        "format": "{:%a %d %H:%M}",
         "format-alt": "{:%a %F %R}",
         "tooltip-format": "<tt><small>{calendar}</small></tt>",
         "calendar": {
