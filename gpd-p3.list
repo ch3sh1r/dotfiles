@@ -5,6 +5,7 @@ alacritty
 alsa-utils
 amdgpu-pro-oglp
 amf-amdgpu-pro
+android-tools
 ast-firmware
 base
 base-devel
@@ -80,7 +81,7 @@ meson
 mullvad-vpn-cli
 nano
 ncdu
-nekoray
+nekoray-bin
 neovide
 nextcloud-client
 nftables
@@ -111,7 +112,9 @@ pipewire-alsa
 pipewire-jack
 pipewire-pulse
 polkit-kde-agent
+powercap
 powertop
+protonhax
 proxychains-ng
 python-numpy
 python-opencv
@@ -134,8 +137,8 @@ retroarch-assets-ozone
 retroarch-assets-xmb
 rizin
 rocm-opencl-runtime
+rofi
 rofi-calc
-rofi-wayland
 rust
 sddm
 slurp
@@ -236,6 +239,6 @@ xdg-desktop-portal-hyprland
 xdg-utils
 xorg-server
 xorg-xinit
+yt-dlp
 zip
-zoom
 zram-generator
