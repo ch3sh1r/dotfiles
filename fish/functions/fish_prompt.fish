@@ -1,53 +1,30 @@
-function fish_prompt
+function fish_prompt --description 'Write out the prompt'
         set -l last_status $status
-    
         set -l normal (set_color normal)
-        set -l usercolor (set_color $fish_color_user)
+        set -l status_color (set_color brgreen)
+        set -l cwd_color (set_color $fish_color_cwd)
+        set -l vcs_color (set_color brpurple)
+        set -l prompt_status ""
     
-        set -l delim ">"
+        # Since we display the prompt on a new line allow the directory names to be longer.
+        set -q fish_prompt_pwd_dir_length
+        or set -lx fish_prompt_pwd_dir_length 0
     
-        fish_is_root_user; and set delim "#"
-    
-        set -l cwd (set_color $fish_color_cwd)
-        if command -sq cksum
-                # randomized cwd color
-                # We hash the physical PWD and turn that into a color. That means directories (usually) get different colors,
-                # but every directory always gets the same color. It's deterministic.
-                # We use cksum because 1. it's fast, 2. it's in POSIX, so it should be available everywhere.
-                set -l shas (pwd -P | cksum | string split -f1 ' ' | math --base=hex | string sub -s 3 | string pad -c 0 -w 6 | string match -ra ..)
-                set -l col 0x$shas[1..3]
-        
-                # If the (simplified idea of) luminance is below 120 (out of 255), add some more.
-                # (this runs at most twice because we add 60)
-                while test (math 0.2126 x $col[1] + 0.7152 x $col[2] + 0.0722 x $col[3]) -lt 120
-                        set col[1] (math --base=hex "min(255, $col[1] + 60)")
-                        set col[2] (math --base=hex "min(255, $col[2] + 60)")
-                        set col[3] (math --base=hex "min(255, $col[3] + 60)")
+        # Color the prompt differently when we're root
+        set -l suffix '❯'
+        if functions -q fish_is_root_user; and fish_is_root_user
+                if set -q fish_color_cwd_root
+                        set cwd_color (set_color $fish_color_cwd_root)
                 end
-                set -l col (string replace 0x '' $col | string pad -c 0 -w 2 | string join "")
-        
-                set cwd (set_color $col)
+                set suffix '#'
         end
     
-        # Prompt status only if it's not 0
-        set -l prompt_status
-        test $last_status -ne 0; and set prompt_status (set_color $fish_color_status)"[$last_status]$normal"
-    
-        # Only show host if in SSH or container
-        # Store this in a global variable because it's slow and unchanging
-        if not set -q prompt_host
-                set -g prompt_host ""
-                if set -q SSH_TTY
-                        or begin
-                                command -sq systemd-detect-virt
-                                and systemd-detect-virt -q
-                        end
-                        set prompt_host $usercolor$USER$normal@(set_color $fish_color_host)$hostname$normal":"
-                end
+        # Color the prompt in red on error
+        if test $last_status -ne 0
+                set status_color (set_color $fish_color_error)
+                set prompt_status $status_color "[" $last_status "]" $normal
         end
     
-        # Shorten pwd if prompt is too long
-        set -l pwd (prompt_pwd)
-    
-        echo -n -s $prompt_host $cwd $pwd $normal $prompt_status $delim
+        echo -s (prompt_login) ' ' $cwd_color (prompt_pwd) $vcs_color (fish_vcs_prompt) $normal ' ' $prompt_status
+        echo -n -s $status_color $suffix ' ' $normal
 end
