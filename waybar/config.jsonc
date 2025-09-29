@@ -1,12 +1,11 @@
 {
     "layer": "top",
     "position": "top",
-    "spacing": 3,
+    "spacing": 1,
     "modules-left": ["hyprland/workspaces"],
     "modules-center": ["hyprland/window"],
     "modules-right": ["pulseaudio", "battery", "network", "custom/mullvad", "custom/tailscale", "clock"],
     "hyprland/workspaces": {
-         "disable-scroll": true,
          "on-click": "activate",
          "format": "{name}"
     },
@@ -28,7 +27,6 @@
             "headset": "",
             "phone": "",
             "portable": "",
-            "car": "",
             "default": ["", "", ""]
         }
     },
@@ -40,17 +38,30 @@
         "format": "{capacity} {icon} ",
         "format-charging": "{capacity} ",
         "format-plugged": "{capacity} ",
+        "format-full": "󰂅",
         "format-alt": "{time} {icon} ",
-        "format-icons": ["", "", "", "", ""]
+        "format-icons": {
+            "charging": ["󰢜", "󰂆", "󰂇", "󰂈", "󰢝", "󰂉", "󰢞", "󰂊", "󰂋", "󰂅"],
+            "default": ["󰁺", "󰁻", "󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰂂", "󰁹"]
+        },
+        "tooltip-format-discharging": "{power:>1.0f}W↓ {capacity}%",
+        "tooltip-format-charging": "{power:>1.0f}W↑ {capacity}%",
+        "states": {
+            "warning": 20,
+            "critical": 10
+        },
     },
     "network": {
-        "interface": "wlan0",
-        "format-wifi": "{essid}",
+        "format-icons": ["󰤯", "󰤟", "󰤢", "󰤥", "󰤨"],
+        "format": "{icon}",
+        "format-wifi": "{icon}",
         "format-ethernet": "{ipaddr}/{cidr} 󰈀",
-        "tooltip-format": "{ifname} via {gwaddr}",
-        "format-linked": "{ifname} (No IP)",
-        "format-disconnected": "󰌙",
         "format-alt": "{ifname}: {ipaddr}/{cidr}"
+        "format-disconnected": "󰌙",
+        "tooltip-format": "{ifname} via {gwaddr}",
+        "tooltip-format-wifi": "{essid} ({frequency} GHz)\n⇣{bandwidthDownBytes}  ⇡{bandwidthUpBytes}",
+        "tooltip-format-ethernet": "⇣{bandwidthDownBytes}  ⇡{bandwidthUpBytes}",
+        "format-linked": "{ifname} (No IP)",
     },
     "custom/mullvad" : {
         "exec": "~/.config/waybar/waybar-mullvad.sh --status",
