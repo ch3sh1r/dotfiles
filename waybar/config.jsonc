@@ -56,7 +56,7 @@
         "format": "{icon}",
         "format-wifi": "{icon}",
         "format-ethernet": "{ipaddr}/{cidr} 󰈀",
-        "format-alt": "{ifname}: {ipaddr}/{cidr}"
+        "format-alt": "{ifname}: {ipaddr}/{cidr}",
         "format-disconnected": "󰌙",
         "tooltip-format": "{ifname} via {gwaddr}",
         "tooltip-format-wifi": "{essid} ({frequency} GHz)\n⇣{bandwidthDownBytes}  ⇡{bandwidthUpBytes}",
