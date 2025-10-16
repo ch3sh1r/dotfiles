@@ -42,6 +42,7 @@ grim
 gst-plugin-pipewire
 hashcat
 hashcat-utils
+heroic-games-launcher-bin
 htop
 hyprland
 hyprlock
@@ -235,10 +236,10 @@ wireless-regdb
 wireless_tools
 wireplumber
 wtype
-xdg-desktop-portal-hyprland
 xdg-utils
 xorg-server
 xorg-xinit
 yt-dlp
 zip
+zoom
 zram-generator
