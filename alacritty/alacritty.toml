@@ -9,7 +9,3 @@ bold = { family = "Hack Nerd Font", style = "Bold" }
 italic = { family = "Hack Nerd Font", style = "Italic" }
 size = 12
 
-[window]
-padding.x = 14
-padding.y = 14
-decorations = "None"
