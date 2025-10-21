@@ -1,5 +1,5 @@
 DOTFILE        := gitconfig tmux.conf vimrc
-DOTFILE_CONFIG := fish i3 i3status alacritty hypr waybar nvim rofi
+DOTFILE_CONFIG := fish i3 i3status alacritty hypr waybar nvim rofi btop
 DOTFILES       := $(DOTFILE_CONFIG) $(DOTFILE)
 DOTFILES_PATH  := $(dir $(abspath $(lastword $(MAKEFILE_LIST))))
 
