@@ -29,6 +29,7 @@ dosfstools
 drawio-desktop
 dunst
 efibootmgr
+evtest
 file-roller
 firefox
 fish
@@ -43,10 +44,11 @@ gst-plugin-pipewire
 hashcat
 hashcat-utils
 heroic-games-launcher-bin
-htop
 hyprland
 hyprlock
 hyprshot
+hyprsunset
+ifuse
 iio-hyprland-git
 iio-sensor-proxy
 impala
@@ -60,7 +62,9 @@ jre-openjdk
 kvantum
 less
 lib32-amdgpu-pro-oglp
+lib32-libpulse
 lib32-mesa
+lib32-openal
 lib32-vulkan-amdgpu-pro
 lib32-vulkan-intel
 libpulse
@@ -75,6 +79,7 @@ libvncserver
 linux
 linux-firmware
 linux-firmware-qlogic
+localsend-bin
 man-db
 man-pages
 mesa-utils
@@ -115,6 +120,7 @@ pipewire-pulse
 polkit-kde-agent
 powercap
 powertop
+prismlauncher
 protonhax
 proxychains-ng
 python-numpy
@@ -146,6 +152,7 @@ slurp
 smartmontools
 sof-firmware
 steam
+steamlink
 swaybg
 tailscale
 tela-circle-icon-theme-dracula
