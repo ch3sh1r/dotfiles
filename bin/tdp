@@ -15,7 +15,25 @@ LONG_TIME_WINDOW_US=28000000 # ~28 seconds
 SHORT_TIME_WINDOW_US=2441    # ~2.4 milliseconds
 
 get_power_mode() {
-    powercap-info "$CONTROL_TYPE" -z "$ZONE"
+    # Get the current sustained (long-term) power limit value
+    # powercap-info -L prints just the limit value
+    local current_limit
+    current_limit=$(powercap-info "$CONTROL_TYPE" -z "$ZONE" -c "$CONSTRAINT_LONG" -l 2>/dev/null)
+
+    # Check if we got a numeric value
+    if ! [[ "$current_limit" =~ ^[0-9]+$ ]]; then
+        echo "unknown"
+        return
+    fi
+
+    # Compare the value to our presets
+    if [ "$current_limit" -eq "$LOW_POWER_UW" ]; then
+        echo "low"
+    elif [ "$current_limit" -eq "$HIGH_POWER_UW" ]; then
+        echo "high"
+    else
+        echo "custom"
+    fi
 }
 
 set_power_mode() {
@@ -33,7 +51,7 @@ set_power_mode() {
     sudo powercap-set "$CONTROL_TYPE" -z "$ZONE" -c "$CONSTRAINT_SHORT" \
         -l "$boost_power" -s "$SHORT_TIME_WINDOW_US"
 
-    echo "Power limits applied:"
+    echo -n "Power limits applied. Current status: "
     get_power_mode
 }
 
