@@ -1,0 +1,201 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+# eGPU manager script - combine enable/disable/status functionality
+# Usage: egpu {enable|disable|status}
+
+get_gpus() {
+    # List all GPUs using lspci
+    if command -v lspci &>/dev/null; then
+        lspci | grep -i "vga\|3d\|display" | grep -i "nvidia\|amd\|intel\|radeon"
+    else
+        echo "No GPUs detected (lspci not available)"
+    fi
+}
+
+show_status() {
+    echo "eGPU Status:"
+    echo "============"
+    echo ""
+
+    local all_monitors
+    all_monitors=$(hyprctl monitors all -j)
+
+    local internal_monitor
+    internal_monitor=$(echo "$all_monitors" | jq -r '.[] | select(.name == "DSI-1") | .name')
+
+    if [ -z "$internal_monitor" ]; then
+        echo "Error: Internal monitor DSI-1 not found"
+        return 1
+    fi
+
+    echo "Internal Monitor:"
+    echo "  - $internal_monitor ($(echo "$all_monitors" | jq -r '.[] | select(.name == "DSI-1") | "\(.width)x\(.height)"'))"
+    echo ""
+
+    local external_monitors
+    external_monitors=$(echo "$all_monitors" | jq -r '.[] | select(.name != "DSI-1") | .name')
+
+    if [ -z "$external_monitors" ]; then
+        echo "External Monitors: None detected"
+    else
+        echo "External Monitors:"
+        while IFS= read -r monitor; do
+            local status
+            local resolution
+            status=$(echo "$all_monitors" | jq -r ".[] | select(.name == \"$monitor\") | if .width == 0 then \"disabled\" else \"enabled\" end")
+            resolution=$(echo "$all_monitors" | jq -r ".[] | select(.name == \"$monitor\") | \"\(.width)x\(.height)\"")
+            echo "  - $monitor: $status ($resolution)"
+        done <<<"$external_monitors"
+    fi
+    echo ""
+
+    echo "Video Cards:"
+    local gpus
+    gpus=$(get_gpus)
+    if [ -n "$gpus" ]; then
+        echo "$gpus" | while IFS= read -r line; do
+            echo "  $line"
+        done
+    else
+        echo "  No GPUs detected"
+    fi
+}
+
+enable_egpu() {
+    echo "Enabling eGPU and external monitors..."
+
+    local all_monitors
+    all_monitors=$(hyprctl monitors all -j)
+
+    local disabled_monitors
+    disabled_monitors=$(echo "$all_monitors" | jq -r '.[] | select(.name != "DSI-1" and .width == 0) | .name')
+
+    if [ -z "$disabled_monitors" ]; then
+        echo "No disabled external monitors found."
+        return 0
+    fi
+
+    echo "Found disabled external monitors: $(echo "$disabled_monitors" | tr '\n' ' ')"
+
+    # Build batch command to enable all disabled monitors
+    local enable_commands=""
+    while IFS= read -r monitor; do
+        if [ -n "$enable_commands" ]; then
+            enable_commands="$enable_commands; "
+        fi
+        enable_commands="${enable_commands}keyword monitor $monitor,preferred"
+    done <<<"$disabled_monitors"
+
+    if [ -n "$enable_commands" ]; then
+        echo "Enabling external monitors..."
+        hyprctl --batch "$enable_commands"
+        echo "Enabled monitors: $(echo "$disabled_monitors" | tr '\n' ' ')"
+    fi
+
+    # Move workspaces to external monitors
+    local i=2
+    while IFS= read -r monitor; do
+        hyprctl dispatch moveworkspacetomonitor "$i" "$monitor"
+        echo "Moved workspace $i to $monitor"
+        i=$((i + 1))
+    done <<<"$disabled_monitors"
+
+    echo "eGPU and external monitors enabled."
+}
+
+disable_egpu() {
+    echo "Disabling eGPU and external monitors..."
+
+    local all_monitors
+    all_monitors=$(hyprctl monitors all -j)
+
+    # Get all external monitors
+    local external_monitors
+    external_monitors=$(echo "$all_monitors" | jq -r '.[] | select(.name != "DSI-1") | .name')
+
+    if [ -z "$external_monitors" ]; then
+        echo "No external monitors detected"
+        return 0
+    fi
+
+    echo "External monitors: $(echo "$external_monitors" | tr '\n' ' ')"
+
+    # Get all workspaces that are on external monitors
+    local external_workspaces
+    external_workspaces=$(echo "$all_monitors" | jq -r '.[] | select(.name != "DSI-1") | .activeWorkspace.id')
+
+    # Move all workspaces from external monitors to DSI-1
+    if [ -n "$external_workspaces" ]; then
+        echo "Moving workspaces to internal monitor DSI-1..."
+        while IFS= read -r workspace; do
+            if [ -n "$workspace" ] && [ "$workspace" != "null" ]; then
+                hyprctl dispatch moveworkspacetomonitor "$workspace" DSI-1
+                echo "Moved workspace $workspace to DSI-1"
+            fi
+        done <<<"$external_workspaces"
+    fi
+
+    # Build batch command to disable all external monitors
+    local disable_commands=""
+    while IFS= read -r monitor; do
+        if [ -n "$disable_commands" ]; then
+            disable_commands="$disable_commands; "
+        fi
+        disable_commands="${disable_commands}keyword monitor $monitor,disabled"
+    done <<<"$external_monitors"
+
+    # Execute the batch disable command
+    if [ -n "$disable_commands" ]; then
+        echo "Disabling external monitors..."
+        hyprctl --batch "$disable_commands"
+        echo "Disabled monitors: $(echo "$external_monitors" | tr '\n' ' ')"
+    fi
+
+    # Wait for changes to take effect
+    sleep 1
+    echo "Safe to remove eGPU"
+}
+
+show_help() {
+    cat <<'EOF'
+eGPU Manager - Manage external monitors and eGPU
+
+Usage: egpu {enable|disable|status|help}
+
+Commands:
+  enable      Enable eGPU and external monitors
+  disable     Disable eGPU and external monitors
+  status      Show current eGPU and monitor status
+  help        Show this help message
+
+EOF
+}
+
+main() {
+    local command="${1:-}"
+
+    case "$command" in
+    enable)
+        enable_egpu
+        ;;
+    disable)
+        disable_egpu
+        ;;
+    status)
+        show_status
+        ;;
+    help | --help | -h | "")
+        show_help
+        ;;
+    *)
+        echo "Error: Unknown command '$command'"
+        echo ""
+        show_help
+        exit 1
+        ;;
+    esac
+}
+
+main "$@"

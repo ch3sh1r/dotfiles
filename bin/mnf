@@ -1,0 +1,160 @@
+#!/usr/bin/env bash
+
+# Simple nftables configuration manager for Mullvad + Tailscale
+# This script only manages nftables rules - no connection management
+
+set -euo pipefail
+
+# =======================
+# CONFIGURATION
+# =======================
+RULES_FILE="${RULES_FILE:-/home/ch3sh1r/Documents/Github/mullvad-tailscale/mullvad.rules}"
+NFT_TABLE="${NFT_TABLE:-mullvad-ts}"
+
+# =======================
+# FUNCTIONS
+# =======================
+
+die() {
+    printf "[ERROR] %s\n" "$*" >&2
+    exit 1
+}
+
+show_usage() {
+    cat <<EOF
+Usage: $(basename "$0") <command>
+
+Commands:
+  apply     Apply nftables rules from rules file
+  remove    Remove nftables table
+  check     Check if rules file is valid
+  status    Show current nftables configuration
+  help      Show this help message
+
+Options:
+  -f, --file FILE    Use specific rules file (default: $RULES_FILE)
+  -t, --table NAME   Use specific table name (default: $NFT_TABLE)
+
+Examples:
+  $(basename "$0") apply
+  $(basename "$0") apply -f /path/to/custom.rules
+  $(basename "$0") remove -t custom-table
+  $(basename "$0") status
+
+Environment variables:
+  RULES_FILE    Path to nftables rules file
+  NFT_TABLE     Name of the nftables table
+EOF
+    exit 0
+}
+
+check_rules_file() {
+    if [[ ! -f "$RULES_FILE" ]]; then
+        die "Rules file not found: $RULES_FILE"
+    fi
+
+    printf "[INFO] Checking rules file validity...\n"
+    if sudo nft -cf "$RULES_FILE" 2>&1; then
+        printf "[OK] Rules file is valid\n"
+        return 0
+    else
+        die "Rules file is invalid"
+    fi
+}
+
+apply_rules() {
+    check_rules_file
+
+    printf "[INFO] Applying nftables rules...\n"
+    if sudo nft -f "$RULES_FILE"; then
+        printf "[OK] Rules applied successfully\n"
+        show_status
+    else
+        die "Failed to apply rules"
+    fi
+}
+
+remove_rules() {
+    if ! sudo nft list table inet "$NFT_TABLE" &>/dev/null; then
+        printf "[WARN] Table '$NFT_TABLE' does not exist\n"
+        return 0
+    fi
+
+    printf "[INFO] Removing nftables table '$NFT_TABLE'...\n"
+    if sudo nft delete table inet "$NFT_TABLE"; then
+        printf "[OK] Table removed successfully\n"
+    else
+        die "Failed to remove table"
+    fi
+}
+
+show_status() {
+    if sudo nft list table inet "$NFT_TABLE" &>/dev/null; then
+        printf "\n[INFO] Current configuration for table '%s':\n" "$NFT_TABLE"
+        sudo nft list table inet "$NFT_TABLE"
+    else
+        printf "[INFO] Table '%s' is not currently configured\n" "$NFT_TABLE"
+    fi
+}
+
+# =======================
+# ARGUMENT PARSING
+# =======================
+
+parse_args() {
+    if [[ $# -eq 0 ]]; then
+        show_usage
+    fi
+
+    local command=""
+
+    while [[ $# -gt 0 ]]; do
+        case "$1" in
+        apply | remove | check | status | help)
+            command="$1"
+            shift
+            ;;
+        -f | --file)
+            RULES_FILE="$2"
+            shift 2
+            ;;
+        -t | --table)
+            NFT_TABLE="$2"
+            shift 2
+            ;;
+        -h | --help)
+            show_usage
+            ;;
+        *)
+            die "Unknown option: $1"
+            ;;
+        esac
+    done
+
+    case "$command" in
+    apply)
+        apply_rules
+        ;;
+    remove)
+        remove_rules
+        ;;
+    check)
+        check_rules_file
+        ;;
+    status)
+        show_status
+        ;;
+    help)
+        show_usage
+        ;;
+    *)
+        die "No command specified. Use 'help' for usage information."
+        ;;
+    esac
+}
+
+# =======================
+# MAIN
+# =======================
+
+parse_args "$@"

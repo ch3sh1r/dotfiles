@@ -1,0 +1,50 @@
+#!/usr/bin/env bash
+CONTROL_TYPE="intel-rapl"
+ZONE="0"
+CONSTRAINT_LONG="0"
+CONSTRAINT_SHORT="1"
+
+# Define power limits (in microwatts)
+LOW_POWER_UW=7000000   # 7W sustained
+LOW_BOOST_UW=12000000  # 12W boost
+HIGH_POWER_UW=20000000 # 20W sustained
+HIGH_BOOST_UW=28000000 # 28W boost
+
+# Default time windows (in microseconds)
+LONG_TIME_WINDOW_US=28000000 # ~28 seconds
+SHORT_TIME_WINDOW_US=2441    # ~2.4 milliseconds
+
+get_power_mode() {
+    powercap-info "$CONTROL_TYPE" -z "$ZONE"
+}
+
+set_power_mode() {
+    local mode=$1
+    local sustained_power=$2
+    local boost_power=$3
+
+    echo "Setting $mode mode..."
+
+    # Set sustained (long-term) power limit
+    sudo powercap-set "$CONTROL_TYPE" -z "$ZONE" -c "$CONSTRAINT_LONG" \
+        -l "$sustained_power" -s "$LONG_TIME_WINDOW_US"
+
+    # Set boost (short-term) power limit
+    sudo powercap-set "$CONTROL_TYPE" -z "$ZONE" -c "$CONSTRAINT_SHORT" \
+        -l "$boost_power" -s "$SHORT_TIME_WINDOW_US"
+
+    echo "Power limits applied:"
+    get_power_mode
+}
+
+case "$1" in
+low)
+    set_power_mode "low" "$LOW_POWER_UW" "$LOW_BOOST_UW"
+    ;;
+high)
+    set_power_mode "high" "$HIGH_POWER_UW" "$HIGH_BOOST_UW"
+    ;;
+*)
+    get_power_mode
+    ;;
+esac
