@@ -18,7 +18,6 @@ abbr -a p 'ps -auxw'
 # Git abbreviations
 abbr -a g git
 abbr -a ga 'git add'
-abbr -a gca 'git commit -v -a'
 abbr -a gc 'git commit --verbose'
 abbr -a gcl 'git clone --recursive'
 abbr -a gco 'git checkout'
@@ -29,6 +28,7 @@ abbr -a grhh 'git reset --hard'
 abbr -a gss 'git status'
 abbr -a gsta 'git stash push'
 abbr -a gstp 'git stash pop'
+abbr -a gsu 'git submodule update --remote --recursive'
 abbr -a gup 'git pull'
 
 # Global abbreviations
