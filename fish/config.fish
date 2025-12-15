@@ -14,6 +14,7 @@ end
 
 # Abbreviations
 abbr -a p 'ps -auxw'
+abbr -a h history
 
 # Git abbreviations
 abbr -a g git
