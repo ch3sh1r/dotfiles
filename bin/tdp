@@ -58,9 +58,11 @@ set_power_mode() {
 case "$1" in
 low)
     set_power_mode "low" "$LOW_POWER_UW" "$LOW_BOOST_UW"
+    sudo cpupower frequency-set -g powersave
     ;;
 high)
     set_power_mode "high" "$HIGH_POWER_UW" "$HIGH_BOOST_UW"
+    sudo cpupower frequency-set -g performance
     ;;
 *)
     get_power_mode
