@@ -6,7 +6,7 @@ CONSTRAINT_SHORT="1"
 
 # Define power limits (in microwatts)
 LOW_POWER_UW=7000000   # 7W sustained
-LOW_BOOST_UW=12000000  # 12W boost
+LOW_BOOST_UW=10000000  # 10W boost
 HIGH_POWER_UW=20000000 # 20W sustained
 HIGH_BOOST_UW=28000000 # 28W boost
 
