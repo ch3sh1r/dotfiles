@@ -1,6 +1,7 @@
 if status is-interactive
     # Run ssh agent plugin
     fish_ssh_agent
+    thefuck --alias | source
 
     # Set up session logging
     #if test -z "$SCRIPTED"
