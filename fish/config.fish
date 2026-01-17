@@ -34,8 +34,9 @@ abbr -a gsu 'git submodule update --remote --recursive'
 abbr -a gup 'git pull'
 
 # Global abbreviations
-abbr -a G --position anywhere '| grep -i'
 abbr -a C --position anywhere --set-cursor '%| wl-copy'
+abbr -a G --position anywhere --set-cursor '%| grep -i'
+abbr -a H --position anywhere --set-cursor '%| head'
+abbr -a J --position anywhere --set-cursor '%| jq'
 abbr -a L --position anywhere --set-cursor '%| less -R'
 abbr -a T --position anywhere --set-cursor '%| tail'
-abbr -a H --position anywhere --set-cursor '%| head'
