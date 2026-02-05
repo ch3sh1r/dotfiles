@@ -19,7 +19,7 @@ abbr -a h history
 
 # Git abbreviations
 abbr -a g git
-abbr -a ga 'git add'
+abbr -a ga 'git add .'
 abbr -a gc 'git commit --verbose'
 abbr -a gcl 'git clone --recursive'
 abbr -a gco 'git checkout'
@@ -28,14 +28,14 @@ abbr -a glg 'git log --stat'
 abbr -a gp 'git push'
 abbr -a grhh 'git reset --hard'
 abbr -a gss 'git status'
-abbr -a gsta 'git stash push'
+abbr -a gsta 'git stash push --include-untracked'
 abbr -a gstp 'git stash pop'
 abbr -a gsu 'git submodule update --remote --recursive'
 abbr -a gup 'git pull'
 
 # Global abbreviations
+abbr -a G --position anywhere '| grep -i'
 abbr -a C --position anywhere --set-cursor '%| wl-copy'
-abbr -a G --position anywhere --set-cursor '%| grep -i'
 abbr -a H --position anywhere --set-cursor '%| head'
 abbr -a J --position anywhere --set-cursor '%| jq'
 abbr -a L --position anywhere --set-cursor '%| less -R'
