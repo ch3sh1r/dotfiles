@@ -3,10 +3,11 @@
 aic94xx-firmware
 alacritty
 alsa-utils
-amdgpu-pro-oglp
-amf-amdgpu-pro
+android-file-transfer
 android-tools
+aria2
 ast-firmware
+atlauncher-bin
 base
 base-devel
 blueman
@@ -41,9 +42,11 @@ glm
 go
 grim
 gst-plugin-pipewire
+gvfs-mtp
 hashcat
 hashcat-utils
 heroic-games-launcher-bin
+hypridle
 hyprland
 hyprlock
 hyprshot
@@ -61,12 +64,11 @@ john
 jre-openjdk
 kvantum
 less
-lib32-amdgpu-pro-oglp
 lib32-libpulse
 lib32-mesa
 lib32-openal
-lib32-vulkan-amdgpu-pro
 lib32-vulkan-intel
+lib32-vulkan-radeon
 libpulse
 libreoffice-still-ru
 libretro-core-info
@@ -86,8 +88,8 @@ mesa-utils
 meson
 mullvad-vpn-cli
 nano
+nautilus
 ncdu
-nekoray-bin
 neovide
 nextcloud-client
 nftables
@@ -111,6 +113,7 @@ otf-monaspace-nerd
 otf-opendyslexic-nerd
 otf-overpass-nerd
 paru
+paru-debug
 pavucontrol
 pince
 pipewire
@@ -152,7 +155,6 @@ slurp
 smartmontools
 sof-firmware
 steam
-steamlink
 swaybg
 tailscale
 tela-circle-icon-theme-dracula
@@ -161,7 +163,7 @@ tesseract
 tesseract-data-eng
 tesseract-data-rus
 the_silver_searcher
-thunar
+thefuck
 tlp
 tmux
 tree
@@ -230,7 +232,7 @@ vim
 virtualbox
 virtualbox-guest-iso
 vlc
-vulkan-amdgpu-pro
+vlc-plugins-all
 vulkan-intel
 vulkan-nouveau
 vulkan-radeon
@@ -243,7 +245,10 @@ wireless-regdb
 wireless_tools
 wireplumber
 wtype
+xdg-desktop-portal-gtk
+xdg-desktop-portal-hyprland
 xdg-utils
+xf86-video-amdgpu
 xorg-server
 xorg-xinit
 yt-dlp
