@@ -35,6 +35,7 @@ file-roller
 firefox
 fish
 freerdp
+fuzzel
 ghostscript
 gimp
 git
@@ -147,8 +148,6 @@ retroarch-assets-ozone
 retroarch-assets-xmb
 rizin
 rocm-opencl-runtime
-rofi
-rofi-calc
 rust
 sddm
 slurp

@@ -1,6 +1,6 @@
 DOTFILE        := gitconfig tmux.conf vimrc
-DOTFILE_CONFIG := fish i3 i3status alacritty hypr waybar nvim rofi btop
-DOTFILE_BIN    := egpu mnf tdp timer
+DOTFILE_CONFIG := fish i3 i3status alacritty hypr waybar nvim btop fuzzel
+DOTFILE_BIN    := egpu mnf tdp timer cliphist-fuzzel-img
 DOTFILES       := $(DOTFILE_CONFIG) $(DOTFILE_BIN) $(DOTFILE)
 DOTFILES_PATH  := $(dir $(abspath $(lastword $(MAKEFILE_LIST))))
 
@@ -16,7 +16,7 @@ $(DOTFILE_CONFIG):
 $(DOTFILE_BIN):
 	mkdir -p ~/.local/bin
 	rm -Rf ~/.local/bin/$@
-	ln -sf $(DOTFILES_PATH)/bin/$@ ~/.local/bin/$@
+	ln -sf $(DOTFILES_PATH)bin/$@ ~/.local/bin/$@
 
 $(DOTFILE):
 	rm -Rf ~/.$@
