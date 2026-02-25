@@ -19,7 +19,7 @@ abbr -a h history
 
 # Git abbreviations
 abbr -a g git
-abbr -a ga 'git add .'
+abbr -a ga 'git add'
 abbr -a gc 'git commit --verbose'
 abbr -a gcl 'git clone --recursive'
 abbr -a gco 'git checkout'
