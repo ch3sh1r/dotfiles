@@ -18,6 +18,7 @@ abbr -a p 'ps -auxw'
 abbr -a h history
 
 # Git abbreviations
+abbr -a - 'cd -'
 abbr -a g git
 abbr -a ga 'git add'
 abbr -a gc 'git commit --verbose'
