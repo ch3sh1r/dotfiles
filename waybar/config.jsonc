@@ -3,15 +3,11 @@
     "position": "top",
     "spacing": 1,
     "modules-left": ["hyprland/workspaces"],
-    "modules-center": ["hyprland/window"],
-    "modules-right": ["pulseaudio", "network", "custom/mullvad", "custom/tailscale", "battery", "clock"],
+    "modules-center": ["clock"],
+    "modules-right": ["pulseaudio", "network", "custom/mullvad", "custom/tailscale", "battery"],
     "hyprland/workspaces": {
          "on-click": "activate",
          "format": "{name}"
-    },
-    "hyprland/window": {
-        "max-length": 50,
-        "separate-outputs": true
     },
     "pulseaudio": {
         "format": "{volume} {icon} ",
@@ -35,7 +31,7 @@
             "warning": 30,
             "critical": 15
         },
-        "format": "{capacity} {icon}",
+        "format": "{icon}",
         "format-full": "󰂅",
         "format-alt": "{time} {icon}",
         "format-icons": {
