@@ -1,0 +1,13 @@
+gui:
+  sidePanelWidth: 0.25
+  expandFocusedSidePanel: true
+  nerdFontsVersion: "3"
+  showRandomTip: false
+  showCommandLog: false
+git:
+  parseEmoji: true
+  commit:
+    autoWrapCommitMessage: true
+    autoWrapWidth: 72
+  pagers:
+    - colorArg: always
