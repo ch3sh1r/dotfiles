@@ -4,6 +4,7 @@ gui:
   nerdFontsVersion: "3"
   showRandomTip: false
   showCommandLog: false
+  showBottomLine: false
 git:
   parseEmoji: true
   commit:
