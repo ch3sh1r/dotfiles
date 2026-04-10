@@ -53,10 +53,3 @@
   min-width: 20px;
 }
 
-#pulseaudio.muted {
-  color: @base0F;
-}
-
-#pulseaudio.bluetooth {
-  color: @base0D;
-}
