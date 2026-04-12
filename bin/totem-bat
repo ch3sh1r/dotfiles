@@ -1,4 +1,0 @@
-#!/bin/sh
-
-printf "central:    %d%%\n" "$(gdbus call --system --dest org.bluez --object-path /org/bluez/hci0/dev_E2_A8_67_4D_52_68/service0010/char0011 --method org.bluez.GattCharacteristic1.ReadValue "{}" | grep -o '0x[0-9a-fA-F]\+' | head -n1)"
-printf "peripheral: %d%%\n\n" "$(gdbus call --system --dest org.bluez --object-path /org/bluez/hci0/dev_E2_A8_67_4D_52_68/service0015/char0016 --method org.bluez.GattCharacteristic1.ReadValue "{}" | grep -o '0x[0-9a-fA-F]\+' | head -n1)"
