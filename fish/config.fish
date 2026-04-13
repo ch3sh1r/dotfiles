@@ -23,6 +23,7 @@ abbr -a - 'cd -'
 abbr -a g git
 abbr -a ga 'git add'
 abbr -a gc 'git commit --verbose'
+abbr -a gcu 'git commit --verbose --message "status update: $(date +"%Y-%m-%dT%H:%M")"'
 abbr -a gcl 'git clone --recursive'
 abbr -a gco 'git checkout'
 abbr -a gd 'git diff'
