@@ -1,5 +1,5 @@
 function tdl --description "Create a Tmux Dev Layout with editor, ai, and terminal"
-    # Usage: tdl <c|cx|codex|other_ai> [<second_ai>]
+    # Usage: tdl <opencode|claude|codex|other_ai> [<second_ai>]
     if test -z "$argv[1]"
         echo "Usage: tdl <c|cx|codex|other_ai> [<second_ai>]"
         return 1
