@@ -10,3 +10,7 @@ msf4/loot/*
 
 hypr/monitors.conf
 hypr/workspaces.conf
+
+fish/fish_variables
+nvim/lazy-lock.json
+
