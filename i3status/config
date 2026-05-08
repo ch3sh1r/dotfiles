@@ -12,8 +12,6 @@ order += "wireless wlan0"
 order += "ethernet cscotun0"
 order += "ethernet tailscale0"
 order += "ethernet tun0"
-order += "battery 0"
-order += "tztime local"
 
 ethernet eth0 {
     format_up = "E: %ip"
@@ -47,22 +45,5 @@ ethernet wg-mullvad {
 
 path_exists VPN {
     path = "/proc/sys/net/ipv4/conf/wg-mullvad"
-}
-
-battery 0 {
-    format = "%status%percentage"
-    format_down = ""
-    status_chr =  "+"
-    status_bat =  "-"
-    status_full = ""
-    path = "/sys/class/power_supply/BAT%d/uevent"
-    low_threshold = 20
-    last_full_capacity = true
-    format_percentage = "%.00f%s"
-}
-
-tztime local {
-    format = "%H:%M "
-    hide_if_equals_localtime = false
 }
 
