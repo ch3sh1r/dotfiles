@@ -102,7 +102,6 @@ Item {
             text: root.viewYear
             color: Theme.purple
             font.bold: true
-            font.pixelSize: Theme.fontSize + 3
         }
 
         Grid {
@@ -140,7 +139,6 @@ Item {
 
                                 Label {
                                     anchors.centerIn: parent
-                                    font.pixelSize: Theme.fontSize - 1
 
                                     visible: {
                                         let t = parent.modelData.type;
