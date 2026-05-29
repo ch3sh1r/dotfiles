@@ -57,6 +57,12 @@ Pill {
         color: root.info.type === "disconnected" ? Theme.base03 : Theme.fg
     }
 
+    Label {
+        visible: root.info.type === "wifi" && root.info.ssid.length > 0
+        text: root.info.type === "wifi" ? root.info.ssid : ""
+        color: Theme.fgBright
+    }
+
     Tooltip {
         anchorItem: root
         shown: root.hovered
