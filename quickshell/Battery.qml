@@ -8,8 +8,19 @@ import Quickshell.Services.UPower
 Pill {
     id: root
 
-    readonly property var dev: UPower.displayDevice
-    readonly property bool present: dev && dev.isLaptopBattery
+    // displayDevice is a synthetic aggregate whose isLaptopBattery is often
+    // false, so prefer the first real laptop battery and fall back to it.
+    readonly property var dev: {
+        let model = UPower.devices;
+        if (model) {
+            let list = model.values;
+            for (let i = 0; i < list.length; i++)
+                if (list[i].isLaptopBattery)
+                    return list[i];
+        }
+        return UPower.displayDevice;
+    }
+    readonly property bool present: dev && dev.ready && (dev.isLaptopBattery || dev.isPresent)
     readonly property int percent: dev ? Math.round(dev.percentage) : 0
     readonly property bool charging: dev && dev.state === UPowerDeviceState.Charging
     readonly property bool full: dev && (dev.state === UPowerDeviceState.FullyCharged || percent >= 100)

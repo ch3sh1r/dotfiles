@@ -16,8 +16,8 @@ Pill {
 
     readonly property var wifiIcons: ["󰤯", "󰤟", "󰤢", "󰤥", "󰤨"]
 
-    function wifiIcon(signal) {
-        let i = Math.min(4, Math.floor((signal / 100) * 5));
+    function wifiIcon(strength) {
+        let i = Math.min(4, Math.floor((strength / 100) * 5));
         return wifiIcons[Math.max(0, i)];
     }
 
