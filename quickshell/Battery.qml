@@ -70,7 +70,7 @@ Pill {
     IconText {
         text: {
             if (root.full)
-                return "󰂅";
+                return "󰂄";
             let i = Math.max(0, Math.min(9, Math.floor(root.percent / 10)));
             return root.charging ? root.chargeIcons[i] : root.dischargeIcons[i];
         }
