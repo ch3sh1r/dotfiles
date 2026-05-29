@@ -108,11 +108,17 @@ Pill {
         visible: shown
 
         anchor.item: root
-        anchor.rect.x: (root.width - width) / 2
-        anchor.rect.y: root.height + Theme.gap
+        anchor.rect.x: 0
+        anchor.rect.y: 0
+        anchor.rect.width: root.width
+        anchor.rect.height: root.height + Theme.gap
+        anchor.edges: Edges.Bottom
+        anchor.gravity: Edges.Bottom
 
         implicitWidth: 200
         implicitHeight: 320
+        width: 200
+        height: 320
         color: "transparent"
 
         Rectangle {

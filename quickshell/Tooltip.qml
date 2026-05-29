@@ -7,10 +7,12 @@ import Quickshell
 //
 // It stays open while the cursor is over the popup itself (`contentHovered`)
 // and uses a short hide delay so moving from the pill into the popup doesn't
-// close it mid-transit. Quickshell resolves the parent window from anchorItem.
+// close it mid-transit.
 //
-// As in Pill, the frame/timer go through the explicit `data:` list so they are
-// not swallowed by the `content` default-property alias.
+// NB: a PopupWindow is a real Wayland window — it needs an explicit, non-zero
+// `width`/`height` and a valid (>=1x1) anchor rect or the compositor rejects
+// the surface and Quickshell crashes. The frame/timer go through the explicit
+// `data:` list so they are not swallowed by the `content` default alias.
 PopupWindow {
     id: root
 
@@ -22,6 +24,20 @@ PopupWindow {
     readonly property bool contentHovered: frameHover.hovered
     readonly property bool wantShown: (shown || contentHovered) && anchorItem !== null
 
+    // Anchor the whole item rect, attach to its bottom edge, grow downward.
+    anchor.item: anchorItem
+    anchor.rect.x: 0
+    anchor.rect.y: 0
+    anchor.rect.width: anchorItem ? anchorItem.width : 1
+    anchor.rect.height: anchorItem ? anchorItem.height + Theme.gap : 1
+    anchor.edges: Edges.Bottom
+    anchor.gravity: Edges.Bottom
+
+    implicitWidth: frame.implicitWidth
+    implicitHeight: frame.implicitHeight
+    width: frame.implicitWidth
+    height: frame.implicitHeight
+    color: "transparent"
     visible: false
 
     onWantShownChanged: {
@@ -32,14 +48,6 @@ PopupWindow {
             hideTimer.restart();
         }
     }
-
-    anchor.item: anchorItem
-    anchor.rect.x: anchorItem ? (anchorItem.width - width) / 2 : 0
-    anchor.rect.y: anchorItem ? anchorItem.height + Theme.gap : 0
-
-    implicitWidth: frame.implicitWidth
-    implicitHeight: frame.implicitHeight
-    color: "transparent"
 
     data: [
         Timer {
