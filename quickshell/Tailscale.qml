@@ -3,14 +3,17 @@ import Quickshell
 import Quickshell.Io
 
 // Tailscale pill. Parses `tailscale status --json` natively. Shows the active
-// exit node (if any); the popup lists peers colour-coded by online state.
-// Click toggles the tailnet up/down.
+// exit node (if any); the popup is a compact status summary. Click toggles the
+// tailnet up/down.
 Pill {
     id: root
 
     property bool running: false
     property string exitNode: ""
-    property var peers: []
+    property string selfName: ""
+    property string selfIp: ""
+    property int peerCount: 0
+    property int onlineCount: 0
 
     function refresh() {
         statusProc.running = true;
@@ -24,29 +27,33 @@ Pill {
                 try {
                     let s = JSON.parse(this.text.trim());
                     root.running = s.BackendState === "Running";
-                    let list = [];
+
+                    let self = s.Self || {};
+                    root.selfName = (self.DNSName || "").split(".")[0];
+                    root.selfIp = (self.TailscaleIPs && self.TailscaleIPs[0]) || "";
+
                     let exit = "";
+                    let total = 0;
+                    let online = 0;
                     let peerMap = s.Peer || {};
                     for (const key in peerMap) {
                         let p = peerMap[key];
-                        let name = (p.DNSName || "").split(".")[0];
+                        total += 1;
+                        if (p.Online)
+                            online += 1;
                         if (p.ExitNode)
-                            exit = name;
-                        list.push({
-                            name: name,
-                            online: !!p.Online,
-                            exit: !!p.ExitNode
-                        });
+                            exit = (p.DNSName || "").split(".")[0];
                     }
-                    list.sort(function (a, b) {
-                        return (b.online - a.online) || a.name.localeCompare(b.name);
-                    });
-                    root.peers = list;
                     root.exitNode = exit;
+                    root.peerCount = total;
+                    root.onlineCount = online;
                 } catch (e) {
                     root.running = false;
-                    root.peers = [];
                     root.exitNode = "";
+                    root.selfName = "";
+                    root.selfIp = "";
+                    root.peerCount = 0;
+                    root.onlineCount = 0;
                 }
             }
         }
@@ -88,27 +95,38 @@ Pill {
         shown: root.hovered
 
         Column {
-            spacing: 2
+            spacing: 4
 
-            Label {
-                visible: !root.running
-                text: "tailscale is not active"
-                color: Theme.fg
-            }
-
-            Label {
-                visible: root.running && root.peers.length === 0
-                text: "no peers"
-                color: Theme.fg
-            }
-
-            Repeater {
-                model: root.running ? root.peers : []
-                delegate: Label {
-                    required property var modelData
-                    text: (modelData.exit ? "󰈂 " : "") + modelData.name
-                    color: modelData.online ? Theme.good : Theme.critical
+            // Header: state.
+            Row {
+                spacing: 6
+                IconText {
+                    text: root.running ? "󰯉" : "󱩆"
+                    color: root.running ? Theme.good : Theme.base03
                 }
+                Label {
+                    text: root.running ? "Connected" : "Stopped"
+                    color: Theme.fgBright
+                    font.bold: true
+                }
+            }
+
+            Label {
+                visible: root.running && root.selfName.length > 0
+                text: root.selfName + (root.selfIp.length > 0 ? "  ·  " + root.selfIp : "")
+                color: Theme.fg
+            }
+
+            Label {
+                visible: root.running
+                text: "Exit node: " + (root.exitNode.length > 0 ? root.exitNode : "none")
+                color: Theme.fg
+            }
+
+            Label {
+                visible: root.running
+                text: "Peers: " + root.onlineCount + "/" + root.peerCount + " online"
+                color: Theme.fg
             }
         }
     }
