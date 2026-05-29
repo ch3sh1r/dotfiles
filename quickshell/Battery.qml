@@ -8,19 +8,24 @@ import Quickshell.Services.UPower
 Pill {
     id: root
 
-    // displayDevice is a synthetic aggregate whose isLaptopBattery is often
-    // false, so prefer the first real laptop battery and fall back to it.
-    readonly property var dev: {
+    // displayDevice is UPower's own synthetic aggregate of the system battery
+    // and is the reliable, always-ready source for percentage/rate/time. Raw
+    // per-battery entries in UPower.devices can lag (reporting ~1% / a bogus
+    // changeRate) until their stats are fetched, so read everything from the
+    // aggregate. Its isLaptopBattery flag is often false, so detect battery
+    // *presence* by scanning the device list instead.
+    readonly property var dev: UPower.displayDevice
+    readonly property bool hasBattery: {
         let model = UPower.devices;
         if (model) {
             let list = model.values;
             for (let i = 0; i < list.length; i++)
                 if (list[i].isLaptopBattery)
-                    return list[i];
+                    return true;
         }
-        return UPower.displayDevice;
+        return dev && (dev.isLaptopBattery || dev.isPresent);
     }
-    readonly property bool present: dev && dev.ready && (dev.isLaptopBattery || dev.isPresent)
+    readonly property bool present: hasBattery && dev && dev.ready
     readonly property int percent: dev ? Math.round(dev.percentage) : 0
     readonly property bool charging: dev && dev.state === UPowerDeviceState.Charging
     readonly property bool full: dev && (dev.state === UPowerDeviceState.FullyCharged || percent >= 100)
