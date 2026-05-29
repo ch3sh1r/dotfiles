@@ -44,10 +44,10 @@ Singleton {
     readonly property color critical: base08
     readonly property color good: base05          // "active/connected" — gray, not green
 
-    // typography
-    readonly property string font: "Roboto"
-    // Nerd-Font glyphs (the icons below). Falls back through fontconfig like waybar did.
-    readonly property string iconFont: "Symbols Nerd Font"
+    // typography — Hack Nerd Font, matching alacritty/fuzzel/hyprlock. It
+    // carries both the text and the Nerd-Font glyphs, so one font does both.
+    readonly property string font: "Hack Nerd Font"
+    readonly property string iconFont: "Hack Nerd Font"
     readonly property int fontSize: 12
     readonly property int iconSize: 14
 
