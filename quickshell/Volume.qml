@@ -2,9 +2,6 @@ import QtQuick
 import Quickshell
 import Quickshell.Services.Pipewire
 
-// Volume pill backed directly by PipeWire — no wpctl polling. Scroll to change,
-// click to mute, right-click opens pavucontrol. The popup shows the device and
-// a live slider.
 Pill {
     id: root
 
@@ -19,8 +16,6 @@ Pill {
     readonly property real volume: audio ? audio.volume : 0
     readonly property int percent: Math.round(volume * 100)
 
-    // Best-effort output-type detection from the sink's names (no reliable
-    // form-factor field). Bluetooth/A2DP sinks are treated as headphones.
     readonly property bool headphones: {
         if (!sink)
             return false;
@@ -36,27 +31,27 @@ Pill {
     IconText {
         text: {
             if (root.muted)
-                return "󰖁";      // muted
+                return "󰖁";
             if (root.headphones)
-                return "󰋋";      // headphones
+                return "󰋋";
             if (root.percent <= 0)
-                return "󰕿";      // off
+                return "󰕿";
             if (root.percent < 50)
-                return "󰖀";      // low
-            return "󰕾";          // high
+                return "󰖀";
+            return "󰕾";
         }
         color: root.muted ? Theme.base03 : Theme.fg
     }
 
     Label {
-        text: root.muted ? "muted" : root.percent
+        text: root.muted ? "" : root.percent
         color: root.muted ? Theme.base03 : Theme.fgBright
     }
 
     onClicked: if (root.audio) root.audio.muted = !root.audio.muted
     onRightClicked: Quickshell.execDetached(["pavucontrol", "-t", "3"])
     onWheel: function (delta) {
-        root.setVolume(root.volume + (delta > 0 ? 0.05 : -0.05));
+        root.setVolume(root.volume + (delta > 0 ? 0.005 : -0.005));
     }
 
     Tooltip {
