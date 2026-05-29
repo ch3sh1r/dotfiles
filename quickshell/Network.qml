@@ -2,13 +2,12 @@ import QtQuick
 import Quickshell
 import Quickshell.Io
 
-// Network pill. NetworkManager has no native Quickshell service, so a tiny
-// helper script emits JSON which we parse here. Wifi shows a signal-strength
-// ramp; ethernet shows a link glyph.
+// Network pill. NetworkManager has no stable native Quickshell service yet, so
+// we shell out to nmcli and parse the JSON it emits. The script is inlined via
+// `bash -c` (no external file/path to resolve through symlinks). Wifi shows a
+// signal-strength ramp; ethernet shows a link glyph.
 Pill {
     id: root
-
-    readonly property string scriptPath: Qt.resolvedUrl("scripts/network.sh").toString().replace("file://", "")
 
     property var info: ({
             type: "disconnected"
@@ -21,9 +20,28 @@ Pill {
         return wifiIcons[Math.max(0, i)];
     }
 
+    // Emits one JSON line describing the primary connection.
+    readonly property string script: [
+        "line=$(nmcli -t -f TYPE,STATE,DEVICE,CONNECTION device status 2>/dev/null | awk -F: '$2==\"connected\" && $1!=\"loopback\"{print; exit}')",
+        "type=$(printf '%s' \"$line\" | cut -d: -f1)",
+        "dev=$(printf '%s' \"$line\" | cut -d: -f3)",
+        "conn=$(printf '%s' \"$line\" | cut -d: -f4-)",
+        "ip=$(nmcli -t -f IP4.ADDRESS device show \"$dev\" 2>/dev/null | head -n1 | cut -d: -f2 | cut -d/ -f1)",
+        "if [ \"$type\" = wifi ]; then",
+        "  info=$(nmcli -t -f IN-USE,SIGNAL,SSID device wifi 2>/dev/null | awk -F: '$1==\"*\"{print; exit}')",
+        "  sig=$(printf '%s' \"$info\" | cut -d: -f2)",
+        "  ssid=$(printf '%s' \"$info\" | cut -d: -f3-)",
+        "  printf '{\"type\":\"wifi\",\"signal\":%s,\"ssid\":\"%s\",\"ip\":\"%s\"}\\n' \"${sig:-0}\" \"$ssid\" \"$ip\"",
+        "elif [ -n \"$type\" ]; then",
+        "  printf '{\"type\":\"ethernet\",\"name\":\"%s\",\"ip\":\"%s\"}\\n' \"$conn\" \"$ip\"",
+        "else",
+        "  printf '{\"type\":\"disconnected\"}\\n'",
+        "fi"
+    ].join("\n")
+
     Process {
         id: proc
-        command: ["bash", root.scriptPath]
+        command: ["bash", "-c", root.script]
         stdout: StdioCollector {
             onStreamFinished: {
                 try {
