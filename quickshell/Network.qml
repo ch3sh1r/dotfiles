@@ -1,0 +1,72 @@
+import QtQuick
+import Quickshell
+import Quickshell.Io
+
+// Network pill. NetworkManager has no native Quickshell service, so a tiny
+// helper script emits JSON which we parse here. Wifi shows a signal-strength
+// ramp; ethernet shows a link glyph.
+Pill {
+    id: root
+
+    readonly property string scriptPath: Qt.resolvedUrl("scripts/network.sh").toString().replace("file://", "")
+
+    property var info: ({
+            type: "disconnected"
+        })
+
+    readonly property var wifiIcons: ["󰤯", "󰤟", "󰤢", "󰤥", "󰤨"]
+
+    function wifiIcon(signal) {
+        let i = Math.min(4, Math.floor((signal / 100) * 5));
+        return wifiIcons[Math.max(0, i)];
+    }
+
+    Process {
+        id: proc
+        command: ["bash", root.scriptPath]
+        stdout: StdioCollector {
+            onStreamFinished: {
+                try {
+                    root.info = JSON.parse(this.text.trim());
+                } catch (e) {
+                    root.info = {
+                        type: "disconnected"
+                    };
+                }
+            }
+        }
+    }
+
+    Timer {
+        interval: 5000
+        running: true
+        repeat: true
+        triggeredOnStart: true
+        onTriggered: proc.running = true
+    }
+
+    IconText {
+        text: {
+            if (root.info.type === "wifi")
+                return root.wifiIcon(root.info.signal);
+            if (root.info.type === "ethernet")
+                return "󰈀";
+            return "󰌙";
+        }
+        color: root.info.type === "disconnected" ? Theme.base03 : Theme.fg
+    }
+
+    onClicked: Quickshell.execDetached(["nm-connection-editor"])
+
+    Tooltip {
+        anchorItem: root
+        shown: root.hovered
+        text: {
+            if (root.info.type === "wifi")
+                return root.info.ssid + "\n" + root.info.signal + "%  ·  " + root.info.ip;
+            if (root.info.type === "ethernet")
+                return root.info.name + "\n" + root.info.ip;
+            return "Disconnected";
+        }
+    }
+}
