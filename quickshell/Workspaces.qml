@@ -32,7 +32,7 @@ Item {
         Repeater {
             model: root.list
 
-            delegate: Rectangle {
+            delegate: Item {
                 id: btn
                 required property var modelData
 
@@ -41,17 +41,14 @@ Item {
 
                 implicitWidth: Math.max(Theme.pillHeight, lbl.implicitWidth + Theme.hPad * 2)
                 implicitHeight: Theme.pillHeight
-                radius: Theme.radius
-                // Outline only for the current desktop; no fill anywhere.
-                color: "transparent"
-                border.width: isActive ? 1 : 0
-                border.color: Theme.accent
 
+                // No background or rounding — just coloured text. Active is
+                // purple, everything else grey.
                 Label {
                     id: lbl
                     anchors.centerIn: parent
                     text: btn.modelData.name
-                    color: btn.isUrgent ? Theme.urgent : (btn.isActive ? Theme.accent : Theme.fgBright)
+                    color: btn.isUrgent ? Theme.urgent : (btn.isActive ? Theme.accent : Theme.fg)
                     font.bold: btn.isActive || btn.isUrgent
                 }
 
