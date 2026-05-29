@@ -21,12 +21,7 @@ Rectangle {
 
     implicitWidth: Math.max(Theme.pillMinWidth, row.implicitWidth + Theme.hPad * 2)
     implicitHeight: Theme.pillHeight
-    radius: Theme.radius
-    color: hovered ? Theme.pillBgHover : Theme.pillBg
-
-    Behavior on color {
-        ColorAnimation { duration: 120 }
-    }
+    color: "transparent"
 
     data: [
         Row {

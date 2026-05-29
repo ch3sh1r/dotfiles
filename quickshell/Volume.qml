@@ -19,25 +19,36 @@ Pill {
     readonly property real volume: audio ? audio.volume : 0
     readonly property int percent: Math.round(volume * 100)
 
+    // Best-effort output-type detection from the sink's names (no reliable
+    // form-factor field). Bluetooth/A2DP sinks are treated as headphones.
+    readonly property bool headphones: {
+        if (!sink)
+            return false;
+        let s = ((sink.description || "") + " " + (sink.nickname || "") + " " + (sink.name || "")).toLowerCase();
+        return /head(phone|set)|hands.?free|bluez|a2dp|hifi/.test(s);
+    }
+
     function setVolume(v) {
         if (audio)
             audio.volume = Math.max(0, Math.min(1, v));
     }
 
     Label {
-        text: root.muted ? "muted" : root.percent + "%"
+        text: root.muted ? "muted" : root.percent
         color: root.muted ? Theme.base03 : Theme.fgBright
     }
 
     IconText {
         text: {
             if (root.muted)
-                return "󰖁"; // 󰝟  muted
+                return "󰖁";      // muted
+            if (root.headphones)
+                return "󰋋";      // headphones
             if (root.percent <= 0)
-                return "󰕺"; // 󰝚  off
+                return "󰕿";      // off
             if (root.percent < 50)
-                return "󰖀"; // 󰝀  low
-            return "󰕾";     // 󰝾  high
+                return "󰖀";      // low
+            return "󰕾";          // high
         }
         color: root.muted ? Theme.base03 : Theme.fg
     }
