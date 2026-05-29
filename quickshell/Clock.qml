@@ -1,8 +1,8 @@
 import QtQuick
 import Quickshell
 
-// Clock pill. Same text as waybar's "{:%A %F %R}". Hover reveals an interactive
-// calendar; click pins it open; scroll changes the shown month.
+// Clock pill. Same text as waybar's "{:%A %F %R}". Hover reveals the year
+// calendar; click pins it open; scroll changes the shown year.
 Pill {
     id: root
 
@@ -20,7 +20,7 @@ Pill {
 
     onClicked: root.pinned = !root.pinned
     onWheel: function (delta) {
-        calendar.shiftMonth(delta > 0 ? -1 : 1);
+        calendar.shiftYear(delta > 0 ? -1 : 1);
     }
 
     Tooltip {
