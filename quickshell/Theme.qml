@@ -1,5 +1,6 @@
 pragma Singleton
 
+import QtQuick
 import Quickshell
 
 // Central palette + metrics, ported from waybar/style.css (base16) with the

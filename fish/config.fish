@@ -29,6 +29,7 @@ abbr -a gco 'git checkout'
 abbr -a gd 'git diff'
 abbr -a glg 'git log --stat'
 abbr -a gp 'git push'
+abbr -a gpu --function _git_push_upstream
 abbr -a grhh 'git reset --hard'
 abbr -a gss 'git status'
 abbr -a gsta 'git stash push --include-untracked'
