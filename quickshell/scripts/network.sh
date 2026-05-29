@@ -1,37 +1,51 @@
 #!/usr/bin/env bash
-# Emit the current primary connection as a single JSON line for Quickshell.
-# Output shapes:
+# Daemon-agnostic network status for Quickshell (no NetworkManager needed).
+# Reads the kernel directly: sysfs for interfaces, /proc/net/wireless for wifi
+# link quality, `iw` for SSID, `ip` for the address. Emits one JSON line:
 #   {"type":"wifi","signal":72,"ssid":"name","ip":"1.2.3.4"}
-#   {"type":"ethernet","name":"Wired","ip":"1.2.3.4"}
+#   {"type":"ethernet","name":"enp0s1","ip":"1.2.3.4"}
 #   {"type":"disconnected"}
 
 esc() { printf '%s' "$1" | sed 's/\\/\\\\/g; s/"/\\"/g'; }
 
-# First non-loopback connected device wins (nmcli lists by priority).
-line=$(nmcli -t -f TYPE,STATE,DEVICE,CONNECTION device status 2>/dev/null \
-    | awk -F: '$2=="connected" && $1!="loopback" {print; exit}')
+ip_of() {
+    ip -4 -o addr show "$1" 2>/dev/null | awk '{print $4}' | cut -d/ -f1 | head -n1
+}
 
-type=$(printf '%s' "$line" | cut -d: -f1)
-dev=$(printf '%s'  "$line" | cut -d: -f3)
-conn=$(printf '%s' "$line" | cut -d: -f4-)
+# Find the wireless interface (if any).
+wifi=""
+for d in /sys/class/net/*; do
+    i=${d##*/}
+    [ "$i" = lo ] && continue
+    if [ -d "$d/wireless" ] || [ -e "$d/phy80211" ]; then
+        wifi=$i
+        break
+    fi
+done
 
-ip=$(nmcli -t -f IP4.ADDRESS device show "$dev" 2>/dev/null \
-    | head -n1 | cut -d: -f2 | cut -d/ -f1)
-
-case "$type" in
-wifi)
-    info=$(nmcli -t -f IN-USE,SIGNAL,SSID device wifi 2>/dev/null \
-        | awk -F: '$1=="*"{print; exit}')
-    sig=$(printf '%s' "$info" | cut -d: -f2)
-    ssid=$(printf '%s' "$info" | cut -d: -f3-)
+# Connected wifi?
+if [ -n "$wifi" ] && [ "$(cat "/sys/class/net/$wifi/operstate" 2>/dev/null)" = up ]; then
+    link=$(awk -v ifc="$wifi:" '$1==ifc {q=$3; sub(/\./,"",q); print q}' /proc/net/wireless 2>/dev/null)
+    sig=0
+    [ -n "$link" ] && sig=$((link * 100 / 70))
+    [ "$sig" -gt 100 ] && sig=100
+    ssid=$(iw dev "$wifi" link 2>/dev/null | sed -n 's/^[[:space:]]*SSID: //p' | head -n1)
     printf '{"type":"wifi","signal":%s,"ssid":"%s","ip":"%s"}\n' \
-        "${sig:-0}" "$(esc "$ssid")" "$(esc "$ip")"
-    ;;
-ethernet | bridge | tun | vpn)
-    printf '{"type":"ethernet","name":"%s","ip":"%s"}\n' \
-        "$(esc "$conn")" "$(esc "$ip")"
-    ;;
-*)
-    printf '{"type":"disconnected"}\n'
-    ;;
-esac
+        "$sig" "$(esc "$ssid")" "$(esc "$(ip_of "$wifi")")"
+    exit 0
+fi
+
+# Otherwise the first wired interface that's up.
+for d in /sys/class/net/*; do
+    i=${d##*/}
+    [ "$i" = lo ] && continue
+    [ -d "$d/wireless" ] && continue
+    [ -e "$d/phy80211" ] && continue
+    if [ "$(cat "$d/operstate" 2>/dev/null)" = up ]; then
+        printf '{"type":"ethernet","name":"%s","ip":"%s"}\n' \
+            "$(esc "$i")" "$(esc "$(ip_of "$i")")"
+        exit 0
+    fi
+done
+
+printf '{"type":"disconnected"}\n'
