@@ -117,8 +117,6 @@ Pill {
 
         implicitWidth: 200
         implicitHeight: 320
-        width: 200
-        height: 320
         color: "transparent"
 
         Rectangle {

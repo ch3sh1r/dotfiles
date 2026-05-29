@@ -35,8 +35,6 @@ PopupWindow {
 
     implicitWidth: frame.implicitWidth
     implicitHeight: frame.implicitHeight
-    width: frame.implicitWidth
-    height: frame.implicitHeight
     color: "transparent"
     visible: false
 
