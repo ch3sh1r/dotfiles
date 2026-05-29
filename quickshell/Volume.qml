@@ -33,11 +33,6 @@ Pill {
             audio.volume = Math.max(0, Math.min(1, v));
     }
 
-    Label {
-        text: root.muted ? "muted" : root.percent
-        color: root.muted ? Theme.base03 : Theme.fgBright
-    }
-
     IconText {
         text: {
             if (root.muted)
@@ -51,6 +46,11 @@ Pill {
             return "󰕾";          // high
         }
         color: root.muted ? Theme.base03 : Theme.fg
+    }
+
+    Label {
+        text: root.muted ? "muted" : root.percent
+        color: root.muted ? Theme.base03 : Theme.fgBright
     }
 
     onClicked: if (root.audio) root.audio.muted = !root.audio.muted
