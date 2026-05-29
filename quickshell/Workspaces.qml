@@ -42,7 +42,10 @@ Item {
                 implicitWidth: Math.max(Theme.pillHeight, lbl.implicitWidth + Theme.hPad * 2)
                 implicitHeight: Theme.pillHeight
                 radius: Theme.radius
-                color: isActive ? Theme.accent : (hover.hovered ? Theme.pillBg : "transparent")
+                // Outline only for the current desktop; others stay flat.
+                color: !isActive && hover.hovered ? Theme.pillBg : "transparent"
+                border.width: isActive ? 1 : 0
+                border.color: Theme.accent
 
                 Behavior on color {
                     ColorAnimation { duration: 120 }
@@ -52,7 +55,7 @@ Item {
                     id: lbl
                     anchors.centerIn: parent
                     text: btn.modelData.name
-                    color: btn.isUrgent ? Theme.urgent : (btn.isActive ? Theme.base00 : Theme.fgBright)
+                    color: btn.isUrgent ? Theme.urgent : (btn.isActive ? Theme.accent : Theme.fgBright)
                     font.bold: btn.isActive || btn.isUrgent
                 }
 

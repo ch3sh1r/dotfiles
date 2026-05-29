@@ -118,8 +118,6 @@ Pill {
         Rectangle {
             anchors.fill: parent
             color: Theme.base00
-            border.color: Theme.base02
-            border.width: 1
             radius: Theme.radius
 
             Column {

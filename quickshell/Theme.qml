@@ -31,7 +31,6 @@ Singleton {
     readonly property color cyan: "#8be9fd"
     readonly property color pink: "#ff79c6"
     readonly property color yellow: "#f1fa8c"
-    readonly property color green: "#50fa7b"
 
     // semantic roles
     readonly property color bg: base01           // bar background
@@ -39,11 +38,11 @@ Singleton {
     readonly property color pillBgHover: Qt.lighter(base02, 1.25)
     readonly property color fg: base04            // default text
     readonly property color fgBright: base05
-    readonly property color accent: purple        // active workspace / highlights
+    readonly property color accent: purple        // active workspace outline
     readonly property color urgent: "#ee2e24"
     readonly property color warning: base0A
     readonly property color critical: base08
-    readonly property color good: base0B
+    readonly property color good: base05          // "active/connected" — gray, not green
 
     // typography
     readonly property string font: "Roboto"

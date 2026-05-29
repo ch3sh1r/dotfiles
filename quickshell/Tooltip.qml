@@ -53,8 +53,6 @@ PopupWindow {
             implicitWidth: Math.max(body.implicitWidth, label.visible ? label.implicitWidth : 0) + 20
             implicitHeight: (label.visible ? label.implicitHeight : body.implicitHeight) + 16
             color: Theme.base00
-            border.color: Theme.base02
-            border.width: 1
             radius: Theme.radius
 
             HoverHandler {

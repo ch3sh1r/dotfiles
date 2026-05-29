@@ -13,7 +13,7 @@ Pill {
     readonly property int percent: dev ? Math.round(dev.percentage) : 0
     readonly property bool charging: dev && dev.state === UPowerDeviceState.Charging
     readonly property bool full: dev && (dev.state === UPowerDeviceState.FullyCharged || percent >= 100)
-    readonly property real watts: dev ? dev.energyRate : 0
+    readonly property real watts: dev && dev.changeRate !== undefined ? dev.changeRate : 0
 
     property bool showTime: false
 
