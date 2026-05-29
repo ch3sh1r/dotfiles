@@ -42,14 +42,19 @@ Item {
                 implicitWidth: Math.max(Theme.pillHeight, lbl.implicitWidth + Theme.hPad * 2)
                 implicitHeight: Theme.pillHeight
 
-                // No background or rounding — just coloured text. Active is
-                // purple, everything else grey.
+                // No background or rounding — just coloured text. The active
+                // workspace and the one under the cursor are purple; the rest
+                // are grey.
                 Label {
                     id: lbl
                     anchors.centerIn: parent
                     text: btn.modelData.name
-                    color: btn.isUrgent ? Theme.urgent : (btn.isActive ? Theme.accent : Theme.fg)
+                    color: btn.isUrgent ? Theme.urgent : (btn.isActive || hover.hovered ? Theme.accent : Theme.fg)
                     font.bold: btn.isActive || btn.isUrgent
+                }
+
+                HoverHandler {
+                    id: hover
                 }
 
                 MouseArea {
