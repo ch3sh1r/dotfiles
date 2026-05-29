@@ -36,21 +36,23 @@ Item {
                 id: btn
                 required property var modelData
 
-                readonly property bool isActive: modelData.active
+                // `focused` = the workspace on the focused monitor (exactly one,
+                // updates on switch). `active` would be true per-monitor.
+                readonly property bool isFocused: modelData.focused
                 readonly property bool isUrgent: modelData.urgent
 
                 implicitWidth: Math.max(Theme.pillHeight, lbl.implicitWidth + Theme.hPad * 2)
                 implicitHeight: Theme.pillHeight
 
-                // No background or rounding — just coloured text. The active
+                // No background or rounding — just coloured text. The focused
                 // workspace and the one under the cursor are purple; the rest
                 // are grey.
                 Label {
                     id: lbl
                     anchors.centerIn: parent
                     text: btn.modelData.name
-                    color: btn.isUrgent ? Theme.urgent : (btn.isActive || hover.hovered ? Theme.accent : Theme.fg)
-                    font.bold: btn.isActive || btn.isUrgent
+                    color: btn.isUrgent ? Theme.urgent : (btn.isFocused || hover.hovered ? Theme.accent : Theme.fg)
+                    font.bold: btn.isFocused || btn.isUrgent
                 }
 
                 HoverHandler {
