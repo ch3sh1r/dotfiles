@@ -1,8 +1,6 @@
 import QtQuick
 import Quickshell
 
-// Clock pill. Same text as waybar's "{:%A %F %R}". Hover reveals the year
-// calendar; click pins it open; scroll changes the shown year.
 Pill {
     id: root
 

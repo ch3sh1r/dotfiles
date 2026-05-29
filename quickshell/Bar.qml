@@ -1,10 +1,6 @@
 import QtQuick
 import Quickshell
 
-// Top bar. Mirrors the waybar layout:
-//   left  : Hyprland workspaces
-//   center: clock
-//   right : volume, network, mullvad, tailscale, battery
 PanelWindow {
     id: bar
 
@@ -16,7 +12,6 @@ PanelWindow {
     implicitHeight: Theme.barHeight
     color: Theme.bg
 
-    // left
     Row {
         anchors.left: parent.left
         anchors.verticalCenter: parent.verticalCenter
@@ -28,12 +23,10 @@ PanelWindow {
         }
     }
 
-    // center
     Clock {
         anchors.centerIn: parent
     }
 
-    // right
     Row {
         anchors.right: parent.right
         anchors.verticalCenter: parent.verticalCenter
