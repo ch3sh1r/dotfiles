@@ -1,0 +1,36 @@
+#!/bin/bash
+# Select a screen region, OCR it with tesseract, copy the text to clipboard.
+# Adapted from omarchy's omarchy-capture-text-extraction.
+#
+# Requires: grim, slurp, tesseract (+ tesseract-data-<lang>), wl-clipboard
+# Optional: hyprpicker (freezes the screen during selection)
+#
+# Languages default to eng; override with OCR_LANGS, e.g. OCR_LANGS=eng+rus
+
+cleanup_freeze() {
+  [[ -n $PID ]] && kill "$PID" 2>/dev/null
+}
+trap cleanup_freeze EXIT
+
+# Keep hyprpicker alive until after grim captures so the screenshot sees the
+# frozen overlay rather than live content shifting during teardown.
+if command -v hyprpicker >/dev/null; then
+  hyprpicker -r -z >/dev/null 2>&1 &
+  PID=$!
+  sleep .1
+fi
+
+SELECTION=$(slurp 2>/dev/null)
+[[ -z $SELECTION ]] && exit 0
+
+TEXT=$(grim -g "$SELECTION" - |
+  tesseract stdin stdout --oem 1 --psm 6 -l "${OCR_LANGS:-eng}" \
+    --dpi 300 -c preserve_interword_spaces=1 2>/dev/null) || exit 1
+
+if [[ -z $TEXT ]]; then
+  notify-send "OCR" "No text recognized in selection" -u low -t 3000
+  exit 1
+fi
+
+printf "%s" "$TEXT" | wl-copy
+notify-send "OCR" "Copied text from selection to clipboard" -t 3000
