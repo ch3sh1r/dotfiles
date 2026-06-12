@@ -30,6 +30,7 @@ drawio-desktop
 dunst
 efibootmgr
 evtest
+exfatprogs
 file-roller
 fish
 freerdp
@@ -45,10 +46,12 @@ gvfs-mtp
 hashcat
 hashcat-utils
 heroic-games-launcher-bin
+htop
 httpie
 hypridle
 hyprland
 hyprlock
+hyprpicker
 hyprshot
 hyprsunset
 ifuse
@@ -92,7 +95,7 @@ mullvad-vpn-cli
 nano
 nautilus
 ncdu
-neovide
+neovim
 nextcloud-client
 nftables
 ninja
@@ -101,6 +104,7 @@ noto-fonts-emoji
 nwg-displays
 nwg-look
 obsidian
+opencode
 openvpn
 otf-aurulent-nerd
 otf-codenewroman-nerd
@@ -141,6 +145,7 @@ qt5ct
 qt6-wayland
 qt6ct
 qt6ct-kde-debug
+quickshell
 remmina
 retroarch
 retroarch-assets-glui
@@ -148,6 +153,7 @@ retroarch-assets-ozone
 retroarch-assets-xmb
 ripgrep
 rizin
+rockyou
 rocm-opencl-runtime
 rofi-rbw
 rust
@@ -238,7 +244,6 @@ vulkan-intel
 vulkan-nouveau
 vulkan-radeon
 vulkan-tools
-waybar
 wd719x-firmware
 wev
 wget
@@ -246,6 +251,7 @@ whois
 wireless-regdb
 wireless_tools
 wireplumber
+wireshark-qt
 wtype
 xdg-desktop-portal-gtk
 xdg-desktop-portal-hyprland
