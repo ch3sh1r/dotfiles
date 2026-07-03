@@ -25,6 +25,16 @@ PanelWindow {
     property string query: ""
     property int selected: 0
     property var matches: []
+    property var usageCounts: ({})
+
+    FileView {
+        id: usageFile
+        path: Quickshell.statePath("launcher-usage.json")
+        blockLoading: true
+        printErrors: false
+        onLoaded: root.loadUsage()
+        onFileChanged: reload()
+    }
 
     function entryText(entry) {
         return ((entry.name || "") + " " + (entry.genericName || "") + " " + (entry.comment || "") + " " + (entry.keywords || []).join(" ")).toLowerCase();
@@ -39,12 +49,37 @@ PanelWindow {
             let entry = all[i];
             if (q.length === 0 || root.entryText(entry).indexOf(q) !== -1)
                 next.push(entry);
-            if (next.length >= 12)
-                break;
         }
+
+        next.sort((a, b) => {
+            let ac = root.usageCounts[a.id] || 0;
+            let bc = root.usageCounts[b.id] || 0;
+            if (bc !== ac)
+                return bc - ac;
+            return (a.name || "").localeCompare(b.name || "");
+        });
+
+        if (next.length > 12)
+            next = next.slice(0, 12);
 
         root.matches = next;
         root.selected = Math.max(0, Math.min(root.selected, root.matches.length - 1));
+    }
+
+    function loadUsage() {
+        try {
+            root.usageCounts = JSON.parse(usageFile.text() || "{}");
+        } catch (e) {
+            root.usageCounts = {};
+        }
+        root.refresh();
+    }
+
+    function recordLaunch(entry) {
+        let next = Object.assign({}, root.usageCounts);
+        next[entry.id] = (next[entry.id] || 0) + 1;
+        root.usageCounts = next;
+        usageFile.setText(JSON.stringify(next, null, 2) + "\n");
     }
 
     function open(): void {
@@ -69,6 +104,7 @@ PanelWindow {
     function launch(entry) {
         if (!entry)
             return;
+        root.recordLaunch(entry);
         root.close();
         entry.execute();
     }
