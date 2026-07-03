@@ -49,6 +49,9 @@ Singleton {
     readonly property string font: "Hack Nerd Font"
     readonly property string iconFont: "Hack Nerd Font"
     readonly property int fontSize: 12
+    readonly property int menuFontSize: 14
+    readonly property int menuTitleFontSize: 16
+    readonly property int menuInputFontSize: 18
     readonly property int iconSize: 12
 
     // metrics

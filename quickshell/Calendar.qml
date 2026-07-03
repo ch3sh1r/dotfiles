@@ -10,6 +10,7 @@ Item {
 
     property date today: new Date()
     property int viewYear: today.getFullYear()
+    signal clicked()
 
     function reset() {
         viewYear = today.getFullYear();
@@ -19,10 +20,10 @@ Item {
     }
 
     readonly property var monthNames: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
-    readonly property var dayNames: ["Mo", "Tu", "We", "Th", "Fr", "Sa", "Su"]
+    readonly property var dayNames: ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"]
 
-    readonly property int cell: 16
-    readonly property int weekCell: 26
+    readonly property int cell: 18
+    readonly property int weekCell: 30
 
     function isToday(y, m, d) {
         return y === today.getFullYear() && m === today.getMonth() && d === today.getDate();
@@ -30,28 +31,19 @@ Item {
 
     function isoWeek(d) {
         let date = new Date(d.getFullYear(), d.getMonth(), d.getDate());
-        let day = (date.getDay() + 6) % 7;       // Mon=0
-        date.setDate(date.getDate() - day + 3);   // Thursday of this week
+        let day = date.getDay();                  // Sun=0
+        date.setDate(date.getDate() - day + 4);   // Thursday of this week
         let firstThu = new Date(date.getFullYear(), 0, 4);
-        let fday = (firstThu.getDay() + 6) % 7;
-        firstThu.setDate(firstThu.getDate() - fday + 3);
+        let fday = firstThu.getDay();
+        firstThu.setDate(firstThu.getDate() - fday + 4);
         return 1 + Math.round((date.getTime() - firstThu.getTime()) / (7 * 86400000));
     }
 
     // Flat 56-cell model (7 header + 1 blank + 6*(7 days + 1 week)) for one month.
     function monthCells(year, month) {
         let out = [];
-        for (let i = 0; i < 7; i++)
-            out.push({
-                type: "wd",
-                text: dayNames[i]
-            });
-        out.push({
-            type: "blank"
-        });
-
         let first = new Date(year, month, 1);
-        let lead = (first.getDay() + 6) % 7;
+        let lead = first.getDay();
         let start = new Date(year, month, 1 - lead);
 
         for (let w = 0; w < 6; w++) {
@@ -92,89 +84,111 @@ Item {
         acceptedButtons: Qt.RightButton
         onTapped: root.reset()
     }
+    TapHandler {
+        acceptedButtons: Qt.LeftButton
+        onTapped: root.clicked()
+    }
 
     Column {
         id: col
-        spacing: 8
+        spacing: 10
 
         Label {
             anchors.horizontalCenter: parent.horizontalCenter
             text: root.viewYear
             color: Theme.purple
             font.bold: true
+            font.pixelSize: Theme.menuTitleFontSize
         }
 
         Grid {
-            columns: 3
-            rowSpacing: 12
-            columnSpacing: 16
+            columns: 2
+            rowSpacing: 14
+            columnSpacing: 24
 
             Repeater {
-                model: 12
+                model: 4
 
                 delegate: Column {
-                    id: month
+                    id: quarter
                     required property int index
-                    spacing: 3
+                    spacing: 0
 
-                    Label {
-                        anchors.horizontalCenter: parent.horizontalCenter
-                        text: root.monthNames[month.index]
-                        color: Theme.purple
-                        font.bold: true
-                    }
-
-                    Grid {
-                        columns: 8
-                        rowSpacing: 1
-                        columnSpacing: 1
+                    Row {
+                        spacing: 14
 
                         Repeater {
-                            model: root.monthCells(root.viewYear, month.index)
+                            model: 3
 
-                            delegate: Item {
-                                required property var modelData
-                                implicitWidth: modelData.type === "week" ? root.weekCell : root.cell
-                                implicitHeight: root.cell
+                            delegate: Column {
+                                id: month
+                                required property int index
+                                readonly property int monthIndex: quarter.index * 3 + index
+                                spacing: 5
 
                                 Label {
-                                    anchors.centerIn: parent
+                                    anchors.horizontalCenter: parent.horizontalCenter
+                                    text: root.monthNames[month.monthIndex]
+                                    color: Theme.purple
+                                    font.bold: true
+                                    font.pixelSize: Theme.menuFontSize
+                                }
 
-                                    visible: {
-                                        let t = parent.modelData.type;
-                                        if (t === "blank")
-                                            return false;
-                                        if (t === "day")
-                                            return parent.modelData.inMonth;
-                                        if (t === "week")
-                                            return parent.modelData.week > 0;
-                                        return true;
+                                Grid {
+                                    columns: 8
+                                    rowSpacing: 2
+                                    columnSpacing: 2
+
+                                    Repeater {
+                                        model: root.monthCells(root.viewYear, month.monthIndex)
+
+                                        delegate: Item {
+                                            required property var modelData
+                                            implicitWidth: modelData.type === "week" ? root.weekCell : root.cell
+                                            implicitHeight: root.cell
+
+                                            Label {
+                                                anchors.centerIn: parent
+
+                                                visible: {
+                                                    let t = parent.modelData.type;
+                                                    if (t === "blank")
+                                                        return false;
+                                                    if (t === "day")
+                                                        return parent.modelData.inMonth;
+                                                    if (t === "week")
+                                                        return parent.modelData.week > 0;
+                                                    return true;
+                                                }
+
+                                                text: {
+                                                    let m = parent.modelData;
+                                                    if (m.type === "wd")
+                                                        return m.text;
+                                                    if (m.type === "day")
+                                                        return m.day;
+                                                    if (m.type === "week")
+                                                        return m.week;
+                                                    return "";
+                                                }
+
+                                                color: {
+                                                    let m = parent.modelData;
+                                                    if (m.type === "wd")
+                                                        return Theme.yellow;
+                                                    if (m.type === "week")
+                                                        return Theme.cyan;
+                                                    if (m.type === "day")
+                                                        return m.today ? Theme.pink : Theme.fgBright;
+                                                    return Theme.fg;
+                                                }
+
+                                                font.bold: parent.modelData.type === "day" && parent.modelData.today
+                                                font.underline: parent.modelData.type === "day" && parent.modelData.today
+                                                font.pixelSize: Theme.menuFontSize
+                                            }
+                                        }
                                     }
-
-                                    text: {
-                                        let m = parent.modelData;
-                                        if (m.type === "wd")
-                                            return m.text;
-                                        if (m.type === "day")
-                                            return m.day;
-                                        if (m.type === "week")
-                                            return "W" + m.week;
-                                        return "";
-                                    }
-
-                                    color: {
-                                        let m = parent.modelData;
-                                        if (m.type === "wd")
-                                            return Theme.yellow;
-                                        if (m.type === "week")
-                                            return Theme.cyan;
-                                        if (m.type === "day")
-                                            return m.today ? Theme.pink : Theme.fgBright;
-                                        return Theme.fg;
-                                    }
-
-                                    font.bold: parent.modelData.type === "day" && parent.modelData.today
-                                    font.underline: parent.modelData.type === "day" && parent.modelData.today
                                 }
                             }
                         }

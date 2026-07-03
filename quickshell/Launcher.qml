@@ -175,7 +175,7 @@ PanelWindow {
                     selectionColor: Theme.accent
                     selectedTextColor: Theme.base00
                     font.family: Theme.font
-                    font.pixelSize: 18
+                    font.pixelSize: Theme.menuInputFontSize
                     text: root.query
                     onTextChanged: root.query = text
 
@@ -202,6 +202,7 @@ PanelWindow {
                     visible: search.text.length === 0 && !search.activeFocus
                     text: "Search applications"
                     color: Theme.base03
+                    font.pixelSize: Theme.menuFontSize
                 }
             }
 
@@ -245,6 +246,7 @@ PanelWindow {
                                 width: parent.width
                                 text: modelData.name
                                 color: Theme.fgBright
+                                font.pixelSize: Theme.menuFontSize
                                 elide: Text.ElideRight
                             }
 
@@ -253,6 +255,7 @@ PanelWindow {
                                 visible: (modelData.genericName || modelData.comment || "").length > 0
                                 text: modelData.genericName || modelData.comment || ""
                                 color: Theme.base04
+                                font.pixelSize: Theme.menuFontSize
                                 elide: Text.ElideRight
                             }
                         }

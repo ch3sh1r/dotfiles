@@ -168,6 +168,7 @@ PanelWindow {
                 text: root.title
                 color: Theme.purple
                 font.bold: true
+                font.pixelSize: Theme.menuTitleFontSize
                 elide: Text.ElideRight
             }
 
@@ -200,7 +201,7 @@ PanelWindow {
                     selectionColor: Theme.accent
                     selectedTextColor: Theme.base00
                     font.family: Theme.font
-                    font.pixelSize: 18
+                    font.pixelSize: Theme.menuInputFontSize
                     text: root.query
                     onTextChanged: root.query = text
 
@@ -230,6 +231,7 @@ PanelWindow {
                     visible: search.text.length === 0 && !search.activeFocus
                     text: "Search"
                     color: Theme.base03
+                    font.pixelSize: Theme.menuFontSize
                 }
             }
 
@@ -238,6 +240,7 @@ PanelWindow {
                 visible: root.error.length > 0
                 text: root.error
                 color: Theme.warning
+                font.pixelSize: Theme.menuFontSize
                 wrapMode: Text.Wrap
             }
 
@@ -283,6 +286,7 @@ PanelWindow {
                                 width: parent.width
                                 text: modelData.title
                                 color: Theme.fgBright
+                                font.pixelSize: Theme.menuFontSize
                                 elide: Text.ElideRight
                             }
 
@@ -291,6 +295,7 @@ PanelWindow {
                                 visible: root.mode !== "clipboard" && (modelData.subtitle || "").length > 0
                                 text: modelData.subtitle || ""
                                 color: Theme.base04
+                                font.pixelSize: Theme.menuFontSize
                                 elide: Text.ElideRight
                             }
                         }

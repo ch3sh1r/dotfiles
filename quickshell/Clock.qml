@@ -32,6 +32,7 @@ Pill {
         Calendar {
             id: calendar
             today: clock.date
+            onClicked: root.pinned = false
         }
     }
 }
