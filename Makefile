@@ -1,5 +1,5 @@
 DOTFILE        := gitconfig vimrc
-DOTFILE_CONFIG := fish i3 i3status alacritty hypr quickshell tmux nvim btop lazygit dunst
+DOTFILE_CONFIG := fish i3 i3status alacritty hypr quickshell tmux nvim btop lazygit
 DOTFILE_BIN    := egpu mnf tdp timer ocr-region
 DOTFILES       := $(DOTFILE_CONFIG) $(DOTFILE_BIN) $(DOTFILE)
 DOTFILES_PATH  := $(dir $(abspath $(lastword $(MAKEFILE_LIST))))

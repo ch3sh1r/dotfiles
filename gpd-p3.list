@@ -27,7 +27,6 @@ docker
 docker-compose
 dosfstools
 drawio-desktop
-dunst
 efibootmgr
 evtest
 exfatprogs

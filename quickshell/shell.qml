@@ -5,6 +5,7 @@ import Quickshell
 ShellRoot {
     Launcher {}
     Selector {}
+    Notifications {}
 
     Variants {
         model: Quickshell.screens
