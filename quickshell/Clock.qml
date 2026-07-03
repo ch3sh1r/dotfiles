@@ -24,7 +24,10 @@ Pill {
     Tooltip {
         id: cal
         anchorItem: root
-        shown: root.hovered || root.pinned
+        shown: root.pinned
+        frameRadius: Theme.radius * 2
+        frameBorderWidth: 1
+        frameBorderColor: Theme.base02
 
         Calendar {
             id: calendar

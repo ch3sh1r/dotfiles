@@ -19,6 +19,9 @@ PopupWindow {
     property Item anchorItem
     property bool shown: false
     property string text: ""
+    property int frameRadius: Theme.radius
+    property int frameBorderWidth: 0
+    property color frameBorderColor: "transparent"
     default property alias content: body.data
 
     readonly property bool contentHovered: frameHover.hovered
@@ -59,7 +62,9 @@ PopupWindow {
             implicitWidth: Math.max(body.implicitWidth, label.visible ? label.implicitWidth : 0) + 20
             implicitHeight: (label.visible ? label.implicitHeight : body.implicitHeight) + 16
             color: Theme.base00
-            radius: Theme.radius
+            radius: root.frameRadius
+            border.width: root.frameBorderWidth
+            border.color: root.frameBorderColor
 
             HoverHandler {
                 id: frameHover
