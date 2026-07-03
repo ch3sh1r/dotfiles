@@ -38,5 +38,6 @@ PanelWindow {
         Mullvad {}
         Tailscale {}
         Battery {}
+        OrientationLock {}
     }
 }
