@@ -1,5 +1,6 @@
 import QtQuick
 import Quickshell
+import Quickshell.Io
 import Quickshell.Services.Pipewire
 
 Pill {
@@ -22,11 +23,53 @@ Pill {
         let s = ((sink.description || "") + " " + (sink.nickname || "") + " " + (sink.name || "")).toLowerCase();
         return /head(phone|set)|hands.?free|bluez|a2dp|hifi/.test(s);
     }
+    readonly property bool bluetoothHeadphones: {
+        if (!sink)
+            return false;
+        let s = ((sink.description || "") + " " + (sink.nickname || "") + " " + (sink.name || "")).toLowerCase();
+        return root.headphones && /bluez|a2dp|hands.?free/.test(s);
+    }
+    readonly property string sinkInfo: sink ? ((sink.name || "") + " " + (sink.description || "") + " " + (sink.nickname || "")) : ""
+    readonly property string batteryScriptPath: Qt.resolvedUrl("scripts/bluetooth-headset-battery.sh").toString().replace("file://", "")
+
+    property int headsetBattery: -1
+
+    function refreshBattery() {
+        if (root.bluetoothHeadphones)
+            batteryProc.running = true;
+        else
+            root.headsetBattery = -1;
+    }
 
     function setVolume(v) {
         if (audio)
             audio.volume = Math.max(0, Math.min(1, v));
     }
+
+    Process {
+        id: batteryProc
+        command: ["bash", root.batteryScriptPath, root.sinkInfo]
+        stdout: StdioCollector {
+            onStreamFinished: {
+                try {
+                    let s = JSON.parse(this.text.trim());
+                    root.headsetBattery = s.battery === null ? -1 : s.battery;
+                } catch (e) {
+                    root.headsetBattery = -1;
+                }
+            }
+        }
+    }
+
+    Timer {
+        interval: 30000
+        running: true
+        repeat: true
+        triggeredOnStart: true
+        onTriggered: root.refreshBattery()
+    }
+
+    onSinkInfoChanged: root.refreshBattery()
 
     IconText {
         text: {
@@ -65,6 +108,13 @@ Pill {
                 anchors.horizontalCenter: parent.horizontalCenter
                 text: root.sink ? (root.sink.description || root.sink.nickname || root.sink.name) : "No sink"
                 color: Theme.cyan
+            }
+
+            Label {
+                anchors.horizontalCenter: parent.horizontalCenter
+                visible: root.bluetoothHeadphones && root.headsetBattery >= 0
+                text: "Battery: " + root.headsetBattery + "%"
+                color: Theme.fg
             }
 
             // Minimal slider.
