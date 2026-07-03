@@ -24,23 +24,46 @@ case "$mode" in
         ;;
     clipboard)
         tmp=$(mktemp)
-        trap 'rm -f "$tmp"' EXIT
+        json_tmp=$(mktemp)
+        thumbnail_dir="${XDG_CACHE_HOME:-$HOME/.cache}/cliphist/thumbnails"
+        trap 'rm -f "$tmp" "$json_tmp"' EXIT
 
         if ! error=$(cliphist list >"$tmp" 2>&1); then
             jq -n --arg error "$error" '{ error: $error, items: [] }'
             exit 0
         fi
 
-        jq -R -s '
+        mkdir -p "$thumbnail_dir"
+        pending=false
+
+        while IFS=$'\t' read -r id text; do
+            if [[ "${text:-}" =~ ^\[\[\ binary\ data.*(jpg|jpeg|png|bmp) ]]; then
+                ext="${BASH_REMATCH[1]}"
+                image="$thumbnail_dir/$id.$ext"
+                if [ ! -f "$image" ]; then
+                    pending=true
+                    (
+                        tmp_image="$image.tmp"
+                        printf '%s\t\n' "$id" | cliphist decode >"$tmp_image" 2>/dev/null && mv "$tmp_image" "$image"
+                    ) &
+                fi
+            fi
+        done <"$tmp"
+
+        jq -R -s --arg thumbnail_dir "$thumbnail_dir" --argjson pending "$pending" '
             split("\n")
             | map(select(length > 0) | capture("^(?<id>[0-9]+)\\t(?<text>.*)$")?)
-            | map(select(. != null) | {
+            | map(select(. != null) | . + {
+                ext: ((.text | capture("^\\[\\[ binary data.*(?<ext>jpg|jpeg|png|bmp)")? // {}).ext // "")
+            })
+            | map({
                 id: .id,
                 title: .text,
                 subtitle: ("#" + .id),
-                icon: (if (.text | test("^\\[\\[ binary data")) then "image-x-generic" else "edit-paste" end)
+                icon: (if .ext != "" then "image-x-generic" else "edit-paste" end),
+                image: (if .ext != "" then ($thumbnail_dir + "/" + .id + "." + .ext) else "" end)
             })
-            | { items: . }
+            | { pendingPreviews: $pending, items: . }
         ' <"$tmp"
         ;;
     *)

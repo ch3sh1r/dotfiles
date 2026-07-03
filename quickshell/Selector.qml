@@ -30,6 +30,7 @@ PanelWindow {
     property string title: ""
     property string query: ""
     property string error: ""
+    property bool pendingPreviews: false
     property int selected: 0
     property var items: []
     property var matches: []
@@ -76,12 +77,16 @@ PanelWindow {
         try {
             let data = JSON.parse(text.trim() || "{}");
             root.error = data.error || "";
+            root.pendingPreviews = data.pendingPreviews || false;
             root.items = data.items || [];
         } catch (e) {
             root.error = "Could not parse selector data";
+            root.pendingPreviews = false;
             root.items = [];
         }
         root.refresh();
+        if (root.pendingPreviews && root.mode === "clipboard")
+            previewRefresh.restart();
     }
 
     function activate(item) {
@@ -122,6 +127,13 @@ PanelWindow {
 
     Process {
         id: actionProc
+    }
+
+    Timer {
+        id: previewRefresh
+        interval: 700
+        repeat: false
+        onTriggered: if (root.visible && root.mode === "clipboard") dataProc.running = true
     }
 
     MouseArea {
@@ -241,9 +253,10 @@ PanelWindow {
                 delegate: Rectangle {
                     required property var modelData
                     required property int index
+                    readonly property bool hasPreview: (modelData.image || "").length > 0
 
                     width: results.width
-                    height: 44
+                    height: hasPreview ? 82 : 44
                     radius: Theme.radius
                     color: index === root.selected ? Theme.base02 : "transparent"
 
@@ -251,17 +264,18 @@ PanelWindow {
                         anchors.fill: parent
                         anchors.leftMargin: 10
                         anchors.rightMargin: 10
-                        spacing: 10
+                        spacing: parent.hasPreview ? 10 : 0
 
                         IconImage {
-                            width: 24
-                            height: 24
+                            width: parent.parent.hasPreview ? 64 : 24
+                            height: parent.parent.hasPreview ? 64 : 24
                             anchors.verticalCenter: parent.verticalCenter
-                            source: Quickshell.iconPath(modelData.icon || "edit-paste", "application-x-executable")
+                            visible: parent.parent.hasPreview || root.mode !== "clipboard"
+                            source: parent.parent.hasPreview ? "file://" + modelData.image : Quickshell.iconPath(modelData.icon || "edit-paste", "application-x-executable")
                         }
 
                         Column {
-                            width: parent.width - 34
+                            width: parent.width - (parent.parent.hasPreview || root.mode !== "clipboard" ? (parent.parent.hasPreview ? 74 : 34) : 0)
                             anchors.verticalCenter: parent.verticalCenter
                             spacing: 1
 
@@ -274,7 +288,7 @@ PanelWindow {
 
                             Label {
                                 width: parent.width
-                                visible: (modelData.subtitle || "").length > 0
+                                visible: root.mode !== "clipboard" && (modelData.subtitle || "").length > 0
                                 text: modelData.subtitle || ""
                                 color: Theme.base04
                                 elide: Text.ElideRight
