@@ -233,7 +233,7 @@ PanelWindow {
                             width: 24
                             height: 24
                             anchors.verticalCenter: parent.verticalCenter
-                            source: modelData.icon
+                            source: Quickshell.iconPath(modelData.icon, "application-x-executable")
                         }
 
                         Column {
