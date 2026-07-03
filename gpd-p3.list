@@ -34,7 +34,6 @@ exfatprogs
 file-roller
 fish
 freerdp
-fuzzel
 ghostscript
 gimp
 git
@@ -119,7 +118,6 @@ otf-monaspace-nerd
 otf-opendyslexic-nerd
 otf-overpass-nerd
 paru
-paru-debug
 pavucontrol
 pipewire
 pipewire-alsa
@@ -144,7 +142,6 @@ qt5-wayland
 qt5ct
 qt6-wayland
 qt6ct
-qt6ct-kde-debug
 quickshell
 remmina
 retroarch
@@ -155,7 +152,6 @@ ripgrep
 rizin
 rockyou
 rocm-opencl-runtime
-rofi-rbw
 rust
 sddm
 slurp

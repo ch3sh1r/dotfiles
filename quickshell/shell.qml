@@ -4,6 +4,7 @@ import Quickshell
 // instances as screens come and go (the GPD's rotated DSI-1 + externals).
 ShellRoot {
     Launcher {}
+    Selector {}
 
     Variants {
         model: Quickshell.screens
