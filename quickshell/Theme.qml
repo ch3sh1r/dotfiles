@@ -8,23 +8,23 @@ import Quickshell
 Singleton {
     id: root
 
-    // base16 palette (matches waybar/style.css)
-    readonly property color base00: "#181818"
-    readonly property color base01: "#282a36"
-    readonly property color base02: "#3b3e47"
-    readonly property color base03: "#585858"
-    readonly property color base04: "#b8b8b8"
-    readonly property color base05: "#d8d8d8"
-    readonly property color base06: "#e8e8e8"
-    readonly property color base07: "#f8f8f8"
-    readonly property color base08: "#ab4642" // red
-    readonly property color base09: "#dc9656" // orange
-    readonly property color base0A: "#f7ca88" // yellow
-    readonly property color base0B: "#a1b56c" // green
-    readonly property color base0C: "#86c1b9" // cyan
-    readonly property color base0D: "#7cafc2" // blue
-    readonly property color base0E: "#ba8baf" // magenta
-    readonly property color base0F: "#a16946" // brown
+    // Dracula palette.
+    readonly property color base00: "#282a36" // background
+    readonly property color base01: "#282a36" // bar / main surface
+    readonly property color base02: "#44475a" // selection / raised surface
+    readonly property color base03: "#6272a4" // comments / muted text
+    readonly property color base04: "#c0c3d4"
+    readonly property color base05: "#f8f8f2" // foreground
+    readonly property color base06: "#ffffff"
+    readonly property color base07: "#ffffff"
+    readonly property color base08: "#ff5555" // red
+    readonly property color base09: "#ffb86c" // orange
+    readonly property color base0A: "#f1fa8c" // yellow
+    readonly property color base0B: "#50fa7b" // green
+    readonly property color base0C: "#8be9fd" // cyan
+    readonly property color base0D: "#8be9fd" // blue/cyan
+    readonly property color base0E: "#bd93f9" // purple
+    readonly property color base0F: "#ff79c6" // pink
 
     // Dracula accents (kept from the old calendar markup)
     readonly property color purple: "#bd93f9"
