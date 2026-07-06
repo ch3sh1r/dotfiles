@@ -32,8 +32,19 @@ PanelWindow {
     property string error: ""
     property bool pendingPreviews: false
     property int selected: 0
+    property var rbwItem: null
     property var items: []
     property var matches: []
+    property var rbwUsageCounts: ({})
+
+    FileView {
+        id: rbwUsageFile
+        path: Quickshell.statePath("selector-rbw-usage.json")
+        blockLoading: true
+        printErrors: false
+        onLoaded: root.loadRbwUsage()
+        onFileChanged: reload()
+    }
 
     function itemText(item) {
         return ((item.title || "") + " " + (item.subtitle || "")).toLowerCase();
@@ -47,25 +58,54 @@ PanelWindow {
             let item = root.items[i];
             if (q.length === 0 || root.itemText(item).indexOf(q) !== -1)
                 next.push(item);
-            if (next.length >= 12)
-                break;
         }
+
+        if (root.mode === "rbw" && root.target === "menu") {
+            next.sort((a, b) => {
+                let ac = root.rbwUsageCounts[a.id] || 0;
+                let bc = root.rbwUsageCounts[b.id] || 0;
+                if (bc !== ac)
+                    return bc - ac;
+                return (a.title || "").localeCompare(b.title || "");
+            });
+        }
+
+        if (next.length > 12)
+            next = next.slice(0, 12);
 
         root.matches = next;
         root.selected = Math.max(0, Math.min(root.selected, root.matches.length - 1));
     }
 
+    function loadRbwUsage() {
+        try {
+            root.rbwUsageCounts = JSON.parse(rbwUsageFile.text() || "{}");
+        } catch (e) {
+            root.rbwUsageCounts = {};
+        }
+        root.refresh();
+    }
+
+    function recordRbwUse(item) {
+        let next = Object.assign({}, root.rbwUsageCounts);
+        next[item.id] = (next[item.id] || 0) + 1;
+        root.rbwUsageCounts = next;
+        rbwUsageFile.setText(JSON.stringify(next, null, 2) + "\n");
+    }
+
     function open(mode: string, target: string): void {
         root.mode = mode;
-        root.target = target;
-        root.title = mode === "rbw" ? "Bitwarden " + target : "Clipboard";
+        root.target = mode === "rbw" && target.length === 0 ? "menu" : target;
+        root.title = mode === "rbw" ? "Bitwarden" : "Clipboard";
         root.query = "";
         root.error = "";
+        root.rbwItem = null;
         root.items = [];
         root.matches = [];
         root.selected = 0;
         root.visible = true;
         search.forceActiveFocus();
+        dataProc.command = ["bash", root.dataScript, root.mode];
         dataProc.running = true;
     }
 
@@ -92,6 +132,28 @@ PanelWindow {
     function activate(item) {
         if (!item)
             return;
+
+        if (root.mode === "rbw" && root.target === "menu") {
+            root.rbwItem = item;
+            root.target = "action";
+            root.title = "Bitwarden " + item.title;
+            root.query = "";
+            root.selected = 0;
+            root.items = [];
+            root.matches = [];
+            dataProc.command = ["bash", root.dataScript, "rbw-actions", item.id];
+            dataProc.running = true;
+            return;
+        }
+
+        if (root.mode === "rbw" && root.target === "action") {
+            root.recordRbwUse(root.rbwItem);
+            actionProc.command = ["bash", root.actionScript, "rbw", item.id, root.rbwItem.id];
+            actionProc.running = true;
+            root.close();
+            return;
+        }
+
         actionProc.command = ["bash", root.actionScript, root.mode, root.target, item.id];
         actionProc.running = true;
         root.close();
@@ -119,7 +181,6 @@ PanelWindow {
 
     Process {
         id: dataProc
-        command: ["bash", root.dataScript, root.mode]
         stdout: StdioCollector {
             onStreamFinished: root.applyData(this.text)
         }
@@ -273,12 +334,12 @@ PanelWindow {
                             width: parent.parent.hasPreview ? 64 : 24
                             height: parent.parent.hasPreview ? 64 : 24
                             anchors.verticalCenter: parent.verticalCenter
-                            visible: parent.parent.hasPreview || root.mode !== "clipboard"
-                            source: parent.parent.hasPreview ? "file://" + modelData.image : Quickshell.iconPath(modelData.icon || "edit-paste", "application-x-executable")
+                            visible: parent.parent.hasPreview
+                            source: parent.parent.hasPreview ? "file://" + modelData.image : ""
                         }
 
                         Column {
-                            width: parent.width - (parent.parent.hasPreview || root.mode !== "clipboard" ? (parent.parent.hasPreview ? 74 : 34) : 0)
+                            width: parent.width - (parent.parent.hasPreview ? 74 : 0)
                             anchors.verticalCenter: parent.verticalCenter
                             spacing: 1
 

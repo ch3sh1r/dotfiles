@@ -2,6 +2,7 @@
 set -euo pipefail
 
 mode="${1:-}"
+item_id="${2:-}"
 
 case "$mode" in
     rbw)
@@ -16,11 +17,41 @@ case "$mode" in
             | map({
                 id: .[0],
                 title: (.[1] // .[0]),
-                subtitle: ([.[2], .[3]] | map(select(. != null and . != "")) | join("  ·  ")),
-                icon: "dialog-password"
+                subtitle: ([.[2], .[3]] | map(select(. != null and . != "")) | join("  ·  "))
             })
             | { items: . }
         ' <<<"$out"
+        ;;
+    rbw-actions)
+        has_password=false
+        has_username=false
+        has_totp=false
+
+        if password=$(rbw get "$item_id" 2>/dev/null) && [ -n "$password" ]; then
+            has_password=true
+        fi
+        unset password
+
+        if username=$(rbw get --field username "$item_id" 2>/dev/null) && [ -n "$username" ]; then
+            has_username=true
+        fi
+        unset username
+
+        if totp=$(rbw code "$item_id" 2>/dev/null) && [ -n "$totp" ]; then
+            has_totp=true
+        fi
+        unset totp
+
+        jq -n \
+            --argjson has_password "$has_password" \
+            --argjson has_username "$has_username" \
+            --argjson has_totp "$has_totp" '
+            [
+                if $has_password then { id: "password", title: "Copy password" } else empty end,
+                if $has_username then { id: "username", title: "Copy username" } else empty end,
+                if $has_totp then { id: "totp", title: "Copy TOTP" } else empty end
+            ] | { items: . }
+        '
         ;;
     clipboard)
         tmp=$(mktemp)
