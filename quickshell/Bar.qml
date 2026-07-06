@@ -38,6 +38,8 @@ PanelWindow {
         Mullvad {}
         Tailscale {}
         Battery {}
-        OrientationLock {}
+        OrientationLock {
+            monitorName: bar.screen ? bar.screen.name : ""
+        }
     }
 }

@@ -8,8 +8,11 @@ Pill {
     readonly property string targetMonitor: "DSI-1"
     readonly property string scriptPath: Qt.resolvedUrl("scripts/orientation-lock.sh").toString().replace("file://", "")
 
+    property string monitorName: ""
     property bool locked: false
     property string currentTransform: ""
+
+    visible: monitorName === targetMonitor
 
     function refresh() {
         statusProc.running = true;
@@ -44,7 +47,7 @@ Pill {
 
     Timer {
         interval: 3000
-        running: true
+        running: root.visible
         repeat: true
         triggeredOnStart: true
         onTriggered: root.refresh()
