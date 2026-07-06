@@ -64,7 +64,7 @@ Pill {
         running: true
         repeat: true
         triggeredOnStart: true
-        onTriggered: statusProc.running = true
+        onTriggered: root.refresh()
     }
 
     Timer {

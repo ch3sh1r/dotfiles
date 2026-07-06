@@ -271,6 +271,4 @@ PanelWindow {
             }
         }
     }
-
-    Component.onCompleted: refresh()
 }

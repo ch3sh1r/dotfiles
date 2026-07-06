@@ -41,7 +41,7 @@ Pill {
         running: true
         repeat: true
         triggeredOnStart: true
-        onTriggered: statusProc.running = true
+        onTriggered: root.refresh()
     }
 
     // Re-poll quickly right after a toggle.

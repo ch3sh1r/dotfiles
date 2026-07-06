@@ -20,8 +20,6 @@ Item {
     }
 
     readonly property var monthNames: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
-    readonly property var dayNames: ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"]
-
     readonly property int cell: 18
     readonly property int weekCell: 30
 
@@ -39,7 +37,7 @@ Item {
         return 1 + Math.round((date.getTime() - firstThu.getTime()) / (7 * 86400000));
     }
 
-    // Flat 56-cell model (7 header + 1 blank + 6*(7 days + 1 week)) for one month.
+    // Flat 48-cell model (6 rows * (7 days + ISO week)) for one month.
     function monthCells(year, month) {
         let out = [];
         let first = new Date(year, month, 1);
@@ -150,37 +148,20 @@ Item {
                                             Label {
                                                 anchors.centerIn: parent
 
-                                                visible: {
-                                                    let t = parent.modelData.type;
-                                                    if (t === "blank")
-                                                        return false;
-                                                    if (t === "day")
-                                                        return parent.modelData.inMonth;
-                                                    if (t === "week")
-                                                        return parent.modelData.week > 0;
-                                                    return true;
-                                                }
+                                                visible: parent.modelData.type === "day" ? parent.modelData.inMonth : parent.modelData.week > 0
 
                                                 text: {
                                                     let m = parent.modelData;
-                                                    if (m.type === "wd")
-                                                        return m.text;
                                                     if (m.type === "day")
                                                         return m.day;
-                                                    if (m.type === "week")
-                                                        return m.week;
-                                                    return "";
+                                                    return m.week;
                                                 }
 
                                                 color: {
                                                     let m = parent.modelData;
-                                                    if (m.type === "wd")
-                                                        return Theme.yellow;
                                                     if (m.type === "week")
                                                         return Theme.cyan;
-                                                    if (m.type === "day")
-                                                        return m.today ? Theme.pink : Theme.fgBright;
-                                                    return Theme.fg;
+                                                    return m.today ? Theme.pink : Theme.fgBright;
                                                 }
 
                                                 font.bold: parent.modelData.type === "day" && parent.modelData.today

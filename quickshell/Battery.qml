@@ -1,5 +1,4 @@
 import QtQuick
-import Quickshell
 import Quickshell.Services.UPower
 
 Pill {
@@ -9,18 +8,8 @@ Pill {
     readonly property bool full: dev && (dev.state === UPowerDeviceState.FullyCharged || dev.percentage >= 1)
     readonly property real watts: dev && dev.changeRate !== undefined ? dev.changeRate : 0
 
-    property bool showTime: false
-
     readonly property var dischargeIcons: ["󰁺", "󰁻", "󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰂂", "󰁹"]
     readonly property var chargeIcons: ["󰢜", "󰂆", "󰂇", "󰂈", "󰢝", "󰂉", "󰢞", "󰂊", "󰂋", "󰂅"]
-
-    function fmtTime(seconds) {
-        if (!seconds || seconds <= 0)
-            return "";
-        let h = Math.floor(seconds / 3600);
-        let m = Math.floor((seconds % 3600) / 60);
-        return h > 0 ? (h + "h " + m + "m") : (m + "m");
-    }
 
     readonly property color stateColor: {
         if (charging || full)
@@ -41,8 +30,6 @@ Pill {
         }
         color: root.stateColor
     }
-
-    onClicked: root.showTime = !root.showTime
 
     Tooltip {
         anchorItem: root

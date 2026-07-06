@@ -15,16 +15,9 @@ Singleton {
     readonly property color base03: "#6272a4" // comments / muted text
     readonly property color base04: "#c0c3d4"
     readonly property color base05: "#f8f8f2" // foreground
-    readonly property color base06: "#ffffff"
-    readonly property color base07: "#ffffff"
     readonly property color base08: "#ff5555" // red
-    readonly property color base09: "#ffb86c" // orange
     readonly property color base0A: "#f1fa8c" // yellow
-    readonly property color base0B: "#50fa7b" // green
-    readonly property color base0C: "#8be9fd" // cyan
-    readonly property color base0D: "#8be9fd" // blue/cyan
     readonly property color base0E: "#bd93f9" // purple
-    readonly property color base0F: "#ff79c6" // pink
 
     // Dracula accents (kept from the old calendar markup)
     readonly property color purple: "#bd93f9"
@@ -34,8 +27,6 @@ Singleton {
 
     // semantic roles
     readonly property color bg: base01           // bar background
-    readonly property color pillBg: base02        // module pill background
-    readonly property color pillBgHover: Qt.lighter(base02, 1.25)
     readonly property color fg: base04            // default text
     readonly property color fgBright: base05
     readonly property color accent: purple        // active workspace outline
