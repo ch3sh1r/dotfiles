@@ -24,6 +24,7 @@ PanelWindow {
 
     property string query: ""
     property int selected: 0
+    readonly property int maxResults: 30
     property var matches: []
     property var usageCounts: ({})
 
@@ -40,6 +41,15 @@ PanelWindow {
         return ((entry.name || "") + " " + (entry.genericName || "") + " " + (entry.comment || "") + " " + (entry.keywords || []).join(" ")).toLowerCase();
     }
 
+    function matchRank(entry, q) {
+        let name = (entry.name || "").toLowerCase();
+        if (name === q)
+            return 0;
+        if (name.indexOf(q) === 0)
+            return 1;
+        return 2;
+    }
+
     function refresh() {
         let q = root.query.trim().toLowerCase();
         let all = DesktopEntries.applications.values;
@@ -52,6 +62,10 @@ PanelWindow {
         }
 
         next.sort((a, b) => {
+            let ar = root.matchRank(a, q);
+            let br = root.matchRank(b, q);
+            if (ar !== br)
+                return ar - br;
             let ac = root.usageCounts[a.id] || 0;
             let bc = root.usageCounts[b.id] || 0;
             if (bc !== ac)
@@ -59,8 +73,8 @@ PanelWindow {
             return (a.name || "").localeCompare(b.name || "");
         });
 
-        if (next.length > 12)
-            next = next.slice(0, 12);
+        if (next.length > root.maxResults)
+            next = next.slice(0, root.maxResults);
 
         root.matches = next;
         root.selected = Math.max(0, Math.min(root.selected, root.matches.length - 1));
