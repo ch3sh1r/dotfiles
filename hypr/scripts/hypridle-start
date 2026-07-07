@@ -1,0 +1,13 @@
+#!/bin/sh
+
+log_dir="${XDG_STATE_HOME:-$HOME/.local/state}/hypr"
+log_file="$log_dir/hypridle.log"
+
+mkdir -p "$log_dir"
+
+{
+    printf '\n[%s] starting hypridle\n' "$(date '+%Y-%m-%d %H:%M:%S%z')"
+    hypridle --version
+} >>"$log_file" 2>&1
+
+exec hypridle --verbose >>"$log_file" 2>&1

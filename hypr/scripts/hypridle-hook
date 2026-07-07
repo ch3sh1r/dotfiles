@@ -1,0 +1,56 @@
+#!/bin/sh
+
+log_dir="${XDG_STATE_HOME:-$HOME/.local/state}/hypr"
+log_file="$log_dir/hypridle.log"
+hook="$1"
+
+mkdir -p "$log_dir"
+
+log() {
+    printf '[%s] hook=%s %s\n' "$(date '+%Y-%m-%d %H:%M:%S%z')" "$hook" "$1" >>"$log_file"
+}
+
+run() {
+    log "start: $*"
+    "$@"
+    rc=$?
+    log "exit=$rc"
+    exit "$rc"
+}
+
+case "$hook" in
+    lock)
+        run loginctl lock-session
+        ;;
+    lock-dpms-off)
+        sleep 1
+        run hyprctl dispatch dpms off
+        ;;
+    dpms-off)
+        run hyprctl dispatch dpms off
+        ;;
+    dpms-on)
+        run hyprctl dispatch dpms on
+        ;;
+    dpms-on-after-sleep)
+        sleep 2
+        run hyprctl dispatch dpms on
+        ;;
+    suspend)
+        log "start: loginctl lock-session"
+        loginctl lock-session
+        rc=$?
+        log "loginctl lock-session exit=$rc"
+
+        if [ "$rc" -ne 0 ]; then
+            exit "$rc"
+        fi
+
+        sleep 2
+        run systemctl suspend
+        ;;
+    *)
+        log "unknown hook"
+        exit 64
+        ;;
+esac
