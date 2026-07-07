@@ -29,6 +29,6 @@ function tdl --description "Create a Tmux Dev Layout with editor, ai, and termin
     end
 
     tmux send-keys -t $ai_pane "$ai" C-m
-    tmux send-keys -t $editor_pane "vi ." C-m
+    tmux send-keys -t $editor_pane vi C-m
     tmux select-pane -t $editor_pane
 end
