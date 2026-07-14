@@ -32,10 +32,6 @@ case "$hook" in
     dpms-on)
         run hyprctl dispatch dpms on
         ;;
-    dpms-on-after-sleep)
-        sleep 2
-        run hyprctl dispatch dpms on
-        ;;
     suspend)
         log "start: loginctl lock-session"
         loginctl lock-session
