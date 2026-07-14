@@ -114,9 +114,9 @@ bindsym $mod+Shift+r restart
 bindsym $mod+Shift+q exit
 
 # Screenshots
-bindsym Print            exec --no-startup-id maim ~/Desktop/$(date +%s).png
-bindsym $mod+Print       exec --no-startup-id maim --window $(xdotool getactivewindow) ~/Desktop/$(date +%s).png
-bindsym Shift+Print      exec --no-startup-id maim --select ~/Desktop/$(date +%s).png
+bindsym Print            exec --no-startup-id maim ~/Pictures/Screenshots/$(date +%s).png
+bindsym $mod+Print       exec --no-startup-id maim --window $(xdotool getactivewindow) ~/Pictures/Screenshots/$(date +%s).png
+bindsym Shift+Print      exec --no-startup-id maim --select ~/Pictures/Screenshots/$(date +%s).png
 bindsym Ctrl+Print       exec --no-startup-id maim | xclip -selection clipboard -t image/png
 bindsym $mod+Ctrl+Print  exec --no-startup-id maim --window $(xdotool getactivewindow) | xclip -selection clipboard -t image/png
 bindsym Ctrl+Shift+Print exec --no-startup-id maim --select | xclip -selection clipboard -t image/png
@@ -160,4 +160,3 @@ client.unfocused        #282A36 #282A36 #BFBFBF #282A36   #282A36
 client.urgent           #44475A #FF5555 #F8F8F2 #FF5555   #FF5555
 client.placeholder      #282A36 #282A36 #F8F8F2 #282A36   #282A36
 client.background       #F8F8F2
-
