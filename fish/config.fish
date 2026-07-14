@@ -13,6 +13,14 @@ if status is-interactive
     #end
 end
 
+# Aliases
+if command -q eza
+    alias ls 'eza -lh --group-directories-first --icons=auto'
+    alias lsa 'ls -a'
+    alias lt 'eza --tree --level=2 --long --icons --git'
+    alias lta 'lt -a'
+end
+
 # Abbreviations
 abbr -a p 'ps -auxw'
 abbr -a t 'tmux new -A -s ws'
