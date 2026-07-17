@@ -15,11 +15,15 @@ case "$mode" in
                 rbw get --field username --clipboard "$item_id"
                 ;;
             totp)
-                rbw code "$item_id" | wl-copy
+                code=$(rbw code "$item_id" 2>/dev/null || true)
+                if [ -n "$code" ]; then
+                    printf '%s' "$code" | wl-copy
+                else
+                    rbw get --field "$target" --clipboard "$item_id"
+                fi
                 ;;
             *)
-                printf 'unknown rbw target: %s\n' "$target" >&2
-                exit 2
+                rbw get --field "$target" --clipboard "$item_id"
                 ;;
         esac
         ;;

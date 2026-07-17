@@ -23,35 +23,88 @@ case "$mode" in
         ' <<<"$out"
         ;;
     rbw-actions)
-        has_password=false
-        has_username=false
-        has_totp=false
-
-        if password=$(rbw get "$item_id" 2>/dev/null) && [ -n "$password" ]; then
-            has_password=true
+        if ! fields=$(rbw get --list-fields "$item_id" 2>&1); then
+            jq -n --arg error "$fields" '{ error: $error, items: [] }'
+            exit 0
         fi
-        unset password
 
-        if username=$(rbw get --field username "$item_id" 2>/dev/null) && [ -n "$username" ]; then
-            has_username=true
+        items_tmp=$(mktemp)
+        trap 'rm -f "$items_tmp"' EXIT
+
+        emit_field() {
+            local field="$1"
+            local value subtitle
+
+            [ -n "$field" ] || return
+
+            if [ "$field" = "password" ]; then
+                value=$(rbw get "$item_id" 2>/dev/null || true)
+            else
+                value=$(rbw get --field "$field" "$item_id" 2>/dev/null || true)
+            fi
+
+            [ -n "$value" ] || return
+            subtitle="$value"
+            if [ "$field" = "password" ]; then
+                subtitle=$(printf '%*s' "${#value}" '' | tr ' ' '.')
+            elif [[ "$subtitle" == *$'\n'* ]]; then
+                subtitle="${subtitle%%$'\n'*} ⏎..."
+            fi
+
+            jq -n --arg id "$field" --arg subtitle "$subtitle" '
+                def field_label:
+                    gsub("[_-]"; " ")
+                    | split(" ")
+                    | map(select(length > 0))
+                    | join(" ");
+
+                { id: $id, title: ("Copy " + ($id | field_label)), subtitle: $subtitle }
+            ' >>"$items_tmp"
+        }
+
+        emit_totp() {
+            local field value
+
+            if value=$(rbw code "$item_id" 2>/dev/null) && [ -n "$value" ]; then
+                jq -n --arg subtitle "$value" '{ id: "totp", title: "Copy TOTP", subtitle: $subtitle }' >>"$items_tmp"
+                return
+            fi
+
+            while IFS= read -r field; do
+                if [ "${field,,}" != "totp" ]; then
+                    continue
+                fi
+
+                value=$(rbw get --field "$field" "$item_id" 2>/dev/null || true)
+                [ -n "$value" ] || return
+                jq -n --arg id "$field" --arg subtitle "$value" '{ id: $id, title: "Copy TOTP", subtitle: $subtitle }' >>"$items_tmp"
+                return
+            done <<<"$unique_fields"
+        }
+
+        unique_fields=$(printf '%s\n' "$fields" | sort -u)
+
+        if printf '%s\n' "$unique_fields" | grep -Fxq username; then
+            emit_field username
         fi
-        unset username
 
-        if totp=$(rbw code "$item_id" 2>/dev/null) && [ -n "$totp" ]; then
-            has_totp=true
+        if printf '%s\n' "$unique_fields" | grep -Fxq password; then
+            emit_field password
         fi
-        unset totp
 
-        jq -n \
-            --argjson has_password "$has_password" \
-            --argjson has_username "$has_username" \
-            --argjson has_totp "$has_totp" '
-            [
-                if $has_password then { id: "password", title: "Copy password" } else empty end,
-                if $has_username then { id: "username", title: "Copy username" } else empty end,
-                if $has_totp then { id: "totp", title: "Copy TOTP" } else empty end
-            ] | { items: . }
-        '
+        emit_totp
+
+        while IFS= read -r field; do
+            case "${field,,}" in
+                username|password|totp)
+                    continue
+                    ;;
+            esac
+
+            emit_field "$field"
+        done <<<"$unique_fields"
+
+        jq -s '{ items: . }' "$items_tmp"
         ;;
     clipboard)
         tmp=$(mktemp)

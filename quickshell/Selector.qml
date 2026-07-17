@@ -31,11 +31,12 @@ PanelWindow {
     property string query: ""
     property string error: ""
     property bool pendingPreviews: false
+    property bool showAfterData: false
     property int selected: 0
     property var rbwItem: null
     property var items: []
     property var matches: []
-    property var rbwUsageCounts: ({})
+    property var rbwLastUsed: ({})
 
     FileView {
         id: rbwUsageFile
@@ -62,8 +63,8 @@ PanelWindow {
 
         if (root.mode === "rbw" && root.target === "menu") {
             next.sort((a, b) => {
-                let ac = root.rbwUsageCounts[a.id] || 0;
-                let bc = root.rbwUsageCounts[b.id] || 0;
+                let ac = root.rbwLastUsed[a.id] || 0;
+                let bc = root.rbwLastUsed[b.id] || 0;
                 if (bc !== ac)
                     return bc - ac;
                 return (a.title || "").localeCompare(b.title || "");
@@ -79,17 +80,17 @@ PanelWindow {
 
     function loadRbwUsage() {
         try {
-            root.rbwUsageCounts = JSON.parse(rbwUsageFile.text() || "{}");
+            root.rbwLastUsed = JSON.parse(rbwUsageFile.text() || "{}");
         } catch (e) {
-            root.rbwUsageCounts = {};
+            root.rbwLastUsed = {};
         }
         root.refresh();
     }
 
     function recordRbwUse(item) {
-        let next = Object.assign({}, root.rbwUsageCounts);
-        next[item.id] = (next[item.id] || 0) + 1;
-        root.rbwUsageCounts = next;
+        let next = Object.assign({}, root.rbwLastUsed);
+        next[item.id] = Date.now();
+        root.rbwLastUsed = next;
         rbwUsageFile.setText(JSON.stringify(next, null, 2) + "\n");
     }
 
@@ -103,8 +104,10 @@ PanelWindow {
         root.items = [];
         root.matches = [];
         root.selected = 0;
-        root.visible = true;
-        search.forceActiveFocus();
+        root.showAfterData = root.mode === "rbw";
+        root.visible = !root.showAfterData;
+        if (root.visible)
+            search.forceActiveFocus();
         dataProc.command = ["bash", root.dataScript, root.mode];
         dataProc.running = true;
     }
@@ -125,6 +128,11 @@ PanelWindow {
             root.items = [];
         }
         root.refresh();
+        if (root.showAfterData) {
+            root.showAfterData = false;
+            root.visible = true;
+            search.forceActiveFocus();
+        }
         if (root.pendingPreviews && root.mode === "clipboard")
             previewRefresh.restart();
     }
@@ -141,6 +149,8 @@ PanelWindow {
             root.selected = 0;
             root.items = [];
             root.matches = [];
+            root.showAfterData = true;
+            root.visible = false;
             dataProc.command = ["bash", root.dataScript, "rbw-actions", item.id];
             dataProc.running = true;
             return;
