@@ -71,12 +71,23 @@ PanelWindow {
                 id: card
                 required property var modelData
 
+                function dismiss() {
+                    retainer.locked = false;
+                    modelData.dismiss();
+                }
+
                 width: stack.width
                 implicitHeight: body.implicitHeight + 20
                 radius: Theme.radius * 2
                 color: Theme.base00
                 border.width: 1
                 border.color: root.borderColor(modelData)
+
+                RetainableLock {
+                    id: retainer
+                    object: card.modelData
+                    locked: true
+                }
 
                 Rectangle {
                     width: 4
@@ -91,7 +102,7 @@ PanelWindow {
                 MouseArea {
                     anchors.fill: parent
                     acceptedButtons: Qt.LeftButton | Qt.RightButton
-                    onClicked: card.modelData.dismiss()
+                    onClicked: card.dismiss()
                 }
 
                 Row {
@@ -165,7 +176,7 @@ PanelWindow {
                                         anchors.fill: parent
                                         onClicked: {
                                             parent.modelData.invoke();
-                                            card.modelData.dismiss();
+                                            card.dismiss();
                                         }
                                     }
                                 }
