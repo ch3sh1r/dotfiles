@@ -1,5 +1,6 @@
 import QtQuick
 import Quickshell
+import Quickshell.Hyprland
 import Quickshell.Io
 import Quickshell.Wayland
 import Quickshell.Widgets
@@ -27,6 +28,21 @@ PanelWindow {
     readonly property int maxResults: 30
     property var matches: []
     property var usageCounts: ({})
+
+    function focusedScreen() {
+        let focused = Hyprland.focusedMonitor;
+        if (!focused)
+            return null;
+
+        for (let i = 0; i < Quickshell.screens.length; i++) {
+            let screen = Quickshell.screens[i];
+            let monitor = Hyprland.monitorFor(screen);
+            if (monitor && monitor.name === focused.name)
+                return screen;
+        }
+
+        return null;
+    }
 
     FileView {
         id: usageFile
@@ -97,6 +113,10 @@ PanelWindow {
     }
 
     function open(): void {
+        let targetScreen = root.focusedScreen();
+        if (targetScreen)
+            root.screen = targetScreen;
+
         root.query = "";
         root.selected = 0;
         root.refresh();
