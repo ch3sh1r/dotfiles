@@ -21,7 +21,7 @@ PanelWindow {
         right: 10
     }
 
-    implicitWidth: 300
+    implicitWidth: 340
     implicitHeight: stack.implicitHeight
 
     WlrLayershell.layer: WlrLayer.Overlay
@@ -39,10 +39,18 @@ PanelWindow {
         }
     }
 
-    function notificationColor(notification) {
+    function accentColor(notification) {
         if (notification.urgency === NotificationUrgency.Critical)
             return Theme.critical;
-        return Theme.base00;
+        if (notification.urgency === NotificationUrgency.Low)
+            return Theme.base03;
+        return Theme.accent;
+    }
+
+    function borderColor(notification) {
+        if (notification.urgency === NotificationUrgency.Critical)
+            return Theme.critical;
+        return Theme.base02;
     }
 
     function foregroundColor(notification) {
@@ -51,21 +59,10 @@ PanelWindow {
         return Theme.fgBright;
     }
 
-    function timeoutMs(notification) {
-        if (notification.urgency === NotificationUrgency.Critical)
-            return 0;
-
-        let timeout = notification.expireTimeout;
-        if (timeout > 0)
-            return timeout > 1000 ? timeout : timeout * 1000;
-
-        return 10000;
-    }
-
     Column {
         id: stack
         width: parent.width
-        spacing: 6
+        spacing: 8
 
         Repeater {
             model: server.trackedNotifications
@@ -75,24 +72,26 @@ PanelWindow {
                 required property var modelData
 
                 width: stack.width
-                implicitHeight: body.implicitHeight + 16
-                radius: Theme.radius
-                color: root.notificationColor(modelData)
+                implicitHeight: body.implicitHeight + 20
+                radius: Theme.radius * 2
+                color: Theme.base00
+                border.width: 1
+                border.color: root.borderColor(modelData)
 
-                Timer {
-                    interval: root.timeoutMs(card.modelData)
-                    running: interval > 0
-                    repeat: false
-                    onTriggered: card.modelData.expire()
+                Rectangle {
+                    width: 4
+                    radius: 2
+                    color: root.accentColor(card.modelData)
+                    anchors.left: parent.left
+                    anchors.top: parent.top
+                    anchors.bottom: parent.bottom
+                    anchors.margins: 1
                 }
 
                 MouseArea {
                     anchors.fill: parent
                     acceptedButtons: Qt.LeftButton | Qt.RightButton
-                    onClicked: mouse => {
-                        if (mouse.button === Qt.RightButton || card.modelData.actions.length === 0)
-                            card.modelData.dismiss();
-                    }
+                    onClicked: card.modelData.dismiss()
                 }
 
                 Row {
@@ -100,8 +99,11 @@ PanelWindow {
                     anchors.left: parent.left
                     anchors.right: parent.right
                     anchors.top: parent.top
-                    anchors.margins: 8
-                    spacing: 8
+                    anchors.leftMargin: 14
+                    anchors.rightMargin: 10
+                    anchors.topMargin: 10
+                    anchors.bottomMargin: 10
+                    spacing: 10
 
                     IconImage {
                         width: 32
@@ -128,7 +130,7 @@ PanelWindow {
                             width: parent.width
                             visible: card.modelData.body.length > 0
                             text: card.modelData.body
-                            color: card.modelData.urgency === NotificationUrgency.Critical ? Theme.fgBright : Theme.fg
+                            color: Theme.fg
                             wrapMode: Text.Wrap
                             maximumLineCount: 6
                             elide: Text.ElideRight
@@ -146,9 +148,11 @@ PanelWindow {
                                     required property var modelData
 
                                     implicitWidth: actionLabel.implicitWidth + 14
-                                    implicitHeight: 22
+                                    implicitHeight: 24
                                     radius: Theme.radius
                                     color: Theme.base02
+                                    border.width: 1
+                                    border.color: Theme.base03
 
                                     Label {
                                         id: actionLabel
@@ -159,7 +163,10 @@ PanelWindow {
 
                                     MouseArea {
                                         anchors.fill: parent
-                                        onClicked: parent.modelData.invoke()
+                                        onClicked: {
+                                            parent.modelData.invoke();
+                                            card.modelData.dismiss();
+                                        }
                                     }
                                 }
                             }
