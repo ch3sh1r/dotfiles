@@ -1,0 +1,50 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+monitor="${1:-DSI-1}"
+mode="${IIO_HYPRLAND_MODE:-1200x1920@60.0}"
+position="${IIO_HYPRLAND_POSITION:-4760x3046}"
+scale="${IIO_HYPRLAND_SCALE:-1.5}"
+startup_retries="${IIO_HYPRLAND_STARTUP_RETRIES:-10}"
+startup_delay="${IIO_HYPRLAND_STARTUP_DELAY:-0.5}"
+
+transform_for_orientation() {
+    case "$1" in
+        normal) printf '2' ;;
+        left-up) printf '1' ;;
+        bottom-up) printf '0' ;;
+        right-up) printf '3' ;;
+        *) return 1 ;;
+    esac
+}
+
+apply_orientation() {
+    local orientation="$1" transform
+
+    transform="$(transform_for_orientation "$orientation")" || return 0
+
+    hyprctl eval "hl.monitor({ output = \"$monitor\", mode = \"$mode\", position = \"$position\", scale = $scale, transform = $transform }); hl.config({ input = { touchdevice = { transform = $transform }, tablet = { transform = $transform } } })" >/dev/null || true
+}
+
+apply_startup_orientation() {
+    local line orientation
+
+    line="$(timeout 5s monitor-sensor 2>/dev/null | grep -m1 'orientation:' || true)"
+    [[ "$line" =~ orientation:\ ([a-z-]+) ]] || return 0
+    orientation="${BASH_REMATCH[1]}"
+
+    for _ in $(seq 1 "$startup_retries"); do
+        apply_orientation "$orientation" || true
+        sleep "$startup_delay"
+    done
+}
+
+apply_startup_orientation &
+
+monitor-sensor | while IFS= read -r line; do
+    if [[ "$line" =~ orientation:\ ([a-z-]+) ]]; then
+        apply_orientation "${BASH_REMATCH[1]}"
+    elif [[ "$line" =~ orientation\ changed:\ ([a-z-]+) ]]; then
+        apply_orientation "${BASH_REMATCH[1]}"
+    fi
+done

@@ -3,9 +3,10 @@ set -euo pipefail
 
 action="${1:-status}"
 monitor="${2:-DSI-1}"
+rotator="${IIO_HYPRLAND_CMD:-$HOME/.config/hypr/scripts/iio-hyprland-lua}"
 
 is_running() {
-    pgrep -x iio-hyprland >/dev/null
+    pgrep -f "$rotator $monitor" >/dev/null
 }
 
 status() {
@@ -28,9 +29,10 @@ case "$action" in
         ;;
     toggle)
         if is_running; then
-            pkill -x iio-hyprland
+            pkill -f "$rotator $monitor"
         else
-            nohup iio-hyprland "$monitor" >/dev/null 2>&1 &
+            nohup "$rotator" "$monitor" >/dev/null 2>&1 &
+            sleep "${IIO_HYPRLAND_UNLOCK_STATUS_DELAY:-1}"
         fi
         status
         ;;
