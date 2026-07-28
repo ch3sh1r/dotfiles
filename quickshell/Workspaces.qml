@@ -61,7 +61,7 @@ Item {
 
                 MouseArea {
                     anchors.fill: parent
-                    onClicked: Hyprland.dispatch("workspace " + btn.modelData.id)
+                    onClicked: Hyprland.dispatch("hl.dsp.focus({ workspace = " + btn.modelData.id + " })")
                 }
             }
         }
@@ -70,7 +70,9 @@ Item {
     // Scroll anywhere over the strip to cycle workspaces.
     WheelHandler {
         onWheel: function (event) {
-            Hyprland.dispatch(event.angleDelta.y > 0 ? "workspace e-1" : "workspace e+1");
+            Hyprland.dispatch(event.angleDelta.y > 0
+                ? "hl.dsp.focus({ workspace = 'e-1' })"
+                : "hl.dsp.focus({ workspace = 'e+1' })");
         }
     }
 }
