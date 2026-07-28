@@ -30,6 +30,7 @@ drawio-desktop
 efibootmgr
 evtest
 exfatprogs
+eza
 file-roller
 fish
 freerdp
@@ -142,6 +143,7 @@ qt5ct
 qt6-wayland
 qt6ct
 quickshell
+rbw
 remmina
 retroarch
 retroarch-assets-glui
