@@ -1,14 +1,14 @@
 local commands = {
-	"hyprsunset",
-	"qs",
-	"swaybg -c 282a36 -m fit -i ~/.config/hypr/rune.png",
-	"wl-paste --watch cliphist store",
-	"~/.config/hypr/scripts/hypridle-start",
-	"~/.config/hypr/scripts/iio-hyprland-lua",
+    "hyprsunset",
+    "qs",
+    "swaybg -c 282a36 -m fit -i ~/.config/hypr/rune.png",
+    "wl-paste --watch cliphist store",
+    "~/.config/hypr/scripts/hypridle-start",
+    "~/.config/hypr/scripts/iio-hyprland-lua",
 }
 
 hl.on("hyprland.start", function()
-	for _, command in ipairs(commands) do
-		hl.exec_cmd(command)
-	end
+    for _, command in ipairs(commands) do
+        hl.exec_cmd(command)
+    end
 end)
