@@ -1,9 +1,9 @@
 return {
   { "Mofiqul/dracula.nvim" },
   {
-    "LazyVim/LazyVim",
-    opts = {
-      colorscheme = "dracula",
-    },
+	"LazyVim/LazyVim",
+	opts = {
+	  colorscheme = "dracula",
+	},
   },
 }
