@@ -4,7 +4,7 @@ local commands = {
 	"swaybg -c 282a36 -m fit -i ~/.config/hypr/rune.png",
 	"wl-paste --watch cliphist store",
 	"~/.config/hypr/scripts/hypridle-start",
-	"~/.config/hypr/scripts/iio-hyprland-lua",
+	"~/.config/hypr/scripts/iio-hyprland-lua DSI-1",
 }
 
 hl.on("hyprland.start", function()
