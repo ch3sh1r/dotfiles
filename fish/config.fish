@@ -14,6 +14,11 @@ if status is-interactive
 end
 
 # Aliases
+alias l ls
+alias vi nvim
+alias iddqd 'sudo -s'
+alias genpasswd 'openssl rand -base64 12'
+
 if command -q eza
     alias ls 'eza -lh --group-directories-first --icons=auto'
     alias lsa 'ls -a'
