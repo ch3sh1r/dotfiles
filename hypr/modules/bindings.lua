@@ -29,7 +29,7 @@ local apps = {
 	{ key = "SHIFT + P", command = webBrowser .. " --app=https://www.perplexity.ai/" },
 	{ key = "SHIFT + G", command = webBrowser .. " --app=https://chatgpt.com/" },
 	{ key = "SHIFT + S", command = webBrowser .. " --app=https://open.spotify.com/" },
-	{ key = "SHIFT + T", command = webBrowser .. " --app=https://teams.microsoft.com/v2/" },
+	{ key = "SHIFT + T", command = webBrowser .. " --app=https://teams.cloud.microsoft/" },
 	{ key = "O", command = "obsidian" },
 	{ key = "T", command = "Telegram" },
 	{ key = "B", command = "blueman-manager" },
