@@ -9,5 +9,6 @@ git:
   commit:
     autoWrapCommitMessage: true
     autoWrapWidth: 72
-  pagers:
+  diffRenderers:
     - colorArg: always
+      type: rawGit
