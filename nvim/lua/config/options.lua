@@ -6,5 +6,7 @@ if vim.g.neovide then
   vim.o.guifont = "Hack Nerd Font:h11"
 end
 
+vim.g.autoformat = false
+
 local opt = vim.opt
 opt.shiftwidth = 4
