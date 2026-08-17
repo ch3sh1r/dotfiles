@@ -12,10 +12,12 @@ Scope {
     property string pendingPassword: ""
     property string message: ""
     property string keyboardLayout: ""
+    property bool passwordVisible: false
     property bool authenticating: false
 
     function lock(): void {
         root.message = "";
+        root.passwordVisible = false;
         sessionLock.locked = true;
         dpmsOffDelay.restart();
         keyboardLayoutProc.running = true;
@@ -26,6 +28,7 @@ Scope {
         dpmsOffDelay.stop();
         dpmsOn.running = true;
         root.pendingPassword = "";
+        root.passwordVisible = false;
         root.authenticating = false;
         sessionLock.locked = false;
     }
@@ -79,6 +82,17 @@ Scope {
         let args = event.parse(2);
         if (args.length >= 2 && args[1].length > 0)
             root.keyboardLayout = args[1];
+    }
+
+    function shortKeyboardLayout(): string {
+        let layout = root.keyboardLayout.toLowerCase();
+
+        if (layout.indexOf("russian") !== -1 || layout.indexOf("ru") === 0)
+            return "RU";
+        if (layout.indexOf("english") !== -1 || layout.indexOf("en") !== -1)
+            return "US";
+
+        return root.keyboardLayout.length >= 2 ? root.keyboardLayout.slice(0, 2).toUpperCase() : "--";
     }
 
     IpcHandler {
@@ -149,11 +163,11 @@ Scope {
 
         WlSessionLockSurface {
             id: surface
-            color: Theme.base00
+            color: "#000000"
 
             Rectangle {
                 anchors.fill: parent
-                color: Theme.base00
+                color: "#000000"
 
                 Image {
                     id: wallpaper
@@ -173,8 +187,29 @@ Scope {
                 }
 
                 Rectangle {
+                    id: blackout
                     anchors.fill: parent
-                    color: "#aa282a36"
+                    color: "#000000"
+                    opacity: 0
+
+                    NumberAnimation on opacity {
+                        from: 0
+                        to: 1
+                        duration: 700
+                        easing.type: Easing.OutCubic
+                    }
+                }
+
+                Label {
+                    anchors.top: parent.top
+                    anchors.right: parent.right
+                    anchors.topMargin: 24
+                    anchors.rightMargin: 28
+                    visible: root.passwordVisible || root.authenticating
+                    text: root.shortKeyboardLayout()
+                    color: Theme.base04
+                    font.pixelSize: Theme.menuFontSize
+                    font.bold: true
                 }
 
                 Column {
@@ -186,6 +221,7 @@ Scope {
 
                     Label {
                         width: parent.width
+                        visible: root.passwordVisible || root.authenticating
                         text: Qt.formatDateTime(new Date(), "hh:mm")
                         color: Theme.fgBright
                         horizontalAlignment: Text.AlignHCenter
@@ -197,6 +233,7 @@ Scope {
                         width: 290
                         height: 60
                         anchors.horizontalCenter: parent.horizontalCenter
+                        visible: root.passwordVisible || root.authenticating
                         radius: Theme.radius
                         color: "#593c3836"
                         border.width: 2
@@ -218,9 +255,17 @@ Scope {
                             font.pixelSize: Theme.menuInputFontSize
 
                             Keys.onPressed: event => {
+                                if (event.text.length > 0)
+                                    root.passwordVisible = true;
+
                                 if (event.key === Qt.Key_Return || event.key === Qt.Key_Enter) {
                                     root.authenticate(password.text);
                                     password.text = "";
+                                    root.passwordVisible = false;
+                                    event.accepted = true;
+                                } else if (event.key === Qt.Key_Escape) {
+                                    password.text = "";
+                                    root.passwordVisible = false;
                                     event.accepted = true;
                                 }
                             }
@@ -239,14 +284,6 @@ Scope {
 
                     Label {
                         width: parent.width
-                        text: "Layout: " + (root.keyboardLayout.length > 0 ? root.keyboardLayout : "unknown")
-                        color: Theme.base04
-                        horizontalAlignment: Text.AlignHCenter
-                        font.pixelSize: Theme.menuFontSize
-                    }
-
-                    Label {
-                        width: parent.width
                         visible: root.message.length > 0 || pam.message.length > 0
                         text: root.message.length > 0 ? root.message : pam.message
                         color: pam.messageIsError || root.message.length > 0 ? Theme.warning : Theme.base04
@@ -261,18 +298,18 @@ Scope {
 
     Timer {
         id: dpmsOffDelay
-        interval: 1000
+        interval: 30000
         repeat: false
         onTriggered: dpmsOff.running = true
     }
 
     Process {
         id: dpmsOff
-        command: ["hyprctl", "dispatch", "dpms", "off"]
+        command: ["hyprctl", "dispatch", "hl.dsp.dpms(\"off\")"]
     }
 
     Process {
         id: dpmsOn
-        command: ["hyprctl", "dispatch", "dpms", "on"]
+        command: ["hyprctl", "dispatch", "hl.dsp.dpms(\"on\")"]
     }
 }
