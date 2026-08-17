@@ -94,6 +94,10 @@ PanelWindow {
         rbwUsageFile.setText(JSON.stringify(next, null, 2) + "\n");
     }
 
+    function selectedItem() {
+        return root.matches.length > 0 ? root.matches[root.selected] : null;
+    }
+
     function open(mode: string, target: string): void {
         root.mode = mode;
         root.target = mode === "rbw" && target.length === 0 ? "menu" : target;
@@ -214,7 +218,7 @@ PanelWindow {
 
     Rectangle {
         id: frame
-        width: Math.min(680, root.width - 32)
+        width: Math.min(root.mode === "clipboard" ? 980 : 680, root.width - 32)
         height: Math.min(500, root.height - 72)
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.top: parent.top
@@ -315,68 +319,122 @@ PanelWindow {
                 wrapMode: Text.Wrap
             }
 
-            ListView {
-                id: results
+            Row {
                 width: parent.width
                 height: parent.height - y
-                clip: true
-                spacing: 4
-                model: root.matches
-                currentIndex: root.selected
+                spacing: 12
 
-                delegate: Rectangle {
-                    required property var modelData
-                    required property int index
-                    readonly property bool hasPreview: (modelData.image || "").length > 0
+                ListView {
+                    id: results
+                    width: root.mode === "clipboard" ? Math.floor((parent.width - parent.spacing) * 0.48) : parent.width
+                    height: parent.height
+                    clip: true
+                    spacing: 4
+                    model: root.matches
+                    currentIndex: root.selected
 
-                    width: results.width
-                    height: hasPreview ? 82 : 44
-                    radius: Theme.radius
-                    color: index === root.selected ? Theme.base02 : "transparent"
+                    delegate: Rectangle {
+                        required property var modelData
+                        required property int index
+                        readonly property bool hasPreview: (modelData.image || "").length > 0
 
-                    Row {
-                        anchors.fill: parent
-                        anchors.leftMargin: 10
-                        anchors.rightMargin: 10
-                        spacing: parent.hasPreview ? 10 : 0
+                        width: results.width
+                        height: 44
+                        radius: Theme.radius
+                        color: index === root.selected ? Theme.base02 : "transparent"
 
-                        IconImage {
-                            width: parent.parent.hasPreview ? 64 : 24
-                            height: parent.parent.hasPreview ? 64 : 24
-                            anchors.verticalCenter: parent.verticalCenter
-                            visible: parent.parent.hasPreview
-                            source: parent.parent.hasPreview ? "file://" + modelData.image : ""
+                        Row {
+                            anchors.fill: parent
+                            anchors.leftMargin: 10
+                            anchors.rightMargin: 10
+                            spacing: 10
+
+                            IconText {
+                                width: 20
+                                anchors.verticalCenter: parent.verticalCenter
+                                text: parent.parent.hasPreview ? "󰋩" : "󰅇"
+                                color: Theme.base04
+                            }
+
+                            Column {
+                                width: parent.width - 30
+                                anchors.verticalCenter: parent.verticalCenter
+                                spacing: 1
+
+                                Label {
+                                    width: parent.width
+                                    text: modelData.title
+                                    color: Theme.fgBright
+                                    font.pixelSize: Theme.menuFontSize
+                                    elide: Text.ElideRight
+                                }
+
+                                Label {
+                                    width: parent.width
+                                    visible: root.mode !== "clipboard" && (modelData.subtitle || "").length > 0
+                                    text: modelData.subtitle || ""
+                                    color: Theme.base04
+                                    font.pixelSize: Theme.menuFontSize
+                                    elide: Text.ElideRight
+                                }
+                            }
                         }
 
-                        Column {
-                            width: parent.width - (parent.parent.hasPreview ? 74 : 0)
-                            anchors.verticalCenter: parent.verticalCenter
-                            spacing: 1
+                        MouseArea {
+                            anchors.fill: parent
+                            hoverEnabled: true
+                            onEntered: root.selected = index
+                            onClicked: root.activate(modelData)
+                        }
+                    }
+                }
 
-                            Label {
-                                width: parent.width
-                                text: modelData.title
-                                color: Theme.fgBright
-                                font.pixelSize: Theme.menuFontSize
-                                elide: Text.ElideRight
-                            }
+                Rectangle {
+                    id: preview
+                    width: parent.width - results.width - parent.spacing
+                    height: parent.height
+                    visible: root.mode === "clipboard"
+                    radius: Theme.radius
+                    color: Theme.base01
+                    border.width: 1
+                    border.color: Theme.base02
+                    clip: true
 
-                            Label {
-                                width: parent.width
-                                visible: root.mode !== "clipboard" && (modelData.subtitle || "").length > 0
-                                text: modelData.subtitle || ""
-                                color: Theme.base04
-                                font.pixelSize: Theme.menuFontSize
-                                elide: Text.ElideRight
-                            }
+                    readonly property var item: root.selectedItem()
+                    readonly property bool hasImage: item && (item.image || "").length > 0
+
+                    IconImage {
+                        anchors.fill: parent
+                        anchors.margins: 14
+                        visible: preview.hasImage
+                        source: preview.hasImage ? "file://" + preview.item.image : ""
+                        mipmap: true
+                    }
+
+                    Flickable {
+                        anchors.fill: parent
+                        anchors.margins: 14
+                        visible: !preview.hasImage
+                        contentWidth: width
+                        contentHeight: previewText.implicitHeight
+                        clip: true
+
+                        Label {
+                            id: previewText
+                            width: parent.width
+                            text: preview.item ? preview.item.title : ""
+                            color: Theme.fgBright
+                            font.pixelSize: Theme.menuFontSize
+                            wrapMode: Text.Wrap
                         }
                     }
 
-                    MouseArea {
-                        anchors.fill: parent
-                        hoverEnabled: true
-                        onEntered: root.selected = index
-                        onClicked: root.activate(modelData)
+                    Label {
+                        anchors.centerIn: parent
+                        visible: !preview.item
+                        text: "No selection"
+                        color: Theme.base03
+                        font.pixelSize: Theme.menuFontSize
                     }
                 }
             }
