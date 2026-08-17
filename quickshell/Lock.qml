@@ -89,8 +89,8 @@ Scope {
 
         if (layout.indexOf("russian") !== -1 || layout.indexOf("ru") === 0)
             return "RU";
-        if (layout.indexOf("english") !== -1 || layout.indexOf("en") !== -1)
-            return "US";
+        if (layout.indexOf("english") !== -1 || layout.indexOf("us") !== -1)
+            return "EN";
 
         return root.keyboardLayout.length >= 2 ? root.keyboardLayout.slice(0, 2).toUpperCase() : "--";
     }
@@ -255,8 +255,10 @@ Scope {
                             font.pixelSize: Theme.menuInputFontSize
 
                             Keys.onPressed: event => {
-                                if (event.text.length > 0)
+                                if (event.text.length > 0) {
+                                    root.message = "";
                                     root.passwordVisible = true;
+                                }
 
                                 if (event.key === Qt.Key_Return || event.key === Qt.Key_Enter) {
                                     root.authenticate(password.text);
