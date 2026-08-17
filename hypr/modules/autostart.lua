@@ -1,9 +1,6 @@
 local commands = {
-	"hyprsunset",
 	"qs",
-	"swaybg -c 282a36 -m fit -i ~/.config/hypr/rune.png",
 	"wl-paste --watch cliphist store",
-	"~/.config/hypr/scripts/hypridle-start",
 	"~/.config/hypr/scripts/iio-hyprland-lua DSI-1",
 }
 

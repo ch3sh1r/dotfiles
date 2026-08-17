@@ -47,12 +47,9 @@ hashcat-utils
 heroic-games-launcher-bin
 htop
 httpie
-hypridle
 hyprland
-hyprlock
 hyprpicker
 hyprshot
-hyprsunset
 ifuse
 iio-hyprland-git
 iio-sensor-proxy
@@ -73,7 +70,7 @@ lib32-openal
 lib32-vulkan-intel
 lib32-vulkan-radeon
 libpulse
-libreoffice-still-ru
+libreoffice-fresh-ru
 libretro-core-info
 libretro-genesis-plus-gx
 libretro-mesen
@@ -159,7 +156,6 @@ slurp
 smartmontools
 sof-firmware
 steam
-swaybg
 tailscale
 tela-circle-icon-theme-dracula
 telegram-desktop

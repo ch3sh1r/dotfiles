@@ -61,8 +61,8 @@ bind(mainMod .. " + Z", hl.dsp.group.prev())
 bind(mainMod .. " + X", hl.dsp.group.next())
 
 -- Lockscreen
-bind_exec(mainMod .. " + CTRL + L", "hyprlock")
-bind_exec("switch:Lid Switch", "hyprlock", { locked = true })
+bind_exec(mainMod .. " + CTRL + L", "qs ipc call lock lock")
+bind_exec("switch:Lid Switch", "qs ipc call lock lock", { locked = true })
 
 local directions = {
 	{ key = "H", direction = "l" },

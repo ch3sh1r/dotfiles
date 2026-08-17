@@ -35,7 +35,7 @@ Singleton {
     readonly property color critical: base08
     readonly property color good: base05          // "active/connected" — gray, not green
 
-    // typography — Hack Nerd Font, matching alacritty/hyprlock. It
+    // typography - Hack Nerd Font, matching alacritty and the lockscreen. It
     // carries both the text and the Nerd-Font glyphs, so one font does both.
     readonly property string font: "Hack Nerd Font"
     readonly property string iconFont: "Hack Nerd Font"
