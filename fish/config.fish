@@ -1,4 +1,6 @@
 if status is-interactive
+    set -g fish_greeting
+
     # Run ssh agent plugin
     fish_ssh_agent
     thefuck --alias | source
