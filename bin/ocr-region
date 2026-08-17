@@ -5,7 +5,7 @@
 # Requires: grim, slurp, tesseract (+ tesseract-data-<lang>), wl-clipboard
 # Optional: hyprpicker (freezes the screen during selection)
 #
-# Languages default to eng; override with OCR_LANGS, e.g. OCR_LANGS=eng+rus
+# Languages default to English + Russian; override with OCR_LANGS, e.g. OCR_LANGS=eng
 
 cleanup_freeze() {
   [[ -n $PID ]] && kill "$PID" 2>/dev/null
@@ -24,7 +24,7 @@ SELECTION=$(slurp 2>/dev/null)
 [[ -z $SELECTION ]] && exit 0
 
 TEXT=$(grim -g "$SELECTION" - |
-  tesseract stdin stdout --oem 1 --psm 6 -l "${OCR_LANGS:-eng}" \
+  tesseract stdin stdout --oem 1 --psm 6 -l "${OCR_LANGS:-eng+rus}" \
     --dpi 300 -c preserve_interword_spaces=1 2>/dev/null) || exit 1
 
 if [[ -z $TEXT ]]; then
