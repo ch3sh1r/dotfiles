@@ -10,6 +10,8 @@ Item {
 
     property date today: new Date()
     property int viewYear: today.getFullYear()
+    property date birthDate: new Date(NaN)
+    property int lifeExpectancyYears: 70
     signal clicked()
 
     function reset() {
@@ -22,6 +24,29 @@ Item {
     readonly property var monthNames: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
     readonly property int cell: 18
     readonly property int weekCell: 30
+    readonly property int progressWidth: 620
+
+    function clamp(value) {
+        return Math.max(0, Math.min(1, value));
+    }
+
+    function percent(value) {
+        return Math.round(root.clamp(value) * 100);
+    }
+
+    function yearProgress() {
+        let start = new Date(today.getFullYear(), 0, 1);
+        let end = new Date(today.getFullYear() + 1, 0, 1);
+        return root.clamp((today.getTime() - start.getTime()) / (end.getTime() - start.getTime()));
+    }
+
+    function lifeProgress() {
+        if (isNaN(birthDate.getTime()))
+            return 0;
+
+        let end = new Date(birthDate.getFullYear() + lifeExpectancyYears, birthDate.getMonth(), birthDate.getDate());
+        return root.clamp((today.getTime() - birthDate.getTime()) / (end.getTime() - birthDate.getTime()));
+    }
 
     function isToday(y, m, d) {
         return y === today.getFullYear() && m === today.getMonth() && d === today.getDate();
@@ -97,6 +122,24 @@ Item {
             color: Theme.purple
             font.bold: true
             font.pixelSize: Theme.menuTitleFontSize
+        }
+
+        Column {
+            anchors.horizontalCenter: parent.horizontalCenter
+            spacing: 6
+
+            ProgressLine {
+                width: root.progressWidth
+                title: "Year"
+                value: root.yearProgress()
+            }
+
+            ProgressLine {
+                width: root.progressWidth
+                visible: !isNaN(root.birthDate.getTime())
+                title: "Memento mori"
+                value: root.lifeProgress()
+            }
         }
 
         Grid {

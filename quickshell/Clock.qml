@@ -32,6 +32,7 @@ Pill {
         Calendar {
             id: calendar
             today: clock.date
+            birthDate: new Date(1991, 3, 20)
             onClicked: root.pinned = false
         }
     }
