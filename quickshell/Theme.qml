@@ -13,8 +13,8 @@ Singleton {
     readonly property color base01: "#282a36" // bar / main surface
     readonly property color base02: "#44475a" // selection / raised surface
     readonly property color base03: "#6272a4" // comments / muted text
-    readonly property color base04: "#c0c3d4"
-    readonly property color base05: "#f8f8f2" // foreground
+    readonly property color base04: "#f8f8f2" // foreground
+    readonly property color base05: "#ffffff" // bright foreground
     readonly property color base08: "#ff5555" // red
     readonly property color base0A: "#f1fa8c" // yellow
     readonly property color base0E: "#bd93f9" // purple
@@ -30,10 +30,10 @@ Singleton {
     readonly property color fg: base04            // default text
     readonly property color fgBright: base05
     readonly property color accent: purple        // active workspace outline
-    readonly property color urgent: "#ee2e24"
+    readonly property color urgent: base08
     readonly property color warning: base0A
     readonly property color critical: base08
-    readonly property color good: base05          // "active/connected" — gray, not green
+    readonly property color good: base04          // "active/connected" — gray, not green
     readonly property color sunsetTint: "#228e5835"
 
     // typography - Hack Nerd Font, matching alacritty and the lockscreen. It
