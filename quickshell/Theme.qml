@@ -34,6 +34,7 @@ Singleton {
     readonly property color warning: base0A
     readonly property color critical: base08
     readonly property color good: base05          // "active/connected" — gray, not green
+    readonly property color sunsetTint: "#228e5835"
 
     // typography - Hack Nerd Font, matching alacritty and the lockscreen. It
     // carries both the text and the Nerd-Font glyphs, so one font does both.

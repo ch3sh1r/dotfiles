@@ -91,13 +91,7 @@ PopupWindow {
             Rectangle {
                 anchors.fill: parent
                 visible: SunsetState.night
-                color: "#14ff9f5f"
-            }
-
-            Rectangle {
-                anchors.fill: parent
-                visible: SunsetState.night
-                color: "#0f000000"
+                color: Theme.sunsetTint
             }
         }
     ]

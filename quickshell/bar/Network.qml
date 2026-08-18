@@ -1,7 +1,7 @@
 import QtQuick
+import Quickshell.Io
 import ".."
 import "../components"
-import "../services"
 
 // Network pill. Reads status straight from the kernel via scripts/network.sh
 // (sysfs + /proc/net/wireless + iw/ip), so it works without NetworkManager —
@@ -12,7 +12,7 @@ StatusPill {
 
     icon: {
         if (root.info.type === "wifi")
-            return NetworkState.wifiIcon(root.info.signal);
+            return root.wifiIcon(root.info.signal);
         if (root.info.type === "ethernet")
             return "󰈀";
         return "󰌙";
@@ -28,5 +28,39 @@ StatusPill {
     }
 
     property bool compact: false
-    readonly property var info: NetworkState.info
+    property var info: ({
+            type: "disconnected"
+        })
+
+    readonly property string scriptPath: Qt.resolvedUrl("../scripts/network.sh").toString().replace("file://", "")
+    readonly property var wifiIcons: ["󰤯", "󰤟", "󰤢", "󰤥", "󰤨"]
+
+    function wifiIcon(strength) {
+        let i = Math.min(4, Math.floor((strength / 100) * 5));
+        return wifiIcons[Math.max(0, i)];
+    }
+
+    Process {
+        id: proc
+        command: ["bash", root.scriptPath]
+        stdout: StdioCollector {
+            onStreamFinished: {
+                try {
+                    root.info = JSON.parse(this.text.trim());
+                } catch (e) {
+                    root.info = {
+                        type: "disconnected"
+                    };
+                }
+            }
+        }
+    }
+
+    Timer {
+        interval: 5000
+        running: true
+        repeat: true
+        triggeredOnStart: true
+        onTriggered: proc.running = true
+    }
 }
