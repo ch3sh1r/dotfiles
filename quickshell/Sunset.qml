@@ -6,20 +6,18 @@ import Quickshell.Wayland
 Scope {
     id: root
 
-    property bool night: false
-
     function update(): void {
         let now = new Date();
         let minutes = now.getHours() * 60 + now.getMinutes();
-        root.night = minutes < 480 || minutes >= 1200;
+        SunsetState.night = minutes < 480 || minutes >= 1200;
     }
 
     IpcHandler {
         target: "sunset"
 
-        function day(): void { root.night = false; }
-        function night(): void { root.night = true; }
-        function toggle(): void { root.night = !root.night; }
+        function day(): void { SunsetState.night = false; }
+        function night(): void { SunsetState.night = true; }
+        function toggle(): void { SunsetState.night = !SunsetState.night; }
     }
 
     Timer {
@@ -37,7 +35,7 @@ Scope {
             required property var modelData
 
             screen: modelData
-            visible: root.night
+            visible: SunsetState.night
             color: "transparent"
             exclusionMode: ExclusionMode.Ignore
             mask: Region { width: 0; height: 0 }

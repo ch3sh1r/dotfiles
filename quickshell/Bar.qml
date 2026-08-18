@@ -41,6 +41,7 @@ PanelWindow {
         Mullvad {}
         Tailscale {}
         Battery {}
+        SunsetToggle {}
         OrientationLock {
             monitorName: bar.screen ? bar.screen.name : ""
         }
