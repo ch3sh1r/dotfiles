@@ -12,6 +12,7 @@ Pill {
     property string city: ""
     property string country: ""
     property string ip: ""
+    property bool compact: false
 
     function refresh() {
         statusProc.running = true;
@@ -58,7 +59,7 @@ Pill {
     }
 
     Label {
-        visible: root.connected && root.city.length > 0
+        visible: !root.compact && root.connected && root.city.length > 0
         text: root.city
         color: Theme.fgBright
     }

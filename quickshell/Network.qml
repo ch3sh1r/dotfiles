@@ -10,6 +10,7 @@ Pill {
     id: root
 
     readonly property string scriptPath: Qt.resolvedUrl("scripts/network.sh").toString().replace("file://", "")
+    property bool compact: false
 
     property var info: ({
             type: "disconnected"
@@ -58,7 +59,7 @@ Pill {
     }
 
     Label {
-        visible: root.info.type === "wifi" && root.info.ssid.length > 0
+        visible: !root.compact && root.info.type === "wifi" && root.info.ssid.length > 0
         text: root.info.type === "wifi" ? root.info.ssid : ""
         color: Theme.fgBright
     }

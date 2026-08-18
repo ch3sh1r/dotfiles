@@ -37,8 +37,12 @@ PanelWindow {
         spacing: Theme.gap
 
         Volume {}
-        Network {}
-        Mullvad {}
+        Network {
+            compact: bar.compactClock
+        }
+        Mullvad {
+            compact: bar.compactClock
+        }
         Tailscale {}
         Battery {}
         SunsetToggle {}
