@@ -19,17 +19,36 @@ StatusPill {
     tooltip: {
         if (!root.dev)
             return "";
-        let arrow = root.charging ? "↑" : "↓";
-        return Math.round(root.watts) + "W" + arrow + "  " + root.dev.percentage;
+        let percentage = Math.round(root.dev.percentage * 100) + "%";
+        if (root.full)
+            return percentage + " · Fully charged";
+
+        let pluggedIn = !UPower.onBattery;
+        let duration = root.formatDuration(pluggedIn ? root.dev.timeToFull : root.dev.timeToEmpty);
+        if (duration.length > 0)
+            return percentage + " · " + duration + (pluggedIn ? " until full" : " remaining");
+        return percentage + " · " + (pluggedIn ? "On AC power" : "Estimating");
     }
 
     readonly property var dev: UPower.displayDevice
     readonly property bool charging: dev && dev.state === UPowerDeviceState.Charging
     readonly property bool full: dev && (dev.state === UPowerDeviceState.FullyCharged || dev.percentage >= 1)
-    readonly property real watts: dev && dev.changeRate !== undefined ? dev.changeRate : 0
 
     readonly property var dischargeIcons: ["󰁺", "󰁻", "󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰂂", "󰁹"]
     readonly property var chargeIcons: ["󰢜", "󰂆", "󰂇", "󰂈", "󰢝", "󰂉", "󰢞", "󰂊", "󰂋", "󰂅"]
+
+    function formatDuration(seconds) {
+        if (!seconds || seconds <= 0)
+            return "";
+        let totalMinutes = Math.max(1, Math.round(seconds / 60));
+        let hours = Math.floor(totalMinutes / 60);
+        let minutes = totalMinutes % 60;
+        if (hours === 0)
+            return minutes + "m";
+        if (minutes === 0)
+            return hours + "h";
+        return hours + "h " + minutes + "m";
+    }
 
     readonly property color stateColor: {
         if (!dev)
