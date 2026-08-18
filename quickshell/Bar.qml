@@ -4,6 +4,8 @@ import Quickshell
 PanelWindow {
     id: bar
 
+    readonly property bool compactClock: bar.screen && bar.screen.width < bar.screen.height
+
     anchors {
         top: true
         left: true
@@ -25,6 +27,7 @@ PanelWindow {
 
     Clock {
         anchors.centerIn: parent
+        compact: bar.compactClock
     }
 
     Row {

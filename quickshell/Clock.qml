@@ -5,6 +5,7 @@ Pill {
     id: root
 
     property bool pinned: false
+    property bool compact: false
 
     SystemClock {
         id: clock
@@ -12,7 +13,7 @@ Pill {
     }
 
     Label {
-        text: Qt.formatDateTime(clock.date, "dddd yyyy-MM-dd HH:mm")
+        text: Qt.formatDateTime(clock.date, root.compact ? "HH:mm" : "dddd yyyy-MM-dd HH:mm")
         color: Theme.fgBright
     }
 
