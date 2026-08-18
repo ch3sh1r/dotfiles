@@ -16,27 +16,110 @@ Scope {
     property string keyboardLayout: ""
     property bool passwordVisible: false
     property bool authenticating: false
+    property bool recovering: false
+    property bool stateFileError: false
+    property string lockStatus: "unlocked"
 
-    function lock(): void {
+    function pamConfigured(): bool {
+        return pam.config.length > 0
+            && pam.configDirectory.length > 0
+            && pamConfigFile.text().trim().length > 0;
+    }
+
+    function waylandOutputCount(): int {
+        if ((Quickshell.env("WAYLAND_DISPLAY") || "").length === 0)
+            return 0;
+
+        let monitors = Hyprland.monitors.values;
+        let screens = Quickshell.screens;
+        let count = 0;
+
+        for (let i = 0; i < monitors.length; i++) {
+            let monitor = monitors[i];
+            if (!monitor || monitor.name.length === 0 || monitor.width <= 0 || monitor.height <= 0)
+                continue;
+
+            for (let j = 0; j < screens.length; j++) {
+                let screen = screens[j];
+                if (screen && screen.name === monitor.name && screen.width > 0 && screen.height > 0) {
+                    count++;
+                    break;
+                }
+            }
+        }
+
+        return count;
+    }
+
+    function lock(): bool {
+        if (sessionLock.secure)
+            return true;
+        if (lockState.requested) {
+            root.lockStatus = sessionLock.locked ? "locking" : "error: lock request failed";
+            return false;
+        }
+        if (!root.pamConfigured()) {
+            root.lockStatus = "error: PAM is not configured";
+            console.error("Refusing to lock: PAM configuration is unavailable");
+            return false;
+        }
+        if (root.waylandOutputCount() === 0) {
+            root.lockStatus = "error: no Wayland outputs";
+            console.error("Refusing to lock: no real Wayland outputs are available");
+            return false;
+        }
+
         root.message = "";
         root.passwordVisible = false;
-        sessionLock.locked = true;
-        dpmsOffDelay.restart();
+        root.recovering = false;
+        root.lockStatus = "locking";
+        root.stateFileError = false;
+        lockStateFile.setText("locked\n");
+        if (root.stateFileError) {
+            root.lockStatus = "error: cannot persist lock state";
+            return false;
+        }
+
+        lockState.requested = true;
+        secureConfirmation.restart();
+        keyboardLayoutProc.running = true;
+        return true;
+    }
+
+    function recoverLock(): void {
+        if (lockState.requested || lockStateFile.text().trim() !== "locked")
+            return;
+        if (!root.pamConfigured()) {
+            root.lockStatus = "error: recovery requires PAM";
+            console.error("Cannot recover the session lock: PAM configuration is unavailable");
+            return;
+        }
+        if (root.waylandOutputCount() === 0) {
+            root.lockStatus = "recovering: waiting for a Wayland output";
+            return;
+        }
+
+        root.recovering = true;
+        root.lockStatus = "recovering";
+        lockState.requested = true;
+        secureConfirmation.restart();
         keyboardLayoutProc.running = true;
     }
 
-    function unlock(): void {
-        pam.abort();
-        dpmsOffDelay.stop();
-        dpmsOn.running = true;
-        root.pendingPassword = "";
-        root.passwordVisible = false;
-        root.authenticating = false;
-        sessionLock.locked = false;
+    function diagnosticStatus(): string {
+        return JSON.stringify({
+            state: root.lockStatus,
+            locked: sessionLock.locked && sessionLock.secure,
+            requested: lockState.requested,
+            secure: sessionLock.secure,
+            pamConfigured: root.pamConfigured(),
+            waylandOutputs: root.waylandOutputCount(),
+            recovering: root.recovering
+        });
     }
 
     function authenticate(password: string): void {
-        if (root.authenticating || password.length === 0)
+        if (root.authenticating || password.length === 0 || !sessionLock.secure)
             return;
 
         root.pendingPassword = password;
@@ -100,8 +183,37 @@ Scope {
     IpcHandler {
         target: "lock"
 
-        function lock(): void { root.lock(); }
-        function unlock(): void { root.unlock(); }
+        function lock(): bool { return root.lock(); }
+        function isLocked(): bool { return sessionLock.locked && sessionLock.secure; }
+        function status(): string { return root.diagnosticStatus(); }
+    }
+
+    PersistentProperties {
+        id: lockState
+        reloadableId: "sessionLockState"
+
+        property bool requested: false
+    }
+
+    FileView {
+        id: pamConfigFile
+        path: pam.configDirectory + "/" + pam.config
+        blockLoading: true
+        printErrors: false
+    }
+
+    FileView {
+        id: lockStateFile
+        path: Quickshell.statePath("session-lock")
+        blockLoading: true
+        blockWrites: true
+        printErrors: false
+
+        onSaved: root.stateFileError = false
+        onSaveFailed: error => {
+            root.stateFileError = true;
+            console.error("Cannot persist session lock state: " + FileViewError.toString(error));
+        }
     }
 
     PamContext {
@@ -116,8 +228,19 @@ Scope {
             root.pendingPassword = "";
 
             if (result === PamResult.Success) {
-                sessionLock.locked = false;
+                if (!sessionLock.locked || !sessionLock.secure) {
+                    root.message = "Lock security was not confirmed";
+                    root.lockStatus = "error: refusing insecure unlock";
+                    return;
+                }
+
+                dpmsOffDelay.stop();
+                dpmsOn.running = true;
+                root.passwordVisible = false;
+                root.recovering = false;
                 root.message = "";
+                lockState.requested = false;
+                lockStateFile.setText("");
             } else if (result === PamResult.MaxTries) {
                 root.message = "Too many attempts";
             } else if (result === PamResult.Error) {
@@ -138,6 +261,14 @@ Scope {
         }
     }
 
+    Connections {
+        target: Hyprland.monitors
+
+        function onValuesChanged(): void {
+            root.recoverLock();
+        }
+    }
+
     Process {
         id: keyboardLayoutProc
         command: ["hyprctl", "devices", "-j"]
@@ -148,18 +279,35 @@ Scope {
 
     WlSessionLock {
         id: sessionLock
+        reloadableId: "sessionLock"
+        locked: lockState.requested
 
         onSecureChanged: {
-            if (secure)
+            if (secure) {
+                secureConfirmation.stop();
+                root.recovering = false;
+                root.lockStatus = "locked";
                 dpmsOffDelay.restart();
+            } else if (locked && lockState.requested) {
+                root.lockStatus = "error: compositor lock is not secure";
+                dpmsOffDelay.stop();
+            }
         }
 
         onLockedChanged: {
             if (locked) {
-                dpmsOffDelay.restart();
+                root.lockStatus = secure ? "locked" : (root.recovering ? "recovering" : "locking");
+                if (!secure)
+                    secureConfirmation.restart();
             } else {
+                let requestFailed = lockState.requested;
+                if (requestFailed && !secure)
+                    lockState.requested = false;
+
+                secureConfirmation.stop();
                 dpmsOffDelay.stop();
                 dpmsOn.running = true;
+                root.lockStatus = requestFailed ? "error: session lock unavailable" : "unlocked";
             }
         }
 
@@ -289,13 +437,34 @@ Scope {
                     Label {
                         width: parent.width
                         visible: root.message.length > 0 || pam.message.length > 0
-                        text: root.message.length > 0 ? root.message : pam.message
+                        text: root.message.length > 0 ? root.message : pam.message.replace(/:\s*$/, "")
                         color: pam.messageIsError || root.message.length > 0 ? Theme.warning : Theme.base04
                         horizontalAlignment: Text.AlignHCenter
                         font.pixelSize: Theme.menuFontSize
                         wrapMode: Text.Wrap
                     }
                 }
+            }
+        }
+    }
+
+    Timer {
+        id: recoveryDelay
+        interval: 250
+        repeat: false
+        onTriggered: root.recoverLock()
+    }
+
+    Timer {
+        id: secureConfirmation
+        interval: 5000
+        repeat: false
+        onTriggered: {
+            if (lockState.requested && !sessionLock.secure) {
+                root.lockStatus = sessionLock.locked
+                    ? "error: compositor did not confirm a secure lock"
+                    : "error: session lock unavailable";
+                console.error(root.lockStatus);
             }
         }
     }
@@ -315,5 +484,20 @@ Scope {
     Process {
         id: dpmsOn
         command: ["hyprctl", "dispatch", "hl.dsp.dpms(\"on\")"]
+    }
+
+    Component.onCompleted: {
+        Hyprland.refreshMonitors();
+
+        if (lockState.requested) {
+            root.recovering = !sessionLock.secure;
+            root.lockStatus = sessionLock.secure ? "locked" : "recovering";
+            if (!sessionLock.secure)
+                secureConfirmation.restart();
+        } else if (lockStateFile.text().trim() === "locked") {
+            root.recovering = true;
+            root.lockStatus = "recovering";
+            recoveryDelay.start();
+        }
     }
 }

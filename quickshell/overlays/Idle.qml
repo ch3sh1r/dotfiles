@@ -28,7 +28,7 @@ Scope {
 
     IdleMonitor {
         timeout: 3600
-        onIsIdleChanged: if (isIdle) root.run(["sh", "-c", "qs ipc call lock lock && sleep 2 && systemctl suspend"])
+        onIsIdleChanged: if (isIdle) root.run(["sh", "-c", "qs ipc call lock lock && sleep 2 && [ \"$(qs ipc call lock isLocked)\" = true ] && systemctl suspend"])
     }
 
     Process {
