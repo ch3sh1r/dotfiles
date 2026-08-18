@@ -3,14 +3,17 @@ import QtQuick
 Pill {
     id: root
 
-    visible: SunsetState.night
+    visible: SunsetState.scheduledNight || SunsetState.night || SunsetState.togglePinned
 
     IconText {
         text: SunsetState.night ? "" : "󰖨"
-        color: SunsetState.night ? Theme.warning : Theme.fg
+        color: Theme.fg
     }
 
-    onClicked: SunsetState.night = !SunsetState.night
+    onClicked: {
+        SunsetState.togglePinned = true;
+        SunsetState.night = !SunsetState.night;
+    }
 
     Tooltip {
         anchorItem: root

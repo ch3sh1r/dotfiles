@@ -9,15 +9,23 @@ Scope {
     function update(): void {
         let now = new Date();
         let minutes = now.getHours() * 60 + now.getMinutes();
-        SunsetState.night = minutes < 480 || minutes >= 1200;
+        let scheduledNight = minutes < 480 || minutes >= 1200;
+
+        if (SunsetState.scheduledNight !== scheduledNight) {
+            SunsetState.scheduledNight = scheduledNight;
+            SunsetState.togglePinned = false;
+        }
+
+        if (!SunsetState.togglePinned)
+            SunsetState.night = scheduledNight;
     }
 
     IpcHandler {
         target: "sunset"
 
-        function day(): void { SunsetState.night = false; }
-        function night(): void { SunsetState.night = true; }
-        function toggle(): void { SunsetState.night = !SunsetState.night; }
+        function day(): void { SunsetState.togglePinned = true; SunsetState.night = false; }
+        function night(): void { SunsetState.togglePinned = true; SunsetState.night = true; }
+        function toggle(): void { SunsetState.togglePinned = true; SunsetState.night = !SunsetState.night; }
     }
 
     Timer {
