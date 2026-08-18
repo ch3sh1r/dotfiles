@@ -4,8 +4,13 @@ import Quickshell.Io
 import ".."
 import "../components"
 
-Pill {
+StatusPill {
     id: root
+
+    icon: root.locked ? "" : ""
+    iconColor: root.locked ? Theme.warning : Theme.fg
+    tooltip: (root.locked ? "Orientation locked" : "Auto-rotate enabled")
+        + (root.currentTransform.length > 0 ? "\nTransform: " + root.currentTransform : "")
 
     readonly property string targetMonitor: "DSI-1"
     readonly property string scriptPath: Qt.resolvedUrl("../scripts/orientation-lock.sh").toString().replace("file://", "")
@@ -62,20 +67,8 @@ Pill {
         onTriggered: root.refresh()
     }
 
-    IconText {
-        text: root.locked ? "" : ""
-        color: root.locked ? Theme.warning : Theme.fg
-    }
-
     onClicked: {
         toggleProc.running = true;
         delayed.restart();
-    }
-
-    Tooltip {
-        anchorItem: root
-        shown: root.hovered
-        text: (root.locked ? "Orientation locked" : "Auto-rotate enabled")
-            + (root.currentTransform.length > 0 ? "\nTransform: " + root.currentTransform : "")
     }
 }

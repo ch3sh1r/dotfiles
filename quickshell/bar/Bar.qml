@@ -5,7 +5,7 @@ import ".."
 PanelWindow {
     id: bar
 
-    readonly property bool compactClock: bar.screen && bar.screen.width < bar.screen.height
+    readonly property bool compact: bar.screen && bar.screen.width < bar.screen.height
 
     anchors {
         top: true
@@ -28,7 +28,7 @@ PanelWindow {
 
     Clock {
         anchors.centerIn: parent
-        compact: bar.compactClock
+        compact: bar.compact
     }
 
     Row {
@@ -39,12 +39,14 @@ PanelWindow {
 
         Volume {}
         Network {
-            compact: bar.compactClock
+            compact: bar.compact
         }
         Mullvad {
-            compact: bar.compactClock
+            compact: bar.compact
         }
-        Tailscale {}
+        Tailscale {
+            compact: bar.compact
+        }
         Battery {}
         SunsetToggle {}
         OrientationLock {

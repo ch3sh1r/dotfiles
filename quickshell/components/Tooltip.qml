@@ -86,6 +86,19 @@ PopupWindow {
                 implicitWidth: childrenRect.width
                 implicitHeight: childrenRect.height
             }
+
+            // Popup surfaces render above the fullscreen sunset layer.
+            Rectangle {
+                anchors.fill: parent
+                visible: SunsetState.night
+                color: "#14ff9f5f"
+            }
+
+            Rectangle {
+                anchors.fill: parent
+                visible: SunsetState.night
+                color: "#0f000000"
+            }
         }
     ]
 }
