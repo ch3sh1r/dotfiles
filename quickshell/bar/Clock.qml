@@ -1,4 +1,7 @@
 import QtQuick
+import ".."
+import "../components"
+import "../overlays"
 import Quickshell
 
 Pill {

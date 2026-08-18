@@ -1,4 +1,6 @@
 import QtQuick
+import ".."
+import "../components"
 
 // Full-year calendar, matching the old waybar clock calendar:
 //   mode: year, 3 month-columns, ISO week numbers on the right.

@@ -1,12 +1,14 @@
 import QtQuick
 import Quickshell
 import Quickshell.Io
+import ".."
+import "../components"
 
 Pill {
     id: root
 
     readonly property string targetMonitor: "DSI-1"
-    readonly property string scriptPath: Qt.resolvedUrl("scripts/orientation-lock.sh").toString().replace("file://", "")
+    readonly property string scriptPath: Qt.resolvedUrl("../scripts/orientation-lock.sh").toString().replace("file://", "")
 
     property string monitorName: ""
     property bool locked: false

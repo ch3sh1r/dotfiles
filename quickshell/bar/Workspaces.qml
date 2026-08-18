@@ -1,6 +1,8 @@
 import QtQuick
 import Quickshell
 import Quickshell.Hyprland
+import ".."
+import "../components"
 
 // Live workspace strip. Unlike the waybar module this reacts to Hyprland's IPC
 // socket directly (no polling) and renders one button per existing workspace

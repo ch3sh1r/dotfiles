@@ -4,6 +4,8 @@ import Quickshell.Hyprland
 import Quickshell.Io
 import Quickshell.Wayland
 import Quickshell.Widgets
+import ".."
+import "../components"
 
 PanelWindow {
     id: root

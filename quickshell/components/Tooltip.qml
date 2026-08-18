@@ -1,5 +1,6 @@
 import QtQuick
 import Quickshell
+import ".."
 
 // A popup that drops down below a bar item. Set `anchorItem` to the widget it
 // belongs to and drive `shown` (e.g. from the pill's `hovered`). Put rich

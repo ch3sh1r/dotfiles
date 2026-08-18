@@ -1,6 +1,8 @@
 import QtQuick
 import Quickshell
 import Quickshell.Io
+import ".."
+import "../components"
 
 // Network pill. Reads status straight from the kernel via scripts/network.sh
 // (sysfs + /proc/net/wireless + iw/ip), so it works without NetworkManager —
@@ -9,7 +11,7 @@ import Quickshell.Io
 Pill {
     id: root
 
-    readonly property string scriptPath: Qt.resolvedUrl("scripts/network.sh").toString().replace("file://", "")
+    readonly property string scriptPath: Qt.resolvedUrl("../scripts/network.sh").toString().replace("file://", "")
     property bool compact: false
 
     property var info: ({

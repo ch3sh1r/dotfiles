@@ -1,5 +1,7 @@
 import QtQuick
 import Quickshell.Services.UPower
+import ".."
+import "../components"
 
 Pill {
     id: root

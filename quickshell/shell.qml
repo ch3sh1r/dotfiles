@@ -1,4 +1,6 @@
 import Quickshell
+import "bar"
+import "overlays"
 
 // Entry point. One bar per connected monitor; Variants creates/destroys
 // instances as screens come and go (the GPD's rotated DSI-1 + externals).

@@ -1,4 +1,5 @@
 import QtQuick
+import ".."
 
 // A rounded module "pill" matching waybar's #module styling.
 // Glyph/text children placed inside a `Pill { ... }` flow into a centred Row.

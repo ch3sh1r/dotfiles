@@ -1,6 +1,8 @@
 import QtQuick
 import Quickshell
 import Quickshell.Io
+import ".."
+import "../components"
 
 // Mullvad VPN pill. Parses `mullvad status --json` natively. Click toggles the
 // connection; the tooltip shows where you're exiting. (Region switching was

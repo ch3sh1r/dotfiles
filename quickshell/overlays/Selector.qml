@@ -3,6 +3,8 @@ import Quickshell
 import Quickshell.Io
 import Quickshell.Wayland
 import Quickshell.Widgets
+import ".."
+import "../components"
 
 PanelWindow {
     id: root
@@ -22,8 +24,8 @@ PanelWindow {
     WlrLayershell.keyboardFocus: WlrKeyboardFocus.Exclusive
     WlrLayershell.namespace: "quickshell-selector"
 
-    readonly property string dataScript: Qt.resolvedUrl("scripts/selector-data.sh").toString().replace("file://", "")
-    readonly property string actionScript: Qt.resolvedUrl("scripts/selector-action.sh").toString().replace("file://", "")
+    readonly property string dataScript: Qt.resolvedUrl("../scripts/selector-data.sh").toString().replace("file://", "")
+    readonly property string actionScript: Qt.resolvedUrl("../scripts/selector-action.sh").toString().replace("file://", "")
 
     property string mode: ""
     property string target: ""

@@ -2,6 +2,8 @@ import QtQuick
 import Quickshell
 import Quickshell.Io
 import Quickshell.Services.Pipewire
+import ".."
+import "../components"
 
 Pill {
     id: root
@@ -30,7 +32,7 @@ Pill {
         return root.headphones && /bluez|a2dp|hands.?free/.test(s);
     }
     readonly property string sinkInfo: sink ? ((sink.name || "") + " " + (sink.description || "") + " " + (sink.nickname || "")) : ""
-    readonly property string batteryScriptPath: Qt.resolvedUrl("scripts/bluetooth-headset-battery.sh").toString().replace("file://", "")
+    readonly property string batteryScriptPath: Qt.resolvedUrl("../scripts/bluetooth-headset-battery.sh").toString().replace("file://", "")
 
     property int headsetBattery: -1
 

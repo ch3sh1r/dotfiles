@@ -1,6 +1,8 @@
 import QtQuick
 import Quickshell
 import Quickshell.Io
+import ".."
+import "../components"
 
 // Tailscale pill. Parses `tailscale status --json` natively. Shows the active
 // exit node (if any); the popup is a compact status summary. Click toggles the

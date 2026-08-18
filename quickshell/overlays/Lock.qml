@@ -5,6 +5,8 @@ import Quickshell.Hyprland
 import Quickshell.Io
 import Quickshell.Services.Pam
 import Quickshell.Wayland
+import ".."
+import "../components"
 
 Scope {
     id: root

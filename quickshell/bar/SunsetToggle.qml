@@ -1,4 +1,6 @@
 import QtQuick
+import ".."
+import "../components"
 
 Pill {
     id: root
