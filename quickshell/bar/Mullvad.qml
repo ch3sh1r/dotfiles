@@ -2,15 +2,16 @@ import QtQuick
 import ".."
 import "../components"
 
-// Mullvad VPN pill. Parses `mullvad status --json` natively. Click toggles the
-// connection; the tooltip shows where you're exiting. (Region switching was
-// dropped — it went unused in the waybar setup.)
+// Mullvad VPN pill. Parses `mullvad status --json` natively. Right-click
+// toggles the connection; left-click shows where you're exiting.
 StatusPill {
     id: root
 
     icon: root.connected ? "󰊠" : "󰧵"
     iconColor: root.connected ? Theme.good : Theme.base03
     label: !root.compact && root.connected && root.city.length > 0 ? root.city : ""
+    tooltipOnHover: false
+    tooltipCloseOnClick: true
 
     required property var backend
     property bool compact: false
@@ -33,7 +34,8 @@ StatusPill {
         return "Disconnected";
     }
 
-    onClicked: backend.toggle()
+    onClicked: root.toggleTooltip()
+    onRightClicked: backend.toggle()
 
     tooltipContent: Column {
         spacing: 4

@@ -10,7 +10,14 @@ Pill {
     property bool labelVisible: label.length > 0
     property color labelColor: Theme.fgBright
     property string tooltip: ""
+    property bool tooltipPinned: false
+    property bool tooltipOnHover: true
+    property alias tooltipCloseOnClick: tip.closeOnClick
     property alias tooltipContent: tip.content
+
+    function toggleTooltip() {
+        root.tooltipPinned = !root.tooltipPinned;
+    }
 
     IconText {
         text: root.icon
@@ -26,7 +33,8 @@ Pill {
     Tooltip {
         id: tip
         anchorItem: root
-        shown: root.hovered
+        shown: root.tooltipPinned || (root.tooltipOnHover && root.hovered)
         text: root.tooltip
+        onDismissRequested: root.tooltipPinned = false
     }
 }

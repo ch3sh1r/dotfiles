@@ -3,14 +3,16 @@ import ".."
 import "../components"
 
 // Tailscale pill. Parses `tailscale status --json` natively. Shows the active
-// exit node (if any); the popup is a compact status summary. Click toggles the
-// tailnet up/down.
+// exit node (if any); the popup is a compact status summary. Right-click
+// toggles the tailnet up/down.
 StatusPill {
     id: root
 
     icon: root.running ? "󰯉" : "󱩆"
     iconColor: root.running ? Theme.good : Theme.base03
     label: !root.compact && root.running && root.exitNode.length > 0 ? root.exitNode : ""
+    tooltipOnHover: false
+    tooltipCloseOnClick: true
 
     required property var backend
     property bool compact: false
@@ -21,7 +23,8 @@ StatusPill {
     readonly property int peerCount: backend.peerCount
     readonly property int onlineCount: backend.onlineCount
 
-    onClicked: backend.toggle()
+    onClicked: root.toggleTooltip()
+    onRightClicked: backend.toggle()
 
     tooltipContent: Column {
         spacing: 4

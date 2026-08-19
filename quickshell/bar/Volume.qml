@@ -19,6 +19,7 @@ StatusPill {
     iconColor: root.muted ? Theme.base03 : Theme.fg
     label: root.muted ? "" : root.percent
     labelVisible: true
+    tooltipCloseOnClick: true
 
     required property var backend
     readonly property var sink: backend.sink

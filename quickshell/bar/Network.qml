@@ -18,6 +18,8 @@ StatusPill {
     }
     iconColor: root.info.type === "disconnected" ? Theme.base03 : Theme.fg
     label: !root.compact && root.info.type === "wifi" && root.info.ssid.length > 0 ? root.info.ssid : ""
+    tooltipOnHover: false
+    tooltipCloseOnClick: true
 
     required property var backend
     property bool compact: false
@@ -28,6 +30,8 @@ StatusPill {
         let i = Math.min(4, Math.floor((strength / 100) * 5));
         return wifiIcons[Math.max(0, i)];
     }
+
+    onClicked: root.toggleTooltip()
 
     tooltipContent: Column {
         spacing: 4

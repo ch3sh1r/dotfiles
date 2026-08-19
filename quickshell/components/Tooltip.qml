@@ -23,7 +23,9 @@ PopupWindow {
     property int frameRadius: Theme.radius
     property int frameBorderWidth: 0
     property color frameBorderColor: "transparent"
+    property bool closeOnClick: false
     default property alias content: body.data
+    signal dismissRequested()
 
     readonly property bool contentHovered: frameHover.hovered
     readonly property bool wantShown: (shown || contentHovered) && anchorItem !== null
@@ -69,6 +71,15 @@ PopupWindow {
 
             HoverHandler {
                 id: frameHover
+            }
+
+            TapHandler {
+                enabled: root.closeOnClick
+                acceptedButtons: Qt.LeftButton
+                onTapped: {
+                    root.visible = false;
+                    root.dismissRequested();
+                }
             }
 
             Label {
