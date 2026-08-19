@@ -23,7 +23,7 @@ ShellRoot {
 
     Launcher {}
     Selector {}
-    Notifications {}
+    Notifications { backend: barServices.notifications }
 
     Variants {
         model: Quickshell.screens

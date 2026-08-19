@@ -9,7 +9,9 @@ import "../components"
 PanelWindow {
     id: root
 
-    visible: server.trackedNotifications.values.length > 0
+    required property var backend
+
+    visible: backend.popups.length > 0
     color: "transparent"
     exclusionMode: ExclusionMode.Ignore
 
@@ -29,16 +31,41 @@ PanelWindow {
     WlrLayershell.layer: WlrLayer.Overlay
     WlrLayershell.namespace: "quickshell-notifications"
 
-    NotificationServer {
-        id: server
-        actionsSupported: true
-        bodyMarkupSupported: true
-        imageSupported: true
-        persistenceSupported: true
+    function timeoutMs(notification) {
+        if (notification.urgency === NotificationUrgency.Critical || notification.expireTimeout === 0)
+            return 0;
+        if (notification.expireTimeout > 0)
+            return Math.round(notification.expireTimeout);
+        return 7000;
+    }
 
-        onNotification: notification => {
-            notification.tracked = true;
+    function defaultAction(notification) {
+        for (const action of notification.actions) {
+            if (action.identifier === "default")
+                return action;
         }
+        return null;
+    }
+
+    function visibleActions(notification) {
+        let actions = [];
+        for (const action of notification.actions) {
+            if (action.identifier !== "default")
+                actions.push(action);
+        }
+        return actions;
+    }
+
+    function activate(notification) {
+        let action = root.defaultAction(notification);
+        if (!action) {
+            root.backend.dismiss(notification);
+            return;
+        }
+
+        action.invoke();
+        if (!notification.resident)
+            root.backend.removePopup(notification.id);
     }
 
     function accentColor(notification) {
@@ -67,28 +94,36 @@ PanelWindow {
         spacing: 8
 
         Repeater {
-            model: server.trackedNotifications
+            model: root.backend.popups
 
             delegate: Rectangle {
                 id: card
                 required property var modelData
-
-                function dismiss() {
-                    retainer.locked = false;
-                    modelData.dismiss();
-                }
 
                 width: stack.width
                 implicitHeight: body.implicitHeight + 20
                 radius: Theme.radius * 2
                 color: Theme.base00
                 border.width: 1
-                border.color: root.borderColor(modelData)
+                border.color: root.borderColor(card.modelData)
 
                 RetainableLock {
-                    id: retainer
                     object: card.modelData
                     locked: true
+                }
+
+                Connections {
+                    target: card.modelData
+
+                    function onClosed(reason) {
+                        root.backend.removePopup(card.modelData.id);
+                    }
+                }
+
+                Timer {
+                    interval: Math.max(1, root.timeoutMs(card.modelData))
+                    running: root.timeoutMs(card.modelData) > 0
+                    onTriggered: root.backend.expire(card.modelData)
                 }
 
                 Rectangle {
@@ -104,7 +139,12 @@ PanelWindow {
                 MouseArea {
                     anchors.fill: parent
                     acceptedButtons: Qt.LeftButton | Qt.RightButton
-                    onClicked: card.dismiss()
+                    onClicked: function (mouse) {
+                        if (mouse.button === Qt.RightButton)
+                            root.backend.dismiss(card.modelData);
+                        else
+                            root.activate(card.modelData);
+                    }
                 }
 
                 Row {
@@ -124,7 +164,7 @@ PanelWindow {
                         visible: source.length > 0
                         source: card.modelData.image.length > 0
                             ? card.modelData.image
-                            : Quickshell.iconPath(card.modelData.appIcon, "dialog-information")
+                            : (card.modelData.appIcon.length > 0 ? Quickshell.iconPath(card.modelData.appIcon) : "")
                     }
 
                     Column {
@@ -151,11 +191,11 @@ PanelWindow {
                         }
 
                         Row {
-                            visible: card.modelData.actions.length > 0
+                            visible: root.visibleActions(card.modelData).length > 0
                             spacing: 6
 
                             Repeater {
-                                model: card.modelData.actions
+                                model: root.visibleActions(card.modelData)
 
                                 delegate: Rectangle {
                                     required property var modelData
@@ -178,7 +218,8 @@ PanelWindow {
                                         anchors.fill: parent
                                         onClicked: {
                                             parent.modelData.invoke();
-                                            card.dismiss();
+                                            if (!card.modelData.resident)
+                                                root.backend.removePopup(card.modelData.id);
                                         }
                                     }
                                 }

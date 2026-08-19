@@ -8,6 +8,7 @@ Scope {
     readonly property alias battery: batteryService
     readonly property alias orientation: orientationService
     readonly property alias clock: clockService
+    readonly property alias notifications: notificationService
 
     MullvadService { id: mullvadService }
     TailscaleService { id: tailscaleService }
@@ -16,4 +17,5 @@ Scope {
     BatteryService { id: batteryService }
     OrientationService { id: orientationService }
     ClockService { id: clockService }
+    NotificationService { id: notificationService }
 }

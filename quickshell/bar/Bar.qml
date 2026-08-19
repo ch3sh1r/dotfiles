@@ -53,6 +53,8 @@ PanelWindow {
             compact: bar.compact
         }
         Battery { backend: bar.services.battery }
+        // Left click opens recent notifications; right click toggles DND.
+        NotificationHistory { backend: bar.services.notifications }
         SunsetToggle {}
         OrientationLock {
             backend: bar.services.orientation
