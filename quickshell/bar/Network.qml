@@ -1,5 +1,4 @@
 import QtQuick
-import Quickshell.Io
 import ".."
 import "../components"
 
@@ -27,12 +26,9 @@ StatusPill {
         return "Disconnected";
     }
 
+    required property var backend
     property bool compact: false
-    property var info: ({
-            type: "disconnected"
-        })
-
-    readonly property string scriptPath: Qt.resolvedUrl("../scripts/network.sh").toString().replace("file://", "")
+    readonly property var info: backend.info
     readonly property var wifiIcons: ["󰤯", "󰤟", "󰤢", "󰤥", "󰤨"]
 
     function wifiIcon(strength) {
@@ -40,27 +36,4 @@ StatusPill {
         return wifiIcons[Math.max(0, i)];
     }
 
-    Process {
-        id: proc
-        command: ["bash", root.scriptPath]
-        stdout: StdioCollector {
-            onStreamFinished: {
-                try {
-                    root.info = JSON.parse(this.text.trim());
-                } catch (e) {
-                    root.info = {
-                        type: "disconnected"
-                    };
-                }
-            }
-        }
-    }
-
-    Timer {
-        interval: 5000
-        running: true
-        repeat: true
-        triggeredOnStart: true
-        onTriggered: proc.running = true
-    }
 }

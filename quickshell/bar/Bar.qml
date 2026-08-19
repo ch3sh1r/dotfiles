@@ -5,6 +5,7 @@ import ".."
 PanelWindow {
     id: bar
 
+    required property var services
     readonly property bool compact: bar.screen && bar.screen.width < bar.screen.height
 
     anchors {
@@ -28,6 +29,7 @@ PanelWindow {
 
     Clock {
         anchors.centerIn: parent
+        backend: bar.services.clock
         compact: bar.compact
     }
 
@@ -37,19 +39,23 @@ PanelWindow {
         anchors.rightMargin: Theme.gap
         spacing: Theme.gap
 
-        Volume {}
+        Volume { backend: bar.services.audio }
         Network {
+            backend: bar.services.network
             compact: bar.compact
         }
         Mullvad {
+            backend: bar.services.mullvad
             compact: bar.compact
         }
         Tailscale {
+            backend: bar.services.tailscale
             compact: bar.compact
         }
-        Battery {}
+        Battery { backend: bar.services.battery }
         SunsetToggle {}
         OrientationLock {
+            backend: bar.services.orientation
             monitorName: bar.screen ? bar.screen.name : ""
         }
     }

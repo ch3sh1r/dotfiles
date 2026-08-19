@@ -30,22 +30,13 @@ Scope {
         if ((Quickshell.env("WAYLAND_DISPLAY") || "").length === 0)
             return 0;
 
-        let monitors = Hyprland.monitors.values;
         let screens = Quickshell.screens;
         let count = 0;
 
-        for (let i = 0; i < monitors.length; i++) {
-            let monitor = monitors[i];
-            if (!monitor || monitor.name.length === 0 || monitor.width <= 0 || monitor.height <= 0)
-                continue;
-
-            for (let j = 0; j < screens.length; j++) {
-                let screen = screens[j];
-                if (screen && screen.name === monitor.name && screen.width > 0 && screen.height > 0) {
-                    count++;
-                    break;
-                }
-            }
+        for (let i = 0; i < screens.length; i++) {
+            let screen = screens[i];
+            if (screen && screen.name.length > 0 && screen.width > 0 && screen.height > 0)
+                count++;
         }
 
         return count;

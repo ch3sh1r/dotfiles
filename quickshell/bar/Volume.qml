@@ -1,7 +1,4 @@
 import QtQuick
-import Quickshell
-import Quickshell.Io
-import Quickshell.Services.Pipewire
 import ".."
 import "../components"
 
@@ -23,75 +20,20 @@ StatusPill {
     label: root.muted ? "" : root.percent
     labelVisible: true
 
-    // Keep the default sink bound/awake so its audio props stay live.
-    PwObjectTracker {
-        objects: [Pipewire.defaultAudioSink]
-    }
+    required property var backend
+    readonly property var sink: backend.sink
+    readonly property var audio: backend.audio
+    readonly property bool muted: backend.muted
+    readonly property real volume: backend.volume
+    readonly property int percent: backend.percent
+    readonly property bool headphones: backend.headphones
+    readonly property bool bluetoothHeadphones: backend.bluetoothHeadphones
+    readonly property int headsetBattery: backend.headsetBattery
 
-    readonly property var sink: Pipewire.defaultAudioSink
-    readonly property var audio: sink ? sink.audio : null
-    readonly property bool muted: audio ? audio.muted : true
-    readonly property real volume: audio ? audio.volume : 0
-    readonly property int percent: Math.round(volume * 100)
-
-    readonly property bool headphones: {
-        if (!sink)
-            return false;
-        let s = ((sink.description || "") + " " + (sink.nickname || "") + " " + (sink.name || "")).toLowerCase();
-        return /head(phone|set)|hands.?free|bluez|a2dp|hifi/.test(s);
-    }
-    readonly property bool bluetoothHeadphones: {
-        if (!sink)
-            return false;
-        let s = ((sink.description || "") + " " + (sink.nickname || "") + " " + (sink.name || "")).toLowerCase();
-        return root.headphones && /bluez|a2dp|hands.?free/.test(s);
-    }
-    readonly property string sinkInfo: sink ? ((sink.name || "") + " " + (sink.description || "") + " " + (sink.nickname || "")) : ""
-    readonly property string batteryScriptPath: Qt.resolvedUrl("../scripts/bluetooth-headset-battery.sh").toString().replace("file://", "")
-
-    property int headsetBattery: -1
-
-    function refreshBattery() {
-        if (root.bluetoothHeadphones)
-            batteryProc.running = true;
-        else
-            root.headsetBattery = -1;
-    }
-
-    function setVolume(v) {
-        if (audio)
-            audio.volume = Math.max(0, Math.min(1, v));
-    }
-
-    Process {
-        id: batteryProc
-        command: ["bash", root.batteryScriptPath, root.sinkInfo]
-        stdout: StdioCollector {
-            onStreamFinished: {
-                try {
-                    let s = JSON.parse(this.text.trim());
-                    root.headsetBattery = s.battery === null ? -1 : s.battery;
-                } catch (e) {
-                    root.headsetBattery = -1;
-                }
-            }
-        }
-    }
-
-    Timer {
-        interval: 30000
-        running: true
-        repeat: true
-        triggeredOnStart: true
-        onTriggered: root.refreshBattery()
-    }
-
-    onSinkInfoChanged: root.refreshBattery()
-
-    onClicked: if (root.audio) root.audio.muted = !root.audio.muted
-    onRightClicked: Quickshell.execDetached(["pavucontrol", "-t", "3"])
+    onClicked: backend.toggleMuted()
+    onRightClicked: backend.openMixer()
     onWheel: function (delta) {
-        root.setVolume(root.volume + (delta > 0 ? 0.005 : -0.005));
+        backend.setVolume(root.volume + (delta > 0 ? 0.005 : -0.005));
     }
 
     tooltipContent: Column {
@@ -138,10 +80,10 @@ StatusPill {
                 anchors.fill: parent
                 anchors.margins: -6
                 onPressed: function (m) {
-                    root.setVolume(m.x / track.width);
+                    backend.setVolume(m.x / track.width);
                 }
                 onPositionChanged: function (m) {
-                    root.setVolume(m.x / track.width);
+                    backend.setVolume(m.x / track.width);
                 }
             }
         }

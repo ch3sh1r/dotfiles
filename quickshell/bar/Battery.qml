@@ -1,5 +1,4 @@
 import QtQuick
-import Quickshell.Services.UPower
 import ".."
 import "../components"
 
@@ -23,16 +22,17 @@ StatusPill {
         if (root.full)
             return percentage + " · Fully charged";
 
-        let pluggedIn = !UPower.onBattery;
+        let pluggedIn = !root.backend.onBattery;
         let duration = root.formatDuration(pluggedIn ? root.dev.timeToFull : root.dev.timeToEmpty);
         if (duration.length > 0)
             return percentage + " · " + duration + (pluggedIn ? " until full" : " remaining");
         return percentage + " · " + (pluggedIn ? "On AC power" : "Estimating");
     }
 
-    readonly property var dev: UPower.displayDevice
-    readonly property bool charging: dev && dev.state === UPowerDeviceState.Charging
-    readonly property bool full: dev && (dev.state === UPowerDeviceState.FullyCharged || dev.percentage >= 1)
+    required property var backend
+    readonly property var dev: backend.device
+    readonly property bool charging: backend.charging
+    readonly property bool full: backend.full
 
     readonly property var dischargeIcons: ["󰁺", "󰁻", "󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰂂", "󰁹"]
     readonly property var chargeIcons: ["󰢜", "󰂆", "󰂇", "󰂈", "󰢝", "󰂉", "󰢞", "󰂊", "󰂋", "󰂅"]

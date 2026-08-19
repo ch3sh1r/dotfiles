@@ -2,21 +2,16 @@ import QtQuick
 import ".."
 import "../components"
 import "../overlays"
-import Quickshell
 
 Pill {
     id: root
 
+    required property var backend
     property bool pinned: false
     property bool compact: false
 
-    SystemClock {
-        id: clock
-        precision: SystemClock.Minutes
-    }
-
     Label {
-        text: Qt.formatDateTime(clock.date, root.compact ? "HH:mm" : "dddd yyyy-MM-dd HH:mm")
+        text: Qt.formatDateTime(root.backend.date, root.compact ? "HH:mm" : "dddd yyyy-MM-dd HH:mm")
         color: Theme.fgBright
     }
 
@@ -35,7 +30,7 @@ Pill {
 
         Calendar {
             id: calendar
-            today: clock.date
+            today: root.backend.date
             birthDate: new Date(1991, 3, 20)
             onClicked: root.pinned = false
         }
