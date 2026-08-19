@@ -15,7 +15,7 @@ Pill {
     onRightClicked: root.backend.toggleDnd()
 
     IconText {
-        text: root.backend.dnd ? "󰂛" : "󰂚"
+        text: root.backend.dnd ? "󰥳" : ""
         color: root.backend.dnd ? Theme.warning : Theme.fg
     }
 

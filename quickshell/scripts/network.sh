@@ -12,6 +12,10 @@ ip_of() {
     ip -4 -o addr show "$1" 2>/dev/null | awk '{print $4}' | cut -d/ -f1 | head -n1
 }
 
+gateway_of() {
+    ip -4 route show default dev "$1" 2>/dev/null | awk '/^default/ {print $3; exit}'
+}
+
 # Find the wireless interface (if any).
 wifi=""
 for d in /sys/class/net/*; do
@@ -30,8 +34,8 @@ if [ -n "$wifi" ] && [ "$(cat "/sys/class/net/$wifi/operstate" 2>/dev/null)" = u
     [ -n "$link" ] && sig=$((link * 100 / 70))
     [ "$sig" -gt 100 ] && sig=100
     ssid=$(iw dev "$wifi" link 2>/dev/null | sed -n 's/^[[:space:]]*SSID: //p' | head -n1)
-    printf '{"type":"wifi","signal":%s,"ssid":"%s","ip":"%s"}\n' \
-        "$sig" "$(esc "$ssid")" "$(esc "$(ip_of "$wifi")")"
+    printf '{"type":"wifi","name":"%s","signal":%s,"ssid":"%s","ip":"%s","gateway":"%s"}\n' \
+        "$(esc "$wifi")" "$sig" "$(esc "$ssid")" "$(esc "$(ip_of "$wifi")")" "$(esc "$(gateway_of "$wifi")")"
     exit 0
 fi
 
@@ -42,8 +46,8 @@ for d in /sys/class/net/*; do
     [ -d "$d/wireless" ] && continue
     [ -e "$d/phy80211" ] && continue
     if [ "$(cat "$d/operstate" 2>/dev/null)" = up ]; then
-        printf '{"type":"ethernet","name":"%s","ip":"%s"}\n' \
-            "$(esc "$i")" "$(esc "$(ip_of "$i")")"
+        printf '{"type":"ethernet","name":"%s","ip":"%s","gateway":"%s"}\n' \
+            "$(esc "$i")" "$(esc "$(ip_of "$i")")" "$(esc "$(gateway_of "$i")")"
         exit 0
     fi
 done
