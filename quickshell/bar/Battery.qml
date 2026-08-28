@@ -28,11 +28,15 @@ StatusPill {
             return percentage + " · " + duration + (pluggedIn ? " until full" : " remaining");
         return percentage + " · " + (pluggedIn ? "On AC power" : "Estimating");
     }
+    tooltipOnHover: false
+    tooltipCloseOnClick: true
 
     required property var backend
     readonly property var dev: backend.device
     readonly property bool charging: backend.charging
     readonly property bool full: backend.full
+
+    onClicked: root.toggleTooltip()
 
     readonly property var dischargeIcons: ["󰁺", "󰁻", "󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰂂", "󰁹"]
     readonly property var chargeIcons: ["󰢜", "󰂆", "󰂇", "󰂈", "󰢝", "󰂉", "󰢞", "󰂊", "󰂋", "󰂅"]

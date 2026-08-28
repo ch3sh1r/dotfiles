@@ -26,6 +26,7 @@ Pill {
     }
 
     Tooltip {
+        id: historyPopup
         anchorItem: root
         shown: root.pinned
         frameRadius: Theme.radius * 2
@@ -83,7 +84,11 @@ Pill {
 
                     MouseArea {
                         anchors.fill: parent
-                        onClicked: root.backend.clearHistory()
+                        onClicked: {
+                            root.backend.clearHistory();
+                            root.pinned = false;
+                            historyPopup.dismiss();
+                        }
                     }
                 }
             }

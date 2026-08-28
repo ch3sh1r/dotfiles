@@ -11,7 +11,7 @@ Pill {
     property color labelColor: Theme.fgBright
     property string tooltip: ""
     property bool tooltipPinned: false
-    property bool tooltipOnHover: true
+    property bool tooltipOnHover: false
     property alias tooltipCloseOnClick: tip.closeOnClick
     property alias tooltipContent: tip.content
 

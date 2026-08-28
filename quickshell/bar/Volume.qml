@@ -19,6 +19,7 @@ StatusPill {
     iconColor: root.muted ? Theme.base03 : Theme.fg
     label: root.muted ? "" : root.percent
     labelVisible: true
+    tooltipOnHover: false
     tooltipCloseOnClick: true
 
     required property var backend
@@ -31,7 +32,7 @@ StatusPill {
     readonly property bool bluetoothHeadphones: backend.bluetoothHeadphones
     readonly property int headsetBattery: backend.headsetBattery
 
-    onClicked: backend.toggleMuted()
+    onClicked: root.toggleTooltip()
     onRightClicked: backend.openMixer()
     onWheel: function (delta) {
         backend.setVolume(root.volume + (delta > 0 ? 0.005 : -0.005));

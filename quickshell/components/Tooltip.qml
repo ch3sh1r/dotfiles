@@ -27,6 +27,12 @@ PopupWindow {
     default property alias content: body.data
     signal dismissRequested()
 
+    function dismiss() {
+        hideTimer.stop();
+        root.visible = false;
+        root.dismissRequested();
+    }
+
     readonly property bool contentHovered: frameHover.hovered
     readonly property bool wantShown: (shown || contentHovered) && anchorItem !== null
 
@@ -76,10 +82,7 @@ PopupWindow {
             TapHandler {
                 enabled: root.closeOnClick
                 acceptedButtons: Qt.LeftButton
-                onTapped: {
-                    root.visible = false;
-                    root.dismissRequested();
-                }
+                onTapped: root.dismiss()
             }
 
             Label {
