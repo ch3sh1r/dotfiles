@@ -43,7 +43,7 @@ apply_orientation() {
 
     transform="$(transform_for_orientation "$orientation")" || return 0
 
-    hyprctl eval "hl.monitor({ output = \"$monitor\", mode = \"$mode\", position = \"$position\", scale = $scale, transform = $transform }); hl.config({ input = { touchdevice = { transform = $transform }, tablet = { transform = $transform } } })" >/dev/null || true
+    hyprctl eval "hl.monitor({ output = \"$monitor\", mode = \"$mode\", position = \"$position\", scale = $scale, transform = $transform }); hl.config({ input = { touchdevice = { output = \"$monitor\", transform = $transform }, tablet = { output = \"$monitor\", transform = $transform } } }); hl.exec_scheduled_prop_refresh_immediately()" >/dev/null || true
 }
 
 last_orientation=""
