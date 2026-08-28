@@ -16,6 +16,11 @@ PanelWindow {
     implicitHeight: Theme.barHeight
     color: Theme.bg
 
+    MouseArea {
+        anchors.fill: parent
+        onClicked: PopupState.dismiss()
+    }
+
     Row {
         anchors.left: parent.left
         anchors.verticalCenter: parent.verticalCenter

@@ -15,7 +15,11 @@ Pill {
         color: Theme.fgBright
     }
 
-    onClicked: root.pinned = !root.pinned
+    onClicked: {
+        let shouldShow = !root.pinned;
+        PopupState.dismiss();
+        root.pinned = shouldShow;
+    }
     onWheel: function (delta) {
         calendar.shiftYear(delta > 0 ? -1 : 1);
     }
@@ -33,6 +37,13 @@ Pill {
             today: root.backend.date
             birthDate: new Date(1991, 3, 20)
             onClicked: root.pinned = false
+        }
+    }
+
+    Connections {
+        target: PopupState
+        function onDismissRequested() {
+            root.pinned = false;
         }
     }
 }

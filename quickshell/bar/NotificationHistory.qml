@@ -11,7 +11,11 @@ Pill {
     required property var backend
     property bool pinned: false
 
-    onClicked: root.pinned = !root.pinned
+    onClicked: {
+        let shouldShow = !root.pinned;
+        PopupState.dismiss();
+        root.pinned = shouldShow;
+    }
     onRightClicked: root.backend.toggleDnd()
 
     IconText {
@@ -175,6 +179,13 @@ Pill {
                     }
                 }
             }
+        }
+    }
+
+    Connections {
+        target: PopupState
+        function onDismissRequested() {
+            root.pinned = false;
         }
     }
 }

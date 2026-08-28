@@ -16,7 +16,16 @@ Pill {
     property alias tooltipContent: tip.content
 
     function toggleTooltip() {
-        root.tooltipPinned = !root.tooltipPinned;
+        let shouldShow = !root.tooltipPinned;
+        PopupState.dismiss();
+        root.tooltipPinned = shouldShow;
+    }
+
+    Connections {
+        target: PopupState
+        function onDismissRequested() {
+            root.tooltipPinned = false;
+        }
     }
 
     IconText {

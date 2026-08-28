@@ -43,7 +43,10 @@ StatusPill {
 
         Label {
             anchors.horizontalCenter: parent.horizontalCenter
+            width: track.width
             text: root.sink ? (root.sink.description || root.sink.nickname || root.sink.name) : "No sink"
+            elide: Text.ElideRight
+            horizontalAlignment: Text.AlignHCenter
             color: Theme.cyan
         }
 
@@ -86,6 +89,52 @@ StatusPill {
                 }
                 onPositionChanged: function (m) {
                     backend.setVolume(m.x / track.width);
+                }
+            }
+        }
+
+        Row {
+            spacing: 6
+
+            Rectangle {
+                implicitWidth: muteLabel.implicitWidth + 14
+                implicitHeight: 24
+                radius: Theme.radius
+                color: Theme.base02
+                border.width: 1
+                border.color: Theme.base03
+
+                Label {
+                    id: muteLabel
+                    anchors.centerIn: parent
+                    text: root.muted ? "Unmute" : "Mute"
+                    color: Theme.fgBright
+                }
+
+                MouseArea {
+                    anchors.fill: parent
+                    onClicked: backend.toggleMuted()
+                }
+            }
+
+            Rectangle {
+                implicitWidth: mixerLabel.implicitWidth + 14
+                implicitHeight: 24
+                radius: Theme.radius
+                color: Theme.base02
+                border.width: 1
+                border.color: Theme.base03
+
+                Label {
+                    id: mixerLabel
+                    anchors.centerIn: parent
+                    text: "Mixer"
+                    color: Theme.fgBright
+                }
+
+                MouseArea {
+                    anchors.fill: parent
+                    onClicked: backend.openMixer()
                 }
             }
         }
