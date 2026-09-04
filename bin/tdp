@@ -15,6 +15,10 @@ LONG_TIME_WINDOW_US=28000000 # ~28 seconds
 SHORT_TIME_WINDOW_US=2441    # ~2.4 milliseconds
 
 get_power_mode() {
+    command -v powercap-info >/dev/null 2>&1 || {
+        printf 'Error: required command not found: powercap-info\n' >&2
+        return 127
+    }
     # Get the current sustained (long-term) power limit value
     # powercap-info -L prints just the limit value
     local current_limit
@@ -55,16 +59,33 @@ set_power_mode() {
     get_power_mode
 }
 
-case "$1" in
+usage() {
+    printf 'Usage: %s {low|high|status}\n' "${0##*/}" >&2
+}
+
+case "${1:-status}" in
 low)
+    command -v sudo >/dev/null 2>&1 || { printf 'Error: required command not found: sudo\n' >&2; exit 127; }
+    command -v powercap-set >/dev/null 2>&1 || { printf 'Error: required command not found: powercap-set\n' >&2; exit 127; }
+    command -v cpupower >/dev/null 2>&1 || { printf 'Error: required command not found: cpupower\n' >&2; exit 127; }
     set_power_mode "low" "$LOW_POWER_UW" "$LOW_BOOST_UW"
     sudo cpupower frequency-set -g powersave
     ;;
 high)
+    command -v sudo >/dev/null 2>&1 || { printf 'Error: required command not found: sudo\n' >&2; exit 127; }
+    command -v powercap-set >/dev/null 2>&1 || { printf 'Error: required command not found: powercap-set\n' >&2; exit 127; }
+    command -v cpupower >/dev/null 2>&1 || { printf 'Error: required command not found: cpupower\n' >&2; exit 127; }
     set_power_mode "high" "$HIGH_POWER_UW" "$HIGH_BOOST_UW"
     sudo cpupower frequency-set -g performance
     ;;
-*)
+status)
     get_power_mode
+    ;;
+help|-h|--help)
+    usage
+    ;;
+*)
+    usage
+    exit 2
     ;;
 esac

@@ -36,6 +36,7 @@ freerdp
 ghostscript
 gimp
 git
+git-lfs
 glm
 go
 greetd
@@ -60,6 +61,7 @@ intel-ucode
 ipython
 iwd
 john
+jq
 jre-openjdk
 kvantum
 lazygit
@@ -118,6 +120,7 @@ otf-opendyslexic-nerd
 otf-overpass-nerd
 paru
 pavucontrol
+pciutils
 pipewire
 pipewire-alsa
 pipewire-jack
@@ -249,6 +252,7 @@ wireless-regdb
 wireless_tools
 wireplumber
 wireshark-qt
+wl-clipboard
 wtype
 xdg-desktop-portal-gtk
 xdg-desktop-portal-hyprland

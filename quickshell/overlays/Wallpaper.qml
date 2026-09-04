@@ -19,7 +19,7 @@ PanelWindow {
 
     Image {
         anchors.fill: parent
-        source: "file:///home/ch3sh1r/.config/hypr/rune.png"
+        source: Qt.resolvedUrl("../../hypr/rune.png")
         fillMode: Image.PreserveAspectFit
         smooth: true
         asynchronous: true
