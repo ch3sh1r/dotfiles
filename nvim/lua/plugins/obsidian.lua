@@ -1,5 +1,5 @@
 return {
-  {
+	{
     "obsidian-nvim/obsidian.nvim",
     version = "*",
     opts = {
@@ -10,8 +10,11 @@ return {
           path = "~/Documents/obsidian",
         },
       },
-      picker = {
-        name = "snacks.picker",
+      daily_notes = {
+        enabled = true,
+        folder = "Journal/Daily",
+        date_format = "YYYY-MM-DD",
+        workdays_only = false,
       },
     },
   },
