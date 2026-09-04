@@ -3,18 +3,6 @@ if status is-interactive
 
     # Run ssh agent plugin
     fish_ssh_agent
-    # Defer the Python startup cost until the correction command is first used.
-    function fuck
-        if not command -q thefuck
-            echo "thefuck is not installed" >&2
-            return 127
-        end
-
-        functions --erase fuck
-        thefuck --alias | source
-        fuck $argv
-    end
-
     # Set up session logging
     #if test -z "$SCRIPTED"
     #set -gx SCRIPTED nested
