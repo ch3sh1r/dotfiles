@@ -313,7 +313,7 @@ Scope {
                 Image {
                     id: wallpaper
                     anchors.fill: parent
-                    source: Qt.resolvedUrl("../../hypr/rune.png")
+                    source: Qt.resolvedUrl("/home/ch3sh1r/.config/hypr/rune.png")
                     fillMode: Image.PreserveAspectCrop
                     smooth: true
                     asynchronous: true

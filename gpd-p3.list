@@ -36,7 +36,6 @@ freerdp
 ghostscript
 gimp
 git
-git-lfs
 glm
 go
 greetd
@@ -61,7 +60,6 @@ intel-ucode
 ipython
 iwd
 john
-jq
 jre-openjdk
 kvantum
 lazygit
@@ -120,7 +118,6 @@ otf-opendyslexic-nerd
 otf-overpass-nerd
 paru
 pavucontrol
-pciutils
 pipewire
 pipewire-alsa
 pipewire-jack
@@ -169,7 +166,6 @@ telegram-desktop
 tesseract
 tesseract-data-eng
 tesseract-data-rus
-the_silver_searcher
 thefuck
 tlp
 tmux
@@ -252,7 +248,6 @@ wireless-regdb
 wireless_tools
 wireplumber
 wireshark-qt
-wl-clipboard
 wtype
 xdg-desktop-portal-gtk
 xdg-desktop-portal-hyprland

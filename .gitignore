@@ -14,3 +14,5 @@ hypr/workspaces.conf
 fish/fish_variables
 nvim/lazy-lock.json
 
+# Machine-local configuration and secrets
+/private/

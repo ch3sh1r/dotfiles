@@ -8,7 +8,9 @@ set -euo pipefail
 # =======================
 # CONFIGURATION
 # =======================
-RULES_FILE="${RULES_FILE:-/home/ch3sh1r/Documents/Github/mullvad-tailscale/mullvad.rules}"
+SCRIPT_PATH=$(readlink -f -- "${BASH_SOURCE[0]}")
+REPO_ROOT=$(dirname -- "$(dirname -- "$SCRIPT_PATH")")
+RULES_FILE="${RULES_FILE:-$REPO_ROOT/private/mullvad.rules}"
 NFT_TABLE="${NFT_TABLE:-mullvad-ts}"
 
 # =======================
