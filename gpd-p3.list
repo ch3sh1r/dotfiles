@@ -15,7 +15,6 @@ bluez
 bluez-utils
 brave-bin
 brightnessctl
-btop
 bzip3
 calibre
 clinfo
@@ -39,6 +38,7 @@ gimp
 git
 glm
 go
+greetd
 grim
 gst-plugin-pipewire
 gvfs-mtp
@@ -81,6 +81,7 @@ libvncserver
 linux
 linux-firmware
 linux-firmware-qlogic
+linux-headers
 localsend-bin
 loupe
 man-db
@@ -91,6 +92,7 @@ mullvad-vpn-cli
 nano
 nautilus
 ncdu
+neovide
 neovim
 nextcloud-client
 nftables
@@ -120,6 +122,7 @@ pipewire
 pipewire-alsa
 pipewire-jack
 pipewire-pulse
+playerctl
 polkit-kde-agent
 powercap
 powertop
@@ -148,10 +151,11 @@ retroarch-assets-ozone
 retroarch-assets-xmb
 ripgrep
 rizin
+rnote
 rockyou
 rocm-opencl-runtime
+rsync
 rust
-sddm
 slurp
 smartmontools
 sof-firmware
