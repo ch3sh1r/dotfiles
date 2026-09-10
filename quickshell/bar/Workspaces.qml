@@ -38,9 +38,11 @@ Item {
                 id: btn
                 required property var modelData
 
-                // `focused` = the workspace on the focused monitor (exactly one,
-                // updates on switch). `active` would be true per-monitor.
-                readonly property bool isFocused: modelData.focused
+                // This strip is already scoped to one monitor, so highlight
+                // that monitor's active workspace. `focused` also requires the
+                // monitor itself to be focused and can therefore leave the
+                // strip without a selection.
+                readonly property bool isFocused: modelData.active
                 readonly property bool isUrgent: modelData.urgent
 
                 implicitWidth: Math.max(Theme.pillHeight, lbl.implicitWidth + Theme.hPad * 2)

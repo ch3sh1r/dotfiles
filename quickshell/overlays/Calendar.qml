@@ -3,7 +3,7 @@ import ".."
 import "../components"
 
 // Full-year calendar, matching the old waybar clock calendar:
-//   mode: year, 3 month-columns, ISO week numbers on the right.
+//   mode: year, 3 month-columns, ISO week numbers on the left.
 // Scroll changes the year; right-click jumps back to the current year.
 // Colours mirror waybar: purple months, yellow weekdays, cyan weeks,
 // pink underlined today.
@@ -12,8 +12,6 @@ Item {
 
     property date today: new Date()
     property int viewYear: today.getFullYear()
-    property date birthDate: new Date(NaN)
-    property int lifeExpectancyYears: 70
     signal clicked()
 
     function reset() {
@@ -42,29 +40,22 @@ Item {
         return root.clamp((today.getTime() - start.getTime()) / (end.getTime() - start.getTime()));
     }
 
-    function lifeProgress() {
-        if (isNaN(birthDate.getTime()))
-            return 0;
-
-        let end = new Date(birthDate.getFullYear() + lifeExpectancyYears, birthDate.getMonth(), birthDate.getDate());
-        return root.clamp((today.getTime() - birthDate.getTime()) / (end.getTime() - birthDate.getTime()));
-    }
-
     function isToday(y, m, d) {
         return y === today.getFullYear() && m === today.getMonth() && d === today.getDate();
     }
 
     function isoWeek(d) {
-        let date = new Date(d.getFullYear(), d.getMonth(), d.getDate());
-        let day = date.getDay();                  // Sun=0
-        date.setDate(date.getDate() - day + 4);   // Thursday of this week
-        let firstThu = new Date(date.getFullYear(), 0, 4);
-        let fday = firstThu.getDay();
-        firstThu.setDate(firstThu.getDate() - fday + 4);
+        // ISO weeks start on Monday; UTC avoids daylight-saving offsets.
+        let date = new Date(Date.UTC(d.getFullYear(), d.getMonth(), d.getDate()));
+        let day = date.getUTCDay() || 7;
+        date.setUTCDate(date.getUTCDate() - day + 4);
+        let firstThu = new Date(Date.UTC(date.getUTCFullYear(), 0, 4));
+        let fday = firstThu.getUTCDay() || 7;
+        firstThu.setUTCDate(firstThu.getUTCDate() - fday + 4);
         return 1 + Math.round((date.getTime() - firstThu.getTime()) / (7 * 86400000));
     }
 
-    // Flat 48-cell model (6 rows * (7 days + ISO week)) for one month.
+    // Flat 48-cell model (6 rows * (ISO week + 7 days)) for one month.
     function monthCells(year, month) {
         let out = [];
         let first = new Date(year, month, 1);
@@ -86,13 +77,14 @@ Item {
                     today: isToday(dt.getFullYear(), dt.getMonth(), dt.getDate())
                 });
             }
-            for (const c of row)
-                out.push(c);
-            let mon = new Date(start.getFullYear(), start.getMonth(), start.getDate() + w * 7);
+            // Label Sunday-first rows by their Thursday's ISO week.
+            let thu = new Date(start.getFullYear(), start.getMonth(), start.getDate() + w * 7 + 4);
             out.push({
                 type: "week",
-                week: rowHasMonth ? isoWeek(mon) : 0
+                week: rowHasMonth ? isoWeek(thu) : 0
             });
+            for (const c of row)
+                out.push(c);
         }
         return out;
     }
@@ -136,12 +128,6 @@ Item {
                 value: root.yearProgress()
             }
 
-            ProgressLine {
-                width: root.progressWidth
-                visible: !isNaN(root.birthDate.getTime())
-                title: "Memento mori"
-                value: root.lifeProgress()
-            }
         }
 
         Grid {
