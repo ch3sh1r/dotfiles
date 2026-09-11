@@ -10,3 +10,6 @@ vim.g.autoformat = false
 
 local opt = vim.opt
 opt.shiftwidth = 4
+opt.langmap =
+  "ФИСВУАПРШОЛДЬТЩЗЙКЫЕГМЦЧНЯ;ABCDEFGHIJKLMNOPQRSTUVWXYZ,фисвуапршолдьтщзйкыегмцчня;abcdefghijklmnopqrstuvwxyz"
+opt.langremap = false
