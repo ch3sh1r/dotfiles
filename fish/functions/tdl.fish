@@ -19,8 +19,8 @@ function tdl --description "Create a Tmux Dev Layout with editor, ai, and termin
     # Split vertically — top 85%, bottom 15%
     tmux split-window -v -p 15 -t $editor_pane -c $current_dir
 
-    # Split editor pane horizontally — AI on right 30%
-    set -l ai_pane (tmux split-window -h -p 30 -t $editor_pane -c $current_dir -P -F '#{pane_id}')
+    # Split editor pane horizontally — AI on right 40%
+    set -l ai_pane (tmux split-window -h -p 40 -t $editor_pane -c $current_dir -P -F '#{pane_id}')
 
     # If second AI provided, split the AI pane vertically
     if test -n "$ai2"
