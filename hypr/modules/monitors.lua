@@ -22,6 +22,14 @@ local monitors = {
 		scale = 1.0,
 		transform = 3,
 	},
+	-- Recovery rule for the U2724D when the dock/DP link fails to expose EDID.
+	{
+		output = "DP-7",
+		mode = "2560x1440@59.95",
+		position = "2720x1053",
+		scale = 1.0,
+		transform = 3,
+	},
 	{
 		output = "desc:Dell Inc. DELL U2724DE 7FV0B34",
 		mode = "2560x1440@59.95",
