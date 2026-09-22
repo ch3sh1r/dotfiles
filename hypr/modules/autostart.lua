@@ -2,6 +2,7 @@ local commands = {
 	"qs",
 	"wl-paste --watch cliphist store",
 	"~/.config/hypr/scripts/iio-hyprland-lua DSI-1",
+	"~/.local/bin/mullvad-network-profile",
 }
 
 hl.on("hyprland.start", function()

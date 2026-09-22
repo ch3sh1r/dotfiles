@@ -17,6 +17,7 @@ brave-bin
 brightnessctl
 bzip3
 calibre
+chatgpt-desktop
 clinfo
 cliphist
 cpio
@@ -30,6 +31,7 @@ efibootmgr
 evtest
 exfatprogs
 eza
+fd
 file-roller
 fish
 freerdp
@@ -88,7 +90,7 @@ man-db
 man-pages
 mesa-utils
 meson
-mullvad-vpn-cli
+mullvad-vpn-daemon
 nano
 nautilus
 ncdu
@@ -129,6 +131,7 @@ powertop
 prismlauncher
 protonhax
 proxychains-ng
+python-matplotlib
 python-numpy
 python-opencv
 python-pillow

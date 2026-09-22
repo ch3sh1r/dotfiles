@@ -1,0 +1,102 @@
+#!/usr/bin/env bash
+
+set -u
+
+SCRIPT_PATH=$(readlink -f -- "${BASH_SOURCE[0]}")
+REPO_ROOT=$(dirname -- "$(dirname -- "$SCRIPT_PATH")")
+readonly RESTRICTED_NETWORKS_FILE="${RESTRICTED_NETWORKS_FILE:-$REPO_ROOT/private/restricted-network-names}"
+readonly WAIT_SECONDS=15
+
+log() {
+	printf 'mullvad-network-profile: %s\n' "$*" >&2
+	logger --tag mullvad-network-profile -- "$*" 2>/dev/null || true
+}
+
+current_ssid() {
+	local wireless_path interface ssid
+
+	for wireless_path in /sys/class/net/*/wireless; do
+		[[ -d "$wireless_path" ]] || continue
+		interface=${wireless_path%/wireless}
+		interface=${interface##*/}
+		ssid=$(iw dev "$interface" link 2>/dev/null |
+			awk '/^[[:space:]]*SSID: / { sub(/^[[:space:]]*SSID: /, ""); print; exit }')
+		if [[ -n "$ssid" ]]; then
+			printf '%s\n' "$ssid"
+			return 0
+		fi
+	done
+
+	return 1
+}
+
+is_restricted_network() {
+	local network_name
+
+	[[ -f "$RESTRICTED_NETWORKS_FILE" ]] || return 1
+
+	while IFS= read -r network_name || [[ -n "$network_name" ]]; do
+		[[ -n "$network_name" && "$network_name" != \#* ]] || continue
+		[[ "$1" == "$network_name" ]] && return 0
+	done <"$RESTRICTED_NETWORKS_FILE"
+
+	return 1
+}
+
+command -v iw >/dev/null 2>&1 || {
+	log "iw is not installed"
+	exit 1
+}
+
+command -v mullvad >/dev/null 2>&1 || {
+	log "mullvad CLI is not installed"
+	exit 1
+}
+
+deadline=$((SECONDS + WAIT_SECONDS))
+ssid=""
+daemon_ready=false
+
+while ((SECONDS < deadline)); do
+	if [[ -z "$ssid" ]]; then
+		ssid=$(current_ssid || true)
+	fi
+
+	if mullvad obfuscation get >/dev/null 2>&1; then
+		daemon_ready=true
+	fi
+
+	if [[ -n "$ssid" && "$daemon_ready" == true ]]; then
+		break
+	fi
+
+	sleep 1
+done
+
+if [[ -z "$ssid" ]]; then
+	log "no connected Wi-Fi network found within ${WAIT_SECONDS}s"
+	exit 1
+fi
+
+if [[ "$daemon_ready" != true ]]; then
+	log "mullvad-daemon did not become available within ${WAIT_SECONDS}s"
+	exit 1
+fi
+
+if is_restricted_network "$ssid"; then
+	if ! mullvad obfuscation set udp2tcp --port 443; then
+		log "failed to set UDP-over-TCP port for SSID '$ssid'"
+		exit 1
+	fi
+	if ! mullvad obfuscation set mode udp2tcp; then
+		log "failed to enable UDP-over-TCP for SSID '$ssid'"
+		exit 1
+	fi
+	log "SSID '$ssid': using UDP-over-TCP on port 443"
+else
+	if ! mullvad obfuscation set mode auto; then
+		log "failed to restore automatic obfuscation for SSID '$ssid'"
+		exit 1
+	fi
+	log "SSID '$ssid': using automatic obfuscation"
+fi

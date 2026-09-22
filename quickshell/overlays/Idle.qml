@@ -22,7 +22,7 @@ Scope {
     }
 
     IdleMonitor {
-        timeout: 620
+        timeout: 630
         onIsIdleChanged: if (isIdle) root.run(["qs", "ipc", "call", "lock", "lock"])
     }
 
