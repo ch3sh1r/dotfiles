@@ -26,7 +26,6 @@ local apps = {
 	{ key = "W", command = webBrowser },
 	{ key = "SHIFT + W", command = webBrowser .. " --incognito" },
 	{ key = "CTRL + W", command = webBrowser .. ' --app="$(wl-paste --no-newline)"' },
-	{ key = "SHIFT + P", command = webBrowser .. " --app=https://www.perplexity.ai/" },
 	{ key = "SHIFT + G", command = webBrowser .. " --app=https://chatgpt.com/" },
 	{ key = "SHIFT + S", command = webBrowser .. " --app=https://open.spotify.com/" },
 	{ key = "SHIFT + T", command = webBrowser .. " --app=https://teams.cloud.microsoft/" },

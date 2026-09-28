@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+region=$(slurp) || exit 0
+[[ -n $region ]] || exit 0
+
+# Let the selection overlay disappear before capturing the selected area.
+sleep 1
+grim -g "$region" - | wl-copy -t image/png
