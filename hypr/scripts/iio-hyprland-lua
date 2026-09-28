@@ -9,6 +9,26 @@ sensor="${IIO_HYPRLAND_SENSOR:-/sys/bus/iio/devices/iio:device0}"
 threshold="${IIO_HYPRLAND_THRESHOLD:-700}"
 poll_interval="${IIO_HYPRLAND_POLL_INTERVAL:-0.5}"
 
+if [[ ! -r "$sensor/in_accel_x_raw" || ! -r "$sensor/in_accel_y_raw" ]]; then
+    printf 'iio-hyprland-lua: accelerometer not found at %s\n' "$sensor" >&2
+    exit 1
+fi
+
+if ! [[ "$scale" =~ ^[0-9]+(\.[0-9]+)?$ ]]; then
+    printf 'iio-hyprland-lua: invalid scale: %s\n' "$scale" >&2
+    exit 1
+fi
+
+lua_string() {
+    local value="${1//\\/\\\\}"
+    value="${value//\"/\\\"}"
+    printf '"%s"' "$value"
+}
+
+output="$(lua_string "$monitor")"
+mode_value="$(lua_string "$mode")"
+position_value="$(lua_string "$position")"
+
 transform_for_orientation() {
     case "$1" in
         normal) printf '3' ;;
@@ -43,7 +63,8 @@ apply_orientation() {
 
     transform="$(transform_for_orientation "$orientation")" || return 0
 
-    hyprctl eval "hl.monitor({ output = \"$monitor\", mode = \"$mode\", position = \"$position\", scale = $scale, transform = $transform }); hl.config({ input = { touchdevice = { output = \"$monitor\", transform = $transform }, tablet = { output = \"$monitor\", transform = $transform } } }); hl.exec_scheduled_prop_refresh_immediately()" >/dev/null || true
+    hyprctl eval "hl.monitor({ output = $output, mode = $mode_value, position = $position_value, scale = $scale, transform = $transform }); hl.config({ input = { touchdevice = { output = $output, transform = $transform }, tablet = { output = $output, transform = $transform } } }); hl.exec_scheduled_prop_refresh_immediately()" >/dev/null ||
+        printf 'iio-hyprland-lua: hyprctl eval failed for %s\n' "$orientation" >&2
 }
 
 last_orientation=""

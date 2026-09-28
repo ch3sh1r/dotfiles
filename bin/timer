@@ -2,12 +2,12 @@
 set -euo pipefail
 
 usage() {
-  printf 'Usage: %s <positive integer minutes> [message]\n' "${0##*/}" >&2
+    printf 'Usage: %s <positive integer minutes> [message]\n' "${0##*/}" >&2
 }
 
 if [ "$#" -lt 1 ] || ! [[ "$1" =~ ^[1-9][0-9]*$ ]]; then
-  usage
-  exit 2
+    usage
+    exit 2
 fi
 
 duration="$1"
@@ -15,16 +15,16 @@ message="${*:2}"
 message="${message:-Timer done!}"
 start_time=$(date +%s)
 while true; do
-  current_time=$(date +%s)
-  elapsed_time=$((current_time - start_time))
-  remaining_time=$((duration * 60 - elapsed_time))
-  if [ "$remaining_time" -le 0 ]; then
-    printf '\r%s\n' "$message"
-    if command -v notify-send >/dev/null 2>&1; then
-      notify-send "Timer" "$message"
+    current_time=$(date +%s)
+    elapsed_time=$((current_time - start_time))
+    remaining_time=$((duration * 60 - elapsed_time))
+    if [ "$remaining_time" -le 0 ]; then
+        printf '\r%s\n' "$message"
+        if command -v notify-send >/dev/null 2>&1; then
+            notify-send "Timer" "$message"
+        fi
+        exit 0
     fi
-    exit 0
-  fi
-  printf '\r%ss ' "$remaining_time"
-  sleep 1
+    printf '\r%ss ' "$remaining_time"
+    sleep 1
 done

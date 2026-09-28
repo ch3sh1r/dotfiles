@@ -1,5 +1,6 @@
 import QtQuick
 import QtQuick.Effects
+import Quickshell
 import Quickshell.Wayland
 import ".."
 import "../components"
@@ -18,15 +19,20 @@ WlSessionLockSurface {
     signal passwordSubmitted(string password)
     signal passwordCancelled()
 
-    color: "#000000"
+    color: Theme.lockBackground
+
+    SystemClock {
+        id: clock
+        precision: SystemClock.Minutes
+    }
 
     Rectangle {
         anchors.fill: parent
-        color: "#000000"
+        color: Theme.lockBackground
 
         Image {
             anchors.fill: parent
-            source: Qt.resolvedUrl("/home/ch3sh1r/.config/hypr/rune.png")
+            source: Theme.wallpaper
             fillMode: Image.PreserveAspectCrop
             smooth: true
             asynchronous: true
@@ -42,7 +48,7 @@ WlSessionLockSurface {
 
         Rectangle {
             anchors.fill: parent
-            color: "#000000"
+            color: Theme.lockBackground
             opacity: 0
 
             NumberAnimation on opacity {
@@ -75,7 +81,7 @@ WlSessionLockSurface {
             Label {
                 width: parent.width
                 visible: root.passwordVisible || root.authenticating
-                text: Qt.formatDateTime(new Date(), "hh:mm")
+                text: Qt.formatDateTime(clock.date, "hh:mm")
                 color: Theme.fgBright
                 horizontalAlignment: Text.AlignHCenter
                 font.pixelSize: 42
@@ -88,7 +94,7 @@ WlSessionLockSurface {
                 anchors.horizontalCenter: parent.horizontalCenter
                 visible: root.passwordVisible || root.authenticating
                 radius: Theme.radius
-                color: "#593c3836"
+                color: Theme.lockInput
                 border.width: 2
                 border.color: password.activeFocus ? Theme.accent : "transparent"
 

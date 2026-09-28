@@ -1,18 +1,15 @@
 .DS_Store
 
-*.pyc
 *.swp
-
-msf4/history
-msf4/local/*
-msf4/logs/*
-msf4/loot/*
-
-hypr/monitors.conf
-hypr/workspaces.conf
 
 fish/fish_variables
 nvim/lazy-lock.json
+
+# Installed by `make fish-plugins` (fisher update)
+fish/functions/fisher.fish
+fish/completions/fisher.fish
+fish/functions/__z*.fish
+fish/conf.d/z.fish
 
 # Machine-local configuration and secrets
 /private/

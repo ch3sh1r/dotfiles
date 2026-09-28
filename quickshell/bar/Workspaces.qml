@@ -75,8 +75,8 @@ Item {
     WheelHandler {
         onWheel: function (event) {
             Hyprland.dispatch(event.angleDelta.y > 0
-                ? "hl.dsp.focus({ workspace = 'e-1' })"
-                : "hl.dsp.focus({ workspace = 'e+1' })");
+                ? "hl.dsp.focus({ workspace = 'm-1' })"
+                : "hl.dsp.focus({ workspace = 'm+1' })");
         }
     }
 }

@@ -10,6 +10,9 @@ import ".."
 // and uses a short hide delay so moving from the pill into the popup doesn't
 // close it mid-transit.
 //
+// Click-to-open popups use `pinned`/`togglePinned()`: opening one closes every
+// other popup through PopupState. `framed` gives the bordered calendar look.
+//
 // NB: a PopupWindow is a real Wayland window — it needs an explicit, non-zero
 // `width`/`height` and a valid (>=1x1) anchor rect or the compositor rejects
 // the surface and Quickshell crashes. The frame/timer go through the explicit
@@ -18,17 +21,26 @@ PopupWindow {
     id: root
 
     property Item anchorItem
-    property bool shown: false
+    property bool pinned: false
+    property bool shown: pinned
     property string text: ""
-    property int frameRadius: Theme.radius
-    property int frameBorderWidth: 0
-    property color frameBorderColor: "transparent"
+    property bool framed: false
+    property int frameRadius: framed ? Theme.radius * 2 : Theme.radius
+    property int frameBorderWidth: framed ? 1 : 0
+    property color frameBorderColor: framed ? Theme.base02 : "transparent"
     property bool closeOnClick: false
     default property alias content: body.data
     signal dismissRequested()
 
+    function togglePinned(): void {
+        let shouldShow = !root.pinned;
+        PopupState.dismiss();
+        root.pinned = shouldShow;
+    }
+
     function dismiss() {
         hideTimer.stop();
+        root.pinned = false;
         root.visible = false;
         root.dismissRequested();
     }
@@ -60,6 +72,12 @@ PopupWindow {
     }
 
     data: [
+        Connections {
+            target: PopupState
+            function onDismissRequested() {
+                root.pinned = false;
+            }
+        },
         Timer {
             id: hideTimer
             interval: 180
@@ -68,8 +86,8 @@ PopupWindow {
         Rectangle {
             id: frame
             anchors.fill: parent
-            implicitWidth: Math.max(body.implicitWidth, label.visible ? label.implicitWidth : 0) + 20
-            implicitHeight: (label.visible ? label.implicitHeight : body.implicitHeight) + 16
+            implicitWidth: Math.max(body.implicitWidth, label.visible ? label.implicitWidth : 0) + Theme.tooltipPadX * 2
+            implicitHeight: (label.visible ? label.implicitHeight : body.implicitHeight) + Theme.tooltipPadY * 2
             color: Theme.base00
             radius: root.frameRadius
             border.width: root.frameBorderWidth

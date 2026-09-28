@@ -24,7 +24,12 @@ Scope {
         }
     }
 
+    // Notifications update several properties in a row; coalesce the writes.
     function saveState() {
+        saveTimer.restart();
+    }
+
+    function writeState() {
         stateFile.setText(JSON.stringify({
             dnd: root.dnd,
             history: root.history
@@ -38,7 +43,8 @@ Scope {
             appIcon: notification.appIcon,
             summary: notification.summary,
             body: notification.body,
-            image: notification.image,
+            // image:// URLs point at in-memory pixmaps that are gone after a restart.
+            image: notification.image.startsWith("image://") ? "" : notification.image,
             urgency: notification.urgency,
             timestamp: new Date().toISOString()
         };
@@ -137,6 +143,12 @@ Scope {
     }
 
     Component.onCompleted: root.loadState()
+
+    Timer {
+        id: saveTimer
+        interval: 500
+        onTriggered: root.writeState()
+    }
 
     FileView {
         id: stateFile

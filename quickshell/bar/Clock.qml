@@ -7,7 +7,6 @@ Pill {
     id: root
 
     required property var backend
-    property bool pinned: false
     property bool compact: false
 
     Label {
@@ -15,34 +14,21 @@ Pill {
         color: Theme.fgBright
     }
 
-    onClicked: {
-        let shouldShow = !root.pinned;
-        PopupState.dismiss();
-        root.pinned = shouldShow;
-    }
+    onClicked: cal.togglePinned()
     onWheel: function (delta) {
-        calendar.shiftYear(delta > 0 ? -1 : 1);
+        if (cal.pinned)
+            calendar.shiftYear(delta > 0 ? -1 : 1);
     }
 
     Tooltip {
         id: cal
         anchorItem: root
-        shown: root.pinned
-        frameRadius: Theme.radius * 2
-        frameBorderWidth: 1
-        frameBorderColor: Theme.base02
+        framed: true
 
         Calendar {
             id: calendar
             today: root.backend.date
-            onClicked: root.pinned = false
-        }
-    }
-
-    Connections {
-        target: PopupState
-        function onDismissRequested() {
-            root.pinned = false;
+            onClicked: cal.pinned = false
         }
     }
 }

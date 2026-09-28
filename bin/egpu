@@ -3,13 +3,13 @@
 set -euo pipefail
 
 # Configuration
-# Change this to your internal display name (check 'hyprctl monitors')
-INTERNAL_MONITOR="DSI-1"
+# Internal display name (check 'hyprctl monitors'); override with INTERNAL_MONITOR=...
+INTERNAL_MONITOR="${INTERNAL_MONITOR:-DSI-1}"
 
 # Check dependencies
 for cmd in jq hyprctl lspci; do
     if ! command -v "$cmd" &>/dev/null; then
-        echo "Error: Required command '$cmd' not found."
+        echo "Error: Required command '$cmd' not found." >&2
         exit 1
     fi
 done
@@ -21,6 +21,10 @@ get_gpus() {
 
 lua_string() {
     jq -n --arg value "$1" '$value'
+}
+
+hyprland_monitor_enabled() {
+    hyprctl monitors all -j | jq -e --arg name "$1" '.[] | select(.name == $name and .disabled == false)' >/dev/null
 }
 
 drm_output_enabled() {
@@ -42,7 +46,7 @@ show_status() {
 
     # Internal Monitor Status
     local internal_data
-    internal_data=$(echo "$all_monitors" | jq -r ".[] | select(.name == \"$INTERNAL_MONITOR\")")
+    internal_data=$(echo "$all_monitors" | jq -r --arg internal "$INTERNAL_MONITOR" '.[] | select(.name == $internal)')
 
     echo "Internal Monitor ($INTERNAL_MONITOR):"
     if [ -n "$internal_data" ]; then
@@ -65,7 +69,7 @@ show_status() {
     echo "External Monitors:"
     local external_monitors
     # Get name, width, height, and disabled status in one go
-    external_monitors=$(echo "$all_monitors" | jq -r ".[] | select(.name != \"$INTERNAL_MONITOR\") | \"\(.name)|\(.width)x\(.height)|\(.disabled)\"")
+    external_monitors=$(echo "$all_monitors" | jq -r --arg internal "$INTERNAL_MONITOR" '.[] | select(.name != $internal) | "\(.name)|\(.width)x\(.height)|\(.disabled)"')
 
     if [ -z "$external_monitors" ]; then
         echo "  - None detected"
@@ -94,7 +98,7 @@ enable_egpu() {
 
     # Find monitors that are explicitly disabled
     local disabled_monitors
-    disabled_monitors=$(echo "$all_monitors" | jq -r ".[] | select(.name != \"$INTERNAL_MONITOR\" and .disabled == true) | .name")
+    disabled_monitors=$(echo "$all_monitors" | jq -r --arg internal "$INTERNAL_MONITOR" '.[] | select(.name != $internal and .disabled == true) | .name')
 
     if [ -z "$disabled_monitors" ]; then
         echo "No disabled external monitors found to enable."
@@ -105,19 +109,16 @@ enable_egpu() {
             [ -z "$monitor" ] && continue
             echo "Enabling $monitor..."
             hyprctl eval "hl.monitor({ output = $(lua_string "$monitor"), disabled = false, mode = \"preferred\", position = \"auto\", scale = 1 })"
-            local attempt
-            for attempt in {1..25}; do
-                if hyprctl monitors all -j | jq -e --arg name "$monitor" '.[] | select(.name == $name and .disabled == false)' >/dev/null; then
-                    break
-                fi
+            for _ in {1..25}; do
+                hyprland_monitor_enabled "$monitor" && break
                 sleep 0.2
             done
-            if [ "$attempt" -eq 25 ] && ! hyprctl monitors all -j | jq -e --arg name "$monitor" '.[] | select(.name == $name and .disabled == false)' >/dev/null; then
+            if ! hyprland_monitor_enabled "$monitor"; then
                 echo "Error: $monitor is still disabled." >&2
                 return 1
             fi
 
-            for attempt in {1..25}; do
+            for _ in {1..25}; do
                 drm_output_enabled "$monitor" && break
                 sleep 0.2
             done
@@ -146,7 +147,7 @@ enable_egpu() {
         while IFS= read -r monitor; do
             [ -z "$monitor" ] && continue
             # Only attempt to move if the workspace exists to avoid errors
-            if hyprctl workspaces -j | jq -e ".[] | select(.id == $i)" >/dev/null; then
+            if hyprctl workspaces -j | jq -e --argjson id "$i" '.[] | select(.id == $id)' >/dev/null; then
                 echo "Moving workspace $i to $monitor"
                 hyprctl eval "hl.dispatch(hl.dsp.workspace.move({ workspace = \"$i\", monitor = $(lua_string "$monitor") }))"
             fi
@@ -165,7 +166,7 @@ disable_egpu() {
 
     # Identify external monitors
     local external_monitors
-    external_monitors=$(echo "$all_monitors" | jq -r ".[] | select(.name != \"$INTERNAL_MONITOR\") | .name")
+    external_monitors=$(echo "$all_monitors" | jq -r --arg internal "$INTERNAL_MONITOR" '.[] | select(.name != $internal) | .name')
 
     if [ -z "$external_monitors" ]; then
         echo "No external monitors detected."
@@ -185,7 +186,7 @@ disable_egpu() {
         [ -z "$monitor" ] && continue
 
         local workspaces_on_monitor
-        workspaces_on_monitor=$(echo "$all_workspaces" | jq -r ".[] | select(.monitor == \"$monitor\") | .id")
+        workspaces_on_monitor=$(echo "$all_workspaces" | jq -r --arg monitor "$monitor" '.[] | select(.monitor == $monitor) | .id')
 
         if [ -n "$workspaces_on_monitor" ]; then
             while IFS= read -r ws_id; do
@@ -228,8 +229,8 @@ main() {
     status) show_status ;;
     help | --help | -h | "") show_help ;;
     *)
-        echo "Error: Unknown command '$command'"
-        show_status
+        echo "Error: Unknown command '$command'" >&2
+        show_help >&2
         exit 1
         ;;
     esac

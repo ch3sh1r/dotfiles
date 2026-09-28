@@ -1,7 +1,8 @@
 import QtQuick
+import Quickshell
 import Quickshell.Services.UPower
 
-QtObject {
+Scope {
     readonly property var device: UPower.displayDevice
     readonly property bool onBattery: UPower.onBattery
     readonly property bool charging: device && device.state === UPowerDeviceState.Charging

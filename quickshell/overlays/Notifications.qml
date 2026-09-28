@@ -2,7 +2,6 @@ import QtQuick
 import Quickshell
 import Quickshell.Services.Notifications
 import Quickshell.Wayland
-import Quickshell.Widgets
 import ".."
 import "../components"
 
@@ -25,7 +24,7 @@ PanelWindow {
         right: 10
     }
 
-    implicitWidth: 340
+    implicitWidth: Theme.notificationWidth
     implicitHeight: stack.implicitHeight
 
     WlrLayershell.layer: WlrLayer.Overlay
@@ -112,14 +111,6 @@ PanelWindow {
                     locked: true
                 }
 
-                Connections {
-                    target: card.modelData
-
-                    function onClosed(reason) {
-                        root.backend.removePopup(card.modelData.id);
-                    }
-                }
-
                 Timer {
                     interval: Math.max(1, root.timeoutMs(card.modelData))
                     running: root.timeoutMs(card.modelData) > 0
@@ -147,7 +138,7 @@ PanelWindow {
                     }
                 }
 
-                Row {
+                NotificationCard {
                     id: body
                     anchors.left: parent.left
                     anchors.right: parent.right
@@ -155,73 +146,28 @@ PanelWindow {
                     anchors.leftMargin: 14
                     anchors.rightMargin: 10
                     anchors.topMargin: 10
-                    anchors.bottomMargin: 10
                     spacing: 10
+                    image: card.modelData.image
+                    appIcon: card.modelData.appIcon
+                    summary: card.modelData.summary
+                    summaryColor: root.foregroundColor(card.modelData)
+                    body: card.modelData.body
 
-                    IconImage {
-                        width: 32
-                        height: 32
-                        visible: source.length > 0
-                        source: card.modelData.image.length > 0
-                            ? card.modelData.image
-                            : (card.modelData.appIcon.length > 0 ? Quickshell.iconPath(card.modelData.appIcon) : "")
-                    }
+                    Row {
+                        visible: root.visibleActions(card.modelData).length > 0
+                        spacing: 6
 
-                    Column {
-                        width: parent.width - (parent.children[0].visible ? 40 : 0)
-                        spacing: 4
+                        Repeater {
+                            model: root.visibleActions(card.modelData)
 
-                        Label {
-                            width: parent.width
-                            text: card.modelData.summary
-                            color: root.foregroundColor(card.modelData)
-                            font.bold: true
-                            elide: Text.ElideMiddle
-                        }
+                            delegate: ActionButton {
+                                required property var modelData
 
-                        Label {
-                            width: parent.width
-                            visible: card.modelData.body.length > 0
-                            text: card.modelData.body
-                            color: Theme.fg
-                            wrapMode: Text.Wrap
-                            maximumLineCount: 6
-                            elide: Text.ElideRight
-                            textFormat: Text.RichText
-                        }
-
-                        Row {
-                            visible: root.visibleActions(card.modelData).length > 0
-                            spacing: 6
-
-                            Repeater {
-                                model: root.visibleActions(card.modelData)
-
-                                delegate: Rectangle {
-                                    required property var modelData
-
-                                    implicitWidth: actionLabel.implicitWidth + 14
-                                    implicitHeight: 24
-                                    radius: Theme.radius
-                                    color: Theme.base02
-                                    border.width: 1
-                                    border.color: Theme.base03
-
-                                    Label {
-                                        id: actionLabel
-                                        anchors.centerIn: parent
-                                        text: parent.modelData.text
-                                        color: Theme.fgBright
-                                    }
-
-                                    MouseArea {
-                                        anchors.fill: parent
-                                        onClicked: {
-                                            parent.modelData.invoke();
-                                            if (!card.modelData.resident)
-                                                root.backend.removePopup(card.modelData.id);
-                                        }
-                                    }
+                                text: modelData.text
+                                onClicked: {
+                                    modelData.invoke();
+                                    if (!card.modelData.resident)
+                                        root.backend.removePopup(card.modelData.id);
                                 }
                             }
                         }

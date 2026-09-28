@@ -19,7 +19,7 @@ PanelWindow {
 
     Image {
         anchors.fill: parent
-        source: Qt.resolvedUrl("/home/ch3sh1r/.config/hypr/rune.png")
+        source: Theme.wallpaper
         fillMode: Image.PreserveAspectFit
         smooth: true
         asynchronous: true

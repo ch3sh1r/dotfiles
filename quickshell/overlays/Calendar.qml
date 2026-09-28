@@ -30,10 +30,6 @@ Item {
         return Math.max(0, Math.min(1, value));
     }
 
-    function percent(value) {
-        return Math.round(root.clamp(value) * 100);
-    }
-
     function yearProgress() {
         let start = new Date(today.getFullYear(), 0, 1);
         let end = new Date(today.getFullYear() + 1, 0, 1);
@@ -118,16 +114,11 @@ Item {
             font.pixelSize: Theme.menuTitleFontSize
         }
 
-        Column {
+        ProgressLine {
             anchors.horizontalCenter: parent.horizontalCenter
-            spacing: 6
-
-            ProgressLine {
-                width: root.progressWidth
-                title: "Year"
-                value: root.yearProgress()
-            }
-
+            width: root.progressWidth
+            title: "Year"
+            value: root.yearProgress()
         }
 
         Grid {

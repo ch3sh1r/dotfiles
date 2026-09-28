@@ -5,7 +5,9 @@ DOTFILES       := $(DOTFILE_CONFIG) $(DOTFILE_BIN) $(DOTFILE)
 DOTFILES_PATH  := $(dir $(abspath $(lastword $(MAKEFILE_LIST))))
 PACKAGE_LIST   := gpd-p3.list
 
-.PHONY: all $(DOTFILES) packages-install
+FISHER_URL     := https://raw.githubusercontent.com/jorgebucaran/fisher/main/functions/fisher.fish
+
+.PHONY: all $(DOTFILES) packages-install fish-plugins
 
 all: $(DOTFILES)
 
@@ -38,3 +40,6 @@ packages-install:
 		makepkg -si --needed --noconfirm -D "$$tmpdir/paru"; \
 	fi
 	paru -S --needed $$(sed '/^[[:space:]]*#/d; /^[[:space:]]*$$/d' $(DOTFILES_PATH)$(PACKAGE_LIST))
+
+fish-plugins: fish
+	fish -c 'type -q fisher; or curl -fsSL $(FISHER_URL) | source; and fisher update'

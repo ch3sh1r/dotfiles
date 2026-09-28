@@ -19,12 +19,9 @@ StatusPill {
     iconColor: root.muted ? Theme.base03 : Theme.fg
     label: root.muted ? "" : root.percent
     labelVisible: true
-    tooltipOnHover: false
-    tooltipCloseOnClick: true
 
     required property var backend
     readonly property var sink: backend.sink
-    readonly property var audio: backend.audio
     readonly property bool muted: backend.muted
     readonly property real volume: backend.volume
     readonly property int percent: backend.percent
@@ -32,7 +29,6 @@ StatusPill {
     readonly property bool bluetoothHeadphones: backend.bluetoothHeadphones
     readonly property int headsetBattery: backend.headsetBattery
 
-    onClicked: root.toggleTooltip()
     onRightClicked: backend.openMixer()
     onWheel: function (delta) {
         backend.setVolume(root.volume + (delta > 0 ? 0.005 : -0.005));
@@ -96,46 +92,14 @@ StatusPill {
         Row {
             spacing: 6
 
-            Rectangle {
-                implicitWidth: muteLabel.implicitWidth + 14
-                implicitHeight: 24
-                radius: Theme.radius
-                color: Theme.base02
-                border.width: 1
-                border.color: Theme.base03
-
-                Label {
-                    id: muteLabel
-                    anchors.centerIn: parent
-                    text: root.muted ? "Unmute" : "Mute"
-                    color: Theme.fgBright
-                }
-
-                MouseArea {
-                    anchors.fill: parent
-                    onClicked: backend.toggleMuted()
-                }
+            ActionButton {
+                text: root.muted ? "Unmute" : "Mute"
+                onClicked: backend.toggleMuted()
             }
 
-            Rectangle {
-                implicitWidth: mixerLabel.implicitWidth + 14
-                implicitHeight: 24
-                radius: Theme.radius
-                color: Theme.base02
-                border.width: 1
-                border.color: Theme.base03
-
-                Label {
-                    id: mixerLabel
-                    anchors.centerIn: parent
-                    text: "Mixer"
-                    color: Theme.fgBright
-                }
-
-                MouseArea {
-                    anchors.fill: parent
-                    onClicked: backend.openMixer()
-                }
+            ActionButton {
+                text: "Mixer"
+                onClicked: backend.openMixer()
             }
         }
 

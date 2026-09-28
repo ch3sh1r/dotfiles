@@ -1,6 +1,8 @@
 import QtQuick
 import ".."
 
+// Icon + optional label pill with a click-to-pin tooltip. Left click toggles
+// the tooltip; widgets add their own right-click / wheel handlers.
 Pill {
     id: root
 
@@ -10,23 +12,16 @@ Pill {
     property bool labelVisible: label.length > 0
     property color labelColor: Theme.fgBright
     property string tooltip: ""
-    property bool tooltipPinned: false
+    property alias tooltipPinned: tip.pinned
     property bool tooltipOnHover: false
     property alias tooltipCloseOnClick: tip.closeOnClick
     property alias tooltipContent: tip.content
 
     function toggleTooltip() {
-        let shouldShow = !root.tooltipPinned;
-        PopupState.dismiss();
-        root.tooltipPinned = shouldShow;
+        tip.togglePinned();
     }
 
-    Connections {
-        target: PopupState
-        function onDismissRequested() {
-            root.tooltipPinned = false;
-        }
-    }
+    onClicked: root.toggleTooltip()
 
     IconText {
         text: root.icon
@@ -42,8 +37,8 @@ Pill {
     Tooltip {
         id: tip
         anchorItem: root
-        shown: root.tooltipPinned || (root.tooltipOnHover && root.hovered)
+        shown: tip.pinned || (root.tooltipOnHover && root.hovered)
+        closeOnClick: true
         text: root.tooltip
-        onDismissRequested: root.tooltipPinned = false
     }
 }

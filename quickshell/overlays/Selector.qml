@@ -6,98 +6,67 @@ import Quickshell.Widgets
 import ".."
 import "../components"
 
-PanelWindow {
+PickerWindow {
     id: root
 
-    visible: false
-    color: "transparent"
-    exclusionMode: ExclusionMode.Ignore
-
-    anchors {
-        top: true
-        left: true
-        right: true
-        bottom: true
-    }
-
-    WlrLayershell.layer: WlrLayer.Overlay
-    WlrLayershell.keyboardFocus: WlrKeyboardFocus.Exclusive
     WlrLayershell.namespace: "quickshell-selector"
 
-    readonly property string dataScript: Qt.resolvedUrl("../scripts/selector-data.sh").toString().replace("file://", "")
-    readonly property string actionScript: Qt.resolvedUrl("../scripts/selector-action.sh").toString().replace("file://", "")
+    readonly property string dataScript: Theme.scriptPath("selector-data.sh")
+    readonly property string actionScript: Theme.scriptPath("selector-action.sh")
 
     property string mode: ""
     property string target: ""
-    property string title: ""
-    property string query: ""
-    property string error: ""
     property bool pendingPreviews: false
     property bool showAfterData: false
-    property int selected: 0
     property var rbwItem: null
     property var items: []
-    property var matches: []
-    property var rbwLastUsed: ({})
+    property var queuedArgs: null
 
-    FileView {
-        id: rbwUsageFile
-        path: Quickshell.statePath("selector-rbw-usage.json")
-        blockLoading: true
-        printErrors: false
-        onLoaded: root.loadRbwUsage()
-        onFileChanged: reload()
-    }
+    maxResults: 12
+    frameWidth: root.mode === "clipboard" ? Theme.pickerWideWidth : Theme.pickerWidth
+    preview: root.mode === "clipboard" ? clipboardPreview : null
+    describe: item => ({
+            title: item.title || "",
+            subtitle: root.mode === "clipboard" ? "" : (item.subtitle || ""),
+            glyph: (item.image || "").length > 0 ? "󰋩" : "󰅇"
+        })
 
     function itemText(item) {
-        return ((item.title || "") + " " + (item.subtitle || "")).toLowerCase();
+        return (item.title || "") + " " + (item.subtitle || "");
     }
 
     function refresh() {
-        let q = root.query.trim().toLowerCase();
-        let next = [];
-
-        for (let i = 0; i < root.items.length; i++) {
-            let item = root.items[i];
-            if (q.length === 0 || root.itemText(item).indexOf(q) !== -1)
-                next.push(item);
-        }
-
+        let byLastUse = null;
         if (root.mode === "rbw" && root.target === "menu") {
-            next.sort((a, b) => {
-                let ac = root.rbwLastUsed[a.id] || 0;
-                let bc = root.rbwLastUsed[b.id] || 0;
+            byLastUse = (a, b) => {
+                let ac = rbwUsage.values[a.id] || 0;
+                let bc = rbwUsage.values[b.id] || 0;
                 if (bc !== ac)
                     return bc - ac;
                 return (a.title || "").localeCompare(b.title || "");
-            });
+            };
         }
-
-        if (next.length > 12)
-            next = next.slice(0, 12);
-
-        root.matches = next;
-        root.selected = Math.max(0, Math.min(root.selected, root.matches.length - 1));
+        root.applyMatches(root.items, root.itemText, byLastUse);
     }
 
-    function loadRbwUsage() {
-        try {
-            root.rbwLastUsed = JSON.parse(rbwUsageFile.text() || "{}");
-        } catch (e) {
-            root.rbwLastUsed = {};
+    // One data run at a time. A request made while a run (e.g. a preview
+    // refresh or another mode) is still going is queued, and the output of the
+    // superseded run is dropped instead of landing in the new mode.
+    function loadData(args): void {
+        if (dataProc.running) {
+            root.queuedArgs = args;
+            return;
         }
-        root.refresh();
+        dataProc.command = ["bash", root.dataScript].concat(args);
+        dataProc.running = true;
     }
 
-    function recordRbwUse(item) {
-        let next = Object.assign({}, root.rbwLastUsed);
-        next[item.id] = Date.now();
-        root.rbwLastUsed = next;
-        rbwUsageFile.setText(JSON.stringify(next, null, 2) + "\n");
-    }
-
-    function selectedItem() {
-        return root.matches.length > 0 ? root.matches[root.selected] : null;
+    function runQueued(): void {
+        if (root.queuedArgs === null)
+            return;
+        let args = root.queuedArgs;
+        root.queuedArgs = null;
+        root.loadData(args);
     }
 
     function open(mode: string, target: string): void {
@@ -110,16 +79,19 @@ PanelWindow {
         root.items = [];
         root.matches = [];
         root.selected = 0;
+        // rbw may prompt for the vault password first; only show once data is in.
         root.showAfterData = root.mode === "rbw";
-        root.visible = !root.showAfterData;
-        if (root.visible)
-            search.forceActiveFocus();
-        dataProc.command = ["bash", root.dataScript, root.mode];
-        dataProc.running = true;
+        if (!root.showAfterData)
+            root.show();
+        root.loadData([root.mode]);
     }
 
-    function close(): void {
-        root.visible = false;
+    // Also cancels a pending rbw open that has not shown the window yet.
+    function hide(): void {
+        root.showAfterData = false;
+        root.queuedArgs = null;
+        previewRefresh.stop();
+        root.close();
     }
 
     function applyData(text) {
@@ -136,17 +108,25 @@ PanelWindow {
         root.refresh();
         if (root.showAfterData) {
             root.showAfterData = false;
-            root.visible = true;
-            search.forceActiveFocus();
+            root.show();
         }
         if (root.pendingPreviews && root.mode === "clipboard")
             previewRefresh.restart();
     }
 
-    function activate(item) {
-        if (!item)
-            return;
+    function runAction(args): void {
+        Quickshell.execDetached(["bash", root.actionScript].concat(args));
+    }
 
+    onQueryChanged: refresh()
+    onVisibleChanged: {
+        if (!visible) {
+            root.showAfterData = false;
+            previewRefresh.stop();
+        }
+    }
+
+    onActivated: item => {
         if (root.mode === "rbw" && root.target === "menu") {
             root.rbwItem = item;
             root.target = "action";
@@ -155,290 +135,110 @@ PanelWindow {
             root.selected = 0;
             root.items = [];
             root.matches = [];
+            root.close();
             root.showAfterData = true;
-            root.visible = false;
-            dataProc.command = ["bash", root.dataScript, "rbw-actions", item.id];
-            dataProc.running = true;
+            root.loadData(["rbw-actions", item.id]);
             return;
         }
 
         if (root.mode === "rbw" && root.target === "action") {
-            root.recordRbwUse(root.rbwItem);
-            actionProc.command = ["bash", root.actionScript, "rbw", item.id, root.rbwItem.id];
-            actionProc.running = true;
+            rbwUsage.set(root.rbwItem.id, Date.now());
+            root.runAction(["rbw", item.id, root.rbwItem.id]);
             root.close();
             return;
         }
 
-        actionProc.command = ["bash", root.actionScript, root.mode, root.target, item.id];
-        actionProc.running = true;
+        root.runAction([root.mode, root.target, item.id]);
         root.close();
     }
 
-    function deleteSelected() {
-        if (root.mode !== "clipboard" || root.matches.length === 0)
+    onDeleteRequested: item => {
+        if (root.mode !== "clipboard")
             return;
-        let item = root.matches[root.selected];
-        actionProc.command = ["bash", root.actionScript, "clipboard", "delete", item.id];
-        actionProc.running = true;
+        root.runAction(["clipboard", "delete", item.id]);
         root.items = root.items.filter(i => i.id !== item.id);
         root.refresh();
     }
 
-    onQueryChanged: refresh()
+    JsonStore {
+        id: rbwUsage
+        fileName: "selector-rbw-usage.json"
+        onValuesChanged: root.refresh()
+    }
 
     IpcHandler {
         target: "selector"
 
         function rbw(target: string): void { root.open("rbw", target); }
         function clipboard(): void { root.open("clipboard", "copy"); }
-        function close(): void { root.close(); }
+        function close(): void { root.hide(); }
     }
 
     Process {
         id: dataProc
         stdout: StdioCollector {
-            onStreamFinished: root.applyData(this.text)
+            onStreamFinished: {
+                if (root.queuedArgs === null)
+                    root.applyData(this.text);
+            }
         }
-    }
-
-    Process {
-        id: actionProc
+        // Deferred so the finished run's stdout is handled (and dropped) first.
+        onExited: Qt.callLater(root.runQueued)
     }
 
     Timer {
         id: previewRefresh
         interval: 700
         repeat: false
-        onTriggered: if (root.visible && root.mode === "clipboard") dataProc.running = true
+        onTriggered: if (root.visible && root.mode === "clipboard") root.loadData(["clipboard"])
     }
 
-    MouseArea {
-        anchors.fill: parent
-        onClicked: root.close()
-    }
+    Component {
+        id: clipboardPreview
 
-    Rectangle {
-        id: frame
-        width: Math.min(root.mode === "clipboard" ? 980 : 680, root.width - 32)
-        height: Math.min(500, root.height - 72)
-        anchors.horizontalCenter: parent.horizontalCenter
-        anchors.top: parent.top
-        anchors.topMargin: 72
-        radius: Theme.radius * 2
-        color: Theme.base00
-        border.width: 1
-        border.color: Theme.base02
+        Rectangle {
+            id: preview
+            radius: Theme.radius
+            color: Theme.base01
+            border.width: 1
+            border.color: Theme.base02
+            clip: true
 
-        MouseArea {
-            anchors.fill: parent
-            onClicked: mouse => mouse.accepted = true
-        }
+            readonly property var item: root.selectedItem
+            readonly property bool hasImage: !!item && (item.image || "").length > 0
 
-        Column {
-            anchors.fill: parent
-            anchors.margins: 14
-            spacing: 10
-
-            Label {
-                width: parent.width
-                text: root.title
-                color: Theme.purple
-                font.bold: true
-                font.pixelSize: Theme.menuTitleFontSize
-                elide: Text.ElideRight
+            IconImage {
+                anchors.fill: parent
+                anchors.margins: 14
+                visible: preview.hasImage
+                source: preview.hasImage ? "file://" + preview.item.image : ""
+                mipmap: true
             }
 
-            Rectangle {
-                width: parent.width
-                height: 42
-                radius: Theme.radius
-                color: Theme.base01
-                border.width: 1
-                border.color: search.activeFocus ? Theme.accent : Theme.base02
-
-                IconText {
-                    id: promptIcon
-                    anchors.left: parent.left
-                    anchors.leftMargin: 12
-                    anchors.verticalCenter: parent.verticalCenter
-                    text: "󰍉"
-                    color: Theme.base04
-                }
-
-                TextInput {
-                    id: search
-                    anchors.left: promptIcon.right
-                    anchors.right: parent.right
-                    anchors.verticalCenter: parent.verticalCenter
-                    anchors.leftMargin: 10
-                    anchors.rightMargin: 12
-                    clip: true
-                    color: Theme.fgBright
-                    selectionColor: Theme.accent
-                    selectedTextColor: Theme.base00
-                    font.family: Theme.font
-                    font.pixelSize: Theme.menuInputFontSize
-                    text: root.query
-                    onTextChanged: root.query = text
-
-                    Keys.onPressed: event => {
-                        if (event.key === Qt.Key_Escape) {
-                            root.close();
-                            event.accepted = true;
-                        } else if (event.key === Qt.Key_Down) {
-                            root.selected = Math.min(root.selected + 1, root.matches.length - 1);
-                            event.accepted = true;
-                        } else if (event.key === Qt.Key_Up) {
-                            root.selected = Math.max(root.selected - 1, 0);
-                            event.accepted = true;
-                        } else if (event.key === Qt.Key_Delete) {
-                            root.deleteSelected();
-                            event.accepted = true;
-                        } else if (event.key === Qt.Key_Return || event.key === Qt.Key_Enter) {
-                            root.activate(root.matches[root.selected]);
-                            event.accepted = true;
-                        }
-                    }
-                }
+            Flickable {
+                anchors.fill: parent
+                anchors.margins: 14
+                visible: !preview.hasImage
+                contentWidth: width
+                contentHeight: previewText.implicitHeight
+                clip: true
 
                 Label {
-                    anchors.left: search.left
-                    anchors.verticalCenter: parent.verticalCenter
-                    visible: search.text.length === 0 && !search.activeFocus
-                    text: "Search"
-                    color: Theme.base03
+                    id: previewText
+                    width: parent.width
+                    text: preview.item ? preview.item.title : ""
+                    color: Theme.fgBright
                     font.pixelSize: Theme.menuFontSize
+                    wrapMode: Text.Wrap
                 }
             }
 
             Label {
-                width: parent.width
-                visible: root.error.length > 0
-                text: root.error
-                color: Theme.warning
+                anchors.centerIn: parent
+                visible: !preview.item
+                text: "No selection"
+                color: Theme.base03
                 font.pixelSize: Theme.menuFontSize
-                wrapMode: Text.Wrap
-            }
-
-            Row {
-                width: parent.width
-                height: parent.height - y
-                spacing: 12
-
-                ListView {
-                    id: results
-                    width: root.mode === "clipboard" ? Math.floor((parent.width - parent.spacing) * 0.48) : parent.width
-                    height: parent.height
-                    clip: true
-                    spacing: 4
-                    model: root.matches
-                    currentIndex: root.selected
-
-                    delegate: Rectangle {
-                        required property var modelData
-                        required property int index
-                        readonly property bool hasPreview: (modelData.image || "").length > 0
-
-                        width: results.width
-                        height: 44
-                        radius: Theme.radius
-                        color: index === root.selected ? Theme.base02 : "transparent"
-
-                        Row {
-                            anchors.fill: parent
-                            anchors.leftMargin: 10
-                            anchors.rightMargin: 10
-                            spacing: 10
-
-                            IconText {
-                                width: 20
-                                anchors.verticalCenter: parent.verticalCenter
-                                text: parent.parent.hasPreview ? "󰋩" : "󰅇"
-                                color: Theme.base04
-                            }
-
-                            Column {
-                                width: parent.width - 30
-                                anchors.verticalCenter: parent.verticalCenter
-                                spacing: 1
-
-                                Label {
-                                    width: parent.width
-                                    text: modelData.title
-                                    color: Theme.fgBright
-                                    font.pixelSize: Theme.menuFontSize
-                                    elide: Text.ElideRight
-                                }
-
-                                Label {
-                                    width: parent.width
-                                    visible: root.mode !== "clipboard" && (modelData.subtitle || "").length > 0
-                                    text: modelData.subtitle || ""
-                                    color: Theme.base04
-                                    font.pixelSize: Theme.menuFontSize
-                                    elide: Text.ElideRight
-                                }
-                            }
-                        }
-
-                        MouseArea {
-                            anchors.fill: parent
-                            hoverEnabled: true
-                            onEntered: root.selected = index
-                            onClicked: root.activate(modelData)
-                        }
-                    }
-                }
-
-                Rectangle {
-                    id: preview
-                    width: parent.width - results.width - parent.spacing
-                    height: parent.height
-                    visible: root.mode === "clipboard"
-                    radius: Theme.radius
-                    color: Theme.base01
-                    border.width: 1
-                    border.color: Theme.base02
-                    clip: true
-
-                    readonly property var item: root.selectedItem()
-                    readonly property bool hasImage: item && (item.image || "").length > 0
-
-                    IconImage {
-                        anchors.fill: parent
-                        anchors.margins: 14
-                        visible: preview.hasImage
-                        source: preview.hasImage ? "file://" + preview.item.image : ""
-                        mipmap: true
-                    }
-
-                    Flickable {
-                        anchors.fill: parent
-                        anchors.margins: 14
-                        visible: !preview.hasImage
-                        contentWidth: width
-                        contentHeight: previewText.implicitHeight
-                        clip: true
-
-                        Label {
-                            id: previewText
-                            width: parent.width
-                            text: preview.item ? preview.item.title : ""
-                            color: Theme.fgBright
-                            font.pixelSize: Theme.menuFontSize
-                            wrapMode: Text.Wrap
-                        }
-                    }
-
-                    Label {
-                        anchors.centerIn: parent
-                        visible: !preview.item
-                        text: "No selection"
-                        color: Theme.base03
-                        font.pixelSize: Theme.menuFontSize
-                    }
-                }
             }
         }
     }

@@ -7,7 +7,6 @@ StatusPill {
 
     icon: root.locked ? "" : ""
     iconColor: root.locked ? Theme.warning : Theme.fg
-    tooltipCloseOnClick: true
     tooltip: (root.locked ? "Orientation locked" : "Auto-rotate enabled")
         + (root.currentTransform.length > 0 ? "\nTransform: " + root.currentTransform : "")
 
@@ -19,6 +18,5 @@ StatusPill {
 
     visible: monitorName === targetMonitor
 
-    onClicked: root.toggleTooltip()
     onRightClicked: backend.toggle()
 }

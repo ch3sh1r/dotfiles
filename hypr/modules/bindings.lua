@@ -2,26 +2,26 @@ local mainMod = "SUPER"
 local terminal = "alacritty"
 local webBrowser = "brave"
 
-local function bind(keys, dispatcher, flags)
-	hl.bind(keys, dispatcher, flags)
-end
-
 local function bind_exec(keys, command, flags)
-	bind(keys, hl.dsp.exec_cmd(command), flags)
+	hl.bind(keys, hl.dsp.exec_cmd(command), flags)
 end
 
--- Common apps
-bind_exec(mainMod .. " + Return", terminal)
-bind(mainMod .. " + C", hl.dsp.window.close())
-bind(
+-- Windows and session
+hl.bind(mainMod .. " + C", hl.dsp.window.close())
+hl.bind(
 	mainMod .. " + F",
 	hl.dsp.window.fullscreen({
 		mode = "fullscreen",
 		action = "toggle",
 	})
 )
+hl.bind(mainMod .. " + SHIFT + F", hl.dsp.window.float({ action = "toggle" }))
+hl.bind(mainMod .. " + CTRL + H", hl.dsp.layout("togglesplit"))
+hl.bind(mainMod .. " + SHIFT + E", hl.dsp.exit())
 
+-- Common apps
 local apps = {
+	{ key = "Return", command = terminal },
 	{ key = "E", command = "nautilus" },
 	{ key = "W", command = webBrowser },
 	{ key = "SHIFT + W", command = webBrowser .. " --incognito" },
@@ -55,13 +55,13 @@ bind_exec("Print", "hyprshot -m region -o ~/Pictures/Screenshots")
 bind_exec(mainMod .. " + Print", "~/.local/bin/ocr-region")
 
 -- Grouped windows
-bind(mainMod .. " + A", hl.dsp.group.toggle())
-bind(mainMod .. " + Z", hl.dsp.group.prev())
-bind(mainMod .. " + X", hl.dsp.group.next())
+hl.bind(mainMod .. " + A", hl.dsp.group.toggle())
+hl.bind(mainMod .. " + Z", hl.dsp.group.prev())
+hl.bind(mainMod .. " + X", hl.dsp.group.next())
 
 -- Lockscreen
 bind_exec(mainMod .. " + CTRL + L", "qs ipc call lock lock")
-bind_exec("switch:Lid Switch", "qs ipc call lock lock", { locked = true })
+bind_exec("switch:on:Lid Switch", "qs ipc call lock lock", { locked = true })
 
 local directions = {
 	{ key = "H", direction = "l" },
@@ -71,36 +71,36 @@ local directions = {
 }
 
 for _, item in ipairs(directions) do
-	bind(mainMod .. " + " .. item.key, hl.dsp.focus({ direction = item.direction }))
-	bind(mainMod .. " + SHIFT + " .. item.key, hl.dsp.window.move({ direction = item.direction }))
+	hl.bind(mainMod .. " + " .. item.key, hl.dsp.focus({ direction = item.direction }))
+	hl.bind(mainMod .. " + SHIFT + " .. item.key, hl.dsp.window.move({ direction = item.direction }))
 end
 
 -- Move workspace between monitors
-bind(mainMod .. " + CTRL + J", hl.dsp.workspace.move({ monitor = "+1" }))
-bind(mainMod .. " + CTRL + K", hl.dsp.workspace.move({ monitor = "-1" }))
+hl.bind(mainMod .. " + CTRL + J", hl.dsp.workspace.move({ monitor = "+1" }))
+hl.bind(mainMod .. " + CTRL + K", hl.dsp.workspace.move({ monitor = "-1" }))
 
 -- Switch workspaces
 for i = 1, 9 do
-	bind(mainMod .. " + " .. i, hl.dsp.focus({ workspace = i }))
-	bind(mainMod .. " + SHIFT + " .. i, hl.dsp.window.move({ workspace = i }))
+	hl.bind(mainMod .. " + " .. i, hl.dsp.focus({ workspace = i }))
+	hl.bind(mainMod .. " + SHIFT + " .. i, hl.dsp.window.move({ workspace = i }))
 end
-bind(mainMod .. " + 0", hl.dsp.focus({ workspace = 10 }))
-bind(mainMod .. " + SHIFT + 0", hl.dsp.window.move({ workspace = 10 }))
+hl.bind(mainMod .. " + 0", hl.dsp.focus({ workspace = 10 }))
+hl.bind(mainMod .. " + SHIFT + 0", hl.dsp.window.move({ workspace = 10 }))
 
--- Scroll through existing workspaces
-bind(mainMod .. " + mouse_down", hl.dsp.focus({ workspace = "e+1" }))
-bind(mainMod .. " + mouse_up", hl.dsp.focus({ workspace = "e-1" }))
+-- Scroll through workspaces on the current monitor (same as the swipe gesture)
+hl.bind(mainMod .. " + mouse_down", hl.dsp.focus({ workspace = "m+1" }))
+hl.bind(mainMod .. " + mouse_up", hl.dsp.focus({ workspace = "m-1" }))
 
 -- Move/resize windows
-bind(mainMod .. " + mouse:272", hl.dsp.window.drag(), { mouse = true })
-bind(mainMod .. " + mouse:273", hl.dsp.window.resize(), { mouse = true })
+hl.bind(mainMod .. " + mouse:272", hl.dsp.window.drag(), { mouse = true })
+hl.bind(mainMod .. " + mouse:273", hl.dsp.window.resize(), { mouse = true })
 
 -- Laptop multimedia keys for volume and LCD brightness
 local media_keys = {
 	{ key = "XF86AudioRaiseVolume", command = "wpctl set-volume -l 1 @DEFAULT_AUDIO_SINK@ 5%+", repeating = true },
 	{ key = "XF86AudioLowerVolume", command = "wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-", repeating = true },
-	{ key = "XF86AudioMute", command = "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle", repeating = true },
-	{ key = "XF86AudioMicMute", command = "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle", repeating = true },
+	{ key = "XF86AudioMute", command = "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle" },
+	{ key = "XF86AudioMicMute", command = "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle" },
 	{ key = "XF86MonBrightnessUp", command = "brightnessctl s 10%+", repeating = true },
 	{ key = "XF86MonBrightnessDown", command = "brightnessctl s 10%-", repeating = true },
 	{ key = "XF86AudioNext", command = "playerctl next" },

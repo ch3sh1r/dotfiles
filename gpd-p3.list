@@ -53,7 +53,6 @@ hyprland
 hyprpicker
 hyprshot
 ifuse
-iio-hyprland-git
 iio-sensor-proxy
 impala
 intel-compute-runtime
@@ -101,7 +100,6 @@ nftables
 ninja
 nmap
 noto-fonts-emoji
-nwg-displays
 nwg-look
 obsidian
 opencode
@@ -159,6 +157,7 @@ rockyou
 rocm-opencl-runtime
 rsync
 rust
+shellcheck
 slurp
 smartmontools
 sof-firmware

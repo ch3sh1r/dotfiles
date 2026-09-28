@@ -17,13 +17,11 @@ Singleton {
     readonly property color base05: "#ffffff" // bright foreground
     readonly property color base08: "#ff5555" // red
     readonly property color base0A: "#f1fa8c" // yellow
-    readonly property color base0E: "#bd93f9" // purple
 
     // Dracula accents (kept from the old calendar markup)
     readonly property color purple: "#bd93f9"
     readonly property color cyan: "#8be9fd"
     readonly property color pink: "#ff79c6"
-    readonly property color yellow: "#f1fa8c"
 
     // semantic roles
     readonly property color bg: base01           // bar background
@@ -35,6 +33,8 @@ Singleton {
     readonly property color critical: base08
     readonly property color good: base04          // "active/connected" — gray, not green
     readonly property color sunsetTint: "#228e5835"
+    readonly property color lockBackground: "#000000"
+    readonly property color lockInput: "#593c3836"
 
     // typography - Hack Nerd Font, matching alacritty and the lockscreen. It
     // carries both the text and the Nerd-Font glyphs, so one font does both.
@@ -53,4 +53,20 @@ Singleton {
     readonly property int radius: 4
     readonly property int gap: 4
     readonly property int hPad: 6
+    readonly property int tooltipPadX: 10
+    readonly property int tooltipPadY: 8
+    readonly property int notificationWidth: 340
+    readonly property int notificationHistoryWidth: 320
+    readonly property int pickerWidth: 680
+    readonly property int pickerWideWidth: 980
+    readonly property int pickerHeight: 500
+    readonly property int pickerTopMargin: 72
+
+    // files - resolved relative to this file, so they follow the repo checkout
+    readonly property url wallpaper: Qt.resolvedUrl("../hypr/rune.png")
+
+    // Absolute path of a helper script in quickshell/scripts/.
+    function scriptPath(name: string): string {
+        return Qt.resolvedUrl("scripts/" + name).toString().replace("file://", "");
+    }
 }

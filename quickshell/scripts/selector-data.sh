@@ -6,8 +6,10 @@ item_id="${2:-}"
 
 case "$mode" in
     rbw)
-        if ! out=$(rbw list --fields id,name,user,folder,type 2>&1); then
-            jq -n --arg error "$out" '{ error: $error, items: [] }'
+        err_tmp=$(mktemp)
+        trap 'rm -f "$err_tmp"' EXIT
+        if ! out=$(rbw list --fields id,name,user,folder,type 2>"$err_tmp"); then
+            jq -n --rawfile error "$err_tmp" '{ error: ($error | rtrimstr("\n")), items: [] }'
             exit 0
         fi
 
@@ -23,13 +25,14 @@ case "$mode" in
         ' <<<"$out"
         ;;
     rbw-actions)
-        if ! fields=$(rbw get --list-fields "$item_id" 2>&1); then
-            jq -n --arg error "$fields" '{ error: $error, items: [] }'
+        items_tmp=$(mktemp)
+        err_tmp=$(mktemp)
+        trap 'rm -f "$items_tmp" "$err_tmp"' EXIT
+
+        if ! fields=$(rbw get --list-fields "$item_id" 2>"$err_tmp"); then
+            jq -n --rawfile error "$err_tmp" '{ error: ($error | rtrimstr("\n")), items: [] }'
             exit 0
         fi
-
-        items_tmp=$(mktemp)
-        trap 'rm -f "$items_tmp"' EXIT
 
         emit_field() {
             local field="$1"
@@ -109,11 +112,12 @@ case "$mode" in
     clipboard)
         tmp=$(mktemp)
         json_tmp=$(mktemp)
+        err_tmp=$(mktemp)
         thumbnail_dir="${XDG_CACHE_HOME:-$HOME/.cache}/cliphist/thumbnails"
-        trap 'rm -f "$tmp" "$json_tmp"' EXIT
+        trap 'rm -f "$tmp" "$json_tmp" "$err_tmp"' EXIT
 
-        if ! error=$(cliphist list >"$tmp" 2>&1); then
-            jq -n --arg error "$error" '{ error: $error, items: [] }'
+        if ! cliphist list >"$tmp" 2>"$err_tmp"; then
+            jq -n --rawfile error "$err_tmp" '{ error: ($error | rtrimstr("\n")), items: [] }'
             exit 0
         fi
 

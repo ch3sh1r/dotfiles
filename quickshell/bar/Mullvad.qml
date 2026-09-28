@@ -10,13 +10,12 @@ StatusPill {
     icon: root.connected ? "󰊠" : "󰧵"
     iconColor: root.connected ? Theme.good : Theme.base03
     label: !root.compact && root.connected && root.city.length > 0 ? root.city : ""
-    tooltipOnHover: false
-    tooltipCloseOnClick: true
 
     required property var backend
     property bool compact: false
     readonly property bool connected: backend.connected
-    readonly property string state: backend.state
+    // Not `state`: that would shadow Item.state.
+    readonly property string vpnState: backend.state
     readonly property string city: backend.city
     readonly property string country: backend.country
     readonly property string ip: backend.ip
@@ -27,30 +26,22 @@ StatusPill {
     function stateLabel() {
         if (root.connected)
             return "Connected";
-        if (root.state === "connecting")
+        if (root.vpnState === "connecting")
             return "Connecting";
-        if (root.state === "disconnecting")
+        if (root.vpnState === "disconnecting")
             return "Disconnecting";
         return "Disconnected";
     }
 
-    onClicked: root.toggleTooltip()
     onRightClicked: backend.toggle()
 
     tooltipContent: Column {
         spacing: 4
 
-        Row {
-            spacing: 6
-            IconText {
-                text: root.connected ? "󰊠" : "󰧵"
-                color: root.connected ? Theme.good : Theme.base03
-            }
-            Label {
-                text: root.stateLabel()
-                color: Theme.fgBright
-                font.bold: true
-            }
+        TooltipHeader {
+            icon: root.icon
+            iconColor: root.iconColor
+            text: root.stateLabel()
         }
 
         Label {

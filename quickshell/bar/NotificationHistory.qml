@@ -1,7 +1,5 @@
 import QtQuick
-import Quickshell
 import Quickshell.Services.Notifications
-import Quickshell.Widgets
 import ".."
 import "../components"
 
@@ -9,17 +7,12 @@ Pill {
     id: root
 
     required property var backend
-    property bool pinned: false
 
-    onClicked: {
-        let shouldShow = !root.pinned;
-        PopupState.dismiss();
-        root.pinned = shouldShow;
-    }
+    onClicked: historyPopup.togglePinned()
     onRightClicked: root.backend.toggleDnd()
 
     IconText {
-        text: root.backend.dnd ? "󰥳" : ""
+        text: root.backend.dnd ? "󰥳" : ""
         color: root.backend.dnd ? Theme.warning : Theme.fg
     }
 
@@ -32,14 +25,11 @@ Pill {
     Tooltip {
         id: historyPopup
         anchorItem: root
-        shown: root.pinned
-        frameRadius: Theme.radius * 2
-        frameBorderWidth: 1
-        frameBorderColor: Theme.base02
+        framed: true
 
         Column {
             id: panel
-            width: 320
+            width: Theme.notificationHistoryWidth
             spacing: 8
 
             Row {
@@ -54,45 +44,20 @@ Pill {
                     font.pixelSize: Theme.menuTitleFontSize
                 }
 
-                Rectangle {
+                ActionButton {
                     id: dndButton
-                    implicitWidth: 24
-                    implicitHeight: 24
-                    radius: Theme.radius
+                    icon: root.backend.dnd ? "󰂛" : "󰂚"
                     color: root.backend.dnd ? Theme.warning : Theme.base02
-
-                    IconText {
-                        anchors.centerIn: parent
-                        text: root.backend.dnd ? "󰂛" : "󰂚"
-                        color: root.backend.dnd ? Theme.base00 : Theme.fgBright
-                    }
-
-                    MouseArea {
-                        anchors.fill: parent
-                        onClicked: root.backend.toggleDnd()
-                    }
+                    foreground: root.backend.dnd ? Theme.base00 : Theme.fgBright
+                    onClicked: root.backend.toggleDnd()
                 }
 
-                Rectangle {
+                ActionButton {
                     id: clearButton
-                    implicitWidth: 24
-                    implicitHeight: 24
-                    radius: Theme.radius
-                    color: Theme.base02
-
-                    IconText {
-                        anchors.centerIn: parent
-                        text: "󰆴"
-                        color: Theme.fgBright
-                    }
-
-                    MouseArea {
-                        anchors.fill: parent
-                        onClicked: {
-                            root.backend.clearHistory();
-                            root.pinned = false;
-                            historyPopup.dismiss();
-                        }
+                    icon: "󰆴"
+                    onClicked: {
+                        root.backend.clearHistory();
+                        historyPopup.dismiss();
                     }
                 }
             }
@@ -126,66 +91,22 @@ Pill {
                     border.width: 1
                     border.color: modelData.urgency === NotificationUrgency.Critical ? Theme.critical : Theme.base02
 
-                    Row {
+                    NotificationCard {
                         id: historyBody
                         anchors.left: parent.left
                         anchors.right: parent.right
                         anchors.top: parent.top
                         anchors.margins: 8
-                        spacing: 8
-
-                        IconImage {
-                            width: 24
-                            height: 24
-                            visible: source.length > 0
-                            source: historyCard.modelData.image.length > 0
-                                ? historyCard.modelData.image
-                                : (historyCard.modelData.appIcon.length > 0 ? Quickshell.iconPath(historyCard.modelData.appIcon) : "")
-                        }
-
-                        Column {
-                            width: parent.width - (parent.children[0].visible ? 32 : 0)
-                            spacing: 3
-
-                            Row {
-                                width: parent.width
-
-                                Label {
-                                    width: parent.width - historyTime.width - 8
-                                    text: historyCard.modelData.summary
-                                    color: Theme.fgBright
-                                    font.bold: true
-                                    elide: Text.ElideRight
-                                }
-
-                                Label {
-                                    id: historyTime
-                                    text: Qt.formatDateTime(new Date(historyCard.modelData.timestamp), "HH:mm")
-                                    color: Theme.base03
-                                }
-                            }
-
-                            Label {
-                                width: parent.width
-                                visible: historyCard.modelData.body.length > 0
-                                text: historyCard.modelData.body
-                                color: Theme.fg
-                                wrapMode: Text.Wrap
-                                maximumLineCount: 3
-                                elide: Text.ElideRight
-                                textFormat: Text.RichText
-                            }
-                        }
+                        iconSize: 24
+                        bodyLines: 3
+                        image: historyCard.modelData.image || ""
+                        appIcon: historyCard.modelData.appIcon || ""
+                        summary: historyCard.modelData.summary || ""
+                        body: historyCard.modelData.body || ""
+                        timeText: Qt.formatDateTime(new Date(historyCard.modelData.timestamp), "HH:mm")
                     }
                 }
             }
-        }
-    }
-
-    Connections {
-        target: PopupState
-        function onDismissRequested() {
-            root.pinned = false;
         }
     }
 }

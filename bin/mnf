@@ -47,7 +47,6 @@ Environment variables:
   RULES_FILE    Path to nftables rules file
   NFT_TABLE     Name of the nftables table
 EOF
-    exit 0
 }
 
 check_rules_file() {
@@ -78,11 +77,11 @@ apply_rules() {
 
 remove_rules() {
     if ! sudo nft list table inet "$NFT_TABLE" &>/dev/null; then
-        printf "[WARN] Table '$NFT_TABLE' does not exist\n"
+        printf "[WARN] Table '%s' does not exist\n" "$NFT_TABLE"
         return 0
     fi
 
-    printf "[INFO] Removing nftables table '$NFT_TABLE'...\n"
+    printf "[INFO] Removing nftables table '%s'...\n" "$NFT_TABLE"
     if sudo nft delete table inet "$NFT_TABLE"; then
         printf "[OK] Table removed successfully\n"
     else
@@ -105,7 +104,8 @@ show_status() {
 
 parse_args() {
     if [[ $# -eq 0 ]]; then
-        show_usage
+        show_usage >&2
+        exit 1
     fi
 
     local command=""
@@ -117,15 +117,18 @@ parse_args() {
             shift
             ;;
         -f | --file)
+            [[ $# -ge 2 ]] || die "Option $1 requires a file argument"
             RULES_FILE="$2"
             shift 2
             ;;
         -t | --table)
+            [[ $# -ge 2 ]] || die "Option $1 requires a table name"
             NFT_TABLE="$2"
             shift 2
             ;;
         -h | --help)
             show_usage
+            exit 0
             ;;
         *)
             die "Unknown option: $1"

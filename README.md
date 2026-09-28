@@ -12,3 +12,10 @@ cd ~/.local/dotfiles
 make
 ```
 
+
+Fish plugins (fisher, z) are not committed. Install them from
+`fish/fish_plugins` with:
+
+```bash
+make fish-plugins
+```

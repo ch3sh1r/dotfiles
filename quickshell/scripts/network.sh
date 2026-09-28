@@ -6,14 +6,26 @@
 #   {"type":"ethernet","name":"enp0s1","ip":"1.2.3.4"}
 #   {"type":"disconnected"}
 
-esc() { printf '%s' "$1" | sed 's/\\/\\\\/g; s/"/\\"/g'; }
+set -euo pipefail
 
 ip_of() {
-    ip -4 -o addr show "$1" 2>/dev/null | awk '{print $4}' | cut -d/ -f1 | head -n1
+    ip -4 -o addr show "$1" 2>/dev/null | awk '{ sub(/\/.*/, "", $4); print $4; exit }' || true
 }
 
 gateway_of() {
-    ip -4 route show default dev "$1" 2>/dev/null | awk '/^default/ {print $3; exit}'
+    ip -4 route show default dev "$1" 2>/dev/null | awk '/^default/ {print $3; exit}' || true
+}
+
+operstate_of() {
+    cat "/sys/class/net/$1/operstate" 2>/dev/null || true
+}
+
+# Bridges, containers and VPN tunnels are not a physical wired link.
+is_virtual() {
+    case "$1" in
+        lo | docker* | veth* | br-* | virbr* | tailscale* | wg* | tun* | tap*) return 0 ;;
+    esac
+    [ -e "/sys/devices/virtual/net/$1" ]
 }
 
 # Find the wireless interface (if any).
@@ -28,26 +40,27 @@ for d in /sys/class/net/*; do
 done
 
 # Connected wifi?
-if [ -n "$wifi" ] && [ "$(cat "/sys/class/net/$wifi/operstate" 2>/dev/null)" = up ]; then
-    link=$(awk -v ifc="$wifi:" '$1==ifc {q=$3; sub(/\./,"",q); print q}' /proc/net/wireless 2>/dev/null)
+if [ -n "$wifi" ] && [ "$(operstate_of "$wifi")" = up ]; then
+    link=$(awk -v ifc="$wifi:" '$1==ifc {q=$3; sub(/\./,"",q); print q}' /proc/net/wireless 2>/dev/null || true)
     sig=0
     [ -n "$link" ] && sig=$((link * 100 / 70))
     [ "$sig" -gt 100 ] && sig=100
-    ssid=$(iw dev "$wifi" link 2>/dev/null | sed -n 's/^[[:space:]]*SSID: //p' | head -n1)
-    printf '{"type":"wifi","name":"%s","signal":%s,"ssid":"%s","ip":"%s","gateway":"%s"}\n' \
-        "$(esc "$wifi")" "$sig" "$(esc "$ssid")" "$(esc "$(ip_of "$wifi")")" "$(esc "$(gateway_of "$wifi")")"
+    ssid=$(iw dev "$wifi" link 2>/dev/null | awk '/^[[:space:]]*SSID: / { sub(/^[[:space:]]*SSID: /, ""); print; exit }' || true)
+    jq -nc --arg name "$wifi" --argjson signal "$sig" --arg ssid "$ssid" \
+        --arg ip "$(ip_of "$wifi")" --arg gateway "$(gateway_of "$wifi")" \
+        '{type: "wifi", name: $name, signal: $signal, ssid: $ssid, ip: $ip, gateway: $gateway}'
     exit 0
 fi
 
 # Otherwise the first wired interface that's up.
 for d in /sys/class/net/*; do
     i=${d##*/}
-    [ "$i" = lo ] && continue
+    is_virtual "$i" && continue
     [ -d "$d/wireless" ] && continue
     [ -e "$d/phy80211" ] && continue
-    if [ "$(cat "$d/operstate" 2>/dev/null)" = up ]; then
-        printf '{"type":"ethernet","name":"%s","ip":"%s","gateway":"%s"}\n' \
-            "$(esc "$i")" "$(esc "$(ip_of "$i")")" "$(esc "$(gateway_of "$i")")"
+    if [ "$(operstate_of "$i")" = up ]; then
+        jq -nc --arg name "$i" --arg ip "$(ip_of "$i")" --arg gateway "$(gateway_of "$i")" \
+            '{type: "ethernet", name: $name, ip: $ip, gateway: $gateway}'
         exit 0
     fi
 done

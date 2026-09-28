@@ -11,8 +11,6 @@ StatusPill {
     icon: root.running ? "󰯉" : "󱩆"
     iconColor: root.running ? Theme.good : Theme.base03
     label: !root.compact && root.running && root.exitNode.length > 0 ? root.exitNode : ""
-    tooltipOnHover: false
-    tooltipCloseOnClick: true
 
     required property var backend
     property bool compact: false
@@ -23,24 +21,15 @@ StatusPill {
     readonly property int peerCount: backend.peerCount
     readonly property int onlineCount: backend.onlineCount
 
-    onClicked: root.toggleTooltip()
     onRightClicked: backend.toggle()
 
     tooltipContent: Column {
         spacing: 4
 
-        // Header: state.
-        Row {
-            spacing: 6
-            IconText {
-                text: root.running ? "󰯉" : "󱩆"
-                color: root.running ? Theme.good : Theme.base03
-            }
-            Label {
-                text: root.running ? "Connected" : "Stopped"
-                color: Theme.fgBright
-                font.bold: true
-            }
+        TooltipHeader {
+            icon: root.icon
+            iconColor: root.iconColor
+            text: root.running ? "Connected" : "Stopped"
         }
 
         Label {

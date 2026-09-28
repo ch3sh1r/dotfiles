@@ -18,8 +18,6 @@ StatusPill {
     }
     iconColor: root.info.type === "disconnected" ? Theme.base03 : Theme.fg
     label: !root.compact && root.info.type === "wifi" && root.info.ssid.length > 0 ? root.info.ssid : ""
-    tooltipOnHover: false
-    tooltipCloseOnClick: true
 
     required property var backend
     property bool compact: false
@@ -31,22 +29,13 @@ StatusPill {
         return wifiIcons[Math.max(0, i)];
     }
 
-    onClicked: root.toggleTooltip()
-
     tooltipContent: Column {
         spacing: 4
 
-        Row {
-            spacing: 6
-            IconText {
-                text: root.icon
-                color: root.iconColor
-            }
-            Label {
-                text: root.info.type === "disconnected" ? "Disconnected" : "Connected"
-                color: Theme.fgBright
-                font.bold: true
-            }
+        TooltipHeader {
+            icon: root.icon
+            iconColor: root.iconColor
+            text: root.info.type === "disconnected" ? "Disconnected" : "Connected"
         }
 
         Label {
@@ -75,5 +64,4 @@ StatusPill {
             color: Theme.fg
         }
     }
-
 }

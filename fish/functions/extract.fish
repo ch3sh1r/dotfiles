@@ -1,31 +1,36 @@
-# Taken from: https://github.com/dideler/dotfiles/blob/master/functions/extract.fish
+# Based on: https://github.com/dideler/dotfiles/blob/master/functions/extract.fish
 
 function extract --description "Expand or extract bundled & compressed files"
-    set --local ext (echo $argv[1] | awk -F. '{print $NF}')
-    switch $ext
-        case tar # non-compressed, just bundled
-            tar -xvf $argv[1]
-        case gz
-            if test (echo $argv[1] | awk -F. '{print $(NF-1)}') = tar # tar bundle compressed with gzip
-                tar -zxvf $argv[1]
-            else # single gzip
-                gunzip $argv[1]
-            end
-        case tgz # same as tar.gz
-            tar -zxvf $argv[1]
-        case xz
-            tar -xf $argv[1]
-        case zst
-            tar -xaf $argv[1]
-        case bz2 # tar compressed with bzip2
-            tar -jxvf $argv[1]
-        case rar
-            unrar x $argv[1]
-        case zip
-            unzip $argv[1]
-        case 7z
-            7z x $argv[1]
-        case '*'
-            echo "unknown extension"
+    if test (count $argv) -eq 0
+        echo "usage: extract FILE..." >&2
+        return 1
     end
+
+    set --local status_code 0
+    for file in $argv
+        switch $file
+            case '*.tar' '*.tar.gz' '*.tgz' '*.tar.xz' '*.txz' '*.tar.bz2' '*.tbz2' '*.tar.zst' '*.tzst'
+                tar -xvaf $file
+            case '*.gz'
+                gunzip -k $file
+            case '*.xz'
+                unxz -k $file
+            case '*.bz2'
+                bunzip2 -k $file
+            case '*.zst'
+                unzstd $file
+            case '*.rar'
+                unrar x $file
+            case '*.zip'
+                unzip $file
+            case '*.7z'
+                7z x $file
+            case '*'
+                echo "extract: unknown extension: $file" >&2
+                set status_code 1
+                continue
+        end
+        or set status_code 1
+    end
+    return $status_code
 end
