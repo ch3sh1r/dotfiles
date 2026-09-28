@@ -62,8 +62,9 @@ Singleton {
     readonly property int pickerHeight: 500
     readonly property int pickerTopMargin: 72
 
-    // files - resolved relative to this file, so they follow the repo checkout
-    readonly property url wallpaper: Qt.resolvedUrl("../hypr/rune.png")
+    // files - hypr/ is outside the shell directory, so resolve it from $HOME
+    // rather than relative to this file.
+    readonly property url wallpaper: "file://" + Quickshell.env("HOME") + "/.config/hypr/rune.png"
 
     // Absolute path of a helper script in quickshell/scripts/.
     function scriptPath(name: string): string {
