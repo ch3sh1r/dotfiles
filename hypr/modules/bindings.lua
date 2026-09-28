@@ -74,15 +74,6 @@ hl.bind(mainMod .. " + A", hl.dsp.group.toggle())
 hl.bind(mainMod .. " + Z", hl.dsp.group.prev())
 hl.bind(mainMod .. " + X", hl.dsp.group.next())
 
--- Screen zoom (the 8" panel is small)
-hl.bind(mainMod .. " + CTRL + Z", function()
-	local zoom = hl.get_config("cursor.zoom_factor") or 1
-	hl.config({ cursor = { zoom_factor = zoom + 1 } })
-end)
-hl.bind(mainMod .. " + CTRL + ALT + Z", function()
-	hl.config({ cursor = { zoom_factor = 1 } })
-end)
-
 -- Lockscreen
 hl.bind(mainMod .. " + CTRL + L", shell("lock"))
 bind_exec("switch:on:Lid Switch", "qs ipc call lock lock", { locked = true })
