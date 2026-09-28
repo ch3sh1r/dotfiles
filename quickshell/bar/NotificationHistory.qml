@@ -11,8 +11,11 @@ Pill {
     onClicked: historyPopup.togglePinned()
     onRightClicked: root.backend.toggleDnd()
 
+    // Bell when there is nothing to show, otherwise just the count. The DND
+    // glyph always shows so muted notifications are never a surprise.
     IconText {
-        text: root.backend.dnd ? "󰥳" : ""
+        visible: root.backend.dnd || root.backend.history.length === 0
+        text: root.backend.dnd ? "󰥳" : ""
         color: root.backend.dnd ? Theme.warning : Theme.fg
     }
 
