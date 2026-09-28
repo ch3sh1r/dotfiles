@@ -13,18 +13,11 @@ local monitors = {
 		output = "desc:Samsung Electric Company LF24T450F HK2TB07170",
 		mode = "1920x1080@60.0",
 		position = "4429x1966",
-		scale = 1.0,
+		scale = 1,
+		vrr = 0
 	},
 	{
 		output = "desc:Dell Inc. DELL U2724D 6JWF934",
-		mode = "2560x1440@59.95",
-		position = "2720x1053",
-		scale = 1.0,
-		transform = 3,
-	},
-	-- Recovery rule for the U2724D when the dock/DP link fails to expose EDID.
-	{
-		output = "DP-7",
 		mode = "2560x1440@59.95",
 		position = "2720x1053",
 		scale = 1.0,
