@@ -61,6 +61,7 @@ PanelWindow {
         // Left click opens recent notifications; right click toggles DND.
         NotificationHistory { backend: bar.services.notifications }
         SunsetToggle {}
+        StayAwake {}
         OrientationLock {
             backend: bar.services.orientation
             monitorName: bar.screen ? bar.screen.name : ""

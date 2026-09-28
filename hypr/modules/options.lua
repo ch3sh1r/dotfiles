@@ -1,7 +1,11 @@
 hl.config({
 	input = {
 		kb_layout = "us, ru",
-		kb_options = "grp:alt_shift_toggle,caps:escape,compose:menu",
+		-- Caps is Escape, so Caps Lock lives on both Shifts; the _cancel variant
+		-- releases it on the next lone Shift so a misfire clears itself.
+		kb_options = "grp:alt_shift_toggle,caps:escape,compose:menu,shift:both_capslock_cancel",
+		repeat_rate = 40,
+		repeat_delay = 250,
 		follow_mouse = 1,
 		mouse_refocus = false,
 		touchpad = {
@@ -48,11 +52,19 @@ hl.config({
 	misc = {
 		force_default_wallpaper = 0,
 		disable_hyprland_logo = true,
+		disable_splash_rendering = true,
+		disable_scale_notification = true,
 		key_press_enables_dpms = true,
 		mouse_move_enables_dpms = false,
+		focus_on_activate = true,
+		on_focus_under_fullscreen = 1,
+		anr_missed_pings = 3,
+		-- Let a restarted qs re-acquire the session lock (Lock.qml recoverLock).
+		allow_session_lock_restore = true,
 	},
 
 	cursor = {
 		no_hardware_cursors = true,
+		hide_on_key_press = true,
 	},
 })

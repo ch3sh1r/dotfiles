@@ -1,6 +1,6 @@
 DOTFILE        := gitconfig vimrc
 DOTFILE_CONFIG := fish i3 i3status alacritty hypr quickshell tmux nvim lazygit
-DOTFILE_BIN    := egpu mnf tdp timer ocr-region mullvad-network-profile
+DOTFILE_BIN    := egpu mnf tdp timer ocr-region mullvad-network-profile sleep-lock
 DOTFILES       := $(DOTFILE_CONFIG) $(DOTFILE_BIN) $(DOTFILE)
 DOTFILES_PATH  := $(dir $(abspath $(lastword $(MAKEFILE_LIST))))
 PACKAGE_LIST   := gpd-p3.list

@@ -18,6 +18,10 @@ Scope {
     readonly property bool headphones: bluetoothHeadphones || /head(phone|set)/.test(sinkText)
     readonly property string sinkInfo: sink ? ((sink.name || "") + " " + (sink.description || "") + " " + (sink.nickname || "")) : ""
 
+    readonly property var source: Pipewire.defaultAudioSource
+    readonly property var sourceAudio: source ? source.audio : null
+    readonly property bool sourceMuted: sourceAudio ? sourceAudio.muted : true
+
     property int headsetBattery: -1
 
     function setVolume(volume: real): void {
@@ -25,9 +29,19 @@ Scope {
             root.audio.volume = Math.max(0, Math.min(1, volume));
     }
 
+    function setMuted(muted: bool): void {
+        if (root.audio && root.audio.muted !== muted)
+            root.audio.muted = muted;
+    }
+
     function toggleMuted(): void {
         if (root.audio)
             root.audio.muted = !root.audio.muted;
+    }
+
+    function toggleSourceMuted(): void {
+        if (root.sourceAudio)
+            root.sourceAudio.muted = !root.sourceAudio.muted;
     }
 
     function openMixer(): void {
@@ -35,7 +49,7 @@ Scope {
     }
 
     PwObjectTracker {
-        objects: [Pipewire.defaultAudioSink]
+        objects: [Pipewire.defaultAudioSink, Pipewire.defaultAudioSource]
     }
 
     JsonPoller {

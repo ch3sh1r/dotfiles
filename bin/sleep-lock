@@ -1,0 +1,64 @@
+#!/usr/bin/env bash
+# Lock the Quickshell session before the machine suspends.
+#
+# Holds a logind delay inhibitor and waits for PrepareForSleep(true). It then
+# asks qs to lock, waits until the lock reports secure, and exits the inhibited
+# process so the inhibitor is released and logind proceeds. The outer loop
+# re-arms after every sleep. Started from hypr/modules/autostart.lua.
+#
+# logind's default InhibitDelayMaxSec is 5s; the lock budget stays under it so
+# a stuck shell cannot hold a closed handheld out of suspend.
+set -u
+
+BUDGET_MS=4000
+MATCH="type='signal',sender='org.freedesktop.login1',interface='org.freedesktop.login1.Manager',member='PrepareForSleep'"
+
+now_ms() {
+    date +%s%3N
+}
+
+wait_for_sleep() {
+    local line status=1
+    coproc MON { exec dbus-monitor --system "$MATCH"; }
+    while IFS= read -r line <&"${MON[0]}"; do
+        if [[ $line == *"boolean true"* ]]; then
+            status=0
+            break
+        fi
+    done
+    kill "$MON_PID" 2>/dev/null
+    wait "$MON_PID" 2>/dev/null
+    return "$status"
+}
+
+lock_session() {
+    local deadline
+    deadline=$(( $(now_ms) + BUDGET_MS ))
+
+    qs ipc call lock lock >/dev/null 2>&1
+    while (( $(now_ms) < deadline )); do
+        [[ $(qs ipc call lock isLocked 2>/dev/null) == true ]] && return 0
+        sleep 0.1
+    done
+
+    echo "sleep-lock: session did not lock within ${BUDGET_MS}ms" >&2
+    notify-send -u critical "Screen did not lock before suspend" \
+        "The session was left unlocked." >/dev/null 2>&1 || true
+    return 1
+}
+
+if [[ ${1:-} == --inhibited ]]; then
+    wait_for_sleep || exit 1
+    lock_session
+    exit $?
+fi
+
+# One monitor per session.
+exec 9>"${XDG_RUNTIME_DIR:-/tmp}/sleep-lock.lock"
+flock -n 9 || exit 0
+
+while true; do
+    systemd-inhibit --what=sleep --mode=delay --who=quickshell \
+        --why="Lock screen before suspend" "$0" --inhibited
+    sleep 1
+done

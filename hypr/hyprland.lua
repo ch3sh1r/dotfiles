@@ -3,6 +3,7 @@
 require("modules/env")
 require("modules/monitors")
 require("modules/options")
+require("modules/rules")
 require("modules/gestures")
 require("modules/animations")
 require("modules/autostart")

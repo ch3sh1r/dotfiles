@@ -1,5 +1,6 @@
 import QtQuick
 import Quickshell
+import Quickshell.Hyprland
 import Quickshell.Io
 import Quickshell.Wayland
 import ".."
@@ -9,6 +10,13 @@ PickerWindow {
     id: root
 
     WlrLayershell.namespace: "quickshell-launcher"
+
+    GlobalShortcut {
+        appid: "quickshell"
+        name: "launcher"
+        description: "Toggle the app launcher"
+        onPressed: root.toggle()
+    }
 
     placeholder: "Search applications"
     maxResults: 30

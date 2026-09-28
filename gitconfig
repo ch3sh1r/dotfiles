@@ -3,6 +3,7 @@
 	email = x@rxtx.wtf
 [push]
 	default = tracking
+	autoSetupRemote = true   # Set upstream automatically on the first push
 [filter "lfs"]
 	clean = git-lfs clean -- %f
 	smudge = git-lfs smudge -- %f
@@ -18,3 +19,18 @@
 	defaultBranch = master
 [gc]
 	auto = 0
+[diff]
+	algorithm = histogram    # Clearer diffs on moved/edited lines
+	colorMoved = plain       # Highlight moved blocks in diffs
+	mnemonicPrefix = true    # i/w/c prefixes instead of a/b in diff output
+[commit]
+	verbose = true           # Include the diff in the commit message template
+[column]
+	ui = auto                # Output in columns when possible
+[branch]
+	sort = -committerdate    # Most recently committed branches first
+[tag]
+	sort = -version:refname  # Sort version tags numerically
+[rerere]
+	enabled = true           # Record and reuse conflict resolutions
+	autoupdate = true        # Apply stored conflict resolutions automatically

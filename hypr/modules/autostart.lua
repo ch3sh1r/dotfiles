@@ -13,6 +13,7 @@ local commands = {
 	"wl-paste --watch cliphist store",
 	rotator,
 	"~/.local/bin/mullvad-network-profile",
+	"~/.local/bin/sleep-lock",
 }
 
 hl.on("hyprland.start", function()

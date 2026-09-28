@@ -3,9 +3,23 @@ general.import = ["~/.config/alacritty/dracula.toml"]
 [env]
 TERM = "xterm-256color"
 
+[terminal]
+# Let remote tmux/nvim yanks reach the local clipboard.
+osc52 = "CopyPaste"
+
 [font]
 normal = { family = "Hack Nerd Font", style = "Regular" }
 bold = { family = "Hack Nerd Font", style = "Bold" }
 italic = { family = "Hack Nerd Font", style = "Italic" }
 size = 12
 
+[window]
+decorations = "None"
+
+[keyboard]
+bindings = [
+  # Send Shift+Return as CSI-u so TUIs can tell it from Return.
+  { key = "Return", mods = "Shift", chars = "\u001B[13;2u" },
+  # Legacy encoding sends Alt+Shift+Return the same as Alt+Return; CSI-u lets tmux match M-S-Enter.
+  { key = "Return", mods = "Alt|Shift", chars = "\u001B[13;4u" },
+]

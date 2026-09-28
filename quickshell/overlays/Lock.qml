@@ -176,6 +176,13 @@ Scope {
         function status(): string { return root.diagnosticStatus(); }
     }
 
+    GlobalShortcut {
+        appid: "quickshell"
+        name: "lock"
+        description: "Lock the session"
+        onPressed: root.lock()
+    }
+
     PersistentProperties {
         id: lockState
         reloadableId: "sessionLockState"

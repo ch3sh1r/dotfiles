@@ -19,7 +19,12 @@ ShellRoot {
 
     Sunset {}
     Lock {}
-    Idle {}
+    Osd { id: osd }
+    Idle { osd: osd }
+    MediaKeys {
+        audio: barServices.audio
+        osd: osd
+    }
 
     Launcher {}
     Selector {}

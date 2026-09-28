@@ -1,5 +1,6 @@
 import QtQuick
 import Quickshell
+import Quickshell.Hyprland
 import Quickshell.Io
 import Quickshell.Wayland
 import Quickshell.Widgets
@@ -172,6 +173,20 @@ PickerWindow {
         function rbw(target: string): void { root.open("rbw", target); }
         function clipboard(): void { root.open("clipboard", "copy"); }
         function close(): void { root.hide(); }
+    }
+
+    GlobalShortcut {
+        appid: "quickshell"
+        name: "clipboard"
+        description: "Clipboard history"
+        onPressed: root.open("clipboard", "copy")
+    }
+
+    GlobalShortcut {
+        appid: "quickshell"
+        name: "rbw"
+        description: "Bitwarden picker"
+        onPressed: root.open("rbw", "menu")
     }
 
     Process {
