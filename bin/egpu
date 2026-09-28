@@ -19,6 +19,19 @@ get_gpus() {
     lspci | grep -i "vga\|3d\|display" | grep -i "nvidia\|amd\|intel\|radeon" || echo "No GPUs detected via lspci"
 }
 
+lua_string() {
+    jq -n --arg value "$1" '$value'
+}
+
+drm_output_enabled() {
+    local monitor="$1" path
+    for path in /sys/class/drm/card*-"$monitor"/enabled; do
+        [ -r "$path" ] || continue
+        [ "$(cat "$path")" == "enabled" ] && return 0
+    done
+    return 1
+}
+
 show_status() {
     echo "eGPU Status"
     echo "==========="
@@ -60,6 +73,8 @@ show_status() {
         while IFS='|' read -r name res disabled; do
             if [ "$disabled" == "true" ]; then
                 echo "  - $name: DISABLED"
+            elif ! drm_output_enabled "$name"; then
+                echo "  - $name: ACTIVE in Hyprland, but no active DRM connector"
             else
                 echo "  - $name: ACTIVE ($res)"
             fi
@@ -86,20 +101,42 @@ enable_egpu() {
     else
         echo "Found disabled monitors: $(echo "$disabled_monitors" | tr '\n' ' ')"
 
-        # Enable monitors in batch
-        local enable_commands=""
         while IFS= read -r monitor; do
             [ -z "$monitor" ] && continue
-            if [ -n "$enable_commands" ]; then enable_commands="$enable_commands ; "; fi
-            # Use 'auto' or 'preferred' for resolution. preferred is usually safer.
-            enable_commands="${enable_commands}keyword monitor $monitor,preferred,auto,1"
-        done <<<"$disabled_monitors"
+            echo "Enabling $monitor..."
+            hyprctl eval "hl.monitor({ output = $(lua_string "$monitor"), disabled = false, mode = \"preferred\", position = \"auto\", scale = 1 })"
+            local attempt
+            for attempt in {1..25}; do
+                if hyprctl monitors all -j | jq -e --arg name "$monitor" '.[] | select(.name == $name and .disabled == false)' >/dev/null; then
+                    break
+                fi
+                sleep 0.2
+            done
+            if [ "$attempt" -eq 25 ] && ! hyprctl monitors all -j | jq -e --arg name "$monitor" '.[] | select(.name == $name and .disabled == false)' >/dev/null; then
+                echo "Error: $monitor is still disabled." >&2
+                return 1
+            fi
 
-        if [ -n "$enable_commands" ]; then
-            echo "Applying Hyprland config changes..."
-            hyprctl --batch "$enable_commands"
-        fi
+            for attempt in {1..25}; do
+                drm_output_enabled "$monitor" && break
+                sleep 0.2
+            done
+            if ! drm_output_enabled "$monitor"; then
+                echo "Error: $monitor appears active in Hyprland, but its DRM connector is not enabled. The eGPU may have reconnected as a new device; restart Hyprland." >&2
+                return 1
+            fi
+        done <<<"$disabled_monitors"
     fi
+
+    local active_monitors
+    active_monitors=$(echo "$all_monitors" | jq -r --arg internal "$INTERNAL_MONITOR" '.[] | select(.name != $internal and .disabled == false) | .name')
+    while IFS= read -r monitor; do
+        [ -z "$monitor" ] && continue
+        if ! drm_output_enabled "$monitor"; then
+            echo "Error: $monitor appears active in Hyprland, but its DRM connector is not enabled. The eGPU may have reconnected as a new device; restart Hyprland." >&2
+            return 1
+        fi
+    done <<<"$active_monitors"
 
     # Optional: Logic to move specific workspaces to the new monitors
     # This attempts to move workspace 2, 3, etc. to the external monitors if they exist
@@ -111,7 +148,7 @@ enable_egpu() {
             # Only attempt to move if the workspace exists to avoid errors
             if hyprctl workspaces -j | jq -e ".[] | select(.id == $i)" >/dev/null; then
                 echo "Moving workspace $i to $monitor"
-                hyprctl dispatch moveworkspacetomonitor "$i" "$monitor"
+                hyprctl eval "hl.dispatch(hl.dsp.workspace.move({ workspace = \"$i\", monitor = $(lua_string "$monitor") }))"
             fi
             i=$((i + 1))
         done <<<"$disabled_monitors"
@@ -154,23 +191,17 @@ disable_egpu() {
             while IFS= read -r ws_id; do
                 [ -z "$ws_id" ] && continue
                 echo "  - Moving workspace $ws_id from $monitor to $INTERNAL_MONITOR"
-                hyprctl dispatch moveworkspacetomonitor "$ws_id" "$INTERNAL_MONITOR"
+                hyprctl eval "hl.dispatch(hl.dsp.workspace.move({ workspace = \"$ws_id\", monitor = $(lua_string "$INTERNAL_MONITOR") }))"
             done <<<"$workspaces_on_monitor"
         fi
     done <<<"$external_monitors"
 
     # Disable monitors
-    local disable_commands=""
     while IFS= read -r monitor; do
         [ -z "$monitor" ] && continue
-        if [ -n "$disable_commands" ]; then disable_commands="$disable_commands ; "; fi
-        disable_commands="${disable_commands}keyword monitor $monitor,disabled"
+        echo "Disabling $monitor via Hyprland..."
+        hyprctl eval "hl.monitor({ output = $(lua_string "$monitor"), disabled = true })"
     done <<<"$external_monitors"
-
-    if [ -n "$disable_commands" ]; then
-        echo "Disabling monitors via Hyprland..."
-        hyprctl --batch "$disable_commands"
-    fi
 
     echo "External monitors disabled. Safe to unplug eGPU."
 }
