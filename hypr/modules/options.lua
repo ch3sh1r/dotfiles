@@ -1,9 +1,8 @@
 hl.config({
 	input = {
 		kb_layout = "us, ru",
-		-- Caps is Escape, so Caps Lock lives on both Shifts; the _cancel variant
-		-- releases it on the next lone Shift so a misfire clears itself.
-		kb_options = "grp:alt_shift_toggle,caps:escape,compose:menu,shift:both_capslock_cancel",
+		-- Shift Caps Lock options override Alt+Shift switching when Alt is pressed first.
+		kb_options = "grp:alt_shift_toggle,caps:escape,compose:menu",
 		repeat_rate = 40,
 		repeat_delay = 250,
 		follow_mouse = 1,
