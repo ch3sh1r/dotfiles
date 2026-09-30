@@ -109,10 +109,6 @@ PanelWindow {
         border.width: 1
         border.color: Theme.base02
 
-        SunsetTint {
-            radius: frame.radius
-        }
-
         MouseArea {
             anchors.fill: parent
             onClicked: mouse => mouse.accepted = true

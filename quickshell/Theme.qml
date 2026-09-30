@@ -32,7 +32,6 @@ Singleton {
     readonly property color warning: base0A
     readonly property color critical: base08
     readonly property color good: base04          // "active/connected" — gray, not green
-    readonly property color sunsetTint: "#228e5835"
     readonly property color lockBackground: "#000000"
     readonly property color lockInput: "#593c3836"
 

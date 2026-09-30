@@ -106,10 +106,6 @@ PanelWindow {
                 border.width: 1
                 border.color: root.borderColor(card.modelData)
 
-                SunsetTint {
-                    radius: card.radius
-                }
-
                 RetainableLock {
                     object: card.modelData
                     locked: true

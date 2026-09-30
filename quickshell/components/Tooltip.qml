@@ -118,10 +118,6 @@ PopupWindow {
                 implicitWidth: childrenRect.width
                 implicitHeight: childrenRect.height
             }
-
-            SunsetTint {
-                radius: frame.radius
-            }
         }
     ]
 }

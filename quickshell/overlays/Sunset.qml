@@ -1,11 +1,16 @@
 import QtQuick
 import Quickshell
+import Quickshell.Hyprland
 import Quickshell.Io
-import Quickshell.Wayland
 import ".."
 
 Scope {
     id: root
+
+    function apply(): void {
+        let shader = SunsetState.night ? Qt.resolvedUrl("../sunset.frag").toString().replace("file://", "") : "";
+        Quickshell.execDetached(["hyprctl", "eval", "hl.config({ decoration = { screen_shader = " + JSON.stringify(shader) + " } })"]);
+    }
 
     function update(): void {
         let now = new Date();
@@ -37,33 +42,18 @@ Scope {
         onTriggered: root.update()
     }
 
-    Variants {
-        model: Quickshell.screens
+    Component.onCompleted: root.apply()
 
-        PanelWindow {
-            required property var modelData
+    Connections {
+        target: SunsetState
+        function onNightChanged() { root.apply(); }
+    }
 
-            screen: modelData
-            visible: SunsetState.night
-            color: "transparent"
-            exclusionMode: ExclusionMode.Ignore
-            mask: Region { width: 0; height: 0 }
-
-            anchors {
-                top: true
-                left: true
-                right: true
-                bottom: true
-            }
-
-            WlrLayershell.layer: WlrLayer.Overlay
-            WlrLayershell.keyboardFocus: WlrKeyboardFocus.None
-            WlrLayershell.namespace: "quickshell-sunset"
-
-            Rectangle {
-                anchors.fill: parent
-                color: Theme.sunsetTint
-            }
+    Connections {
+        target: Hyprland
+        function onRawEvent(event) {
+            if (event.name === "configreloaded")
+                root.apply();
         }
     }
 }
