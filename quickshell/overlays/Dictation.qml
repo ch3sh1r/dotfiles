@@ -86,6 +86,10 @@ PanelWindow {
         border.width: 2
         border.color: root.stateColor
 
+        SunsetTint {
+            radius: card.radius
+        }
+
         Row {
             id: row
             anchors.centerIn: parent

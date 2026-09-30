@@ -68,6 +68,12 @@ PickerWindow {
     }
 
     onQueryChanged: refresh()
+    // Desktop entries can finish loading after the first search or opening.
+    Connections {
+        target: DesktopEntries.applications
+        function onValuesChanged() { root.refresh(); }
+    }
+
     onActivated: entry => {
         usage.set(entry.id, (usage.values[entry.id] || 0) + 1);
         root.close();

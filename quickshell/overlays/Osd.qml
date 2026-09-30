@@ -134,6 +134,10 @@ Scope {
             border.width: 1
             border.color: Theme.base02
 
+            SunsetTint {
+                radius: card.radius
+            }
+
             Row {
                 id: row
                 anchors.centerIn: parent
