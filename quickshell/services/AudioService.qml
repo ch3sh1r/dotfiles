@@ -45,7 +45,7 @@ Scope {
     }
 
     function openMixer(): void {
-        Quickshell.execDetached(["pavucontrol", "-t", "3"]);
+        Quickshell.execDetached(["uwsm", "app", "--", "pavucontrol", "-t", "3"]);
     }
 
     PwObjectTracker {

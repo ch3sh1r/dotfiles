@@ -1,10 +1,22 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-monitor="${1:-DSI-1}"
-mode="${IIO_HYPRLAND_MODE:-1200x1920@60.0}"
-position="${IIO_HYPRLAND_POSITION:-4760x3046}"
-scale="${IIO_HYPRLAND_SCALE:-1.5}"
+# Use the same panel settings as monitors.lua, including when started manually.
+panel_config="${XDG_CONFIG_HOME:-$HOME/.config}/hypr/modules/panel.lua"
+panel_values="$(lua - "$panel_config" <<'LUA'
+local panel = dofile(arg[1])
+for _, field in ipairs({ "output", "mode", "position", "scale" }) do
+    local value = assert(panel[field], "Missing panel setting: " .. field)
+    print(value)
+end
+LUA
+)"
+mapfile -t panel <<< "$panel_values"
+
+monitor="${1:-${panel[0]}}"
+mode="${IIO_HYPRLAND_MODE:-${panel[1]}}"
+position="${IIO_HYPRLAND_POSITION:-${panel[2]}}"
+scale="${IIO_HYPRLAND_SCALE:-${panel[3]}}"
 sensor="${IIO_HYPRLAND_SENSOR:-/sys/bus/iio/devices/iio:device0}"
 threshold="${IIO_HYPRLAND_THRESHOLD:-700}"
 poll_interval="${IIO_HYPRLAND_POLL_INTERVAL:-0.5}"

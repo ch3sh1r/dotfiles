@@ -3,10 +3,12 @@ set -euo pipefail
 
 action="${1:-status}"
 monitor="${2:-DSI-1}"
-rotator="${IIO_HYPRLAND_CMD:-$HOME/.config/hypr/scripts/iio-hyprland-lua}"
+rotator="${IIO_HYPRLAND_CMD:-$HOME/.local/bin/iio-hyprland-lua}"
 
 # pgrep/pkill take a regex; escape the path so it matches literally.
-pattern=$(printf '%s %s' "$rotator" "$monitor" | sed 's/[][\\.^$*+?(){}|]/\\&/g')
+rotator_pattern=$(printf '%s' "$rotator" | sed 's/[][\\.^$*+?(){}|]/\\&/g')
+monitor_pattern=$(printf '%s' "$monitor" | sed 's/[][\\.^$*+?(){}|]/\\&/g')
+pattern="$rotator_pattern( $monitor_pattern)?$"
 
 is_running() {
     pgrep -f -- "$pattern" >/dev/null

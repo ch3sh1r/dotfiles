@@ -71,7 +71,7 @@ PickerWindow {
     onActivated: entry => {
         usage.set(entry.id, (usage.values[entry.id] || 0) + 1);
         root.close();
-        entry.execute();
+        Quickshell.execDetached(["uwsm", "app", "--", entry.id.endsWith(".desktop") ? entry.id : entry.id + ".desktop"]);
     }
 
     JsonStore {

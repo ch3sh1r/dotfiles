@@ -1,0 +1,5 @@
+# Loaded by UWSM before starting Hyprland and exported to user services.
+export XCURSOR_SIZE=24
+export HYPRCURSOR_SIZE=24
+export QT_QPA_PLATFORM=wayland
+export QT_QPA_PLATFORMTHEME=qt6ct

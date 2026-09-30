@@ -13,7 +13,7 @@ local function shell(name)
 	return hl.dsp.global("quickshell:" .. name)
 end
 
--- Windows and session
+-- Windows
 hl.bind(mainMod .. " + C", hl.dsp.window.close())
 hl.bind(
 	mainMod .. " + F",
@@ -31,7 +31,6 @@ hl.bind(
 )
 hl.bind(mainMod .. " + SHIFT + F", hl.dsp.window.float({ action = "toggle" }))
 hl.bind(mainMod .. " + CTRL + H", hl.dsp.layout("togglesplit"))
-hl.bind(mainMod .. " + SHIFT + E", hl.dsp.exit())
 
 -- Common apps
 local apps = {
@@ -50,7 +49,7 @@ local apps = {
 }
 
 for _, app in ipairs(apps) do
-	bind_exec(mainMod .. " + " .. app.key, app.command)
+	bind_exec(mainMod .. " + " .. app.key, "uwsm app -- " .. app.command)
 end
 
 -- Shell overlays
