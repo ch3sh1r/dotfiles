@@ -55,7 +55,7 @@ hl.config({
 		disable_scale_notification = true,
 		key_press_enables_dpms = true,
 		mouse_move_enables_dpms = false,
-		focus_on_activate = true,
+		focus_on_activate = false,
 		on_focus_under_fullscreen = 1,
 		anr_missed_pings = 3,
 		-- Let a restarted qs re-acquire the session lock (Lock.qml recoverLock).
@@ -63,7 +63,8 @@ hl.config({
 	},
 
 	cursor = {
-		no_hardware_cursors = true,
+		-- Software cursors can leave a flashing duplicate when switching monitors.
+		no_hardware_cursors = false,
 		hide_on_key_press = true,
 	},
 })

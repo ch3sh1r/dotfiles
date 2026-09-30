@@ -69,6 +69,10 @@ end
 bind_exec("Print", "hyprshot -m region -o ~/Pictures/Screenshots")
 bind_exec(mainMod .. " + Print", "~/.local/bin/ocr-region")
 
+-- Toggle local dictation; Voxtype copies the transcription to the clipboard.
+bind_exec(mainMod .. " + D", "/usr/bin/voxtype record toggle")
+bind_exec(mainMod .. " + SHIFT + D", "/usr/bin/voxtype record toggle --model large-v3-turbo")
+
 -- Grouped windows
 hl.bind(mainMod .. " + A", hl.dsp.group.toggle())
 hl.bind(mainMod .. " + Z", hl.dsp.group.prev())

@@ -221,6 +221,35 @@ PickerWindow {
 
             readonly property var item: root.selectedItem
             readonly property bool hasImage: !!item && (item.image || "").length > 0
+            readonly property string textId: item && !hasImage ? item.id : ""
+            property string requestedId: ""
+            property string fullText: ""
+
+            function loadText(): void {
+                fullText = "";
+                textScroll.contentY = 0;
+                if (textProc.running || textId.length === 0)
+                    return;
+                requestedId = textId;
+                textProc.command = ["bash", root.actionScript, "clipboard", "preview", textId];
+                textProc.running = true;
+            }
+
+            onTextIdChanged: Qt.callLater(preview.loadText)
+
+            Process {
+                id: textProc
+                stdout: StdioCollector {
+                    onStreamFinished: {
+                        if (preview.requestedId === preview.textId)
+                            preview.fullText = this.text;
+                    }
+                }
+                onExited: Qt.callLater(() => {
+                    if (preview.requestedId !== preview.textId)
+                        preview.loadText();
+                })
+            }
 
             IconImage {
                 anchors.fill: parent
@@ -231,20 +260,24 @@ PickerWindow {
             }
 
             Flickable {
+                id: textScroll
                 anchors.fill: parent
                 anchors.margins: 14
                 visible: !preview.hasImage
                 contentWidth: width
-                contentHeight: previewText.implicitHeight
+                contentHeight: Math.max(height, previewText.implicitHeight)
                 clip: true
+                boundsBehavior: Flickable.StopAtBounds
 
                 Label {
                     id: previewText
                     width: parent.width
-                    text: preview.item ? preview.item.title : ""
+                    text: preview.fullText
+                    textFormat: Text.PlainText
                     color: Theme.fgBright
                     font.pixelSize: Theme.menuFontSize
                     wrapMode: Text.Wrap
+                    verticalAlignment: Text.AlignTop
                 }
             }
 

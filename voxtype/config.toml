@@ -1,0 +1,22 @@
+state_file = "auto"
+
+[osd]
+enabled = false
+
+[hotkey]
+enabled = false
+
+[whisper]
+model = "small"
+secondary_model = "large-v3-turbo"
+language = "ru"
+translate = false
+initial_prompt = "Codex, Voxtype, Hyprland, tmux, Linux, Python, Rust, TypeScript, API."
+
+[output]
+mode = "clipboard"
+
+[output.notification]
+on_recording_start = true
+on_recording_stop = true
+on_transcription = true

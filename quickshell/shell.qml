@@ -20,6 +20,7 @@ ShellRoot {
     Sunset {}
     Lock {}
     Osd { id: osd }
+    Dictation {}
     Idle { osd: osd }
     MediaKeys {
         audio: barServices.audio
