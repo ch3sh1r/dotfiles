@@ -10,6 +10,9 @@ Scope {
     readonly property bool charging: device && device.state === UPowerDeviceState.Charging
     readonly property bool full: device && (device.state === UPowerDeviceState.FullyCharged || device.percentage >= 1)
     readonly property int percent: device ? Math.round(device.percentage * 100) : -1
+    readonly property bool batteryReady: !!device && device.ready && device.isPresent
+    readonly property bool discharging: batteryReady && (device.state === UPowerDeviceState.Discharging
+        || device.state === UPowerDeviceState.Empty || device.state === UPowerDeviceState.PendingDischarge)
 
     // Low-battery warnings: one critical toast at 10% and another at 5%, re-armed
     // once the level climbs back above the threshold or the charger is plugged in.
@@ -17,7 +20,7 @@ Scope {
     property bool warnedCritical: false
 
     function checkLevel(): void {
-        if (!root.device || !root.onBattery || root.percent < 0) {
+        if (!root.discharging || !root.onBattery || root.percent < 0) {
             root.warnedLow = false;
             root.warnedCritical = false;
             return;
@@ -43,4 +46,5 @@ Scope {
 
     onPercentChanged: root.checkLevel()
     onOnBatteryChanged: root.checkLevel()
+    onDischargingChanged: root.checkLevel()
 }

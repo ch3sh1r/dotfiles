@@ -29,6 +29,9 @@ case "$mode" in
         ;;
     clipboard)
         case "$target" in
+            preview)
+                printf '%s\t\n' "$item_id" | cliphist decode
+                ;;
             copy)
                 printf '%s\t\n' "$item_id" | cliphist decode | wl-copy
                 ;;
