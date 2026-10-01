@@ -29,7 +29,15 @@ ShellRoot {
 
     Launcher {}
     Selector {}
-    Notifications { backend: barServices.notifications }
+    Variants {
+        model: Quickshell.screens
+
+        Notifications {
+            required property var modelData
+            screen: modelData
+            backend: barServices.notifications
+        }
+    }
 
     Variants {
         model: Quickshell.screens
