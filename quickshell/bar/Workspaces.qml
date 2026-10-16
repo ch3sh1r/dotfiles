@@ -11,6 +11,16 @@ Item {
     id: root
 
     property string monitorName: ""
+    // At session startup the first monitor query can return before monitors
+    // are ready. Query again once the workspace model has been populated.
+    Component.onCompleted: Qt.callLater(Hyprland.refreshMonitors)
+
+    Connections {
+        target: Hyprland.workspaces
+        function onValuesChanged(): void {
+            Qt.callLater(Hyprland.refreshMonitors);
+        }
+    }
 
     implicitWidth: row.implicitWidth
     implicitHeight: Theme.pillHeight
@@ -38,10 +48,8 @@ Item {
                 id: btn
                 required property var modelData
 
-                // This strip is already scoped to one monitor, so highlight
-                // that monitor's active workspace. `focused` also requires the
-                // monitor itself to be focused and can therefore leave the
-                // strip without a selection.
+                // Highlight the active workspace on this monitor even when
+                // another monitor has keyboard focus.
                 readonly property bool isFocused: modelData.active
                 readonly property bool isUrgent: modelData.urgent
 
