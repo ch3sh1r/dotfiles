@@ -46,4 +46,4 @@ if [[ -z $TEXT ]]; then
 fi
 
 printf "%s" "$TEXT" | wl-copy
-notify-send "OCR" "Copied text from selection to clipboard" -t 3000
+notify-send -t 3000 -- "OCR — copied to clipboard" "$TEXT"
