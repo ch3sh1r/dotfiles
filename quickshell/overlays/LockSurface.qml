@@ -1,5 +1,6 @@
+pragma ComponentBehavior: Bound
+
 import QtQuick
-import QtQuick.Effects
 import Quickshell
 import Quickshell.Wayland
 import ".."
@@ -12,143 +13,209 @@ WlSessionLockSurface {
     required property bool passwordVisible
     required property string keyboardLayout
     required property string message
-    required property string pamMessage
-    required property bool pamMessageIsError
+    required property int clearSequence
+    required property string passwordText
+
+    readonly property bool interfaceVisible: passwordVisible || authenticating
+    readonly property color frameColor: message.length > 0 ? Theme.pink : Theme.accent
 
     signal passwordEntered()
+    signal passwordEdited(string text)
     signal passwordSubmitted(string password)
     signal passwordCancelled()
 
     color: Theme.lockBackground
+
+    onClearSequenceChanged: password.clear()
+    onPasswordTextChanged: syncPassword()
+
+    function syncPassword(): void {
+        if (password.text !== root.passwordText) {
+            password.text = root.passwordText;
+            password.cursorPosition = password.length;
+        }
+    }
 
     SystemClock {
         id: clock
         precision: SystemClock.Minutes
     }
 
-    Rectangle {
-        anchors.fill: parent
-        color: Theme.lockBackground
+    // Opacity keeps the editor focused even when the screen is entirely black.
+    // The first printable key is handled by TextInput itself, without replaying it.
+    Item {
+        id: panel
+        width: Math.min(320, parent.width - 48)
+        height: 254
+        anchors.centerIn: parent
+        opacity: root.interfaceVisible ? 1 : 0
 
-        Image {
-            anchors.fill: parent
-            source: Theme.wallpaper
-            fillMode: Image.PreserveAspectCrop
-            smooth: true
-            asynchronous: true
-            opacity: 0.55
-            layer.enabled: true
-            layer.effect: MultiEffect {
-                blurEnabled: true
-                blurMax: 16
-                blur: 0.8
-                saturation: 0.45
+        Row {
+            anchors.top: parent.top
+            spacing: 8
+
+            Rectangle {
+                width: 5
+                height: 5
+                anchors.verticalCenter: parent.verticalCenter
+                color: root.frameColor
             }
-        }
 
-        Rectangle {
-            anchors.fill: parent
-            color: Theme.lockBackground
-            opacity: 0
-
-            NumberAnimation on opacity {
-                from: 0
-                to: 1
-                duration: 700
-                easing.type: Easing.OutCubic
+            Label {
+                text: "SESSION LOCKED"
+                color: Theme.accent
+                font.pixelSize: 11
+                font.letterSpacing: 2
             }
         }
 
         Label {
             anchors.top: parent.top
             anchors.right: parent.right
-            anchors.topMargin: 24
-            anchors.rightMargin: 28
-            visible: root.passwordVisible || root.authenticating
             text: root.keyboardLayout
-            color: Theme.base04
-            font.pixelSize: Theme.menuFontSize
-            font.bold: true
+            color: Theme.cyan
+            font.pixelSize: 11
+            font.letterSpacing: 1
         }
 
-        Column {
-            width: Math.min(320, parent.width - 48)
-            anchors.horizontalCenter: parent.horizontalCenter
-            anchors.verticalCenter: parent.verticalCenter
-            anchors.verticalCenterOffset: 92
-            spacing: 10
+        Rectangle {
+            y: 25
+            width: parent.width
+            height: 1
+            color: Theme.accent
+            opacity: 0.45
+        }
 
-            Label {
-                width: parent.width
-                visible: root.passwordVisible || root.authenticating
-                text: Qt.formatDateTime(clock.date, "hh:mm")
-                color: Theme.fgBright
-                horizontalAlignment: Text.AlignHCenter
-                font.pixelSize: 42
-                font.bold: true
-            }
+        Label {
+            y: 43
+            width: parent.width
+            text: Qt.formatDateTime(clock.date, "HH:mm")
+            color: Theme.fgBright
+            horizontalAlignment: Text.AlignHCenter
+            font.pixelSize: 48
+            font.letterSpacing: 3
+        }
 
-            Rectangle {
-                width: 290
-                height: 60
-                anchors.horizontalCenter: parent.horizontalCenter
-                visible: root.passwordVisible || root.authenticating
-                radius: Theme.radius
-                color: Theme.lockInput
-                border.width: 2
-                border.color: password.activeFocus ? Theme.accent : "transparent"
+        Label {
+            y: 105
+            width: parent.width
+            text: Qt.formatDateTime(clock.date, "yyyy.MM.dd")
+            color: Theme.base03
+            horizontalAlignment: Text.AlignHCenter
+            font.pixelSize: 12
+            font.letterSpacing: 2
+        }
 
-                TextInput {
-                    id: password
-                    anchors.fill: parent
-                    anchors.leftMargin: 18
-                    anchors.rightMargin: 18
-                    verticalAlignment: TextInput.AlignVCenter
-                    color: Theme.fgBright
-                    selectionColor: Theme.accent
-                    selectedTextColor: Theme.base00
-                    echoMode: TextInput.Password
-                    passwordCharacter: "*"
-                    enabled: !root.authenticating
-                    font.family: Theme.font
-                    font.pixelSize: Theme.menuInputFontSize
+        Item {
+            id: inputFrame
+            y: 150
+            width: parent.width
+            height: 56
 
-                    Keys.onPressed: event => {
-                        if (event.text.length > 0)
-                            root.passwordEntered();
+            // Four short brackets frame the input without a filled card.
+            Repeater {
+                model: 4
 
-                        if (event.key === Qt.Key_Return || event.key === Qt.Key_Enter) {
-                            root.passwordSubmitted(password.text);
-                            password.text = "";
-                            event.accepted = true;
-                        } else if (event.key === Qt.Key_Escape) {
-                            password.text = "";
-                            root.passwordCancelled();
-                            event.accepted = true;
-                        }
+                delegate: Item {
+                    required property int index
+                    x: index % 2 === 0 ? 0 : inputFrame.width - width
+                    y: index < 2 ? 0 : inputFrame.height - height
+                    width: 12
+                    height: 10
+
+                    Rectangle {
+                        width: parent.width
+                        height: 1
+                        y: parent.index < 2 ? 0 : parent.height - height
+                        color: root.frameColor
                     }
 
-                    Component.onCompleted: forceActiveFocus()
-                }
-
-                Label {
-                    anchors.centerIn: parent
-                    visible: password.text.length === 0 && !password.activeFocus
-                    text: root.authenticating ? "Checking" : "Password"
-                    color: Theme.base04
-                    font.pixelSize: Theme.menuFontSize
+                    Rectangle {
+                        width: 1
+                        height: parent.height
+                        x: parent.index % 2 === 0 ? 0 : parent.width - width
+                        color: root.frameColor
+                    }
                 }
             }
 
             Label {
-                width: parent.width
-                visible: root.message.length > 0 || root.pamMessage.length > 0
-                text: root.message.length > 0 ? root.message : root.pamMessage.replace(/:\s*$/, "")
-                color: root.pamMessageIsError || root.message.length > 0 ? Theme.warning : Theme.base04
-                horizontalAlignment: Text.AlignHCenter
-                font.pixelSize: Theme.menuFontSize
-                wrapMode: Text.Wrap
+                anchors.left: parent.left
+                anchors.leftMargin: 16
+                anchors.verticalCenter: parent.verticalCenter
+                text: ">"
+                color: root.frameColor
+                font.pixelSize: Theme.menuInputFontSize
             }
+
+            TextInput {
+                id: password
+                anchors.fill: parent
+                anchors.leftMargin: 42
+                anchors.rightMargin: 18
+                verticalAlignment: TextInput.AlignVCenter
+                color: Theme.fgBright
+                selectionColor: Theme.accent
+                selectedTextColor: Theme.base00
+                echoMode: TextInput.Password
+                passwordCharacter: "*"
+                passwordMaskDelay: 0
+                readOnly: root.authenticating
+                cursorVisible: root.interfaceVisible && activeFocus && !root.authenticating
+                font.family: Theme.font
+                font.pixelSize: Theme.menuInputFontSize
+                font.letterSpacing: 3
+                clip: true
+
+                onTextEdited: {
+                    root.passwordEdited(text);
+                    root.passwordEntered();
+                }
+
+                Keys.onPressed: event => {
+                    if (root.authenticating) {
+                        event.accepted = true;
+                        return;
+                    }
+
+                    if (event.key === Qt.Key_Return || event.key === Qt.Key_Enter) {
+                        root.passwordSubmitted(password.text);
+                        password.clear();
+                        event.accepted = true;
+                    } else if (event.key === Qt.Key_Escape) {
+                        password.clear();
+                        root.passwordCancelled();
+                        event.accepted = true;
+                    } else if (root.interfaceVisible || event.text.length > 0) {
+                        root.passwordEntered();
+                    }
+                }
+
+                Component.onCompleted: {
+                    root.syncPassword();
+                    forceActiveFocus();
+                }
+            }
+
+            Label {
+                anchors.centerIn: parent
+                visible: password.text.length === 0
+                text: root.authenticating ? "VERIFYING" : "PASSWORD"
+                color: Theme.base03
+                font.pixelSize: 11
+                font.letterSpacing: 2
+            }
+        }
+
+        Label {
+            y: 226
+            width: parent.width
+            text: root.message.length > 0 ? root.message : root.authenticating ? "AUTHENTICATING" : ""
+            color: root.message.length > 0 ? Theme.pink : Theme.base03
+            horizontalAlignment: Text.AlignHCenter
+            font.pixelSize: 10
+            font.letterSpacing: 1
+            wrapMode: Text.Wrap
         }
     }
 }

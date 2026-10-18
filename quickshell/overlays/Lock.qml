@@ -1,3 +1,5 @@
+pragma ComponentBehavior: Bound
+
 import QtQuick
 import Quickshell
 import Quickshell.Hyprland
@@ -9,13 +11,42 @@ Scope {
     id: root
 
     property string pendingPassword: ""
+    property string enteredPassword: ""
     property string message: ""
     property string keyboardLayout: ""
     property bool passwordVisible: false
     property bool authenticating: false
+    property int clearSequence: 0
     property bool recovering: false
     property bool stateFileError: false
     property string lockStatus: "unlocked"
+
+    onClearSequenceChanged: root.enteredPassword = ""
+
+    function hideInterface(): void {
+        inputIdle.stop();
+        messageTimeout.stop();
+        root.message = "";
+        root.passwordVisible = false;
+        root.clearSequence++;
+    }
+
+    function inputActivity(): void {
+        if (root.authenticating)
+            return;
+        messageTimeout.stop();
+        root.message = "";
+        root.passwordVisible = true;
+        inputIdle.restart();
+    }
+
+    function showMessage(text: string): void {
+        inputIdle.stop();
+        root.clearSequence++;
+        root.passwordVisible = true;
+        root.message = text;
+        messageTimeout.restart();
+    }
 
     function pamConfigured(): bool {
         return pam.config.length > 0
@@ -57,8 +88,7 @@ Scope {
             return false;
         }
 
-        root.message = "";
-        root.passwordVisible = false;
+        root.hideInterface();
         root.recovering = false;
         root.lockStatus = "locking";
         root.stateFileError = false;
@@ -110,11 +140,17 @@ Scope {
         if (root.authenticating || password.length === 0 || !sessionLock.secure)
             return;
 
+        inputIdle.stop();
+        messageTimeout.stop();
         root.pendingPassword = password;
         root.message = "";
+        root.passwordVisible = true;
+        root.clearSequence++;
         root.authenticating = pam.start();
-        if (!root.authenticating)
-            root.message = "Authentication unavailable";
+        if (!root.authenticating) {
+            root.pendingPassword = "";
+            root.showMessage("AUTH UNAVAILABLE");
+        }
     }
 
     function answerPam(): void {
@@ -224,28 +260,31 @@ Scope {
 
             if (result === PamResult.Success) {
                 if (!sessionLock.locked || !sessionLock.secure) {
-                    root.message = "Lock security was not confirmed";
+                    root.showMessage("LOCK SECURITY ERROR");
                     root.lockStatus = "error: refusing insecure unlock";
                     return;
                 }
 
                 dpmsOffDelay.stop();
                 dpmsOn.running = true;
-                root.passwordVisible = false;
+                root.hideInterface();
                 root.recovering = false;
-                root.message = "";
                 lockState.requested = false;
                 lockStateFile.setText("");
             } else if (result === PamResult.MaxTries) {
-                root.message = "Too many attempts";
+                root.showMessage("TOO MANY ATTEMPTS");
             } else if (result === PamResult.Error) {
-                root.message = "Authentication error";
+                root.showMessage("AUTH ERROR");
             } else {
-                root.message = "Authentication failed";
+                root.showMessage("ACCESS DENIED");
             }
         }
 
-        onError: root.message = "Authentication error"
+        onError: {
+            root.authenticating = false;
+            root.pendingPassword = "";
+            root.showMessage("AUTH ERROR");
+        }
     }
 
     Connections {
@@ -311,18 +350,30 @@ Scope {
             passwordVisible: root.passwordVisible
             keyboardLayout: root.shortKeyboardLayout()
             message: root.message
-            pamMessage: pam.message
-            pamMessageIsError: pam.messageIsError
+            clearSequence: root.clearSequence
+            passwordText: root.enteredPassword
 
-            onPasswordEntered: {
-                root.message = "";
-                root.passwordVisible = true;
-            }
-            onPasswordSubmitted: password => {
-                root.authenticate(password);
-                root.passwordVisible = false;
-            }
-            onPasswordCancelled: root.passwordVisible = false
+            onPasswordEntered: root.inputActivity()
+            onPasswordEdited: text => root.enteredPassword = text
+            onPasswordSubmitted: password => root.authenticate(password)
+            onPasswordCancelled: root.hideInterface()
+        }
+    }
+
+    Timer {
+        id: inputIdle
+        interval: 8000
+        repeat: false
+        onTriggered: root.hideInterface()
+    }
+
+    Timer {
+        id: messageTimeout
+        interval: 4000
+        repeat: false
+        onTriggered: {
+            if (!root.authenticating)
+                root.hideInterface();
         }
     }
 
