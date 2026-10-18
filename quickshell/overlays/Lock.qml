@@ -427,7 +427,7 @@ Scope {
 
     Process {
         id: dpmsOff
-        command: ["hyprctl", "dispatch", "hl.dsp.dpms(\"off\")"]
+        command: ["hyprctl", "dispatch", "hl.dsp.dpms({ action = \"off\" })"]
         // An off command already in flight must not win over an unlock.
         onExited: {
             if (!lockState.requested || !sessionLock.locked)
@@ -437,7 +437,7 @@ Scope {
 
     Process {
         id: dpmsOn
-        command: ["hyprctl", "dispatch", "hl.dsp.dpms(\"on\")"]
+        command: ["hyprctl", "dispatch", "hl.dsp.dpms({ action = \"on\" })"]
     }
 
     Component.onCompleted: {

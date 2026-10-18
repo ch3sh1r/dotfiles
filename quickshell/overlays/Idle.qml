@@ -25,7 +25,7 @@ Scope {
     IdleMonitor {
         enabled: !IdleState.stayAwake
         timeout: 600
-        onIsIdleChanged: Quickshell.execDetached(["hyprctl", "dispatch", isIdle ? "hl.dsp.dpms(\"off\")" : "hl.dsp.dpms(\"on\")"])
+        onIsIdleChanged: Quickshell.execDetached(["hyprctl", "dispatch", isIdle ? "hl.dsp.dpms({ action = \"off\" })" : "hl.dsp.dpms({ action = \"on\" })"])
     }
 
     IdleMonitor {
