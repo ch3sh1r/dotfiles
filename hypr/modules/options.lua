@@ -63,8 +63,14 @@ hl.config({
 	},
 
 	cursor = {
+		-- Use the same XCursor assets in the compositor, GTK, Qt and XWayland.
+		enable_hyprcursor = false,
+		sync_gsettings_theme = true,
 		-- Software cursors can leave a flashing duplicate when switching monitors.
-		no_hardware_cursors = false,
+		no_hardware_cursors = 0,
+		-- Avoid GPU buffer sharing for cursor planes on the Intel + AMD setup.
+		-- Verify physical monitor crossings before treating this as a confirmed fix.
+		use_cpu_buffer = 1,
 		hide_on_key_press = true,
 	},
 })

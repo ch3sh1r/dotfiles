@@ -20,6 +20,45 @@ Fish plugins (fisher, z) are not committed. Install them from
 make fish-plugins
 ```
 
+## Mouse cursor
+
+Restore and select the bundled [NeuroDance-Dracula](icons/NeuroDance-Dracula/README.md) theme:
+
+```bash
+make cursor
+```
+
+`make` includes `make cursor`: it copies the ready-to-use theme from
+`icons/NeuroDance-Dracula` to `~/.local/share/icons/NeuroDance-Dracula`, then
+sets size 24 in GTK 3/4 and GSettings, and fixes the user `default` theme's
+inheritance. Other GTK settings are preserved; changed INI files get numbered
+`.before-cursor` backups. Python 3 is required; restoration works offline without
+the original theme or Git commands. Identical existing installations are reused;
+different existing themes at the destination are left untouched.
+
+Original cursor theme: [v1ewport (viewport), NEURODANCE-CURSOR](https://github.com/v1ewport/NEURODANCE-CURSOR).
+Original concept art: [Anna Kuźmińska](https://www.behance.net/gallery/127222375/Cyberpunk-2077-UI-Art-and-UI-Art-Concepts),
+as credited by upstream. This local variant changes the colors to the Dracula
+palette; the original cursor designs are by their respective authors.
+
+The Dracula variant replaces the main red accent with purple (`#bd93f9`), maps
+neutral details to the background/foreground palette, and uses Dracula accents
+for other semantic hues. The native XCursor transform preserves alpha, all frame
+headers, sizes, hotspots, and animation delays. The original theme is retained.
+
+Log out and back in after installation so UWSM services and existing apps receive
+`XCURSOR_THEME=NeuroDance-Dracula`. Hyprland uses the same XCursor assets as clients.
+The compositor keeps hardware cursors with `cursor.use_cpu_buffer = 1` as a
+workaround to test on Intel + AMD displays. This is not yet a visually confirmed
+fix: verify repeated crossings between displays at scales 1 and 1.5, including
+pointer/text shape changes, and check for black squares or flashing duplicates.
+If the square persists, temporarily test `cursor.no_hardware_cursors = 1` and
+check for the previously observed software-cursor duplicate before saving it.
+
+Links should use the shape requested by the application: a theme changes the
+images, not browser CSS or terminal link-detection rules. Check a reproducible
+case in the affected app if a text cursor still appears over a clickable link.
+
 ## Hyprland session (UWSM)
 
 greetd starts Hyprland through UWSM. Apply the setup from this directory:

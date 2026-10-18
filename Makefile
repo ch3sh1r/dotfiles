@@ -4,12 +4,14 @@ DOTFILE_BIN    := egpu mnf tdp timer ocr-region mullvad-network-profile sleep-lo
 DOTFILES       := $(DOTFILE_CONFIG) $(DOTFILE_BIN) $(DOTFILE)
 DOTFILES_PATH  := $(dir $(abspath $(lastword $(MAKEFILE_LIST))))
 PACKAGE_LIST   := gpd-p3.list
-
 FISHER_URL     := https://raw.githubusercontent.com/jorgebucaran/fisher/main/functions/fisher.fish
 
-.PHONY: all $(DOTFILES) packages-install fish-plugins
+.PHONY: all $(DOTFILES) packages-install fish-plugins cursor
 
 all: $(DOTFILES)
+
+cursor:
+	python3 "$(DOTFILES_PATH)scripts/install-cursor.py"
 
 $(DOTFILE_CONFIG):
 	@mkdir -p ~/.config
