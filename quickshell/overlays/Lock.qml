@@ -12,6 +12,7 @@ Scope {
 
     property string pendingPassword: ""
     property string enteredPassword: ""
+    property int passwordCursorPosition: 0
     property string message: ""
     property string keyboardLayout: ""
     property bool passwordVisible: false
@@ -21,7 +22,10 @@ Scope {
     property bool stateFileError: false
     property string lockStatus: "unlocked"
 
-    onClearSequenceChanged: root.enteredPassword = ""
+    onClearSequenceChanged: {
+        root.enteredPassword = "";
+        root.passwordCursorPosition = 0;
+    }
 
     function hideInterface(): void {
         inputIdle.stop();
@@ -34,6 +38,8 @@ Scope {
     function inputActivity(): void {
         if (root.authenticating)
             return;
+        if (lockState.requested && sessionLock.locked && sessionLock.secure)
+            dpmsOffDelay.restart();
         messageTimeout.stop();
         root.message = "";
         root.passwordVisible = true;
@@ -266,10 +272,11 @@ Scope {
                 }
 
                 dpmsOffDelay.stop();
-                dpmsOn.running = true;
                 root.hideInterface();
                 root.recovering = false;
                 lockState.requested = false;
+                root.lockStatus = "unlocked";
+                dpmsOn.running = true;
                 lockStateFile.setText("");
             } else if (result === PamResult.MaxTries) {
                 root.showMessage("TOO MANY ATTEMPTS");
@@ -317,6 +324,11 @@ Scope {
         locked: lockState.requested
 
         onSecureChanged: {
+            // Notifications can arrive while the lock is being released.
+            if (!lockState.requested || !sessionLock.locked) {
+                dpmsOffDelay.stop();
+                return;
+            }
             if (secure) {
                 secureConfirmation.stop();
                 root.recovering = false;
@@ -352,9 +364,14 @@ Scope {
             message: root.message
             clearSequence: root.clearSequence
             passwordText: root.enteredPassword
+            passwordCursorPosition: root.passwordCursorPosition
 
             onPasswordEntered: root.inputActivity()
-            onPasswordEdited: text => root.enteredPassword = text
+            onPasswordEdited: (text, cursorPosition) => {
+                root.enteredPassword = text;
+                root.passwordCursorPosition = cursorPosition;
+            }
+            onPasswordCursorMoved: position => root.passwordCursorPosition = position
             onPasswordSubmitted: password => root.authenticate(password)
             onPasswordCancelled: root.hideInterface()
         }
@@ -402,12 +419,20 @@ Scope {
         id: dpmsOffDelay
         interval: 30000
         repeat: false
-        onTriggered: dpmsOff.running = true
+        onTriggered: {
+            if (lockState.requested && sessionLock.locked && sessionLock.secure && !root.authenticating)
+                dpmsOff.running = true;
+        }
     }
 
     Process {
         id: dpmsOff
         command: ["hyprctl", "dispatch", "hl.dsp.dpms(\"off\")"]
+        // An off command already in flight must not win over an unlock.
+        onExited: {
+            if (!lockState.requested || !sessionLock.locked)
+                dpmsOn.running = true;
+        }
     }
 
     Process {

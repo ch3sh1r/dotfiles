@@ -15,24 +15,40 @@ WlSessionLockSurface {
     required property string message
     required property int clearSequence
     required property string passwordText
+    required property int passwordCursorPosition
+
+    property bool syncingPassword: false
 
     readonly property bool interfaceVisible: passwordVisible || authenticating
     readonly property color frameColor: message.length > 0 ? Theme.pink : Theme.accent
 
     signal passwordEntered()
-    signal passwordEdited(string text)
+    signal passwordEdited(string text, int cursorPosition)
+    signal passwordCursorMoved(int position)
     signal passwordSubmitted(string password)
     signal passwordCancelled()
 
     color: Theme.lockBackground
 
-    onClearSequenceChanged: password.clear()
+    onClearSequenceChanged: syncPassword()
     onPasswordTextChanged: syncPassword()
+    onPasswordCursorPositionChanged: syncCursor()
 
     function syncPassword(): void {
         if (password.text !== root.passwordText) {
+            root.syncingPassword = true;
             password.text = root.passwordText;
-            password.cursorPosition = password.length;
+            root.syncingPassword = false;
+            root.syncCursor();
+        }
+    }
+
+    function syncCursor(): void {
+        let position = Math.max(0, Math.min(root.passwordCursorPosition, password.length));
+        if (password.cursorPosition !== position) {
+            root.syncingPassword = true;
+            password.cursorPosition = position;
+            root.syncingPassword = false;
         }
     }
 
@@ -161,14 +177,35 @@ WlSessionLockSurface {
                 passwordCharacter: "*"
                 passwordMaskDelay: 0
                 readOnly: root.authenticating
-                cursorVisible: root.interfaceVisible && activeFocus && !root.authenticating
+                cursorVisible: false
                 font.family: Theme.font
                 font.pixelSize: Theme.menuInputFontSize
                 font.letterSpacing: 3
+                rightPadding: Math.ceil(passwordMetrics.advanceWidth(password.passwordCharacter))
                 clip: true
 
+                FontMetrics {
+                    id: passwordMetrics
+                    font: password.font
+                }
+
+                // A separate cursor stays visible on outputs without keyboard focus.
+                Rectangle {
+                    x: password.cursorRectangle.x
+                    y: password.cursorRectangle.y
+                    width: Math.ceil(passwordMetrics.advanceWidth(password.passwordCharacter))
+                    height: password.cursorRectangle.height
+                    color: root.frameColor
+                    visible: root.interfaceVisible && !root.authenticating
+                }
+
+                onCursorPositionChanged: {
+                    if (!root.syncingPassword && activeFocus && text === root.passwordText)
+                        root.passwordCursorMoved(cursorPosition);
+                }
+
                 onTextEdited: {
-                    root.passwordEdited(text);
+                    root.passwordEdited(text, cursorPosition);
                     root.passwordEntered();
                 }
 
