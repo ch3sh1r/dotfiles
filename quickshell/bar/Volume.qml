@@ -90,6 +90,7 @@ StatusPill {
         }
 
         Row {
+            anchors.horizontalCenter: parent.horizontalCenter
             spacing: 6
 
             ActionButton {
