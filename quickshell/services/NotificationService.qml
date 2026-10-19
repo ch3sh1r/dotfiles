@@ -83,12 +83,19 @@ Scope {
         notification.transientChanged.connect(refresh);
         notification.imageChanged.connect(refresh);
         notification.expireTimeoutChanged.connect(refresh);
-        notification.closed.connect(reason => root.removePopup(notification.id));
+        notification.closed.connect(reason => {
+            root.removePopup(notification.id);
+            if (reason !== NotificationCloseReason.Expired)
+                root.removeHistory(notification.id);
+        });
 
         root.refresh(notification);
     }
 
     function refresh(notification) {
+        if (!notification.tracked)
+            return;
+
         root.record(notification);
 
         if (root.dnd) {
@@ -110,8 +117,23 @@ Scope {
     }
 
     function dismiss(notification) {
+        root.removeHistory(notification.id);
         root.removePopup(notification.id);
-        notification.dismiss();
+        if (notification.tracked)
+            notification.dismiss();
+    }
+
+    function removeHistory(id) {
+        root.history = root.history.filter(entry => entry.id !== id);
+        root.saveState();
+    }
+
+    function dismissHistory(id) {
+        let notification = root.popups.find(current => current.id === id);
+        if (notification)
+            root.dismiss(notification);
+        else
+            root.removeHistory(id);
     }
 
     function expire(notification) {
@@ -138,6 +160,12 @@ Scope {
     }
 
     function clearHistory() {
+        let current = root.popups;
+        root.popups = [];
+        for (const notification of current) {
+            if (notification.tracked)
+                notification.dismiss();
+        }
         root.history = [];
         root.saveState();
     }

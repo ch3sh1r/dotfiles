@@ -61,6 +61,13 @@ PopupWindow {
     implicitHeight: frame.implicitHeight
     color: "transparent"
     visible: false
+    // Keep presses inside the popup in its native Wayland grab.
+    grabFocus: true
+
+    onVisibleChanged: {
+        if (!visible)
+            root.pinned = false;
+    }
 
     onWantShownChanged: {
         if (wantShown) {

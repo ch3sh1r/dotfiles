@@ -100,6 +100,7 @@ Pill {
                         anchors.right: parent.right
                         anchors.top: parent.top
                         anchors.margins: 8
+                        anchors.rightMargin: 38
                         iconSize: 24
                         bodyLines: 3
                         image: historyCard.modelData.image || ""
@@ -107,6 +108,14 @@ Pill {
                         summary: historyCard.modelData.summary || ""
                         body: historyCard.modelData.body || ""
                         timeText: Qt.formatDateTime(new Date(historyCard.modelData.timestamp), "HH:mm")
+                    }
+
+                    ActionButton {
+                        anchors.top: parent.top
+                        anchors.right: parent.right
+                        anchors.margins: 6
+                        icon: "×"
+                        onClicked: root.backend.dismissHistory(historyCard.modelData.id)
                     }
                 }
             }

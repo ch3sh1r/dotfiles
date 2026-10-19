@@ -18,6 +18,7 @@ PanelWindow {
 
     MouseArea {
         anchors.fill: parent
+        acceptedButtons: Qt.AllButtons
         onClicked: PopupState.dismiss()
     }
 

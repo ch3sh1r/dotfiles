@@ -144,7 +144,7 @@ PanelWindow {
                     anchors.right: parent.right
                     anchors.top: parent.top
                     anchors.leftMargin: 14
-                    anchors.rightMargin: 10
+                    anchors.rightMargin: 40
                     anchors.topMargin: 10
                     spacing: 10
                     image: card.modelData.image
@@ -172,6 +172,14 @@ PanelWindow {
                             }
                         }
                     }
+                }
+
+                ActionButton {
+                    anchors.top: parent.top
+                    anchors.right: parent.right
+                    anchors.margins: 8
+                    icon: "×"
+                    onClicked: root.backend.dismiss(card.modelData)
                 }
             }
         }

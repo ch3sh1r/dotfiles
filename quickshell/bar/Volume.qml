@@ -81,10 +81,11 @@ StatusPill {
                 anchors.fill: parent
                 anchors.margins: -6
                 onPressed: function (m) {
-                    backend.setVolume(m.x / track.width);
+                    backend.setVolume(track.mapFromItem(this, m.x, m.y).x / track.width);
                 }
                 onPositionChanged: function (m) {
-                    backend.setVolume(m.x / track.width);
+                    if (pressed)
+                        backend.setVolume(track.mapFromItem(this, m.x, m.y).x / track.width);
                 }
             }
         }

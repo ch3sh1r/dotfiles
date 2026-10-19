@@ -38,7 +38,7 @@ Pill {
         id: tip
         anchorItem: root
         shown: tip.pinned || (root.tooltipOnHover && root.hovered)
-        closeOnClick: true
+        closeOnClick: root.tooltip.length > 0
         text: root.tooltip
     }
 }

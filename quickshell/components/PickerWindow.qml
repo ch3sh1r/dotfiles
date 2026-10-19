@@ -94,6 +94,7 @@ PanelWindow {
 
     MouseArea {
         anchors.fill: parent
+        acceptedButtons: Qt.AllButtons
         onClicked: root.close()
     }
 
@@ -111,6 +112,7 @@ PanelWindow {
 
         MouseArea {
             anchors.fill: parent
+            acceptedButtons: Qt.AllButtons
             onClicked: mouse => mouse.accepted = true
         }
 
