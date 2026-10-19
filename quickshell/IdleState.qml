@@ -4,7 +4,7 @@ import QtQuick
 import Quickshell
 import Quickshell.Io
 
-// Stay-awake flag shared by the Idle overlay (which disables its monitors
+// Stay-awake flag shared by IdleService (which disables its monitors
 // while set) and the bar pill. Persisted so a shell restart keeps it.
 Singleton {
     id: root

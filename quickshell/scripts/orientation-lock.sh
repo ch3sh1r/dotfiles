@@ -1,4 +1,6 @@
 #!/usr/bin/env bash
+# Adapter for OrientationService: status|toggle [monitor] emits
+# {locked, monitor, transform}. Rotation is locked while the rotator is stopped.
 set -euo pipefail
 
 action="${1:-status}"
@@ -34,6 +36,7 @@ case "$action" in
         status
         ;;
     toggle)
+        # Starting the rotator is asynchronous; wait before reporting its state.
         if is_running; then
             pkill -f -- "$pattern"
         else

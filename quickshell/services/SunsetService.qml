@@ -4,12 +4,15 @@ import Quickshell.Hyprland
 import Quickshell.Io
 import ".."
 
+// Applies the night schedule and shader to Hyprland. SunsetState is shared
+// with the bar; generated shaders are cached, never written into the config.
 Scope {
     id: root
 
     property bool applyPending: false
     property int shaderSlot: 0
 
+    // Serialize compositor updates and remember changes made during an active apply.
     function apply(): void {
         if (applyProc.running) {
             root.applyPending = true;
@@ -35,6 +38,7 @@ Scope {
         applyProc.running = true;
     }
 
+    // Separate the source template from the generated, intensity-specific cache file.
     FileView {
         id: shaderTemplate
         path: Qt.resolvedUrl("../sunset.frag")
@@ -59,12 +63,14 @@ Scope {
         }
     }
 
+    // Throttle slider updates without changing the scheduled day/night transition.
     Timer {
         id: intensityUpdate
         interval: 60
         onTriggered: root.apply()
     }
 
+    // A manual override lasts until the next scheduled boundary (08:00 or 20:00).
     function update(): void {
         let now = new Date();
         let minutes = now.getHours() * 60 + now.getMinutes();
@@ -79,6 +85,7 @@ Scope {
             SunsetState.night = scheduledNight;
     }
 
+    // External commands update the same state as the bar toggle.
     IpcHandler {
         target: "sunset"
 
@@ -110,6 +117,7 @@ Scope {
         }
     }
 
+    // Compositor config reloads can replace the shader setting; reapply our state.
     Connections {
         target: Hyprland
         function onRawEvent(event) {

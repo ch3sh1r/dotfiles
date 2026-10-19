@@ -77,6 +77,7 @@ Scope {
         }
     }
 
+    // Register the existing Hyprland shortcut names; all handlers share these controls.
     GlobalShortcut {
         appid: "quickshell"
         name: "volume-raise"

@@ -2,6 +2,8 @@ import QtQuick
 import Quickshell
 import Quickshell.Services.UPower
 
+// Exposes UPower state to the bar and owns low-battery warning hysteresis,
+// so adding a monitor never creates another warning producer.
 Scope {
     id: root
 

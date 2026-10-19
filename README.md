@@ -20,6 +20,11 @@ Fish plugins (fisher, z) are not committed. Install them from
 make fish-plugins
 ```
 
+## Quickshell
+
+See [the Quickshell guide](quickshell/README.md) for component ownership,
+IPC commands, persisted state and checks when changing the shell.
+
 ## Mouse cursor
 
 Restore and select the bundled [NeuroDance-Dracula](icons/NeuroDance-Dracula/README.md) theme:

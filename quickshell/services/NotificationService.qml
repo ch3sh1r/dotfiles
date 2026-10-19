@@ -3,6 +3,8 @@ import Quickshell
 import Quickshell.Io
 import Quickshell.Services.Notifications
 
+// Owns the notification server, live popup objects and persisted history/DND.
+// Surfaces consume this shared model and send actions back to this service.
 Scope {
     id: root
 
@@ -11,6 +13,7 @@ Scope {
     property var popups: []
     property var history: []
 
+    // Restore snapshots only; live notification objects belong to the server.
     function loadState() {
         try {
             let state = JSON.parse(stateFile.text() || "{}");
@@ -36,6 +39,7 @@ Scope {
         }, null, 2) + "\n");
     }
 
+    // History must survive expiry/restarts without retaining server objects.
     function snapshot(notification) {
         return {
             id: notification.id,
@@ -69,6 +73,7 @@ Scope {
         root.saveState();
     }
 
+    // Track replacement updates as well as the initial delivery.
     function receive(notification) {
         notification.tracked = true;
 
@@ -112,6 +117,7 @@ Scope {
         root.popups = next;
     }
 
+    // Expiry removes a popup but preserves history; dismissal removes both.
     function removePopup(id) {
         root.popups = root.popups.filter(notification => notification.id !== id);
     }
@@ -141,6 +147,7 @@ Scope {
         notification.expire();
     }
 
+    // DND silences live popups while continuing to record incoming history.
     function setDnd(enabled) {
         if (root.dnd === enabled)
             return;
@@ -170,6 +177,7 @@ Scope {
         root.saveState();
     }
 
+    // Batch disk writes without changing the in-memory model seen by the UI.
     Component.onCompleted: root.loadState()
 
     Timer {
@@ -185,6 +193,7 @@ Scope {
         printErrors: false
     }
 
+    // Stable commands for scripts; UI consumers call the same methods directly.
     IpcHandler {
         target: "notifications"
 
@@ -203,6 +212,7 @@ Scope {
         }
     }
 
+    // One desktop notification endpoint, retained across QML reloads.
     NotificationServer {
         actionsSupported: true
         bodyMarkupSupported: true

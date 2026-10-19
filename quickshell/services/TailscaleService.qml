@@ -2,6 +2,8 @@ import QtQuick
 import Quickshell
 import "../components"
 
+// Adapts Tailscale JSON to a shared tailnet summary. The bar only renders
+// this state; connection commands and refresh timing stay here.
 Scope {
     id: root
 

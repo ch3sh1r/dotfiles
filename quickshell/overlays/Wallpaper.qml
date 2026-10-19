@@ -3,6 +3,8 @@ import Quickshell
 import Quickshell.Wayland
 import ".."
 
+// Background surface per output. Aspect-fit keeps the whole wallpaper visible
+// on both portrait and landscape displays, with the theme behind letterboxing.
 PanelWindow {
     color: Theme.base00
     exclusionMode: ExclusionMode.Ignore

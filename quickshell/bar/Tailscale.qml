@@ -2,15 +2,11 @@ import QtQuick
 import ".."
 import "../components"
 
-// Tailscale pill. Parses `tailscale status --json` natively. Shows the active
+// Tailscale pill backed by TailscaleService. Shows the active
 // exit node (if any); the popup is a compact status summary. Right-click
 // toggles the tailnet up/down.
 StatusPill {
     id: root
-
-    icon: root.running ? "󰯉" : "󱩆"
-    iconColor: root.running ? Theme.good : Theme.base03
-    label: !root.compact && root.running && root.exitNode.length > 0 ? root.exitNode : ""
 
     required property var backend
     property bool compact: false
@@ -20,6 +16,10 @@ StatusPill {
     readonly property string selfIp: backend.selfIp
     readonly property int peerCount: backend.peerCount
     readonly property int onlineCount: backend.onlineCount
+
+    icon: root.running ? "󰯉" : "󱩆"
+    iconColor: root.running ? Theme.good : Theme.base03
+    label: !root.compact && root.running && root.exitNode.length > 0 ? root.exitNode : ""
 
     onRightClicked: backend.toggle()
 

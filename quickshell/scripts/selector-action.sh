@@ -1,4 +1,6 @@
 #!/usr/bin/env bash
+# Action adapter: <mode> <target> <item-id>. rbw targets identify fields/actions;
+# clipboard preview emits decoded bytes, while copy/delete/wipe perform actions.
 set -euo pipefail
 
 mode="${1:-}"
@@ -7,6 +9,7 @@ item_id="${3:-}"
 
 case "$mode" in
     rbw)
+        # Let rbw copy secrets directly; TOTP can be generated or a stored field.
         case "$target" in
             password)
                 rbw get --clipboard "$item_id"
@@ -28,6 +31,7 @@ case "$mode" in
         esac
         ;;
     clipboard)
+        # Feed only the history ID to cliphist; decode supplies the original data.
         case "$target" in
             preview)
                 printf '%s\t\n' "$item_id" | cliphist decode

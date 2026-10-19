@@ -2,8 +2,30 @@ import QtQuick
 import ".."
 import "../components"
 
+// Presents battery level and estimated time. Warning notifications belong
+// to BatteryService, so each output can render this pill independently.
 StatusPill {
     id: root
+
+    required property var backend
+    readonly property var dev: backend.device
+    readonly property bool charging: backend.charging
+    readonly property bool full: backend.full
+
+    readonly property var dischargeIcons: ["󰁺", "󰁻", "󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰂂", "󰁹"]
+    readonly property var chargeIcons: ["󰢜", "󰂆", "󰂇", "󰂈", "󰢝", "󰂉", "󰢞", "󰂊", "󰂋", "󰂅"]
+
+    readonly property color stateColor: {
+        if (!dev)
+            return Theme.fg;
+        if (charging || full)
+            return Theme.good;
+        if (dev.percentage <= 0.1)
+            return Theme.critical;
+        if (dev.percentage <= 0.2)
+            return Theme.warning;
+        return Theme.fg;
+    }
 
     visible: !!root.dev
     icon: {
@@ -29,14 +51,6 @@ StatusPill {
         return percentage + " · " + (pluggedIn ? "On AC power" : "Estimating");
     }
 
-    required property var backend
-    readonly property var dev: backend.device
-    readonly property bool charging: backend.charging
-    readonly property bool full: backend.full
-
-    readonly property var dischargeIcons: ["󰁺", "󰁻", "󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰂂", "󰁹"]
-    readonly property var chargeIcons: ["󰢜", "󰂆", "󰂇", "󰂈", "󰢝", "󰂉", "󰢞", "󰂊", "󰂋", "󰂅"]
-
     function formatDuration(seconds) {
         if (!seconds || seconds <= 0)
             return "";
@@ -48,17 +62,5 @@ StatusPill {
         if (minutes === 0)
             return hours + "h";
         return hours + "h " + minutes + "m";
-    }
-
-    readonly property color stateColor: {
-        if (!dev)
-            return Theme.fg;
-        if (charging || full)
-            return Theme.good;
-        if (dev.percentage <= 0.1)
-            return Theme.critical;
-        if (dev.percentage <= 0.2)
-            return Theme.warning;
-        return Theme.fg;
     }
 }

@@ -3,6 +3,8 @@ import Quickshell
 import ".."
 import "../components"
 
+// Polls the daemon-independent helper once for all bars. Failure is presented
+// as disconnected instead of retaining a stale link status.
 Scope {
     id: root
 

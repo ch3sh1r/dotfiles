@@ -3,10 +3,11 @@ import Quickshell
 import Quickshell.Hyprland
 import Quickshell.Io
 import Quickshell.Wayland
-import Quickshell.Widgets
 import ".."
 import "../components"
 
+// Coordinates clipboard and rbw picker modes. Helpers supply data/actions;
+// PickerWindow owns interaction and ClipboardPreview owns detail loading.
 PickerWindow {
     id: root
 
@@ -15,6 +16,7 @@ PickerWindow {
     readonly property string dataScript: Theme.scriptPath("selector-data.sh")
     readonly property string actionScript: Theme.scriptPath("selector-action.sh")
 
+    // Mode/navigation state is separate from the currently displayed matches.
     property string mode: ""
     property string target: ""
     property bool pendingPreviews: false
@@ -36,6 +38,7 @@ PickerWindow {
         return (item.title || "") + " " + (item.subtitle || "");
     }
 
+    // rbw menu ordering uses last-use timestamps; action lists keep helper order.
     function refresh() {
         let byLastUse = null;
         if (root.mode === "rbw" && root.target === "menu") {
@@ -95,6 +98,7 @@ PickerWindow {
         root.close();
     }
 
+    // rbw can prompt before showing the picker; clipboard may need a thumbnail retry.
     function applyData(text) {
         try {
             let data = JSON.parse(text.trim() || "{}");
@@ -127,6 +131,7 @@ PickerWindow {
         }
     }
 
+    // rbw first selects an entry, then a field; clipboard activates in one step.
     onActivated: item => {
         if (root.mode === "rbw" && root.target === "menu") {
             root.rbwItem = item;
@@ -161,12 +166,14 @@ PickerWindow {
         root.refresh();
     }
 
+    // Keep usage metadata only; vault contents are supplied by rbw for each open.
     JsonStore {
         id: rbwUsage
         fileName: "selector-rbw-usage.json"
         onValuesChanged: root.refresh()
     }
 
+    // IPC and shortcuts enter the same navigation flow.
     IpcHandler {
         target: "selector"
 
@@ -189,6 +196,7 @@ PickerWindow {
         onPressed: root.open("rbw", "menu")
     }
 
+    // A superseded request must never populate the newly selected mode.
     Process {
         id: dataProc
         stdout: StdioCollector {
@@ -201,6 +209,7 @@ PickerWindow {
         onExited: Qt.callLater(root.runQueued)
     }
 
+    // The helper generates images asynchronously; retry only while clipboard is visible.
     Timer {
         id: previewRefresh
         interval: 700
@@ -208,86 +217,13 @@ PickerWindow {
         onTriggered: if (root.visible && root.mode === "clipboard") root.loadData(["clipboard"])
     }
 
+    // Keep clipboard decoding/presentation out of the mode coordinator.
     Component {
         id: clipboardPreview
 
-        Rectangle {
-            id: preview
-            radius: Theme.radius
-            color: Theme.base01
-            border.width: 1
-            border.color: Theme.base02
-            clip: true
-
-            readonly property var item: root.selectedItem
-            readonly property bool hasImage: !!item && (item.image || "").length > 0
-            readonly property string textId: item && !hasImage ? item.id : ""
-            property string requestedId: ""
-            property string fullText: ""
-
-            function loadText(): void {
-                fullText = "";
-                textScroll.contentY = 0;
-                if (textProc.running || textId.length === 0)
-                    return;
-                requestedId = textId;
-                textProc.command = ["bash", root.actionScript, "clipboard", "preview", textId];
-                textProc.running = true;
-            }
-
-            onTextIdChanged: Qt.callLater(preview.loadText)
-
-            Process {
-                id: textProc
-                stdout: StdioCollector {
-                    onStreamFinished: {
-                        if (preview.requestedId === preview.textId)
-                            preview.fullText = this.text;
-                    }
-                }
-                onExited: Qt.callLater(() => {
-                    if (preview.requestedId !== preview.textId)
-                        preview.loadText();
-                })
-            }
-
-            IconImage {
-                anchors.fill: parent
-                anchors.margins: 14
-                visible: preview.hasImage
-                source: preview.hasImage ? "file://" + preview.item.image : ""
-                mipmap: true
-            }
-
-            Flickable {
-                id: textScroll
-                anchors.fill: parent
-                anchors.margins: 14
-                visible: !preview.hasImage
-                contentWidth: width
-                contentHeight: Math.max(height, previewText.implicitHeight)
-                clip: true
-                boundsBehavior: Flickable.StopAtBounds
-
-                Label {
-                    id: previewText
-                    width: parent.width
-                    text: preview.fullText
-                    textFormat: Text.PlainText
-                    color: Theme.fgBright
-                    font.pixelSize: Theme.menuFontSize
-                    wrapMode: Text.Wrap
-                    verticalAlignment: Text.AlignTop
-                }
-            }
-
-            Label {
-                anchors.centerIn: parent
-                visible: !preview.item
-                text: "No selection"
-                color: Theme.base03
-                font.pixelSize: Theme.menuFontSize
-            }
+        ClipboardPreview {
+            item: root.selectedItem
+            actionScript: root.actionScript
         }
     }
 }

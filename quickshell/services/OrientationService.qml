@@ -4,6 +4,8 @@ import Quickshell.Io
 import ".."
 import "../components"
 
+// Controls the internal display rotator through its helper. Poll only while
+// that output exists, and refresh after the helper finishes toggling rotation.
 Scope {
     id: root
 

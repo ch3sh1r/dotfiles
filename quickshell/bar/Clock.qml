@@ -3,6 +3,7 @@ import ".."
 import "../components"
 import "../overlays"
 
+// Displays the shared clock and owns this bar's year-calendar popup.
 Pill {
     id: root
 

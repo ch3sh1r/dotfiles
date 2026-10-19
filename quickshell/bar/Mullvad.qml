@@ -2,14 +2,10 @@ import QtQuick
 import ".."
 import "../components"
 
-// Mullvad VPN pill. Parses `mullvad status --json` natively. Right-click
+// Mullvad VPN pill backed by MullvadService. Right-click
 // toggles the connection; left-click shows where you're exiting.
 StatusPill {
     id: root
-
-    icon: root.connected ? "󰊠" : "󰧵"
-    iconColor: root.connected ? Theme.good : Theme.base03
-    label: !root.compact && root.connected && root.city.length > 0 ? root.city : ""
 
     required property var backend
     property bool compact: false
@@ -22,6 +18,10 @@ StatusPill {
     readonly property string hostname: backend.hostname
     readonly property string tunnelInterface: backend.tunnelInterface
     readonly property string protocol: backend.protocol
+
+    icon: root.connected ? "󰊠" : "󰧵"
+    iconColor: root.connected ? Theme.good : Theme.base03
+    label: !root.compact && root.connected && root.city.length > 0 ? root.city : ""
 
     function stateLabel() {
         if (root.connected)

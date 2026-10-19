@@ -2,8 +2,19 @@ import QtQuick
 import ".."
 import "../components"
 
+// Renders the shared audio state and sends slider, wheel and mute actions
+// to AudioService. This popup never creates its own Pipewire tracker.
 StatusPill {
     id: root
+
+    required property var backend
+    readonly property var sink: backend.sink
+    readonly property bool muted: backend.muted
+    readonly property real volume: backend.volume
+    readonly property int percent: backend.percent
+    readonly property bool headphones: backend.headphones
+    readonly property bool bluetoothHeadphones: backend.bluetoothHeadphones
+    readonly property int headsetBattery: backend.headsetBattery
 
     icon: {
         if (root.muted)
@@ -19,15 +30,6 @@ StatusPill {
     iconColor: root.muted ? Theme.base03 : Theme.fg
     label: root.muted ? "" : root.percent
     labelVisible: true
-
-    required property var backend
-    readonly property var sink: backend.sink
-    readonly property bool muted: backend.muted
-    readonly property real volume: backend.volume
-    readonly property int percent: backend.percent
-    readonly property bool headphones: backend.headphones
-    readonly property bool bluetoothHeadphones: backend.bluetoothHeadphones
-    readonly property int headsetBattery: backend.headsetBattery
 
     onRightClicked: backend.openMixer()
     onWheel: function (delta) {

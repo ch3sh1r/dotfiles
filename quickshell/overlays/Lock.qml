@@ -6,18 +6,23 @@ import Quickshell.Hyprland
 import Quickshell.Io
 import Quickshell.Services.Pam
 import Quickshell.Wayland
+import "../services"
 
+// Session lock controller: keep PAM, compositor security, recovery and DPMS
+// together so an unlock can only follow successful authentication of a secure
+// lock. LockSurface renders input; KeyboardLayoutService tracks its layout.
 Scope {
     id: root
 
+    // Input is shared across outputs; PAM gets a separate copy during a request.
     property string pendingPassword: ""
     property string enteredPassword: ""
     property int passwordCursorPosition: 0
     property string message: ""
-    property string keyboardLayout: ""
     property bool passwordVisible: false
     property bool authenticating: false
     property int clearSequence: 0
+    // Recovery and diagnostics describe the lock independently of its input UI.
     property bool recovering: false
     property bool stateFileError: false
     property string lockStatus: "unlocked"
@@ -27,6 +32,7 @@ Scope {
         root.passwordCursorPosition = 0;
     }
 
+    // Hiding the editor clears secrets without releasing the session lock.
     function hideInterface(): void {
         inputIdle.stop();
         messageTimeout.stop();
@@ -54,6 +60,7 @@ Scope {
         messageTimeout.restart();
     }
 
+    // Refuse new locks when authentication or real Wayland outputs are absent.
     function pamConfigured(): bool {
         return pam.config.length > 0
             && pam.configDirectory.length > 0
@@ -106,10 +113,11 @@ Scope {
 
         lockState.requested = true;
         secureConfirmation.restart();
-        keyboardLayoutProc.running = true;
+        keyboardLayoutService.refresh();
         return true;
     }
 
+    // A disk marker also survives process restarts, unlike reload-only state.
     function recoverLock(): void {
         if (lockState.requested || lockStateFile.text().trim() !== "locked")
             return;
@@ -127,7 +135,7 @@ Scope {
         root.lockStatus = "recovering";
         lockState.requested = true;
         secureConfirmation.restart();
-        keyboardLayoutProc.running = true;
+        keyboardLayoutService.refresh();
     }
 
     function diagnosticStatus(): string {
@@ -142,6 +150,7 @@ Scope {
         });
     }
 
+    // Submit one PAM conversation at a time and clear the visible editor first.
     function authenticate(password: string): void {
         if (root.authenticating || password.length === 0 || !sessionLock.secure)
             return;
@@ -164,52 +173,7 @@ Scope {
             pam.respond(root.pendingPassword);
     }
 
-    function updateKeyboardLayout(text): void {
-        try {
-            let devices = JSON.parse(text.trim() || "{}");
-            let keyboards = devices.keyboards || [];
-            let fallback = "";
-
-            for (let i = 0; i < keyboards.length; i++) {
-                let layout = keyboards[i].active_keymap || "";
-                if (layout.length === 0)
-                    continue;
-
-                if (fallback.length === 0)
-                    fallback = layout;
-
-                if (keyboards[i].main) {
-                    root.keyboardLayout = layout;
-                    return;
-                }
-            }
-
-            root.keyboardLayout = fallback;
-        } catch (e) {
-            root.keyboardLayout = "";
-        }
-    }
-
-    function updateKeyboardLayoutFromEvent(event): void {
-        if (event.name !== "activelayout")
-            return;
-
-        let args = event.parse(2);
-        if (args.length >= 2 && args[1].length > 0)
-            root.keyboardLayout = args[1];
-    }
-
-    function shortKeyboardLayout(): string {
-        let layout = root.keyboardLayout.toLowerCase();
-
-        if (layout.indexOf("russian") !== -1 || layout.indexOf("ru") === 0)
-            return "RU";
-        if (layout.indexOf("english") !== -1 || layout.indexOf("us") !== -1)
-            return "EN";
-
-        return root.keyboardLayout.length >= 2 ? root.keyboardLayout.slice(0, 2).toUpperCase() : "--";
-    }
-
+    // sleep-lock relies on isLocked() confirming compositor security, not intent.
     IpcHandler {
         target: "lock"
 
@@ -225,6 +189,7 @@ Scope {
         onPressed: root.lock()
     }
 
+    // Preserve object identity and requested state during a QML reload.
     PersistentProperties {
         id: lockState
         reloadableId: "sessionLockState"
@@ -232,6 +197,7 @@ Scope {
         property bool requested: false
     }
 
+    // Check PAM availability before accepting a request to lock.
     FileView {
         id: pamConfigFile
         path: pam.configDirectory + "/" + pam.config
@@ -239,6 +205,7 @@ Scope {
         printErrors: false
     }
 
+    // Persist intent synchronously before locking; a write failure aborts it.
     FileView {
         id: lockStateFile
         path: Quickshell.statePath("session-lock")
@@ -253,6 +220,7 @@ Scope {
         }
     }
 
+    // Only successful PAM completion on a secure lock may release it.
     PamContext {
         id: pam
         config: "login"
@@ -294,14 +262,10 @@ Scope {
         }
     }
 
-    Connections {
-        target: Hyprland
+    // Layout tracking is independent of authentication and input state.
+    KeyboardLayoutService { id: keyboardLayoutService }
 
-        function onRawEvent(event): void {
-            root.updateKeyboardLayoutFromEvent(event);
-        }
-    }
-
+    // Recovery may need to wait for the compositor to enumerate outputs.
     Connections {
         target: Hyprland.monitors
 
@@ -310,14 +274,7 @@ Scope {
         }
     }
 
-    Process {
-        id: keyboardLayoutProc
-        command: ["hyprctl", "devices", "-j"]
-        stdout: StdioCollector {
-            onStreamFinished: root.updateKeyboardLayout(this.text)
-        }
-    }
-
+    // The compositor confirms security asynchronously; requested alone is insufficient.
     WlSessionLock {
         id: sessionLock
         reloadableId: "sessionLock"
@@ -360,7 +317,7 @@ Scope {
         LockSurface {
             authenticating: root.authenticating
             passwordVisible: root.passwordVisible
-            keyboardLayout: root.shortKeyboardLayout()
+            keyboardLayout: keyboardLayoutService.shortLayout
             message: root.message
             clearSequence: root.clearSequence
             passwordText: root.enteredPassword
@@ -377,6 +334,7 @@ Scope {
         }
     }
 
+    // UI timers hide input/messages while leaving the lock active.
     Timer {
         id: inputIdle
         interval: 8000
@@ -394,6 +352,7 @@ Scope {
         }
     }
 
+    // Give startup outputs time to appear; report an unconfirmed lock after 5 s.
     Timer {
         id: recoveryDelay
         interval: 250
@@ -415,6 +374,7 @@ Scope {
         }
     }
 
+    // Blank only a confirmed lock; input postpones blanking and PAM suspends it.
     Timer {
         id: dpmsOffDelay
         interval: 30000
@@ -440,6 +400,7 @@ Scope {
         command: ["hyprctl", "dispatch", "hl.dsp.dpms({ action = \"on\" })"]
     }
 
+    // Reconcile reload-preserved state with the marker from a previous process.
     Component.onCompleted: {
         Hyprland.refreshMonitors();
 

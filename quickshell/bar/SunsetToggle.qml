@@ -2,6 +2,7 @@ import QtQuick
 import ".."
 import "../components"
 
+// Edits shared night-mode state; SunsetService owns scheduling and shaders.
 StatusPill {
     id: root
 

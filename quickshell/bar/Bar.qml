@@ -2,6 +2,8 @@ import QtQuick
 import Quickshell
 import ".."
 
+// One top bar per output. Device state comes from shared services; portrait
+// outputs use compact labels to leave room for the workspace strip.
 PanelWindow {
     id: bar
 

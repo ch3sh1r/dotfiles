@@ -2,7 +2,6 @@ import QtQuick
 import Quickshell
 import Quickshell.Hyprland
 import Quickshell.Wayland
-import Quickshell.Widgets
 import ".."
 
 // Full-screen overlay with a search box and a keyboard-driven result list,
@@ -15,6 +14,7 @@ import ".."
 PanelWindow {
     id: root
 
+    // Consumer contract: data/description in, activation/deletion signals out.
     property string title: ""
     property string placeholder: "Search"
     property string error: ""
@@ -64,6 +64,7 @@ PanelWindow {
         root.selected = Math.max(0, Math.min(root.selected, root.matches.length - 1));
     }
 
+    // Resolve the focused Hyprland monitor to a Quickshell screen before mapping.
     function focusedScreen() {
         let focused = Hyprland.focusedMonitor;
         if (!focused)
@@ -92,6 +93,7 @@ PanelWindow {
         root.visible = false;
     }
 
+    // The backdrop closes the picker; the frame consumes clicks inside it.
     MouseArea {
         anchors.fill: parent
         acceptedButtons: Qt.AllButtons
@@ -164,6 +166,7 @@ PanelWindow {
                     text: root.query
                     onTextChanged: root.query = text
 
+                    // Keep keyboard and pointer activation on the same selected model item.
                     Keys.onPressed: event => {
                         if (event.key === Qt.Key_Escape) {
                             root.close();
@@ -210,6 +213,7 @@ PanelWindow {
                 height: parent.height - y
                 spacing: 12
 
+                // Rows render descriptions; selection and model ownership stay here.
                 ListView {
                     id: results
                     width: root.preview ? Math.floor((parent.width - parent.spacing) * 0.48) : parent.width
@@ -219,76 +223,19 @@ PanelWindow {
                     model: root.matches
                     currentIndex: root.selected
 
-                    delegate: Rectangle {
-                        id: row
+                    delegate: PickerResult {
                         required property var modelData
                         required property int index
-                        readonly property var info: root.describe(modelData)
 
                         width: results.width
-                        height: 44
-                        radius: Theme.radius
-                        color: index === root.selected ? Theme.base02 : "transparent"
-
-                        Row {
-                            anchors.fill: parent
-                            anchors.leftMargin: 10
-                            anchors.rightMargin: 10
-                            spacing: 10
-
-                            Item {
-                                id: leading
-                                width: 24
-                                height: 24
-                                anchors.verticalCenter: parent.verticalCenter
-
-                                IconImage {
-                                    anchors.fill: parent
-                                    visible: !!row.info.icon
-                                    source: row.info.icon ? Quickshell.iconPath(row.info.icon, "application-x-executable") : ""
-                                }
-
-                                IconText {
-                                    anchors.centerIn: parent
-                                    visible: !row.info.icon
-                                    text: row.info.glyph || ""
-                                    color: Theme.base04
-                                }
-                            }
-
-                            Column {
-                                width: parent.width - leading.width - parent.spacing
-                                anchors.verticalCenter: parent.verticalCenter
-                                spacing: 1
-
-                                Label {
-                                    width: parent.width
-                                    text: row.info.title || ""
-                                    color: Theme.fgBright
-                                    font.pixelSize: Theme.menuFontSize
-                                    elide: Text.ElideRight
-                                }
-
-                                Label {
-                                    width: parent.width
-                                    visible: (row.info.subtitle || "").length > 0
-                                    text: row.info.subtitle || ""
-                                    color: Theme.base04
-                                    font.pixelSize: Theme.menuFontSize
-                                    elide: Text.ElideRight
-                                }
-                            }
-                        }
-
-                        MouseArea {
-                            anchors.fill: parent
-                            hoverEnabled: true
-                            onEntered: root.selected = row.index
-                            onClicked: root.activated(row.modelData)
-                        }
+                        info: root.describe(modelData)
+                        selected: index === root.selected
+                        onHovered: root.selected = index
+                        onActivated: root.activated(modelData)
                     }
                 }
 
+                // Instantiate the optional consumer pane in the remaining width.
                 Loader {
                     width: parent.width - results.width - parent.spacing
                     height: parent.height

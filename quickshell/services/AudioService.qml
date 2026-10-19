@@ -4,6 +4,8 @@ import Quickshell.Services.Pipewire
 import ".."
 import "../components"
 
+// Shared Pipewire controls for the bar and media keys. BlueZ battery polling
+// supplements Pipewire only while the active sink is a Bluetooth headset.
 Scope {
     id: root
 
@@ -48,6 +50,7 @@ Scope {
         Quickshell.execDetached(["uwsm", "app", "--", "pavucontrol", "-t", "3"]);
     }
 
+    // Subscribe to live sink/source audio properties before rendering or editing them.
     PwObjectTracker {
         objects: [Pipewire.defaultAudioSink, Pipewire.defaultAudioSource]
     }
@@ -62,6 +65,7 @@ Scope {
         onFailed: root.headsetBattery = -1
     }
 
+    // Clear old device battery data and refresh when the active headset changes.
     onBluetoothHeadphonesChanged: {
         if (!root.bluetoothHeadphones)
             root.headsetBattery = -1;

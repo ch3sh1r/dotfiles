@@ -58,6 +58,7 @@ PanelWindow {
     WlrLayershell.namespace: "quickshell-dictation"
     WlrLayershell.keyboardFocus: WlrKeyboardFocus.None
 
+    // Watch the daemon state file; missing state means there is no active recording.
     FileView {
         path: root.runtimeDir.length > 0 ? root.runtimeDir + "/voxtype/state" : "/voxtype/state"
         blockLoading: true
@@ -68,6 +69,7 @@ PanelWindow {
         onLoadFailed: root.setState("idle")
     }
 
+    // Count only recording time, resetting on each state transition.
     Timer {
         running: root.recording
         repeat: true
@@ -75,6 +77,7 @@ PanelWindow {
         onTriggered: root.elapsedSeconds++
     }
 
+    // A passive status card leaves keyboard focus and pointer input with the app.
     Rectangle {
         id: card
 

@@ -2,6 +2,8 @@ import QtQuick
 import Quickshell
 import "../components"
 
+// Adapts Mullvad JSON to bar properties and requests a delayed refresh after
+// toggling, allowing the daemon time to apply the connection change.
 Scope {
     id: root
 

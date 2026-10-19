@@ -1,4 +1,7 @@
 #!/usr/bin/env bash
+# Data adapter for Selector.qml: rbw, rbw-actions <id>, or clipboard.
+# Emit {items: [...], error?: string, pendingPreviews?: bool} on stdout;
+# tool failures become displayable errors rather than non-JSON output.
 set -euo pipefail
 
 mode="${1:-}"
@@ -6,6 +9,7 @@ item_id="${2:-}"
 
 case "$mode" in
     rbw)
+        # List metadata only; selecting an entry opens the separate field menu.
         err_tmp=$(mktemp)
         trap 'rm -f "$err_tmp"' EXIT
         if ! out=$(rbw list --fields id,name,user,folder,type 2>"$err_tmp"); then
@@ -25,6 +29,8 @@ case "$mode" in
         ' <<<"$out"
         ;;
     rbw-actions)
+        # Build copy actions for one entry. Mask passwords in display subtitles;
+        # actual values are fetched again by the action helper on activation.
         items_tmp=$(mktemp)
         err_tmp=$(mktemp)
         trap 'rm -f "$items_tmp" "$err_tmp"' EXIT
@@ -110,6 +116,8 @@ case "$mode" in
         jq -s '{ items: . }' "$items_tmp"
         ;;
     clipboard)
+        # Return history immediately while missing image previews decode in the
+        # background. pendingPreviews asks the visible picker to retry later.
         tmp=$(mktemp)
         json_tmp=$(mktemp)
         err_tmp=$(mktemp)

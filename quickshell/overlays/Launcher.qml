@@ -6,17 +6,12 @@ import Quickshell.Wayland
 import ".."
 import "../components"
 
+// Application data and ranking for PickerWindow. Usage counts affect ties;
+// activation goes through uwsm so applications get the session environment.
 PickerWindow {
     id: root
 
     WlrLayershell.namespace: "quickshell-launcher"
-
-    GlobalShortcut {
-        appid: "quickshell"
-        name: "launcher"
-        description: "Toggle the app launcher"
-        onPressed: root.toggle()
-    }
 
     placeholder: "Search applications"
     maxResults: 30
@@ -83,6 +78,14 @@ PickerWindow {
     JsonStore {
         id: usage
         fileName: "launcher-usage.json"
+    }
+
+    // Shortcuts and IPC share the same open/close lifecycle.
+    GlobalShortcut {
+        appid: "quickshell"
+        name: "launcher"
+        description: "Toggle the app launcher"
+        onPressed: root.toggle()
     }
 
     IpcHandler {

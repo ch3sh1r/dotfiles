@@ -5,6 +5,8 @@ import Quickshell.Wayland
 import ".."
 import "../components"
 
+// Per-output popup stack over the shared notification backend. Each card
+// retains its live notification while rendering it and drives its expiry.
 PanelWindow {
     id: root
 
@@ -30,6 +32,7 @@ PanelWindow {
     WlrLayershell.layer: WlrLayer.Overlay
     WlrLayershell.namespace: "quickshell-notifications"
 
+    // Critical and explicitly persistent notifications require user dismissal.
     function timeoutMs(notification) {
         if (notification.urgency === NotificationUrgency.Critical || notification.expireTimeout === 0)
             return 0;
@@ -38,6 +41,7 @@ PanelWindow {
         return 7000;
     }
 
+    // The default action belongs to the card; expose other actions as buttons.
     function defaultAction(notification) {
         for (const action of notification.actions) {
             if (action.identifier === "default")
@@ -67,6 +71,7 @@ PanelWindow {
             root.backend.removePopup(notification.id);
     }
 
+    // Urgency affects presentation without mutating the notification.
     function accentColor(notification) {
         if (notification.urgency === NotificationUrgency.Critical)
             return Theme.critical;
@@ -106,6 +111,7 @@ PanelWindow {
                 border.width: 1
                 border.color: root.borderColor(card.modelData)
 
+                // Keep the server object alive for bindings/actions until this card is destroyed.
                 RetainableLock {
                     object: card.modelData
                     locked: true

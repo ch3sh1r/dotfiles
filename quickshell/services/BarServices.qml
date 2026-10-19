@@ -1,5 +1,7 @@
 import Quickshell
 
+// One shared backend set for every bar and notification surface. Keeping this
+// outside Variants avoids duplicate pollers, warnings and notification servers.
 Scope {
     readonly property alias mullvad: mullvadService
     readonly property alias tailscale: tailscaleService

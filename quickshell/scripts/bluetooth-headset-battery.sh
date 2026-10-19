@@ -1,4 +1,6 @@
 #!/usr/bin/env bash
+# Supplement Pipewire with BlueZ battery data for a sink's identifying text.
+# Emit {battery: number|null}; null means no address or unavailable battery data.
 set -euo pipefail
 
 identifier="${1:-}"
@@ -19,6 +21,7 @@ info="$(bluetoothctl info "$mac" 2>/dev/null || true)"
 battery=""
 
 while IFS= read -r line; do
+    # bluetoothctl may include a hex value followed by decimal in parentheses.
     if [[ "$line" =~ Battery[[:space:]]Percentage:.*\(([0-9]+)\) ]]; then
         battery="${BASH_REMATCH[1]}"
         break

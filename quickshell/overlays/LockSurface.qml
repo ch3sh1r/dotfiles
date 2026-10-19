@@ -6,6 +6,8 @@ import Quickshell.Wayland
 import ".."
 import "../components"
 
+// One input surface per locked output. The controller owns authentication
+// and synchronizes password text/cursor across surfaces through these signals.
 WlSessionLockSurface {
     id: root
 

@@ -1,6 +1,7 @@
 import QtQuick
 import ".."
 
+// Calendar progress row: the input is a fraction, clamped to the visible track.
 Item {
     id: root
 

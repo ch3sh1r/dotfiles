@@ -3,6 +3,8 @@ import Quickshell.Services.Notifications
 import ".."
 import "../components"
 
+// Bar entry to the shared history and DND controls. History entries are
+// saved snapshots; live notification actions are handled by the backend.
 Pill {
     id: root
 

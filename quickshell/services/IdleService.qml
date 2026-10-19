@@ -22,6 +22,8 @@ Scope {
             root.osd.showMessage("idle", "Idle lock enabled");
     }
 
+    // Blank after 10 minutes, then request the session lock 30 seconds later.
+    // Wayland idle inhibitors and the manual stay-awake flag pause these monitors.
     IdleMonitor {
         enabled: !IdleState.stayAwake
         timeout: 600
@@ -34,6 +36,7 @@ Scope {
         onIsIdleChanged: if (isIdle) Quickshell.execDetached(["qs", "ipc", "call", "lock", "lock"])
     }
 
+    // Only the interactive toggle emits OSD feedback; the setter stays silent.
     GlobalShortcut {
         appid: "quickshell"
         name: "idle-toggle"

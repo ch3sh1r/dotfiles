@@ -2,7 +2,7 @@ pragma Singleton
 
 import QtQuick
 
-// Shared by the Sunset overlay (schedule) and the bar toggle. Sunset.update()
+// Shared by SunsetService (schedule) and the bar toggle. Its update()
 // recomputes it every minute, so nothing here needs to survive a reload.
 QtObject {
     property bool night: false
