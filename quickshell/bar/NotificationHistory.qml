@@ -96,13 +96,19 @@ Pill {
                     border.width: 1
                     border.color: modelData.urgency === NotificationUrgency.Critical ? Theme.critical : Theme.base02
 
+                    // Dismiss the entry directly, including a matching live popup.
+                    MouseArea {
+                        anchors.fill: parent
+                        acceptedButtons: Qt.LeftButton | Qt.RightButton
+                        onClicked: root.backend.dismissHistory(historyCard.modelData.id)
+                    }
+
                     NotificationCard {
                         id: historyBody
                         anchors.left: parent.left
                         anchors.right: parent.right
                         anchors.top: parent.top
                         anchors.margins: 8
-                        anchors.rightMargin: 38
                         iconSize: 24
                         bodyLines: 3
                         image: historyCard.modelData.image || ""
@@ -112,13 +118,6 @@ Pill {
                         timeText: Qt.formatDateTime(new Date(historyCard.modelData.timestamp), "HH:mm")
                     }
 
-                    ActionButton {
-                        anchors.top: parent.top
-                        anchors.right: parent.right
-                        anchors.margins: 6
-                        icon: "×"
-                        onClicked: root.backend.dismissHistory(historyCard.modelData.id)
-                    }
                 }
             }
         }

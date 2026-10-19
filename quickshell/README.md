@@ -22,6 +22,9 @@ therefore do not multiply when a monitor is connected. `MediaKeys` receives the
 same audio backend and the OSD explicitly. `IdleService` receives the OSD;
 `SunsetService` applies the state edited by the bar's night-mode control.
 
+Clicking a notification card dismisses it, both in popups and in history.
+Cards have no close button; explicit notification action buttons remain available.
+
 Keep state and process ownership near the behavior they implement. A bar widget
 renders a backend and forwards user actions; it should not start another copy of
 that backend. File comments explain ownership, and block comments explain timing,

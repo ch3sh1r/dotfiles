@@ -41,15 +41,7 @@ PanelWindow {
         return 7000;
     }
 
-    // The default action belongs to the card; expose other actions as buttons.
-    function defaultAction(notification) {
-        for (const action of notification.actions) {
-            if (action.identifier === "default")
-                return action;
-        }
-        return null;
-    }
-
+    // Card clicks dismiss; explicit action buttons keep their own behavior.
     function visibleActions(notification) {
         let actions = [];
         for (const action of notification.actions) {
@@ -57,18 +49,6 @@ PanelWindow {
                 actions.push(action);
         }
         return actions;
-    }
-
-    function activate(notification) {
-        let action = root.defaultAction(notification);
-        if (!action) {
-            root.backend.dismiss(notification);
-            return;
-        }
-
-        action.invoke();
-        if (!notification.resident)
-            root.backend.removePopup(notification.id);
     }
 
     // Urgency affects presentation without mutating the notification.
@@ -136,12 +116,7 @@ PanelWindow {
                 MouseArea {
                     anchors.fill: parent
                     acceptedButtons: Qt.LeftButton | Qt.RightButton
-                    onClicked: function (mouse) {
-                        if (mouse.button === Qt.RightButton)
-                            root.backend.dismiss(card.modelData);
-                        else
-                            root.activate(card.modelData);
-                    }
+                    onClicked: root.backend.dismiss(card.modelData)
                 }
 
                 NotificationCard {
@@ -150,7 +125,7 @@ PanelWindow {
                     anchors.right: parent.right
                     anchors.top: parent.top
                     anchors.leftMargin: 14
-                    anchors.rightMargin: 40
+                    anchors.rightMargin: 14
                     anchors.topMargin: 10
                     spacing: 10
                     image: card.modelData.image
@@ -178,14 +153,6 @@ PanelWindow {
                             }
                         }
                     }
-                }
-
-                ActionButton {
-                    anchors.top: parent.top
-                    anchors.right: parent.right
-                    anchors.margins: 8
-                    icon: "×"
-                    onClicked: root.backend.dismiss(card.modelData)
                 }
             }
         }
