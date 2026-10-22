@@ -29,7 +29,17 @@ hl.bind(
 		action = "toggle",
 	})
 )
-hl.bind(mainMod .. " + SHIFT + F", hl.dsp.window.float({ action = "toggle" }))
+-- Work around the direct action-only binding failing to tile Brave's PiP window
+-- in this setup. Resolve the active window on each keypress and pass it explicitly;
+-- this path was verified to switch PiP between floating and tiled modes.
+local function toggle_floating()
+	local window = hl.get_active_window()
+	if window then
+		hl.dispatch(hl.dsp.window.float({ window = window, action = "toggle" }))
+	end
+end
+
+hl.bind(mainMod .. " + SHIFT + SPACE", toggle_floating)
 hl.bind(mainMod .. " + CTRL + H", hl.dsp.layout("togglesplit"))
 
 -- Common apps
