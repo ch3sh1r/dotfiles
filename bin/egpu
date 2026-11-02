@@ -175,8 +175,12 @@ disable_egpu() {
 
     echo "Target monitors to disable: $(echo "$external_monitors" | tr '\n' ' ')"
 
-    # CRITICAL FIX: Move ALL workspaces from external monitors, not just the active one
-    echo "Evacuating workspaces to $INTERNAL_MONITOR..."
+    # Enable the panel, evacuate ALL workspaces, then disable externals in one
+    # compositor callback. The lid timer cannot disable the panel mid-transfer.
+    echo "Enabling $INTERNAL_MONITOR and evacuating workspaces..."
+    local script internal
+    internal=$(lua_string "$INTERNAL_MONITOR")
+    script="local spec = {}; for k, v in pairs(require(\"modules/panel\")) do spec[k] = v end; spec.output = $internal; spec.disabled = false; hl.monitor(spec); hl.exec_scheduled_prop_refresh_immediately(); assert(hl.get_monitor($internal), \"Internal display could not be enabled; external displays left enabled\"); "
 
     local all_workspaces
     all_workspaces=$(hyprctl workspaces -j)
@@ -192,7 +196,7 @@ disable_egpu() {
             while IFS= read -r ws_id; do
                 [ -z "$ws_id" ] && continue
                 echo "  - Moving workspace $ws_id from $monitor to $INTERNAL_MONITOR"
-                hyprctl eval "hl.dispatch(hl.dsp.workspace.move({ workspace = \"$ws_id\", monitor = $(lua_string "$INTERNAL_MONITOR") }))"
+                script+="hl.dispatch(hl.dsp.workspace.move({ workspace = $(lua_string "$ws_id"), monitor = $internal })); "
             done <<<"$workspaces_on_monitor"
         fi
     done <<<"$external_monitors"
@@ -201,8 +205,15 @@ disable_egpu() {
     while IFS= read -r monitor; do
         [ -z "$monitor" ] && continue
         echo "Disabling $monitor via Hyprland..."
-        hyprctl eval "hl.monitor({ output = $(lua_string "$monitor"), disabled = true })"
+        script+="hl.monitor({ output = $(lua_string "$monitor"), disabled = true }); "
     done <<<"$external_monitors"
+
+    local result
+    result=$(hyprctl eval "$script")
+    if [[ $result != ok ]]; then
+        printf 'Error while disabling external monitors: %s\n' "$result" >&2
+        return 1
+    fi
 
     echo "External monitors disabled. Safe to unplug eGPU."
 }

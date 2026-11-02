@@ -75,7 +75,7 @@ apply_orientation() {
 
     transform="$(transform_for_orientation "$orientation")" || return 0
 
-    hyprctl eval "hl.monitor({ output = $output, mode = $mode_value, position = $position_value, scale = $scale, transform = $transform }); hl.config({ input = { touchdevice = { output = $output, transform = $transform }, tablet = { output = $output, transform = $transform } } }); hl.exec_scheduled_prop_refresh_immediately()" >/dev/null ||
+    hyprctl eval "require(\"modules/lid\").rotate({ output = $output, mode = $mode_value, position = $position_value, scale = $scale, transform = $transform })" >/dev/null ||
         printf 'iio-hyprland-lua: hyprctl eval failed for %s\n' "$orientation" >&2
 }
 

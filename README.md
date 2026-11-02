@@ -107,6 +107,58 @@ To restore direct startup,
 copy `/etc/greetd/config.toml.before-uwsm` back to `/etc/greetd/config.toml`
 with sudo, then reboot.
 
+## Laptop lid and external displays
+
+Hyprland handles display changes through `modules/lid.lua`, using lid bindings
+and one-shot timers after monitor events. There is no additional daemon or
+periodic lid poll. The lid sensor on this machine is
+`/proc/acpi/button/lid/LID0/state`; adjust that path for different hardware.
+
+| Action | Result |
+| --- | --- |
+| Close with an active external display | Disable the panel's touchscreen/stylus and remove `DSI-1` from the layout; Hyprland relocates its workspaces. Show the panel's active desktop if it contains windows. Continue without locking. |
+| Close without an active external display | Lock through the existing `sleep-lock` inhibitor and suspend, on battery or AC. |
+| Disable/unplug the last external display while closed | Restore the panel for locking, then suspend after the monitor layout settles for two seconds. |
+| Open | Restore the panel's saved mode, position and scale, using the latest rotation, and enable its touchscreen/stylus. Workspaces remain on the external display. |
+
+The rotator caches orientation through the lid module while the panel is closed
+or disabled, and cannot enable it. Stopping the rotator still locks rotation.
+`egpu disable` enables the panel and moves all workspaces before disabling
+externals in one compositor callback. With the lid closed this leads to sleep;
+open the lid first to keep working on the panel. Stay-awake only controls idle
+blanking/locking and does not override lid actions.
+
+Configure logind manually so closing the lid without external displays suspends
+on both battery and AC. Create `/etc/systemd/logind.conf.d/60-lid.conf`:
+
+```bash
+sudo mkdir -p /etc/systemd/logind.conf.d
+sudoedit /etc/systemd/logind.conf.d/60-lid.conf
+```
+
+Use these settings:
+
+```ini
+[Login]
+HandleLidSwitch=suspend
+HandleLidSwitchExternalPower=suspend
+HandleLidSwitchDocked=ignore
+```
+
+Reboot when convenient to activate the settings. Docked operation remains awake.
+Hyprland additionally handles software-disabled external outputs, which logind
+may still regard as connected. The Makefile does not configure logind.
+
+For diagnosis, use `cat /proc/acpi/button/lid/LID0/state`,
+`hyprctl monitors all -j`, `hyprctl configerrors`,
+`systemd-analyze cat-config systemd/logind.conf`, and
+`systemd-inhibit --list`. Before a sleep test, confirm the `quickshell` sleep
+delay inhibitor from `sleep-lock` is present. Hardware suspend/resume, hotplug
+and lock-screen authentication require an interactive check on the device.
+
+Use `bash -n bin/egpu bin/iio-hyprland-lua` and
+`Hyprland --verify-config -c "$PWD/hypr/hyprland.lua"` for syntax/config checks.
+
 ## Dictation for Codex
 
 Voxtype transcribes locally and copies the result to the Wayland clipboard.
