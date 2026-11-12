@@ -162,18 +162,49 @@ Use `bash -n bin/egpu bin/iio-hyprland-lua` and
 ## Dictation for Codex
 
 Voxtype transcribes locally and copies the result to the Wayland clipboard.
-Install `voxtype-bin` (listed in `gpd-p3.list`) and download the multilingual
-Whisper model with `voxtype setup --download --model small`. Download
-`large-v3-turbo` the same way for higher-accuracy dictation. UWSM activates
+Install `voxtype-bin` (listed in `gpd-p3.list`) with the ONNX AVX-512 variant:
+
+```bash
+VOXTYPE_VARIANTS=onnx-avx512 paru -S --rebuild voxtype-bin
+```
+
+Since 1.2.1, the package downloads only selected variants. The service override
+requires `onnx-avx512`; the default package selection can omit it. An explicit
+selection is recorded in `/usr/lib/voxtype/package-variants` for future builds.
+Download Parakeet v3 int8 with
+`voxtype setup --download --model parakeet-tdt-0.6b-v3-int8`. Download
+`large-v3-turbo` the same way for higher-accuracy dictation. Install the service
+override to use the packaged ONNX binary (AVX-512, supported by this machine):
+
+```bash
+mkdir -p ~/.config/systemd/user/voxtype.service.d
+```
+
+Create `~/.config/systemd/user/voxtype.service.d/onnx.conf` with:
+
+```ini
+[Service]
+ExecStart=
+ExecStart=/usr/lib/voxtype/voxtype-onnx-avx512 -q daemon
+```
+
+Service overrides are configured locally using this guide rather than symlinked
+from the repository. Reload the user units after saving the file:
+
+```bash
+systemctl --user daemon-reload
+```
+
+UWSM activates
 `graphical-session.target`, which starts the enabled packaged user service:
 
 ```bash
 systemctl --user enable --now voxtype.service
 ```
 
-Russian is fixed as the recognition language. Press `Super+D` to toggle fast
-dictation (`small`), or `Super+Shift+D`
-to toggle higher-accuracy dictation (`large-v3-turbo`). Use the same shortcut
+Parakeet automatically detects the language, including Russian. Press `Super+D`
+to toggle fast dictation (`parakeet-tdt-0.6b-v3-int8`), or `Super+Shift+D`
+to toggle higher-accuracy dictation (`large-v3-turbo`, fixed to Russian). Use the same shortcut
 to stop the recording. Review the result, then paste it into Codex in Alacritty
 with `Ctrl+Shift+V`. Quickshell keeps a red recording timer or an amber speech
 recognition indicator on screen until that phase finishes.

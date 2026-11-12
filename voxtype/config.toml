@@ -1,3 +1,4 @@
+engine = "parakeet"
 state_file = "auto"
 
 [osd]
@@ -5,6 +6,10 @@ enabled = false
 
 [hotkey]
 enabled = false
+
+[parakeet]
+model = "parakeet-tdt-0.6b-v3-int8"
+model_type = "tdt"
 
 [whisper]
 model = "small"

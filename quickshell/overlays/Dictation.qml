@@ -60,6 +60,7 @@ PanelWindow {
 
     // Watch the daemon state file; missing state means there is no active recording.
     FileView {
+        id: stateFile
         path: root.runtimeDir.length > 0 ? root.runtimeDir + "/voxtype/state" : "/voxtype/state"
         blockLoading: true
         printErrors: false
@@ -67,6 +68,15 @@ PanelWindow {
         onLoaded: root.setState(text())
         onFileChanged: reload()
         onLoadFailed: root.setState("idle")
+    }
+
+    // The daemon may start after the shell or recreate its runtime directory.
+    // A watcher cannot follow a path whose parent directory did not exist.
+    Timer {
+        running: !stateFile.loaded
+        repeat: true
+        interval: 1000
+        onTriggered: stateFile.reload()
     }
 
     // Count only recording time, resetting on each state transition.
