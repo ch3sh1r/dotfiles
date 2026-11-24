@@ -88,7 +88,7 @@ hl.bind(mainMod .. " + Z", hl.dsp.group.prev())
 hl.bind(mainMod .. " + X", hl.dsp.group.next())
 
 -- Lockscreen
-hl.bind(mainMod .. " + CTRL + L", shell("lock"))
+hl.bind(mainMod .. " + Q", shell("lock"))
 
 local directions = {
 	{ key = "H", direction = "l" },
