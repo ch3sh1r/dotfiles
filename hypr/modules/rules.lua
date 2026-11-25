@@ -7,6 +7,10 @@ hl.window_rule({ match = { class = ".*" }, idle_inhibit = "fullscreen" })
 -- Apps asking to maximize themselves get tiled like everything else.
 hl.window_rule({ match = { class = ".*" }, suppress_event = "maximize" })
 
+-- Brave popups can advertise a maximum size smaller than a tile. Dwindle
+-- then immediately floats them again, defeating the manual floating toggle.
+hl.window_rule({ match = { class = "(brave-browser|Brave-browser)" }, no_max_size = true })
+
 -- Portal and file-chooser dialogs float instead of taking a tile.
 hl.window_rule({ match = { class = "xdg-desktop-portal-gtk" }, float = true })
 hl.window_rule({
