@@ -37,6 +37,16 @@ local function lid_closed()
 	end
 end
 
+local function externally_powered()
+	local file = io.open("/sys/class/power_supply/ADP1/online", "r")
+	if not file then
+		return false
+	end
+	local online = file:read("*a"):match("^%s*1%s*$") ~= nil
+	file:close()
+	return online
+end
+
 local function panel_spec()
 	local spec = {}
 	for key, value in pairs(panel) do
@@ -106,6 +116,8 @@ function M.reconcile()
 				hl.dispatch(hl.dsp.focus({ workspace = show_workspace }))
 			end
 		end
+	elseif externally_powered() then
+		sleep_requested = false
 	elseif not sleep_requested then
 		if not internal then
 			apply_rotation(panel_spec())
